@@ -2,6 +2,7 @@
 title: hexo中公式显示
 date: 2021-08-05 20:38:51
 tags: [hexo,fluid,配置]
+categories: [配置,hexo]
 math: true
 ---
 
