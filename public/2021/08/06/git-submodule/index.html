@@ -18,7 +18,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>关于 - 待时</title>
+  <title>子模块为空的解决方案 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -34,6 +34,8 @@
     
   
 
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   
 
 
@@ -64,7 +66,7 @@
 
 
 <body>
-  <header style="height: 60vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -158,14 +160,51 @@
 </nav>
 
     <div class="banner" id="banner" parallax=true
-         style="background: url('https://rmt.dogedoge.com/fetch/fluid/storage/bg/dojm2h.png?w=1920&q=100&fmt=webp') no-repeat center center;
+         style="background: url('https://tva3.sinaimg.cn/mw690/6833939bly1giph4wqtg4j20zk0m8x6p.jpg') no-repeat center center;
            background-size: cover;">
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="关于">
+            <span class="h2" id="subtitle" title="子模块为空的解决方案">
               
             </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-06 02:09" pubdate>
+        2021年8月6日 凌晨
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      162 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      1
+       分钟
+    </span>
+  
+
+  
+  
+</div>
 
             
           </div>
@@ -178,81 +217,131 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/img/meicon.png" srcset="/img/loading.gif" lazyload
-                   class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">Fluid</div>
-    <div class="about-intro">An elegant theme for Hexo</div>
-    <div class="about-icons">
-      
-        
-        
-        
-        <a href=https://github.com/fanmeilin class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-        
-        
-        
-        <a href=https://douban.com class="
-           hint--bottom hint--rounded"
-           aria-label=豆瓣
-           target="_blank"
-        >
-          <i class="iconfont icon-douban-fill" aria-hidden="true"></i>
-          
-        </a>
-      
-        
-        
-        
-        <a  class="qr-trigger
-           "
-           
-           target="_self"
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/img/favicon.png" srcset="/img/loading.gif" lazyload alt="qrcode" />
-          
-        </a>
-      
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">子模块为空的解决方案</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>针对子模块文件夹为空的情况，采取下列解决方案。</p>
+<p>当一个 git 项目包含子模块（submodule) 时，直接克隆下来的子模块目录里面是空的。</p>
+</blockquote>
+<p><strong>有两种方法解决</strong>：</p>
+<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>如果项目已经克隆到了本地，执行下面的步骤：</p>
+<ol>
+<li><p>初始化本地子模块配置文件</p>
+<figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git submodule <span class="hljs-keyword">init</span><br><span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>更新项目，抓取子模块内容。</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git submodule update</span><br></code></pre></td></tr></tbody></table></figure></li>
+</ol>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>另外一种更简单的方法，就是在执行 <code>git clone</code> 时加上 <code>--recursive</code> 参数。它会自动初始化并更新每一个子模块。例如：</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone --recursive https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/example/</span>example.git<br></code></pre></td></tr></tbody></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/git/">git</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/05/hexo-math-config/">
+                        <span class="hidden-mobile">hexo中公式显示</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2021/08/06/git-submodule/';
+          this.page.identifier = '/2021/08/06/git-submodule/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
     </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
   </div>
 </div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    
-  </div>
+<!-- Custom -->
 
-  
-</article>
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
     
 
     
@@ -356,7 +445,11 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
 
 
 
@@ -395,6 +488,13 @@
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 
