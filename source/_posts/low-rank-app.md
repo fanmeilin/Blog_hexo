@@ -36,6 +36,18 @@ math: true
 
 ***4）变换不变低秩纹理（TILT）***
 
+> 在论文 **Semi-orthogonal Embedding for Effificient Unsupervised Anomaly Segmentation**中有一段可以参考。
+
+**Low-rank approximation of precision matrix**
+
+The feature data **X** is subject to low-rank approximation due to the narrower target domain for anomaly-free images than the ImageNet dataset’s. The multi-scale features from different layers may also contribute to it due to the inter-dependency among the features from the layers. Inspired by the truncated SVD of a precision matrix, a low-rank embedding of input features with **W** *∈* $R^{F*k}$,where *F > k*, is considered as follows:
+$$
+d^2_{i,j} = X^TW(W^TC_{i,j}W)^{−1}W^TX
+$$
+where the below Theorem 1 shows the optimal **W*** is the eigenvectors related to the *k*-smallest eigenvalues of $C_{i,j}$ . Notice that 1) the computational complexity of the equation is cubically reduced to *O*($HWk^3$) set aside the cost of SVD, although which is the concern, 2) PCA embedding would fail to minimize approximation error since it uses the *k*-largest eigenvectors [14], and 3) near-zero eigenvalues may induce substantial anomaly scores.
+
+选取协方差矩阵的k个最小的特征值对应的特征向量，进行低秩逼近
+
 > 参考
 >
 >  https://www.zhihu.com/question/28630628
