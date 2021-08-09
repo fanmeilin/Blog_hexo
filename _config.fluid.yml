@@ -128,14 +128,14 @@ dark_mode:
 color:
   # body 背景色
   # Color of body background
-  body_bg_color: "#eee"
+  body_bg_color: "#fff5ee" #"#eee"
   # 暗色模式下的 body 背景色，下同
   # Color in dark mode, the same below
   body_bg_color_dark: "#181c27"
 
   # 顶部菜单背景色
   # Color of navigation bar background
-  navbar_bg_color: "#2f4154"
+  navbar_bg_color: "#d8afe4" #"#2f4154"
   navbar_bg_color_dark: "#1f3144"
 
   # 顶部菜单字体色
@@ -165,12 +165,12 @@ color:
 
   # 文章超链接字体色
   # Color of post link
-  post_link_color: "#0366d6"
+  post_link_color: "#ffc0cb"
   post_link_color_dark: "#1589e9"
 
   # 超链接悬浮时字体色
   # Color of link when hovering
-  link_hover_color: "#30a9de"
+  link_hover_color: "#dda0dd" #	#ffc0cb
   link_hover_color_dark: "#30a9de"
 
   # 超链接悬浮背景色
@@ -180,7 +180,7 @@ color:
 
   # 主面板背景色
   # Color of main board
-  board_color: "#fff"
+  board_color: "#fffafa" #"#fff"
   board_color_dark: "#252d38"
 
 # 主题字体配置
