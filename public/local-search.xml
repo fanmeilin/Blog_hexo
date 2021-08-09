@@ -4,6 +4,91 @@
   
   
   <entry>
+    <title>Mahalanobis_distance</title>
+    <link href="/2021/08/09/Mahalanobis-distance/"/>
+    <url>/2021/08/09/Mahalanobis-distance/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>马氏距离(Mahalanobis Distance)是度量学习中一种常用的距离指标，同欧氏距离、曼哈顿距离、汉明距离等一样被用作评定数据之间的相似度指标。但却可以应对高维线性分布的数据中各维度间非独立同分布的问题。</p></blockquote><p><em>使用马氏距离，对高维非独立分布的数据进行距离度量。</em></p><p><strong>那我们为什么要用马氏距离呢？</strong><br>马氏距离有很多<strong>优点：</strong> <strong>马氏距离不受量纲的影响</strong>，两点之间的马氏距离与原始数据的测量单位无关；由标准化数据和中心化数据(即原始数据与均值之差）计算出的二点之间的马氏距离相同。<strong>马氏距离还可以排除变量之间的相关性的干扰</strong>。</p><h2 id="什么是马氏距离"><a href="#什么是马氏距离" class="headerlink" title="什么是马氏距离"></a>什么是马氏距离</h2><p>马氏距离(Mahalanobis Distance)是一种距离的度量，可以看作是欧氏距离的一种修正，修正了欧式距离中各个维度尺度不一致且相关的问题。</p><p>单个数据点的马氏距离</p><p><img src="https://pic4.zhimg.com/80/v2-d2987369d8167a362482d6cbecefb8bb_720w.jpg"></p><p>数据点x, y之间的马氏距离</p><p><img src="https://pic3.zhimg.com/80/v2-d54956df14c05568f8c0c0548ac16416_720w.jpg"></p><p><em>其中Σ是多维随机变量的协方差矩阵，μ为样本均值，如果协方差矩阵是单位向量，也就是各维度独立同分布，马氏距离就变成了欧氏距离。</em></p><h2 id="马氏距离实际意义"><a href="#马氏距离实际意义" class="headerlink" title="马氏距离实际意义"></a>马氏距离实际意义</h2><p>那么马氏距离就能能干什么？它比欧氏距离好在哪里？举几个栗子</p><p><strong>欧式距离近就一定相似？</strong></p><p>先举个比较常用的例子，身高和体重，这两个变量拥有不同的单位标准，也就是有不同的scale。比如身高用毫米计算，而体重用千克计算，显然差10mm的身高与差10kg的体重是完全不同的。但在普通的欧氏距离中，这将会算作相同的差距。</p><p><strong>归一化后欧氏距离近就一定相似？</strong></p><p>当然我们可以先做归一化来消除这种维度间scale不同的问题，但是样本分布也会影响分类</p><p>举个一维的栗子，现在有两个类别，统一单位，第一个类别均值为0，方差为0.1，第二个类别均值为5，方差为5。那么一个值为2的点属于第一类的概率大还是第二类的概率大？距离上说应该是第一类，但是直觉上显然是第二类，因为第一类不太可能到达2这个位置。</p><p>所以，在一个方差较小的维度下很小的差别就有可能成为离群点。就像下图一样，A与B相对于原点的距离是相同的。但是由于样本总体沿着横轴分布，所以B点更有可能是这个样本中的点，而A则更有可能是离群点。</p><p><img src="https://pic4.zhimg.com/80/v2-6f5d1b59fd1687cfeecd0c6991c6db77_720w.jpg"></p><p><strong>算上维度的方差就够了？</strong></p><p>还有一个问题——如果维度间不独立同分布，样本点一定与欧氏距离近的样本点同类的概率更大吗？</p><p><img src="https://pic3.zhimg.com/80/v2-3cee35b79d272dda86e2604c160934ee_720w.jpg"></p><p>可以看到样本基本服从f(x) = x的线性分布，A与B相对于原点的距离依旧相等，显然A更像是一个离群点</p><p>即使数据已经经过了标准化，也不会改变AB与原点间距离大小的相互关系。所以要本质上解决这个问题，就要针对<a href="https://link.zhihu.com/?target=https://www.ph0en1x.space/2018/03/06/PCA/">主成分分析</a>中的<code>主成分</code>来进行标准化。</p><h2 id="马氏距离的几何意义"><a href="#马氏距离的几何意义" class="headerlink" title="马氏距离的几何意义"></a>马氏距离的几何意义</h2><p>上面搞懂了，马氏距离就好理解了，<u>只需要将变量<code>按照主成分进行旋转</code>，让维度间相互<strong>独立</strong>，然后进行<code>标准化</code></u>，让维度<strong>同分布</strong>就可以了。</p><p>由主成分分析可知，由于主成分就是特征向量方向，每个方向的方差就是对应的特征值，所以只需要按照特征向量的方向旋转，然后缩放特征值倍就可以了，可以得到以下的结果：</p><p><img src="https://pic3.zhimg.com/80/v2-068306ff7e62b7af24b126eafe0b8bc6_720w.jpg"></p><p>离群点就被成功分离，这时候的欧式距离就是马氏距离。</p><h2 id="马氏距离的推导"><a href="#马氏距离的推导" class="headerlink" title="马氏距离的推导"></a>马氏距离的推导</h2><p>首先要对数据点进行<em>旋转</em>，旋转至主成分，维度间线性无关，假设新的坐标为</p><p><img src="https://pic2.zhimg.com/80/v2-e924839926a256cb277a8cfc850d5a89_720w.jpg"></p><p>又变换后<em>维度间线性无关且每个维度自己的方差为特征值</em>，所以满足：</p><p><img src="https://pic1.zhimg.com/80/v2-24ace781a1f0b2cc64ea359b1bb78d74_720w.jpg"></p><p>马氏距离是旋转变换缩放之后的欧式距离，所以马氏距离的计算公式为：</p><p><img src="https://pic3.zhimg.com/80/v2-4435a733478fafe47ee0198e315e67f6_720w.jpg"></p><p>这就是之前提到的马氏距离的公式</p><h2 id="马氏距离的问题"><a href="#马氏距离的问题" class="headerlink" title="马氏距离的问题"></a>马氏距离的问题</h2><ul><li>协方差矩阵必须满秩</li></ul><p>里面有求逆矩阵的过程，不满秩不行，要求数据要有原维度个特征值，如果没有可以考虑先进行PCA，这种情况下PCA不会损失信息</p><ul><li>不能处理非线性流形(manifold)上的问题</li></ul><p>只对线性空间有效，如果要处理流形，只能在局部定义，可以用来建立KNN图</p><blockquote><p>参考：</p><p><a href="https://zhuanlan.zhihu.com/p/46626607">https://zhuanlan.zhihu.com/p/46626607</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>math</category>
+      
+      <category>概率论</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>马氏距离</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Eckark_young定理</title>
+    <link href="/2021/08/09/Eckark-young/"/>
+    <url>/2021/08/09/Eckark-young/</url>
+    
+    <content type="html"><![CDATA[<p>最佳低秩逼近和奇异值的关系(<em>Eckart</em>-<em>Young定理</em>)</p><h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>Suppose a matrix $A\in \mathbb{R}^{m\times n}$has an SVD-decomposition$A=U\Sigma V^T$. Let $k &lt; r= \mathsf{rank}(A)$and truncated matrix<br>$$<br>A_k = \sum_{i=1}^k \sigma_i \mathbf u_i \mathbf v_i^T,<br>$$<br>then, for any matrix B of rank k , the minimal error is achieved with $A_k$:</p>$$\min_{\mathsf{rank}(B)=k}||A-B||_2 = || A - A_k||_2 = \sigma_{k+1}.$$<p>The same holds for Frobenius norm as well</p>$$\min_{\mathsf{rank}(B)=k}||A-B||_F = || A - A_k||_F = \sqrt{\sigma_{k+1}^2 + \cdots + \sigma_p^2}.$$<h3 id="证明-2-norm-case"><a href="#证明-2-norm-case" class="headerlink" title="证明 (2-norm case)"></a>证明 (2-norm case)</h3><p>Since $U^\ A_k V = \mathrm{diag}(\sigma_1,\ldots, \sigma_k,0,\ldots,0)$ it means that $A_k$ is rank K. Moreover, $U^T (A-A_k) V =  \mathrm{diag}(0,\ldots, 0,\sigma_{k+1},\ldots, \sigma_p)$with the largest singular value is $\sigma_{k+1}$ and thus $||A-A_k||_2 = \sigma_{k+1}$.</p><h3 id="证明-Frobenius-norm-case"><a href="#证明-Frobenius-norm-case" class="headerlink" title="证明 (Frobenius norm case)"></a>证明 (Frobenius norm case)</h3><blockquote><p>Lemma: If $A,B \in \mathbb{R}^{m\times n}$ , with B having rank K , then $\sigma_{k+i}(A) \le \sigma_i(A-B) \text{ for all }; i.$</p></blockquote><p>To prove the lemma, first consider the case i=1, we have proved that $\sigma_{k+1}(A) \le \sigma_1(A-B) = ||A-B||_2$in the 2-norm case. Then we do the general case:</p>$$\begin{aligned} \sigma_i(A-B) = &amp; \sigma_i(A-B) + \sigma_1(B-B_k)\qquad\text{since } B=B_k\\ =&amp; \sigma_1(A-B - (A-B)_{i-1}) + \sigma_1(B-B_k)\qquad\\ \ge &amp; \sigma_1(A-B - (A-B)_{i-1}+B-B_k)   \\ =&amp; \sigma_1(A  - (A-B)_{i-1} -B_k)\\ \ge &amp; \sigma_1(A - A_{k+i-1})\\ =&amp; \sigma_{k+i}(A)   \end{aligned} $$<blockquote><p><a href="https://zhuanlan.zhihu.com/p/361938622">https://zhuanlan.zhihu.com/p/361938622</a></p><p><a href="https://zhuanlan.zhihu.com/p/75283604">https://zhuanlan.zhihu.com/p/75283604</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>math</category>
+      
+      <category>线性代数</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>math</tag>
+      
+      <tag>线性代数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>低秩逼近的思考</title>
+    <link href="/2021/08/06/low-rank-app/"/>
+    <url>/2021/08/06/low-rank-app/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>阅读文章<strong>Semi-orthogonal Embedding for Effificient Unsupervised Anomaly Segmentation</strong>时出现一个概念–<strong>Low-rank approximation</strong> ，就此进行相关讨论。</p></blockquote><h3 id="低秩（Low-Rank）"><a href="#低秩（Low-Rank）" class="headerlink" title="低秩（Low-Rank）"></a>低秩（Low-Rank）</h3><p>如果X是一个m行n列的数值矩阵，rank(X)是X的秩，假如rank (X)远小于m和n，则我们称X是低秩矩阵。低秩矩阵每行或每列都可以用其他的行或列线性表出，可见它包含大量的冗余信息。利用这种冗余信息，可以对缺失数据进行恢复，也可以对数据进行特征提取。</p><p>图像处理中，<em>rank可以理解为图像所包含的信息的丰富程度</em>，在显示生活中，一张图片中大部分成分是相似的。比如给一张大草原的图片</p><p><img src="https://pic1.zhimg.com/50/ce29981e00f4d519ff547e986bf8a5d6_720w.jpg?source=1940ef5c"></p><p>草原是由很多草组成的，而草是相似的，所以如果全是草，那么这张图所包含的信息量是很少的的，因为可以理解为草是草的复制品。而上图的蒙古包，人，马之类的则可以理解为图片所包含的信息，实际上，相对于只有草的草原图片和有草和蒙古包的草原图片，后者的秩是较高的。也就是说，图片中比较突兀的成分，比如蒙古包，比如人像照片中的红眼亮点，会增加图像矩阵的秩。而现实生活中一张不错的图片的秩其实是比较低的，如果图像的秩比较高，往往是因为图像中的噪声比较严重。比如拍照的时候ISO感光度设置过高造成噪点太过泛滥之类的。所以，<em>图像处理的低秩性其实可以拿来去除照片中的噪点</em>。</p><h3 id="低秩和稀疏"><a href="#低秩和稀疏" class="headerlink" title="低秩和稀疏"></a>低秩和稀疏</h3><p>我们认为图像有一些公共的模式，所有图像都由这些基本的模式组成。例如，如果图像是一个叉，可以看成是一个正斜线和反斜线的叠加。<strong>只要我们找到了所有的基底（称作字典</strong>，就是上面说的正斜线和反斜线之类的东西）<strong>，就能通过基底的线性组合表示出所有的图像。</strong>这就好像学画画，先学会基本的画正方体、球体、圆柱体等等，就可以组合出各种各样的复杂形状。</p><p><strong>在很多情形下，基底的数量是很少的</strong>，比如一张照片拍的是一面砖墙，那么它显然具有周期重复的特点，换句话说低秩。即使整个图不低秩，往往也能找出一些相似的块，这些块是低秩的。再退一步，就算这也做不到，往往也可以把已有的数据看成一组低维的结果加上噪声，也即原来的数据<strong>可以被低秩矩阵很好的逼近</strong>。<strong>稀疏性</strong>的意思是（以稀疏表示为例），任给一个图像，<strong>字典可能是过完备的</strong>，从而用字典里的基向量表出这幅图有很多种不同的方案。我们希望<strong>选取使用基底数量最少的那种方案</strong>，</p><p>应用：</p><p><em><strong>1）矩阵填充(Matrix Completion)</strong></em></p><p><em><strong>2）鲁棒PCA</strong></em></p><p><em><strong>3）背景建模</strong></em></p><p><em><strong>4）变换不变低秩纹理（TILT）</strong></em></p><blockquote><p>参考</p><p> <a href="https://www.zhihu.com/question/28630628">https://www.zhihu.com/question/28630628</a></p><p><a href="https://blog.csdn.net/zouxy09/article/details/24972869">https://blog.csdn.net/zouxy09/article/details/24972869</a></p></blockquote>]]></content>
+    
+    
+    <categories>
+      
+      <category>math</category>
+      
+      <category>线性代数</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>math</tag>
+      
+      <tag>线性代数</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>子模块为空的解决方案</title>
     <link href="/2021/08/06/git-submodule/"/>
     <url>/2021/08/06/git-submodule/</url>
