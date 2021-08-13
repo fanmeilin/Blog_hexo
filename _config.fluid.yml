@@ -412,7 +412,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: https://z3.ax1x.com/2021/08/11/fNeK4U.png #https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg 
+  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/girl.png #https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg 
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -484,7 +484,7 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: https://z3.ax1x.com/2021/08/11/fNeF3Q.jpg #/img/bg/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/mw690/6833939bly1giph4wqtg4j20zk0m8x6p.jpg 
+  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #/img/bg/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/mw690/6833939bly1giph4wqtg4j20zk0m8x6p.jpg 
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -775,7 +775,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: https://z3.ax1x.com/2021/08/11/fNZq9e.jpg #/img/default.png
+  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/bd643dc0ad68f830b3a0eeae50ceba5f_4.jpg #/img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -787,7 +787,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: https://z3.ax1x.com/2021/08/11/fNepAf.jpg #/img/default.png
+  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/7cc417b7ace4b99c19d3034179926555_3.jpg #/img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -858,7 +858,7 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: https://z3.ax1x.com/2021/08/11/fNeF3Q.jpg #https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg 
+  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg 
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
