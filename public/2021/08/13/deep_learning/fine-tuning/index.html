@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
 
 
 
@@ -66,6 +67,7 @@
 
 
 <body>
+
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -159,10 +161,64 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle" title="fine-tuning的方法">
@@ -235,7 +291,8 @@
 </blockquote>
 <h3 id="训练技巧"><a href="#训练技巧" class="headerlink" title="训练技巧"></a><strong>训练技巧</strong></h3><p>1.要做<strong>梯度归一化</strong>,即算出来的梯度除以minibatch size</p>
 <p>2.clip c(梯度裁剪): 限制最大梯度,其实是value = sqrt(w1^2 +w2^2….),如果value超过了阈值,就算一个衰减系数,让value的值等于阈值: 5,10,15</p>
-<h5 id="3-防止过拟合"><a href="#3-防止过拟合" class="headerlink" title="3.防止过拟合"></a><strong>3.防止过拟合</strong></h5><p>​    一般常用的防止过拟合方法有使用<strong>L1正则项、L2正则项、dropout、提前终止、数据集扩充等</strong>。如果模型在训练集上表现比较好但在测试集上表现欠佳可以选择增大L1或L2正则的惩罚力度（<strong>L2正则经验上首选1.0</strong>，超过10很少见），或<strong>增大dropout的随机失活概率</strong>（经验首选0.5）；或者当随着训练的持续在测试集上不增反降时，使用提前终止训练的方法。当然<strong>最有效的还是增大训练集的规模</strong>，实在难以获得新数据也可以使用数据集增强的方法，比如CV任务可以对数据集进行裁剪、翻转、平移等方法进行数据集增强，这种方法往往都会提高最后模型的测试精度。<br>     dropout对小数据防止过拟合有很好的效果,值一般设为0.5,小数据上dropout+sgd。在大部分实验中，效果提升都非常明显.<strong>建议尝试</strong>。 dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置.关于RNN如何用dropout,可以参考:<a href="https://link.zhihu.com/?target=http://arxiv.org/abs/1409.2329">http://arxiv.org/abs/1409.2329</a>(Captain Jack令言:(不仅仅可以防止过拟合, 其实这相当于做人力成本最低的Ensemble, 当然, 训练起来会比没有Dropout的要慢一点, 同时网络参数你最好相应加一点, 对, 这会再慢一点).)</p>
+<p><strong>3.防止过拟合</strong></p>
+<p>​    一般常用的防止过拟合方法有使用<strong>L1正则项、L2正则项、dropout、提前终止、数据集扩充等</strong>。如果模型在训练集上表现比较好但在测试集上表现欠佳可以选择增大L1或L2正则的惩罚力度（<strong>L2正则经验上首选1.0</strong>，超过10很少见），或<strong>增大dropout的随机失活概率</strong>（经验首选0.5）；或者当随着训练的持续在测试集上不增反降时，使用提前终止训练的方法。当然<strong>最有效的还是增大训练集的规模</strong>，实在难以获得新数据也可以使用数据集增强的方法，比如CV任务可以对数据集进行裁剪、翻转、平移等方法进行数据集增强，这种方法往往都会提高最后模型的测试精度。<br>     dropout对小数据防止过拟合有很好的效果,值一般设为0.5,小数据上dropout+sgd。在大部分实验中，效果提升都非常明显.<strong>建议尝试</strong>。 dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置.关于RNN如何用dropout,可以参考:<a href="https://link.zhihu.com/?target=http://arxiv.org/abs/1409.2329">http://arxiv.org/abs/1409.2329</a>(Captain Jack令言:(不仅仅可以防止过拟合, 其实这相当于做人力成本最低的Ensemble, 当然, 训练起来会比没有Dropout的要慢一点, 同时网络参数你最好相应加一点, 对, 这会再慢一点).)</p>
 <p><strong>4.超参</strong> </p>
 <p>​    learning rate 最重要<strong>，推荐了解 cosine learning rate 和 cyclic learning rate，其次是 <strong>batchsize 和 weight decay</strong>。当你的模型还不错的时候，可以试着做数据增广和改损失函数锦上添花了。(罗浩ZJU令言：随着网络训练的进行，学习率要逐渐降下来；网络性能越好，学习率要越小（即越需要微调而非粗调)；batchsize通常影响没那么大，塞满卡就行，除了特殊的算法需要batch大一点)<br>​    adam,adadelta等,在小数据上,我这里实验的效果不如sgd, sgd收敛速度会慢一些，但是最终收敛后的结果，一般都比较好。</strong>如果使用sgd的话,可以选择从1.0或者0.1的学习率开始,隔一段时间,在验证集上检查一下,如果cost没有下降,就对学习率减半**. 我看过很多论文都这么搞,我自己实验的结果也很好. 当然,也可以先用ada系列先跑,最后快收敛的时候,更换成sgd继续训练.同样也会有提升.据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好。(Captain Jack令言：sgd adam 这些选择上, 看你个人选择. 一般对网络不是决定性的. 反正我无脑用sgd + momentum. ）</p>
 <p>5.<strong>激活函数</strong><br>    除了gate之类的地方,需要把输出限制成0-1之外,<strong>尽量不要用sigmoid</strong>,可以用tanh或者relu之类的激活函数.1. sigmoid函数在-4到4之外的区间梯度接近0，很容易造成梯度消失问题。2. 输入0均值，sigmoid函数的输出不是0均值的。（hzwer令言:虽然有至少十种激活函数，但在 Relu 外只推荐试一下 Swish。)</p>
@@ -267,7 +324,7 @@
 <p>8、subword 总是会很稳定地涨点，只管用就对了。</p>
 <p>9、<strong>GPU 上报错时尽量放在 CPU 上重跑</strong>，错误信息更友好。例如 “ERROR:tensorflow:Model diverged with loss = NaN” 其实很有可能是输入 ID 超出了 softmax 词表的范围。</p>
 <p><strong>10、别没耐心</strong>！<br><strong>有些指标是有滞后性的，需要等训练一段时间才开始动。</strong>很多人训练几步看没什么效果就把程序停掉开始 debug 了，但其实代码毫无问题。如此反复好几天甚至一两周都在原地踏步，其实需要做的仅仅是让程序自个儿安安静静地跑上几个小时或者一天……</p>
-<h3 id="trick"><a href="#trick" class="headerlink" title="trick"></a>trick</h3><ul>
+<h3 id="相关trick"><a href="#相关trick" class="headerlink" title="相关trick"></a>相关trick</h3><ul>
 <li><p> fine-tuning: 通常来说，直接把预训练模型来用效果不一定足够好，因此需要进行fine-tuning（微调）。fine-tuning需要冻结网络的前几层参数，只更新网络结构的后面几层和最后的全连接层，这样效果会更好。</p>
 </li>
 <li><p>  Learning rate:在迁移学习的微调过程中一般不建议使用过大的学习率，通常来说1e-5是比较合适的选择。</p>
@@ -320,7 +377,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/13/page-site/">
+                      <a href="/2021/08/13/deep_learning/paper-site/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">文献整理笔记</span>
                         <span class="visible-mobile">上一篇</span>

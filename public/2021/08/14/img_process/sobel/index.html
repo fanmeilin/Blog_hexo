@@ -1,0 +1,687 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>Sobel算子 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Sobel算子">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-08-14 10:25" pubdate>
+        2021年8月14日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      20
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Sobel算子</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本文主要介绍Sobel算子，主要用于边缘检测；由于该算子引入了局部平均，对噪声有平滑作用，因此还可以消除噪声。</p>
+</blockquote>
+<h2 id="图像边缘与梯度"><a href="#图像边缘与梯度" class="headerlink" title="图像边缘与梯度"></a>图像边缘与梯度</h2><p>在图像边缘，灰度值的变化较大，因此图像在此处的梯度值也较大。一般情况，图像梯度时计算图像的边缘信息。图像梯度严格来说时需要求导数，但是在图像计算上时使用像素值的差得到梯度的近似值。<br>图像强度的显著变化可分为：</p>
+<ul>
+<li>阶跃变化函数，即图像强度在不连续处的两边的像素灰度值有着显著的差异；</li>
+<li>线条（屋顶）变化函数，即图像强度突然从一个值变化到另一个值，保持一较小行程后又回到原来的值。</li>
+</ul>
+<p><img src="http://qxtgssh6h.hn-bkt.clouddn.com/sobel1.png" srcset="/img/loading.gif" lazyload></p>
+<p>（a）（b）分别是阶跃函数和屋顶函数的二维图像；（c）（d）是阶跃和屋顶函数的函数图象；（e）（f）对应一阶倒数；（g）（h）是二阶倒数。</p>
+<h2 id="Sobel算子"><a href="#Sobel算子" class="headerlink" title="Sobel算子"></a>Sobel算子</h2><p>常用如下两个模板进行边缘检测，将Gx，Gy与图像卷积，即可得到横向和纵向的亮度差分近似值。</p>
+
+$$
+G_x = \begin{bmatrix} -1 &amp; 0 &amp; 1 \\ -2 &amp; 0 &amp; 2\\-1 &amp; 0 &amp; 1\end{bmatrix} \qquad G_y = \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 0\\-1 &amp; -2 &amp; -1\end{bmatrix}
+$$
+
+
+<p>图像每一个像素的梯度可以使用$G = \sqrt{G^2_x+G^2_y}$来表示，梯度的方向使用$\Theta = arctan(\frac{G_y}{G_x})$。</p>
+<p>还有另外一个比<code>Sobel</code>函数的近似效果更好的 <code>Scharr</code>函数，其内核矩阵如下:</p>
+
+$$
+G_x = \begin{bmatrix} -3 &amp; 0 &amp; 3 \\ -10 &amp; 0 &amp; 10 \\ -3 &amp; 0 &amp; 3\end{bmatrix} \qquad G_y = \begin{bmatrix} -3 &amp; -10 &amp; -3 \\ 0 &amp; 0 &amp; 0 \\ 3 &amp; 10 &amp; 3\end{bmatrix}
+$$
+
+
+
+<h2 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h2><h3 id="cv2-Sobel"><a href="#cv2-Sobel" class="headerlink" title="cv2.Sobel()"></a>cv2.Sobel()</h3><p>Sobel算子依然是一种过滤器，只是其是带有方向的</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">dst = cv2.Sobel(src, ddepth, dx, dy[,ksize[, scale[, delta[, borderType]]]])<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>dst代表目标函数</li>
+<li> src代表原始图像</li>
+<li> ddpeth代表输出图像的深度 ，-1表示采用的是与原图像相同的深度。目标图像的深度必须大于等于原图像的深度；</li>
+<li>  dx代表x方向上的求导阶数 ，0表示这个方向上没有求导，一般为0、1、2。</li>
+<li>  dy代表y方向上的求导阶数，0表示这个方向上没有求导，一般为0、1、2。</li>
+<li>  ksize代表Sobel核的大小，该值为-1时，则会使用Scharr算子进行运算,一般选择为1、3、5、7</li>
+<li>  scale代表计算导数时所采用的缩放因子，默认为1，无缩放</li>
+<li> delta代表加在目标图像dst上的值，该值是可选的，默认为0</li>
+<li> borderType代表边界样式，这个参数默认值为cv2.BORDER_DEFAULT。</li>
+</ul>
+<blockquote>
+<p>其中ddepth设计图像深度的概念：<br>图像深度是指存储每个像素值所用的位数，例如cv2.CV_8U，指的是8位无符号数，取值范围为0~255，超出范围则会被截断（截断指的是，当数值大于255保留为255，当数值小于0保留为0，其余不变）。</p>
+<p>具体还有：CV_16S（16位无符号数），CV_16U（16位有符号数），CV_32F（32位浮点数），CV_64F（64位浮点数）等.</p>
+</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-comment">#载入原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#求X方向梯度，并且输出图像一个为CV_8U,一个为CV_64F</span><br>img_gradient_X_8U=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>img_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#将图像深度改为CV_8U</span><br>img_gradient_X_64Fto8U=cv2.convertScaleAbs(img_gradient_X_64F)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'X_gradient_8U'</span>,img_gradient_X)<br>cv2.imshow(<span class="hljs-string">'X_gradient_64Fto8U'</span>,img_gradient_X_64Fto8U)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191103142600352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<p><code>cv2.imshow()</code>的默认显示为8位无符号数，即[0,255]，因此在显示<code>CV_64F</code>的图像前使用了函数<code>cv2.convertScaleAbs()</code>将图像深度为<code>CV_64F</code>的梯度图像重新转化为<code>CV_8U</code>。</p>
+<h3 id="cv2-convertScaleAbs"><a href="#cv2-convertScaleAbs" class="headerlink" title="cv2.convertScaleAbs()"></a>cv2.convertScaleAbs()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.convert<span class="hljs-constructor">ScaleAbs(<span class="hljs-params">src</span>[,<span class="hljs-params">alpha</span>[,<span class="hljs-params">beta</span>]])</span><br></code></pre></td></tr></tbody></table></figure>
+
+<p>先计算数组绝对值，后转化为8位无符号数</p>
+<ul>
+<li>src:输入图像（多维数组）</li>
+<li>alpha:比例因子</li>
+<li>beta:保存新图像（数组）前可以增加的值</li>
+</ul>
+<h3 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h3><p>防止梯度大小被截断最简单的方法就是先将输入图像归一化（实际归一化的过程就已经实现了图像深度的转变）。在使用深度大于8U的格式之前将灰度先归一化，就不用<code>convertScaleAbs</code>转换了。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment">#载入灰度原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#原图归一化,实际图像深度已经变为CV_64F</span><br>img_standard=img_original/<span class="hljs-number">255</span><br><span class="hljs-comment">#采用灰度原图求X方向梯度</span><br>original_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>original_gradient_X_64Fto8U=cv2.convertScaleAbs(original_gradient_X_64F)<br><span class="hljs-comment">#采用归一化的图像求X方向梯度</span><br>standard_gradient_X=cv2.Sobel(img_standard,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'original'</span>,img_original)<br>cv2.imshow(<span class="hljs-string">'original_X'</span>,original_gradient_X_64Fto8U)<br>cv2.imshow(<span class="hljs-string">'standard_X'</span>,standard_gradient_X)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/20191103144005627.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<h3 id="cv2-addWeighted"><a href="#cv2-addWeighted" class="headerlink" title="cv2.addWeighted()"></a>cv2.addWeighted()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.add<span class="hljs-constructor">Weighted(<span class="hljs-params">src1</span>, <span class="hljs-params">alpha</span>, <span class="hljs-params">src2</span>, <span class="hljs-params">beta</span>, <span class="hljs-params">gamma</span>[, <span class="hljs-params">dst</span>[, <span class="hljs-params">dtype</span>]])</span> → dst<br></code></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>src1 输入的第一个数组</li>
+<li>alpha 第一个数组的权重</li>
+<li>src2 输入的第二个数组（与第一个数组有相同的shape）</li>
+<li>beta 第二个数组的权重</li>
+<li>dst 输出的数组名称</li>
+<li>gamma 计算和时所采用的缩放因子，默认为1，无缩放</li>
+<li>dtype 输出图像的深度，-1表示和input相同</li>
+<li><blockquote>
+<p>dst = src1 * alpha + src2 * beta + gamma;</p>
+</blockquote>
+</li>
+</ul>
+<p>注意：由参数说明可以看出，被叠加的两幅图像必须是尺寸相同、类型相同的；并且，当输出图像array的深度为CV_32S时，这个函数就不适用了，这时候就会内存溢出或者算出的结果压根不对。</p>
+<h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>通过cv2.Sobel()我们可以轻松计算出X,Y方向的梯度大小，根据公式</p>
+<p>$$<br>G = \sqrt{G^2_x+G^2_y}<br>$$<br>可以求出梯度图像，实际操作时，为了简化运算，我们使用公式</p>
+<p>$$<br>G = \vert{G_x}\vert+\vert{G_y}\vert<br>$$</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment">#载入灰度原图，并且归一化</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)/<span class="hljs-number">255</span><br><span class="hljs-comment">#分别求X,Y方向的梯度</span><br>grad_X=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>grad_Y=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)<br><span class="hljs-comment">#求梯度图像</span><br>grad=cv2.addWeighted(grad_X,<span class="hljs-number">0.5</span>,grad_Y,<span class="hljs-number">0.5</span>,<span class="hljs-number">0</span>)<br>cv2.imshow(<span class="hljs-string">'gradient'</span>,grad)<br></code></pre></td></tr></tbody></table></figure>
+
+<h2 id="官方说明"><a href="#官方说明" class="headerlink" title="官方说明"></a>官方说明</h2><p>当年作者并没有公开发表过论文，仅仅是在一次博士生课题讨论会(1968)上提出(“A 3x3 Isotropic Gradient Operator for Image Processing”)，后在1973年出版的一本专著（”Pattern Classification and Scene Analysis”）的脚注里作为注释出现和公开的。</p>
+<p>详细介绍，请参考以下内容。</p>
+<p><a target="_blank" rel="noopener" href="http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf">文章链接</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/08/14/leetcode/leetcode-offer06/">
+                        <span class="hidden-mobile">剑指offer06 从尾到头打印链表</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2021/08/14/img_process/sobel/';
+          this.page.identifier = '/2021/08/14/img_process/sobel/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":true},"react":{"opacity":0.9}});</script></body>
+</html>

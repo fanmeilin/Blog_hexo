@@ -2,6 +2,7 @@
 
 <!DOCTYPE html>
 <html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
 
 
 
@@ -50,6 +51,7 @@
 
 
 <body>
+
   <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -143,10 +145,64 @@
   </div>
 </nav>
 
-    <div class="banner" id="banner" parallax=true
-         style="background: url('https://rmt.ladydaily.com/fetch/fluid/storage/bg/73twhs.png?w=1920&fmt=webp') no-repeat center center;
-           background-size: cover;">
-      <div class="full-bg-img">
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://rmt.ladydaily.com/fetch/fluid/storage/bg/73twhs.png?w=1920&fmt=webp') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
             <span class="h2" id="subtitle" title="标签 - 剑指">
@@ -178,13 +234,31 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
+  <p class="h4">共计 9 篇文章</p>
   <hr>
   
   
     
       
       <p class="h5">2021</p>
+    
+    <a href="/2021/08/14/leetcode/leetcode-offer06/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">剑指offer06 从尾到头打印链表</span>
+      <time style="float: right;">08-14</time>
+    </a>
+  
+    
+    <a href="/2021/08/14/leetcode/leetcode-offer12/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">剑指offer12 矩阵中的路径</span>
+      <time style="float: right;">08-14</time>
+    </a>
+  
+    
+    <a href="/2021/08/13/leetcode/leetcode-offer11/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">剑指offer11 旋转数组的最小数字</span>
+      <time style="float: right;">08-13</time>
+    </a>
+  
     
     <a href="/2021/08/11/leetcode/leetcode-offer05/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">剑指offer05 替换空格</span>
