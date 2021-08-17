@@ -1,7 +1,7 @@
 ---
 title: 剑指offer27 二叉树的镜像
 tags: [剑指,树]
-categories: [剑指，树]
+categories: [剑指,树]
 date: 2021-08-16 21:01:18
 ---
 
