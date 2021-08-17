@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      327 字
+      350 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -293,8 +293,7 @@
 <p>$$<br>w_1=w_1− \alpha \frac{∂J(w)}{∂w1}<br>$$</p>
 <p>$$<br>w_2=w_2− \alpha \frac{∂J(w)}{∂w2}<br>$$</p>
 <p><img src="https://img-blog.csdn.net/20180313201807699?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L2d1b2xpbmRvbmdnbGQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" srcset="/img/loading.gif" lazyload></p>
-<p>这里介绍梯度裁剪（Gradient Clipping）的方法，对梯度进行裁剪，论文提出对梯度的L2范数进行裁剪，也就是所有参数偏导数的平方和再开方。</p>
-<p>$$<br>g_1=\frac{∂J(w)}{∂w1}<br>$$</p>
+<h2 id="梯度裁剪"><a href="#梯度裁剪" class="headerlink" title="梯度裁剪"></a>梯度裁剪</h2><p>梯度裁剪是解决<strong>梯度爆炸</strong>的一种高效的方法，这里介绍梯度裁剪（Gradient Clipping）的方法，对梯度进行裁剪，论文提出对梯度的L2范数进行裁剪，也就是所有参数偏导数的平方和再开方。<br>$$<br>g_1=\frac{∂J(w)}{∂w1}<br>$$</p>
 <p>$$<br>g_2=\frac{∂J(w)}{∂w2}<br>$$</p>
 <p>设定裁剪阈值为 C = max_norm，$\Vert g\Vert_2= \sqrt{g^2_1+g^2_2}$</p>
 <p>当$\Vert g\Vert_2$大于c时：</p>

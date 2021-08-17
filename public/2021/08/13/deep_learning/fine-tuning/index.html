@@ -294,7 +294,7 @@
 <p><strong>3.防止过拟合</strong></p>
 <p>​    一般常用的防止过拟合方法有使用<strong>L1正则项、L2正则项、dropout、提前终止、数据集扩充等</strong>。如果模型在训练集上表现比较好但在测试集上表现欠佳可以选择增大L1或L2正则的惩罚力度（<strong>L2正则经验上首选1.0</strong>，超过10很少见），或<strong>增大dropout的随机失活概率</strong>（经验首选0.5）；或者当随着训练的持续在测试集上不增反降时，使用提前终止训练的方法。当然<strong>最有效的还是增大训练集的规模</strong>，实在难以获得新数据也可以使用数据集增强的方法，比如CV任务可以对数据集进行裁剪、翻转、平移等方法进行数据集增强，这种方法往往都会提高最后模型的测试精度。<br>     dropout对小数据防止过拟合有很好的效果,值一般设为0.5,小数据上dropout+sgd。在大部分实验中，效果提升都非常明显.<strong>建议尝试</strong>。 dropout的位置比较有讲究, 对于RNN,建议放到输入-&gt;RNN与RNN-&gt;输出的位置.关于RNN如何用dropout,可以参考:<a href="https://link.zhihu.com/?target=http://arxiv.org/abs/1409.2329">http://arxiv.org/abs/1409.2329</a>(Captain Jack令言:(不仅仅可以防止过拟合, 其实这相当于做人力成本最低的Ensemble, 当然, 训练起来会比没有Dropout的要慢一点, 同时网络参数你最好相应加一点, 对, 这会再慢一点).)</p>
 <p><strong>4.超参</strong> </p>
-<p>​    learning rate 最重要<strong>，推荐了解 cosine learning rate 和 cyclic learning rate，其次是 <strong>batchsize 和 weight decay</strong>。当你的模型还不错的时候，可以试着做数据增广和改损失函数锦上添花了。(罗浩ZJU令言：随着网络训练的进行，学习率要逐渐降下来；网络性能越好，学习率要越小（即越需要微调而非粗调)；batchsize通常影响没那么大，塞满卡就行，除了特殊的算法需要batch大一点)<br>​    adam,adadelta等,在小数据上,我这里实验的效果不如sgd, sgd收敛速度会慢一些，但是最终收敛后的结果，一般都比较好。</strong>如果使用sgd的话,可以选择从1.0或者0.1的学习率开始,隔一段时间,在验证集上检查一下,如果cost没有下降,就对学习率减半**. 我看过很多论文都这么搞,我自己实验的结果也很好. 当然,也可以先用ada系列先跑,最后快收敛的时候,更换成sgd继续训练.同样也会有提升.据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好。(Captain Jack令言：sgd adam 这些选择上, 看你个人选择. 一般对网络不是决定性的. 反正我无脑用sgd + momentum. ）</p>
+<p>​    learning rate 最重要<strong>，推荐了解 cosine learning rate 和 cyclic learning rate，其次是 <strong>batchsize 和 weight decay</strong>。当你的模型还不错的时候，可以试着做数据增广和改损失函数锦上添花了。(罗浩ZJU令言：随着网络训练的进行，学习率要逐渐降下来；网络性能越好，学习率要越小（即越需要微调而非粗调)；batchsize通常影响没那么大，塞满卡就行，除了特殊的算法需要batch大一点)<br>​    adam,adadelta等,在小数据上,我这里实验的效果不如sgd, sgd收敛速度会慢一些，但是最终收敛后的结果，一般都比较好。</strong>如果使用sgd的话,可以选择从1.0或者0.1的学习率开始,隔一段时间,在验证集上检查一下,如果cost没有下降,就对<strong>学习率减半</strong>. 我看过很多论文都这么搞,我自己实验的结果也很好. 当然,也可以先用ada系列先跑,最后快收敛的时候,更换成sgd继续训练.同样也会有提升.据说adadelta一般在分类问题上效果比较好，adam在生成问题上效果比较好。(Captain Jack令言：sgd adam 这些选择上, 看你个人选择. 一般对网络不是决定性的. 反正我无脑用sgd + momentum. ）</p>
 <p>5.<strong>激活函数</strong><br>    除了gate之类的地方,需要把输出限制成0-1之外,<strong>尽量不要用sigmoid</strong>,可以用tanh或者relu之类的激活函数.1. sigmoid函数在-4到4之外的区间梯度接近0，很容易造成梯度消失问题。2. 输入0均值，sigmoid函数的输出不是0均值的。（hzwer令言:虽然有至少十种激活函数，但在 Relu 外只推荐试一下 Swish。)</p>
 <p>6.BN层具有加速训练速度，有效防止梯度消失与梯度爆炸，具有防止过拟合的效果，所以构建网络时最好要加上这个组件。(Captain Jack令言：batch normalization我一直没用, 虽然我知道这个很好, 我不用仅仅是因为我懒. 所以要鼓励使用batch normalization.）</p>
 <p>7.如果你的模型包含全连接层（MLP），并且输入和输出大小一样，可以考虑将MLP替换成<strong>Highway Network</strong>,我尝试对结果有一点提升，建议作为最后提升模型的手段，原理很简单，就是给<strong>输出加了一个gate来控制信息的流动</strong>，详细介绍请参考论文: <a href="https://link.zhihu.com/?target=http://arxiv.org/abs/1505.00387">http://arxiv.org/abs/1505.00387</a></p>
@@ -377,7 +377,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/13/deep_learning/paper-site/">
+                      <a href="/2021/08/13/paper/paper-site/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">文献整理笔记</span>
                         <span class="visible-mobile">上一篇</span>
