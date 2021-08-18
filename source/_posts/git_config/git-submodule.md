@@ -27,6 +27,12 @@ categories: git
    git submodule update
    ```
 
+3. 进入对应子模块目录，执行
+
+   ```
+   git submodule update --init --recursive
+   ```
+
 ### 方法二
 
 另外一种更简单的方法，就是在执行 `git clone` 时加上 `--recursive` 参数。它会自动初始化并更新每一个子模块。例如：

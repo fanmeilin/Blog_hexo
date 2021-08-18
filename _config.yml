@@ -145,7 +145,7 @@ live2d:
     width: 280
     height: 500
   mobile:
-    show: true   #是否在手机进行显示
+    show: false   #是否在手机进行显示
   react:
     opacity: 0.9
 

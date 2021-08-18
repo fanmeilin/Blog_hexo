@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      162 字
+      178 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      2
        分钟
     </span>
   
@@ -297,6 +297,8 @@
 <figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git submodule <span class="hljs-keyword">init</span><br></code></pre></td></tr></tbody></table></figure></li>
 <li><p>更新项目，抓取子模块内容。</p>
 <figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git submodule update</span><br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>进入对应子模块目录，执行</p>
+<figure class="highlight brainfuck"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">submodule</span> <span class="hljs-comment">update</span> --<span class="hljs-comment">init</span> --<span class="hljs-comment">recursive</span><br></code></pre></td></tr></tbody></table></figure></li>
 </ol>
 <h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>另外一种更简单的方法，就是在执行 <code>git clone</code> 时加上 <code>--recursive</code> 参数。它会自动初始化并更新每一个子模块。例如：</p>
 <figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone --recursive https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/example/</span>example.git<br></code></pre></td></tr></tbody></table></figure>
@@ -581,5 +583,5 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":true},"react":{"opacity":0.9}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
 </html>

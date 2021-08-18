@@ -176,3 +176,6 @@ cv2.imshow('gradient',grad)
 
 [文章链接](http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf)
 
+
+<iframe src='/js/pdfjs_old/web/viewer.html?file=http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' style='width:100%;height:100%'></iframe>
+
