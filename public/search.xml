@@ -4,9 +4,98 @@
   
     
     <entry>
+      <title>剑指offer21 调整数组顺序使奇数位于偶数前面</title>
+      <link href="/2021/08/18/leetcode/leetcode-offer21/"/>
+      <url>/2021/08/18/leetcode/leetcode-offer21/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>调整数组顺序使奇数位于偶数前面</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个整数数组，实现一个函数来调整该数组中数字的顺序，使得所有奇数位于数组的前半部分，所有偶数位于数组的后半部分。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：nums = [<span class="hljs-number">1,2,3,4</span>]<br>输出：[<span class="hljs-number">1,3,2,4</span>] <br>注：[<span class="hljs-number">3,1,2,4</span>] 也是正确的答案之一。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>0 &lt;= nums.length &lt;= 50000</li><li>1 &lt;= nums[i] &lt;= 10000</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>python的list的常规操作。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">exchange</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        odd = []<br>        even = []<br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span>(x%<span class="hljs-number">2</span>):<br>                odd.append(x)<br>            <span class="hljs-keyword">else</span>:<br>                even.append(x)<br>        <span class="hljs-keyword">return</span> odd+even<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 数组 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指offer28 对称的二叉树</title>
+      <link href="/2021/08/18/leetcode/leetcode-offer28/"/>
+      <url>/2021/08/18/leetcode/leetcode-offer28/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>对称的二叉树</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。</p><p>例如，二叉树&nbsp;[1,2,2,3,4,4,3] 是对称的。</p><p>&nbsp; &nbsp; 1<br>&nbsp; &nbsp;/ <br>&nbsp; 2 &nbsp; 2<br>&nbsp;/ \ / <br>3 &nbsp;4 4 &nbsp;3<br>但是下面这个&nbsp;[1,2,2,null,3,null,3] 则不是镜像对称的:</p><p>&nbsp; &nbsp; 1<br>&nbsp; &nbsp;/ <br>&nbsp; 2 &nbsp; 2<br>&nbsp; &nbsp;\ &nbsp; <br>&nbsp; &nbsp;3 &nbsp; &nbsp;3</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>0 &lt;= 节点个数 &lt;= 1000</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>如果root为空就直接返回True，然后判断其左右子树是否为镜像结构。如果两个子节点为空则为真，如果一空则为假，然后分别判断其对称结构。 <code>judge(A.left,B.right) and judge(A.right,B.left)</code> 注意是镜像因此左右时相反的呢</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSymmetric</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">judge</span>(<span class="hljs-params">A,B</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (A <span class="hljs-keyword">or</span> B): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">or</span> (A.val!=B.val): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> judge(A.left,B.right) <span class="hljs-keyword">and</span> judge(A.right,B.left) <br>        <span class="hljs-keyword">return</span> judge(root.left,root.right)<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 树 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>剑指offer26 树的子结构</title>
+      <link href="/2021/08/18/leetcode/leetcode-offer26/"/>
+      <url>/2021/08/18/leetcode/leetcode-offer26/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>树的子结构</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)<br>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p><p>例如:<br>给定的树 A:</p><p>&nbsp; &nbsp; &nbsp;3<br>&nbsp; &nbsp; / <br>&nbsp; &nbsp;4 &nbsp; 5<br>&nbsp; / <br>&nbsp;1 &nbsp; 2<br>给定的树 B：</p><p>&nbsp; &nbsp;4&nbsp;<br>&nbsp; /<br>&nbsp;1<br>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>0 &lt;= 节点个数 &lt;= 10000</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>python代码真的！好！简洁！</p><p><code>isSubStructure</code>的作用是先序查找A，B的匹配情况。而在内部会对匹配的<code>judgechildren(A,B)</code>进行判断，查看是否为其子结构。</p><p>如果B为空了则表示匹配成功。如果根节点不匹配或者A为空了就直接返回失败。如果可以继续判断，就继续判断对应的左右子树。</p><p><code>(judgechildren(A,B) or self.isSubStructure(A.left,B) or self.isSubStructure(A.right,B))</code> 判断AB两子树；先序判断左右子树，<code>注意这里是self.isSubStructure</code>进行递归哦~~</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSubStructure</span>(<span class="hljs-params">self, A: TreeNode, B: TreeNode</span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">judgechildren</span>(<span class="hljs-params">A,B</span>):</span> <span class="hljs-comment">#判断以AB为根节点的条件下，B是否为A的子结构</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(B): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> A) <span class="hljs-keyword">or</span> (A.val!=B.val): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> judgechildren(A.right,B.right) <span class="hljs-keyword">and</span> judgechildren(A.left,B.left)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bool</span>(A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">and</span> (judgechildren(A,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.left,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.right,B))<br></code></pre></td></tr></tbody></table></figure><blockquote><p>bool(A and B)注意要转换为bool变量</p></blockquote><ul><li><p>时间复杂度为O(MN)</p></li><li><p>空间复杂度 O(M)： 当树 A和树 B 都退化为链表时，递归调用深度最大。当 M≤N 时，遍历树 A 与递归判断的总递归深度为 M ；当 M&gt;N 时，最差情况为遍历至树 A叶子节点，此时总递归深度为 M。</p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 树 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> idea </tag>
+            
+            <tag> 树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer14.2 剪绳子2</title>
-      <link href="/2021/08/18/leetcode/leetcode-offer14-2(1)/"/>
-      <url>/2021/08/18/leetcode/leetcode-offer14-2(1)/</url>
+      <link href="/2021/08/18/leetcode/leetcode-offer14-2/"/>
+      <url>/2021/08/18/leetcode/leetcode-offer14-2/</url>
       
         <content type="html"><![CDATA[<blockquote><p>剪绳子2</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] .请问 k[0]<em>k[1]</em>…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p><p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 2<br>输出: 1<br>解释:<span class="hljs-number"> 2 </span>=<span class="hljs-number"> 1 </span>+ 1,<span class="hljs-number"> 1 </span>×<span class="hljs-number"> 1 </span>= 1<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 10<br>输出: 36<br>解释:<span class="hljs-number"> 10 </span>=<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 3 </span>+ 4,<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 4 </span>= 36<br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li><code>2 &lt;= n &lt;= 1000</code></li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>使用动态规划具体参照剪绳子1</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cuttingRope</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        dp = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>)]<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>,n+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>,i):<br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i],<span class="hljs-built_in">max</span>(j*(i-j),j*dp[i-j]))<br>        <span class="hljs-keyword">return</span> dp[n]%<span class="hljs-number">1000000007</span><br></code></pre></td></tr></tbody></table></figure><p>但是这种方式时间复杂度较大。</p><p>步骤如下：(数学可以证明尽量分成多的3)<a href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/solution/mian-shi-ti-14-i-jian-sheng-zi-tan-xin-si-xiang-by/">参见题解</a></p><ul><li>如果 n == 2，返回1，如果 n == 3，返回2，两个可以合并成n小于4的时候返回n - 1</li><li>如果 n == 4，返回4</li><li>如果 n &gt; 4，分成尽可能多的长度为3的小段，每次循环长度n减去3，乘积res乘以3；最后返回时乘以小于等于4的最后一小段；每次乘法操作后记得取余就行<br>以上2和3可以合并</li></ul><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cuttingRope</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">4</span>:<br>            <span class="hljs-keyword">return</span> n - <span class="hljs-number">1</span><br>        res = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> n &gt; <span class="hljs-number">4</span>: <span class="hljs-comment"># 找寻尽量多的3</span><br>            res = res * <span class="hljs-number">3</span> % <span class="hljs-number">1000000007</span><br>            n -= <span class="hljs-number">3</span><br>        <span class="hljs-keyword">return</span> res * n % <span class="hljs-number">1000000007</span> <span class="hljs-comment">#乘以剩余的</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
       
