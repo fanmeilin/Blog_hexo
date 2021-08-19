@@ -412,7 +412,7 @@ footer:
 index:
   # 首页 Banner 头图，可以是相对路径或绝对路径，以下相同
   # Path of Banner image, can be a relative path or an absolute path, the same on other pages
-  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/girl.png #https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg 
+  banner_img: https://picture.mulindya.com/girl.png #https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg 
 
   # 头图高度，屏幕百分比
   # Height ratio of banner image
@@ -431,7 +431,7 @@ index:
 
     # 为空则按 hexo config.subtitle 显示
     # If empty, text based on `subtitle` in hexo config
-    text: "听说，橘红色的天空是星星在舞蹈"
+    text: "听说，橘红色的天空是星星在跳舞"
 
     # 通过 API 接口作为首页副标题的内容，必须返回的是 JSON 格式，如果请求失败则按 text 字段显示，该功能必须先开启 typing 打字机功能
     # Subtitle of the homepage through the API, must be returned a JSON. If the request fails, it will be displayed in `text` value. This feature must first enable the typing animation
@@ -484,7 +484,7 @@ index:
 # Post Page
 #---------------------------
 post:
-  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #/img/bg/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/mw690/6833939bly1giph4wqtg4j20zk0m8x6p.jpg 
+  banner_img: https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #/img/bg/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/mw690/6833939bly1giph4wqtg4j20zk0m8x6p.jpg 
   banner_img_height: 70
   banner_mask_alpha: 0.3
 
@@ -775,7 +775,7 @@ cusdis:
 # Archive Page
 #---------------------------
 archive:
-  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/bd643dc0ad68f830b3a0eeae50ceba5f_4.jpg #/img/default.png
+  banner_img: https://picture.mulindya.com/bd643dc0ad68f830b3a0eeae50ceba5f_4.jpg #/img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -787,7 +787,7 @@ archive:
 #---------------------------
 category:
   enable: true
-  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/7cc417b7ace4b99c19d3034179926555_3.jpg #/img/default.png
+  banner_img: https://picture.mulindya.com/7cc417b7ace4b99c19d3034179926555_3.jpg #/img/default.png
   banner_img_height: 60
   banner_mask_alpha: 0.3
   subtitle:
@@ -858,7 +858,7 @@ about:
 # Custom Page through `hexo new page`
 #---------------------------
 page:
-  banner_img: http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg 
+  banner_img: https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg #https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg 
   banner_img_height: 60
   banner_mask_alpha: 0.3
 
