@@ -62,12 +62,12 @@ SE在分类上是个涨点必备的工具，换言之，堆最高精度是一定
 对于CNN网络来说，其核心计算是卷积算子，其通过卷积核从输入特征图学习到新特征图。从本质上讲，卷积是对一个局部区域进行特征融合，这包括空间上（H和W维度）以及通道间（C维度）的特征融合。
 
 
-![](https://img-blog.csdnimg.cn/2019051415564658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pamlheWFuMTIz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/fine-tuning-pic1.png)
 
 卷积实际上是对<u>局部区域</u>进行的特征融合。 这也导致了普通卷积神经网络的感受野不大，当然你也可以设计出更多的通道特征来增加这个，但是这样做导致了计算量大大的增加。因此为了空间上融合更多特征融合，或者是提取多尺度空间信息。也提出了许多不同的方法如Inception网络的多分支结构。对于channel维度的特征融合，卷积操作基本上默认对输入特征图的所有channel进行融合。<u>而SENet网络的创新点在于关注channel之间的关系，希望模型可以自动学习到不同channel特征的重要程度</u>。为此，SENet提出了Squeeze-and-Excitation (SE)模块，如下图所示：
 
 
-![](https://img-blog.csdnimg.cn/20190514160215998.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pamlheWFuMTIz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/fine-tuning-pic2.png)
 
 ### 反面训诫
 

@@ -20,7 +20,7 @@ $$
 w_2=w_2− \alpha \frac{∂J(w)}{∂w2}
 $$
 
-![](https://img-blog.csdn.net/20180313201807699?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L2d1b2xpbmRvbmdnbGQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![](https://picture.mulindya.com/gradient-exp-pic1.png)
 
 ## 梯度裁剪
 

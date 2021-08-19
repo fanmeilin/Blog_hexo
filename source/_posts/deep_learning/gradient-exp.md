@@ -21,7 +21,7 @@ $$
 w_2=w_2− \alpha \frac{∂J(w)}{∂w2}
 $$
 
-![](https://img-blog.csdn.net/20180313201807699?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L2d1b2xpbmRvbmdnbGQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+![](https://picture.mulindya.com/gradient-exp-pic1.png)
 
 ## 梯度消失和梯度爆炸原因
 
@@ -33,9 +33,9 @@ $$
 
 - 根据链式求导和反向传播，我们很容易得出，其中C是代价函数
 
-  ![](https://img-blog.csdn.net/2018080717114969?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2p1bmp1bjE1MDAxMzY1Mg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70)
+  ![](https://picture.mulindya.com/gradient-exp-pic2.png)
 
-  ![](https://img-blog.csdnimg.cn/20190410214837528.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODIzMDQz,size_16,color_FFFFFF,t_70)
+  ![](https://picture.mulindya.com/gradient-exp-pic3.png)
 
 ## 解决方案
 
@@ -87,7 +87,7 @@ $$
 
 ReLU的主要贡献在于：
 
-![](https://img-blog.csdnimg.cn/20190410221031730.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODIzMDQz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/gradient-exp-pic4.png)
 
 ##### 优点
 
@@ -104,11 +104,11 @@ ReLU的主要贡献在于：
 
 LeakyReLU就是为了解决ReLU的0区间带来的影响，该函数输出对负值输入有很小的坡度，由于导数总是不为零，这能减少静默神经元的出现，允许基于梯度的学习（虽然会很慢），解决了ReLU函数进入负区间后，导致神经元不学习的问题。
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410221531939.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODIzMDQz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/gradient-exp-pic5.png)
 
 #### 3.ELU函数：
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20190410222011377.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODIzMDQz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/gradient-exp-pic6.png)
 
 - 融合了sigmoid和ReLU，**左侧具有软饱和性，右侧无饱和性**。
 
@@ -135,4 +135,4 @@ BN是深度学习发展以来提出的最重要的成果之一了，目前已经
 LSTM是循环神经网络RNN的变体，全称是长短期记忆网络（long-short term memory networks），它是不那么容易发生梯度消失的，主要原因在于LSTM内部复杂的“门”结构，**LSTM通过它内部的“门”可以接下来更新的时候“记住”前几次训练的“残留记忆”**，因此，经常用于生成文本中。关于LSTM的原理详解后续再分析。[LSTM](https://zhuanlan.zhihu.com/p/32085405)
 
 
-![](https://img-blog.csdnimg.cn/20190410224144569.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQyODIzMDQz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/gradient-exp-pic7.png)

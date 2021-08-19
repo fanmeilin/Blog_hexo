@@ -14,7 +14,7 @@ date: 2021-08-17 20:59:06
 
 ### 示例 1：
 
-![img](https://assets.leetcode.com/uploads/2021/02/19/tree.jpg)
+![img](https://picture.mulindya.com/leetcode-offer07-tree.jpg)
 
 ```
 Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]

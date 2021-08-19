@@ -102,7 +102,7 @@ ssh root@192.168.10.12:3721
 ssh -p 3721 root@192.168.10.12
 ```
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201102200256.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201102200256.png)
 
 - 如果不清楚Linux系统端口映射配置情况：
 
@@ -116,15 +116,15 @@ iptables -t nat -L -n
 
 - 新建会话，填写名称、IP、端口号（我们刚刚配置过的）：
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201102200522.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201102200522.png)
 
 - 用户身份认证，填入用户名密码（刚刚配置过的）：
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201102200640.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201102200640.png)
 
 - 随后就可以使用该会话直接登录docker容器了，为远程调试打下了坚实的基础：
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201102200804.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201102200804.png)
 
 ### 填坑
 
@@ -198,15 +198,15 @@ service sshd restart
 
   > 会自动安装 Remote-WSL / Containers / SSH 等插件。
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201028143530.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201028143530.png)
 
 ### 配置主机信息
 
 > ctrl + shift + p
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201028174129.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201028174129.png)
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201028175152.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201028175152.png)
 
 ```
 Host Enter
@@ -219,7 +219,7 @@ Host Enter
 
 ### vs code 连接远程主机
 
-![img](https://photos.zywvvd.com/images_matrixtime/20201028175324.png)
+![](https://photos.zywvvd.com/images_matrixtime/20201028175324.png)
 
 > 之后选择目标主机的操作系统。
 
@@ -237,4 +237,4 @@ Host Enter
 
 - 搜索配置 `execute in file`：
 
-![img](https://photos.zywvvd.com/win11-mt/20210717114300.png)
+![](https://photos.zywvvd.com/win11-mt/20210717114300.png)

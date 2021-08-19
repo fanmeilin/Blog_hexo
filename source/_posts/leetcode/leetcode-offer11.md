@@ -42,7 +42,7 @@ class Solution:
 
 还可以使用二分法，将线性级别的复杂度降低到对数级别。
 
-![Picture1.png](https://pic.leetcode-cn.com/1599404042-JMvjtL-Picture1.png)
+![](https://picture.mulindya.com/leetcode-offer11-pic1.png)
 
 最低点有特性：左边的所有元素都要比右边所有元素大。利用这个特性可以逐渐缩小范围。
 

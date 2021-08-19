@@ -15,7 +15,7 @@ date: 2021-08-14 01:04:59
 
 例如，在下面的 3×4 的矩阵中包含单词 "ABCCED"（单词中的字母已标出）。
 
-![img](https://assets.leetcode.com/uploads/2020/11/04/word2.jpg)
+![](https://picture.mulindya.com/leetcode-offer12-pic1.jpg)
 
 ### 示例 1：
 

@@ -16,7 +16,7 @@ math: true
 - 阶跃变化函数，即图像强度在不连续处的两边的像素灰度值有着显著的差异；
 - 线条（屋顶）变化函数，即图像强度突然从一个值变化到另一个值，保持一较小行程后又回到原来的值。
 
-![](http://qxtgssh6h.hn-bkt.clouddn.com/sobel1.png)
+![](https://picture.mulindya.com/sobel-pic1.png)
 
 （a）（b）分别是阶跃函数和屋顶函数的二维图像；（c）（d）是阶跃和屋顶函数的函数图象；（e）（f）对应一阶倒数；（g）（h）是二阶倒数。
 
@@ -82,7 +82,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 ```
 
-![](https://img-blog.csdnimg.cn/20191103142600352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/sobel-pic2.png)
 
 `cv2.imshow()`的默认显示为8位无符号数，即[0,255]，因此在显示`CV_64F`的图像前使用了函数`cv2.convertScaleAbs()`将图像深度为`CV_64F`的梯度图像重新转化为`CV_8U`。
 
@@ -122,7 +122,7 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 ```
 
-![](https://img-blog.csdnimg.cn/20191103144005627.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70)
+![](https://picture.mulindya.com/sobel-pic3.png)
 
 ### cv2.addWeighted()
 
@@ -174,8 +174,5 @@ cv2.imshow('gradient',grad)
 
 详细介绍，请参考以下内容。
 
-[文章链接](http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf)
-
-
-<iframe src='/js/pdfjs_old/web/viewer.html?file=http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' style='width:100%;height:100%'></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' style='width:100%;height:100%'></iframe>
 

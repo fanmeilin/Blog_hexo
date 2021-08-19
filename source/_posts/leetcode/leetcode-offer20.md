@@ -97,7 +97,7 @@ math: true
 7. 幂符号之后的`数字`
 8. 结尾的`空格`
 
-![Picture1.png](https://pic.leetcode-cn.com/6f41d7e46fd0344c013980e3f46429dd7a7311bb4292783a482466a90f15747b-Picture1.png)
+![](https://picture.mulindya.com/leetcode-offer20-pic1.png)
 
 #### 结束状态
 

@@ -43,7 +43,7 @@ $$
 
 标准差(Standard Deviation)是离均差平方的算术平均数(即：方差)的算术平方根，用$\sigma$表示。标准差也被称为标准偏差，或者实验标准差，在概率统计中最常使用作为统计分布程度上的测量依据。 见下图：
 
-![](https://pic1.zhimg.com/80/v2-37e04458baf17d09c914981b5dbae140_720w.jpg)
+![](https://picture.mulindya.com/covariance-matrix-pic1.jpg)
 
 标准差是方差的算术平方根。标准差能反映一个数据集的离散程度。平均数相同的两组数据，标准差未必相同。
 

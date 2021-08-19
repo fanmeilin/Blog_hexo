@@ -19,7 +19,7 @@ math: true
 
 单个数据点的马氏距离
 
-![](https://pic4.zhimg.com/80/v2-d2987369d8167a362482d6cbecefb8bb_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic1.png)
 
 
 
@@ -27,7 +27,7 @@ math: true
 
 
 
-![](https://pic3.zhimg.com/80/v2-d54956df14c05568f8c0c0548ac16416_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic2.png)
 
 
 
@@ -49,7 +49,7 @@ math: true
 
 所以，在一个方差较小的维度下很小的差别就有可能成为离群点。就像下图一样，A与B相对于原点的距离是相同的。但是由于样本总体沿着横轴分布，所以B点更有可能是这个样本中的点，而A则更有可能是离群点。
 
-![](https://pic4.zhimg.com/80/v2-6f5d1b59fd1687cfeecd0c6991c6db77_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic3.png)
 
 
 
@@ -59,7 +59,7 @@ math: true
 
 
 
-![](https://pic3.zhimg.com/80/v2-3cee35b79d272dda86e2604c160934ee_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic4.png)
 
 
 
@@ -75,7 +75,7 @@ math: true
 
 
 
-![](https://pic3.zhimg.com/80/v2-068306ff7e62b7af24b126eafe0b8bc6_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic5.png)
 
 
 
@@ -85,7 +85,7 @@ math: true
 
 首先要对数据点进行*旋转*，旋转至主成分，维度间线性无关，假设新的坐标为
 
-![](https://pic2.zhimg.com/80/v2-e924839926a256cb277a8cfc850d5a89_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic6.png)
 
 
 
@@ -93,13 +93,13 @@ math: true
 
 
 
-![](https://pic1.zhimg.com/80/v2-24ace781a1f0b2cc64ea359b1bb78d74_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic7.png)
 
 
 
 马氏距离是旋转变换缩放之后的欧式距离，所以马氏距离的计算公式为：
 
-![](https://pic3.zhimg.com/80/v2-4435a733478fafe47ee0198e315e67f6_720w.jpg)
+![](https://picture.mulindya.com/Mahalanobis-distance-pic8.png)
 
 这就是之前提到的马氏距离的公式
 

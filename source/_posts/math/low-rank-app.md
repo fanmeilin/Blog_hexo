@@ -14,7 +14,7 @@ math: true
 
 图像处理中，*rank可以理解为图像所包含的信息的丰富程度*，在显示生活中，一张图片中大部分成分是相似的。比如给一张大草原的图片
 
-![](https://pic1.zhimg.com/50/ce29981e00f4d519ff547e986bf8a5d6_720w.jpg?source=1940ef5c)
+![](https://picture.mulindya.com/low-rank-app-pic1.png)
 
 
 
@@ -40,7 +40,7 @@ math: true
 
 **Low-rank approximation of precision matrix**
 
-The feature data **X** is subject to low-rank approximation due to the narrower target domain for anomaly-free images than the ImageNet dataset’s. The multi-scale features from different layers may also contribute to it due to the inter-dependency among the features from the layers. Inspired by the truncated SVD of a precision matrix, a low-rank embedding of input features with **W** *∈* $R^{F*k}$,where *F > k*, is considered as follows:
+The feature data **X** is subject to low-rank approximation due to the narrower target domain for anomaly-free images than the ImageNet dataset’s. The multi-scale features from different layers may also contribute to it due to the inter-dependency among the features from the layers. Inspired by the truncated SVD of a precision matrix, a low-rank embedding of input features with $W \in R^{F \times k}$,where *F > k*, is considered as follows:
 $$
 d^2_{i,j} = X^TW(W^TC_{i,j}W)^{−1}W^TX
 $$
