@@ -162,7 +162,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -298,7 +298,7 @@
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minArray</span>(<span class="hljs-params">self, numbers: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(numbers):<span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        minitem = numbers[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(numbers)):<br>            <span class="hljs-keyword">if</span> numbers[i]&lt;numbers[i-<span class="hljs-number">1</span>]:<br>                <span class="hljs-keyword">return</span> <span class="hljs-built_in">min</span>(minitem,numbers[i])<br>        <span class="hljs-keyword">return</span> minitem<br></code></pre></td></tr></tbody></table></figure>
 
 <p>还可以使用二分法，将线性级别的复杂度降低到对数级别。</p>
-<p><img src="https://pic.leetcode-cn.com/1599404042-JMvjtL-Picture1.png" srcset="/img/loading.gif" lazyload alt="Picture1.png"></p>
+<p><img src="https://picture.mulindya.com/leetcode-offer11-pic1.png" srcset="/img/loading.gif" lazyload></p>
 <p>最低点有特性：左边的所有元素都要比右边所有元素大。利用这个特性可以逐渐缩小范围。</p>
 <p>中间元素和某个边界元素比较大小，来确定范围，<u>但是要注意两者相等时就没有确切的判断了</u>。可以直接用线性比较来替代。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minArray</span>(<span class="hljs-params">self, numbers: [<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        i, j = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(numbers) - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> i &lt; j:<br>            m = (i + j) // <span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> numbers[m] &gt; numbers[j]: i = m + <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> numbers[m] &lt; numbers[j]: j = m<br>            <span class="hljs-keyword">else</span>: j -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> numbers[i]<br></code></pre></td></tr></tbody></table></figure>
@@ -592,5 +592,5 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
 </html>

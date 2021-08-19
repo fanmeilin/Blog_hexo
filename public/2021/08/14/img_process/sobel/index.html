@@ -162,7 +162,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -294,7 +294,7 @@
 <li>阶跃变化函数，即图像强度在不连续处的两边的像素灰度值有着显著的差异；</li>
 <li>线条（屋顶）变化函数，即图像强度突然从一个值变化到另一个值，保持一较小行程后又回到原来的值。</li>
 </ul>
-<p><img src="http://qxtgssh6h.hn-bkt.clouddn.com/sobel1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/sobel-pic1.png" srcset="/img/loading.gif" lazyload></p>
 <p>（a）（b）分别是阶跃函数和屋顶函数的二维图像；（c）（d）是阶跃和屋顶函数的函数图象；（e）（f）对应一阶倒数；（g）（h）是二阶倒数。</p>
 <h2 id="Sobel算子"><a href="#Sobel算子" class="headerlink" title="Sobel算子"></a>Sobel算子</h2><p>常用如下两个模板进行边缘检测，将Gx，Gy与图像卷积，即可得到横向和纵向的亮度差分近似值。</p>
 
@@ -332,7 +332,7 @@ $$
 </blockquote>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-comment">#载入原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#求X方向梯度，并且输出图像一个为CV_8U,一个为CV_64F</span><br>img_gradient_X_8U=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>img_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#将图像深度改为CV_8U</span><br>img_gradient_X_64Fto8U=cv2.convertScaleAbs(img_gradient_X_64F)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'X_gradient_8U'</span>,img_gradient_X)<br>cv2.imshow(<span class="hljs-string">'X_gradient_64Fto8U'</span>,img_gradient_X_64Fto8U)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191103142600352.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/sobel-pic2.png" srcset="/img/loading.gif" lazyload></p>
 <p><code>cv2.imshow()</code>的默认显示为8位无符号数，即[0,255]，因此在显示<code>CV_64F</code>的图像前使用了函数<code>cv2.convertScaleAbs()</code>将图像深度为<code>CV_64F</code>的梯度图像重新转化为<code>CV_8U</code>。</p>
 <h3 id="cv2-convertScaleAbs"><a href="#cv2-convertScaleAbs" class="headerlink" title="cv2.convertScaleAbs()"></a>cv2.convertScaleAbs()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.convert<span class="hljs-constructor">ScaleAbs(<span class="hljs-params">src</span>[,<span class="hljs-params">alpha</span>[,<span class="hljs-params">beta</span>]])</span><br></code></pre></td></tr></tbody></table></figure>
 
@@ -345,7 +345,7 @@ $$
 <h3 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h3><p>防止梯度大小被截断最简单的方法就是先将输入图像归一化（实际归一化的过程就已经实现了图像深度的转变）。在使用深度大于8U的格式之前将灰度先归一化，就不用<code>convertScaleAbs</code>转换了。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment">#载入灰度原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#原图归一化,实际图像深度已经变为CV_64F</span><br>img_standard=img_original/<span class="hljs-number">255</span><br><span class="hljs-comment">#采用灰度原图求X方向梯度</span><br>original_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>original_gradient_X_64Fto8U=cv2.convertScaleAbs(original_gradient_X_64F)<br><span class="hljs-comment">#采用归一化的图像求X方向梯度</span><br>standard_gradient_X=cv2.Sobel(img_standard,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'original'</span>,img_original)<br>cv2.imshow(<span class="hljs-string">'original_X'</span>,original_gradient_X_64Fto8U)<br>cv2.imshow(<span class="hljs-string">'standard_X'</span>,standard_gradient_X)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
 
-<p><img src="https://img-blog.csdnimg.cn/20191103144005627.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzM0MzQxNDIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/sobel-pic3.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="cv2-addWeighted"><a href="#cv2-addWeighted" class="headerlink" title="cv2.addWeighted()"></a>cv2.addWeighted()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.add<span class="hljs-constructor">Weighted(<span class="hljs-params">src1</span>, <span class="hljs-params">alpha</span>, <span class="hljs-params">src2</span>, <span class="hljs-params">beta</span>, <span class="hljs-params">gamma</span>[, <span class="hljs-params">dst</span>[, <span class="hljs-params">dtype</span>]])</span> → dst<br></code></pre></td></tr></tbody></table></figure>
 
 <ul>
@@ -369,8 +369,7 @@ $$
 
 <h2 id="官方说明"><a href="#官方说明" class="headerlink" title="官方说明"></a>官方说明</h2><p>当年作者并没有公开发表过论文，仅仅是在一次博士生课题讨论会(1968)上提出(“A 3x3 Isotropic Gradient Operator for Image Processing”)，后在1973年出版的一本专著（”Pattern Classification and Scene Analysis”）的脚注里作为注释出现和公开的。</p>
 <p>详细介绍，请参考以下内容。</p>
-<p><a target="_blank" rel="noopener" href="http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf">文章链接</a></p>
-<iframe src="/js/pdfjs_old/web/viewer.html?file=http://qxrol67de.hn-bkt.clouddn.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf" style="width:100%;height:100%"></iframe>
+<iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf" style="width:100%;height:100%"></iframe>
 
 
             </div>
@@ -691,5 +690,5 @@ $$
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
 </html>

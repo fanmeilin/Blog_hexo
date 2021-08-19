@@ -162,7 +162,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -307,9 +307,9 @@
 <p>所谓SE：SENet是Squeeze-and-Excitation Networks的简称，拿到了ImageNet2017分类比赛冠军，其效果得到了认可，其提出的SE模块思想简单，易于实现，并且很容易可以加载到现有的网络模型框架中。*<u>SENet主要是学习了channel之间的相关性，筛选出了针对通道的注意力</u>*，稍微增加了一点计算量，但是效果比较好。</p>
 </blockquote>
 <p>对于CNN网络来说，其核心计算是卷积算子，其通过卷积核从输入特征图学习到新特征图。从本质上讲，卷积是对一个局部区域进行特征融合，这包括空间上（H和W维度）以及通道间（C维度）的特征融合。</p>
-<p><img src="https://img-blog.csdnimg.cn/2019051415564658.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pamlheWFuMTIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/fine-tuning-pic1.png" srcset="/img/loading.gif" lazyload></p>
 <p>卷积实际上是对<u>局部区域</u>进行的特征融合。 这也导致了普通卷积神经网络的感受野不大，当然你也可以设计出更多的通道特征来增加这个，但是这样做导致了计算量大大的增加。因此为了空间上融合更多特征融合，或者是提取多尺度空间信息。也提出了许多不同的方法如Inception网络的多分支结构。对于channel维度的特征融合，卷积操作基本上默认对输入特征图的所有channel进行融合。<u>而SENet网络的创新点在于关注channel之间的关系，希望模型可以自动学习到不同channel特征的重要程度</u>。为此，SENet提出了Squeeze-and-Excitation (SE)模块，如下图所示：</p>
-<p><img src="https://img-blog.csdnimg.cn/20190514160215998.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L25pamlheWFuMTIz,size_16,color_FFFFFF,t_70" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/fine-tuning-pic2.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="反面训诫"><a href="#反面训诫" class="headerlink" title="反面训诫"></a>反面训诫</h3><p>1.1、一上来就自己动手写模型。<br>建议首先用<strong>成熟的开源项目及其默认配置</strong>（例如 Gluon 对经典模型的各种复现、各个著名模型作者自己放出来的代码仓库）在自己的数据集上跑一遍，在等程序运行结束的时间里仔细研究一下代码里的各种细节，最后再自己写或者改代码。</p>
 <p>1.2、<strong>不推荐做人肉模型设计</strong>，比如把某层卷积改大一点，或者微调一下通道数。除非有特别 insight，不要自己乱设计新组件。</p>
 <p>2、训 RNN 不加 gradient clipping，导致训练一段时间以后 loss 突然变成 Nan。</p>
@@ -623,5 +623,5 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
 </html>

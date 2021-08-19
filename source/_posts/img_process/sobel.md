@@ -174,5 +174,5 @@ cv2.imshow('gradient',grad)
 
 详细介绍，请参考以下内容。
 
-<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' style='width:100%;height:100%'></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' width=100% height=450></iframe>
 

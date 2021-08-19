@@ -162,7 +162,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('http://qxdmmse9v.hn-bkt.clouddn.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -293,9 +293,9 @@
 <p><strong>那我们为什么要用马氏距离呢？</strong><br>马氏距离有很多<strong>优点：</strong> <strong>马氏距离不受量纲的影响</strong>，两点之间的马氏距离与原始数据的测量单位无关；由标准化数据和中心化数据(即原始数据与均值之差）计算出的二点之间的马氏距离相同。<strong>马氏距离还可以排除变量之间的相关性的干扰</strong>。</p>
 <h2 id="什么是马氏距离"><a href="#什么是马氏距离" class="headerlink" title="什么是马氏距离"></a>什么是马氏距离</h2><p>马氏距离(Mahalanobis Distance)是一种距离的度量，可以看作是欧氏距离的一种修正，修正了欧式距离中各个维度尺度不一致且相关的问题。</p>
 <p>单个数据点的马氏距离</p>
-<p><img src="https://pic4.zhimg.com/80/v2-d2987369d8167a362482d6cbecefb8bb_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic1.png" srcset="/img/loading.gif" lazyload></p>
 <p>数据点x, y之间的马氏距离</p>
-<p><img src="https://pic3.zhimg.com/80/v2-d54956df14c05568f8c0c0548ac16416_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic2.png" srcset="/img/loading.gif" lazyload></p>
 <p><em>其中Σ是多维随机变量的协方差矩阵，μ为样本均值，如果协方差矩阵是单位向量，也就是各维度独立同分布，马氏距离就变成了欧氏距离。</em></p>
 <h2 id="马氏距离实际意义"><a href="#马氏距离实际意义" class="headerlink" title="马氏距离实际意义"></a>马氏距离实际意义</h2><p>那么马氏距离就能能干什么？它比欧氏距离好在哪里？举几个栗子</p>
 <p><strong>欧式距离近就一定相似？</strong></p>
@@ -304,22 +304,22 @@
 <p>当然我们可以先做归一化来消除这种维度间scale不同的问题，但是样本分布也会影响分类</p>
 <p>举个一维的栗子，现在有两个类别，统一单位，第一个类别均值为0，方差为0.1，第二个类别均值为5，方差为5。那么一个值为2的点属于第一类的概率大还是第二类的概率大？距离上说应该是第一类，但是直觉上显然是第二类，因为第一类不太可能到达2这个位置。</p>
 <p>所以，在一个方差较小的维度下很小的差别就有可能成为离群点。就像下图一样，A与B相对于原点的距离是相同的。但是由于样本总体沿着横轴分布，所以B点更有可能是这个样本中的点，而A则更有可能是离群点。</p>
-<p><img src="https://pic4.zhimg.com/80/v2-6f5d1b59fd1687cfeecd0c6991c6db77_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic3.png" srcset="/img/loading.gif" lazyload></p>
 <p><strong>算上维度的方差就够了？</strong></p>
 <p>还有一个问题——如果维度间不独立同分布，样本点一定与欧氏距离近的样本点同类的概率更大吗？</p>
-<p><img src="https://pic3.zhimg.com/80/v2-3cee35b79d272dda86e2604c160934ee_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic4.png" srcset="/img/loading.gif" lazyload></p>
 <p>可以看到样本基本服从f(x) = x的线性分布，A与B相对于原点的距离依旧相等，显然A更像是一个离群点</p>
 <p>即使数据已经经过了标准化，也不会改变AB与原点间距离大小的相互关系。所以要本质上解决这个问题，就要针对<a href="https://link.zhihu.com/?target=https://www.ph0en1x.space/2018/03/06/PCA/">主成分分析</a>中的<code>主成分</code>来进行标准化。</p>
 <h2 id="马氏距离的几何意义"><a href="#马氏距离的几何意义" class="headerlink" title="马氏距离的几何意义"></a>马氏距离的几何意义</h2><p>上面搞懂了，马氏距离就好理解了，<u>只需要将变量<code>按照主成分进行旋转</code>，让维度间相互<strong>独立</strong>，然后进行<code>标准化</code></u>，让维度<strong>同分布</strong>就可以了。</p>
 <p>由主成分分析可知，由于主成分就是特征向量方向，每个方向的方差就是对应的特征值，所以只需要按照特征向量的方向旋转，然后缩放特征值倍就可以了，可以得到以下的结果：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-068306ff7e62b7af24b126eafe0b8bc6_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic5.png" srcset="/img/loading.gif" lazyload></p>
 <p>离群点就被成功分离，这时候的欧式距离就是马氏距离。</p>
 <h2 id="马氏距离的推导"><a href="#马氏距离的推导" class="headerlink" title="马氏距离的推导"></a>马氏距离的推导</h2><p>首先要对数据点进行<em>旋转</em>，旋转至主成分，维度间线性无关，假设新的坐标为</p>
-<p><img src="https://pic2.zhimg.com/80/v2-e924839926a256cb277a8cfc850d5a89_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic6.png" srcset="/img/loading.gif" lazyload></p>
 <p>又变换后<em>维度间线性无关且每个维度自己的方差为特征值</em>，所以满足：</p>
-<p><img src="https://pic1.zhimg.com/80/v2-24ace781a1f0b2cc64ea359b1bb78d74_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic7.png" srcset="/img/loading.gif" lazyload></p>
 <p>马氏距离是旋转变换缩放之后的欧式距离，所以马氏距离的计算公式为：</p>
-<p><img src="https://pic3.zhimg.com/80/v2-4435a733478fafe47ee0198e315e67f6_720w.jpg" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/Mahalanobis-distance-pic8.png" srcset="/img/loading.gif" lazyload></p>
 <p>这就是之前提到的马氏距离的公式</p>
 <h2 id="马氏距离的问题"><a href="#马氏距离的问题" class="headerlink" title="马氏距离的问题"></a>马氏距离的问题</h2><ul>
 <li>协方差矩阵必须满秩</li>
@@ -654,5 +654,5 @@
 <script  src="/js/boot.js" ></script>
 
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"right","width":280,"height":500},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
 </html>
