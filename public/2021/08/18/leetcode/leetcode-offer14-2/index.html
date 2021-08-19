@@ -196,7 +196,7 @@
 			}
 
 			$.getJSON('/js/video_url.json', function(data){
-				if (!isMobile){
+				if (true){ <!--!isMobile-->
 					var video_list_length = data.length
 					var seed = Math.random()
 					index = Math.floor(seed * video_list_length)
@@ -210,7 +210,7 @@
 
 			});
 
-			if (!isMobile){
+			if (true){
 				window.onresize = function(){
 					set_video_attr('video_item')
 					}

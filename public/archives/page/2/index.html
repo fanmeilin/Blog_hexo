@@ -180,7 +180,7 @@
 			}
 
 			$.getJSON('/js/video_url.json', function(data){
-				if (!isMobile){
+				if (true){ <!--!isMobile-->
 					var video_list_length = data.length
 					var seed = Math.random()
 					index = Math.floor(seed * video_list_length)
@@ -194,7 +194,7 @@
 
 			});
 
-			if (!isMobile){
+			if (true){
 				window.onresize = function(){
 					set_video_attr('video_item')
 					}
@@ -230,13 +230,19 @@
                 
 
 <div class="list-group">
-  <p class="h4">共计 33 篇文章</p>
+  <p class="h4">共计 34 篇文章</p>
   <hr>
   
   
     
       
       <p class="h5">2021</p>
+    
+    <a href="/2021/08/14/img_process/sobel/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">Sobel算子</span>
+      <time style="float: right;">08-14</time>
+    </a>
+  
     
     <a href="/2021/08/14/leetcode/leetcode-offer06/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">剑指offer06 从尾到头打印链表</span>
@@ -300,12 +306,6 @@
     
     <a href="/2021/08/10/docker/docker-ssh/" class="list-group-item list-group-item-action">
       <span class="archive-post-title">docker的ssh相关配置</span>
-      <time style="float: right;">08-10</time>
-    </a>
-  
-    
-    <a href="/2021/08/10/docker/docker-intro/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">docker相关命令</span>
       <time style="float: right;">08-10</time>
     </a>
   

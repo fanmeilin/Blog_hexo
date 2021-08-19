@@ -180,7 +180,7 @@
 			}
 
 			$.getJSON('/js/video_url.json', function(data){
-				if (!isMobile){
+				if (true){ <!--!isMobile-->
 					var video_list_length = data.length
 					var seed = Math.random()
 					index = Math.floor(seed * video_list_length)
@@ -194,7 +194,7 @@
 
 			});
 
-			if (!isMobile){
+			if (true){
 				window.onresize = function(){
 					set_video_attr('video_item')
 					}
@@ -253,7 +253,7 @@
       </a>
       <a href="/categories/%E5%89%91%E6%8C%87/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
-        <span>19</span>
+        <span>20</span>
       </a>
       <div class="category-collapse">
         
@@ -263,6 +263,13 @@
   <div id="collapse-a4cc124005ff4b672d45ae1234595e95" class="collapse in" role="tabpanel"
        aria-labelledby="heading-a4cc124005ff4b672d45ae1234595e95">
     
+    
+      
+      
+        <a href="/2021/08/19/test/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offertest</span>
+        </a>
+      
     
   </div>
 
@@ -334,63 +341,6 @@
     <div class="category-sub row">
       <a
         class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-8c05890ac8f93d0195f884f1ff4656ec" role="tab" data-toggle="collapse" href="#collapse-8c05890ac8f93d0195f884f1ff4656ec"
-        aria-expanded="false"
-      >
-        动态规划
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>4</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-8c05890ac8f93d0195f884f1ff4656ec" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-8c05890ac8f93d0195f884f1ff4656ec">
-    
-    
-      
-      
-        <a href="/2021/08/18/leetcode/leetcode-offer14-2/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer14.2 剪绳子2</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2021/08/17/leetcode/leetcode-offer14-1/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer14.1 剪绳子1</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2021/08/10/leetcode/leetcode-offer10-2/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer10-2 青蛙跳台阶问题</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2021/08/10/leetcode/leetcode-offer10-1/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer10-1 斐波那契数列</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category-sub row">
-      <a
-        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
         id="heading-302f276a934f5b3debc891512c311e91" role="tab" data-toggle="collapse" href="#collapse-302f276a934f5b3debc891512c311e91"
         aria-expanded="false"
       >
@@ -448,35 +398,49 @@
     <div class="category-sub row">
       <a
         class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-c1bb62b63c65be3760b715faad0bdf8d" role="tab" data-toggle="collapse" href="#collapse-c1bb62b63c65be3760b715faad0bdf8d"
+        id="heading-8c05890ac8f93d0195f884f1ff4656ec" role="tab" data-toggle="collapse" href="#collapse-8c05890ac8f93d0195f884f1ff4656ec"
         aria-expanded="false"
       >
-        DFS
+        动态规划
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%89%91%E6%8C%87/DFS/" class="category-count col-2 col-md-1">
+      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
-        <span>2</span>
+        <span>4</span>
       </a>
       <div class="category-collapse">
         
         
           
-  <div id="collapse-c1bb62b63c65be3760b715faad0bdf8d" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-c1bb62b63c65be3760b715faad0bdf8d">
+  <div id="collapse-8c05890ac8f93d0195f884f1ff4656ec" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-8c05890ac8f93d0195f884f1ff4656ec">
     
     
       
       
-        <a href="/2021/08/14/leetcode/leetcode-offer13/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer13 机器人的运动范围</span>
+        <a href="/2021/08/18/leetcode/leetcode-offer14-2/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer14.2 剪绳子2</span>
         </a>
       
     
       
       
-        <a href="/2021/08/14/leetcode/leetcode-offer12/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer12 矩阵中的路径</span>
+        <a href="/2021/08/17/leetcode/leetcode-offer14-1/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer14.1 剪绳子1</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/10/leetcode/leetcode-offer10-2/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer10-2 青蛙跳台阶问题</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/10/leetcode/leetcode-offer10-1/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer10-1 斐波那契数列</span>
         </a>
       
     
@@ -534,28 +498,35 @@
     <div class="category-sub row">
       <a
         class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-e2bcd2c348f032f70eece5f63808b90a" role="tab" data-toggle="collapse" href="#collapse-e2bcd2c348f032f70eece5f63808b90a"
+        id="heading-c1bb62b63c65be3760b715faad0bdf8d" role="tab" data-toggle="collapse" href="#collapse-c1bb62b63c65be3760b715faad0bdf8d"
         aria-expanded="false"
       >
-        有限状态机
+        DFS
         <i class="iconfont icon-arrowright"></i>
       </a>
-      <a href="/categories/%E5%89%91%E6%8C%87/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" class="category-count col-2 col-md-1">
+      <a href="/categories/%E5%89%91%E6%8C%87/DFS/" class="category-count col-2 col-md-1">
         <i class="iconfont icon-articles"></i>
-        <span>1</span>
+        <span>2</span>
       </a>
       <div class="category-collapse">
         
         
           
-  <div id="collapse-e2bcd2c348f032f70eece5f63808b90a" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-e2bcd2c348f032f70eece5f63808b90a">
+  <div id="collapse-c1bb62b63c65be3760b715faad0bdf8d" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-c1bb62b63c65be3760b715faad0bdf8d">
     
     
       
       
-        <a href="/2021/08/19/leetcode/leetcode-offer20/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer20 表示数值的字符串</span>
+        <a href="/2021/08/14/leetcode/leetcode-offer13/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer13 机器人的运动范围</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/08/14/leetcode/leetcode-offer12/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer12 矩阵中的路径</span>
         </a>
       
     
@@ -628,6 +599,42 @@
       
         <a href="/2021/08/10/leetcode/leetcode-offer09/" class="list-group-item list-group-item-action">
           <span class="category-post">剑指offer09 用两个栈实现队列</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-e2bcd2c348f032f70eece5f63808b90a" role="tab" data-toggle="collapse" href="#collapse-e2bcd2c348f032f70eece5f63808b90a"
+        aria-expanded="false"
+      >
+        有限状态机
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%89%91%E6%8C%87/%E6%9C%89%E9%99%90%E7%8A%B6%E6%80%81%E6%9C%BA/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+        
+          
+  <div id="collapse-e2bcd2c348f032f70eece5f63808b90a" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-e2bcd2c348f032f70eece5f63808b90a">
+    
+    
+      
+      
+        <a href="/2021/08/19/leetcode/leetcode-offer20/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer20 表示数值的字符串</span>
         </a>
       
     
@@ -937,42 +944,6 @@
     <div class="category row">
       <a
         class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-7808a68ee1b34dab43011429a12de19e" role="tab" data-toggle="collapse" href="#collapse-7808a68ee1b34dab43011429a12de19e"
-        aria-expanded="false"
-      >
-        图像处理
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-7808a68ee1b34dab43011429a12de19e" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-7808a68ee1b34dab43011429a12de19e">
-    
-    
-      
-      
-        <a href="/2021/08/14/img_process/sobel/" class="list-group-item list-group-item-action">
-          <span class="category-post">Sobel算子</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category row">
-      <a
-        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
         id="heading-224e2ccda861c2514faa683b3683c361" role="tab" data-toggle="collapse" href="#collapse-224e2ccda861c2514faa683b3683c361"
         aria-expanded="false"
       >
@@ -1036,6 +1007,42 @@
       </div>
     </div>
   
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category row">
+      <a
+        class="category-item collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-7808a68ee1b34dab43011429a12de19e" role="tab" data-toggle="collapse" href="#collapse-7808a68ee1b34dab43011429a12de19e"
+        aria-expanded="false"
+      >
+        图像处理
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+        
+          
+  <div id="collapse-7808a68ee1b34dab43011429a12de19e" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-7808a68ee1b34dab43011429a12de19e">
+    
+    
+      
+      
+        <a href="/2021/08/14/img_process/sobel/" class="list-group-item list-group-item-action">
+          <span class="category-post">Sobel算子</span>
+        </a>
+      
+    
   </div>
 
         
