@@ -43,19 +43,27 @@ $$
 ### 模板卷积
 
 对应的模板卷积即为
+
+{%raw%}
 $$
-\begin{bmatrix} 0 & 1 & 0\\ 1 & -4 &1 \\0 & 1 & 0\end{bmatrix} 或者\begin{bmatrix} 0 & -1 & 0\\ -1 & 4 & -1 \\0 & -1 & 0\end{bmatrix}
+\begin{bmatrix} 0 & 1 & 0\\ 1 & -4 & 1 \\ 0 & 1 & 0 \end{bmatrix} 或者\begin{bmatrix} 0 & -1 & 0 \\ -1 & 4 & -1 \\ 0 & -1 & 0 \end{bmatrix}
 $$
+{%endraw%}
+
 前者是mask中心为负数，后者是mask中心为正数；他们的目的和效果是一致的，只是表现形式稍有不同，前者在卷积后，在边缘的亮处为负数，在边缘暗处为正数。后者相反。
 
-mask为负数时，也就是$\begin{bmatrix} 0 & 1 & 0\\ 1 & -4 &1 \\0 & 1 & 0\end{bmatrix}$在边缘的亮处为负数，在边缘暗处为正数。可以参见下图：
+mask为负数时，在边缘的亮处为负数，在边缘暗处为正数。可以参见下图：
 
 ![](https://picture.mulindya.com/laplace-pic3.png)
 
-上述是考虑中心像素4邻域，类似还有考虑8邻域，此时中心点区8或-8，周围为-1或1
+上述是考虑中心像素4邻域，类似还有考虑8邻域，此时中心点区8或-8，周围为-1或1。
+
+{%raw%}
 $$
-\begin{bmatrix} 1 & 1 & 1\\ 1 & -8 &1 \\1 & 1 & 1\end{bmatrix} 或者\begin{bmatrix} -1 & -1 & -1\\ -1 & 8 & -1 \\-1 & -1 & -1\end{bmatrix}
+\begin{bmatrix} 1 & 1 & 1 \\ 1 & -8 & 1 \\ 1 & 1 & 1 \end{bmatrix} 或者\begin{bmatrix} -1 & -1 & -1 \\ -1 & 8 & -1 \\ -1 & -1 & -1 \end{bmatrix}
 $$
+
+{%endraw%}
 
 ## 图像锐化
 
