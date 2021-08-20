@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offertest - 待时</title>
+  <title>剑指offer29 顺时针打印矩阵 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -192,7 +192,6 @@
 				} else {
 					video_item.setAttribute('height', '100%'); <!--'100%'-->
 					video_item.setAttribute('width', 'auto');
-					video_item.style.left = 0.5*width
 				}
 			}
 
@@ -222,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offertest">
+            <span class="h2" id="subtitle" title="剑指offer29 顺时针打印矩阵">
               
             </span>
 
@@ -232,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 10:39" pubdate>
-        2021年8月20日 上午
+      <time datetime="2021-08-19 21:00" pubdate>
+        2021年8月19日 晚上
       </time>
     </span>
   
@@ -244,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      15 字
+      381 字
     </span>
   
 
@@ -254,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      6
        分钟
     </span>
   
@@ -284,20 +283,31 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offertest</h1>
+            <h1 style="display: none">剑指offer29 顺时针打印矩阵</h1>
             
             <div class="markdown-body">
               <blockquote>
+<p> 顺时针打印矩阵</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个矩阵，按照从外向里以顺时针的顺序依次打印出每一个数字。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：matrix = <span class="hljs-comment">[<span class="hljs-comment">[1,2,3]</span>,<span class="hljs-comment">[4,5,6]</span>,<span class="hljs-comment">[7,8,9]</span>]</span><br>输出：<span class="hljs-comment">[1,2,3,6,9,8,7,4,5]</span><br></code></pre></td></tr></tbody></table></figure>
 
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：matrix = [[<span class="hljs-number">1,2,3,4</span>],[<span class="hljs-number">5,6,7,8</span>],[<span class="hljs-number">9,10,11,12</span>]]<br>输出：[<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">8,12,11,10</span>,<span class="hljs-number">9,5,6,7</span>]<br></code></pre></td></tr></tbody></table></figure>
 
 <h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
-<li></li>
+<li><code>0 &lt;= matrix.length &lt;= 100</code></li>
+<li><code>0 &lt;= matrix[i].length &lt;= 100</code></li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>一种是对数组进行常规操作，安装题目要求进行遍历判断。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">spiralOrder</span>(<span class="hljs-params">self, matrix: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> matrix: <span class="hljs-keyword">return</span> []<br>        l, r, t, b, res = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(matrix[<span class="hljs-number">0</span>]) - <span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(matrix) - <span class="hljs-number">1</span>, []<br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(l, r + <span class="hljs-number">1</span>): res.append(matrix[t][i]) <span class="hljs-comment"># left to right</span><br>            t += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> t &gt; b: <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(t, b + <span class="hljs-number">1</span>): res.append(matrix[i][r]) <span class="hljs-comment"># top to bottom</span><br>            r -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> l &gt; r: <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(r, l - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>): res.append(matrix[b][i]) <span class="hljs-comment"># right to left</span><br>            b -= <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> t &gt; b: <span class="hljs-keyword">break</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(b, t - <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>): res.append(matrix[i][l]) <span class="hljs-comment"># bottom to top</span><br>            l += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> l &gt; r: <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> res<br><br></code></pre></td></tr></tbody></table></figure>
+<p>第二种是采用相关的方法，<code>pop(0)</code>可以弹出第一个元素。使用$zip(<em>)$相当于对矩阵转置。<code>list(zip(*matrix))[::-1]</code>就是对矩阵逆旋转90度。zip和zip(</em>)也是一对逆操作；前者表示压缩，后者表示解压。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">spiralOrder</span>(<span class="hljs-params">self, matrix: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        res = []<br>        <span class="hljs-keyword">while</span> matrix:<br>            res += matrix.pop(<span class="hljs-number">0</span>)<br>            matrix = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">zip</span>(*matrix))[::-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
 
+<blockquote>
+<p>pop &amp; zip知识参考</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhanshen112/article/details/90341177">https://blog.csdn.net/zhanshen112/article/details/90341177</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/Aurora-Twinkle/p/8660778.html">https://www.cnblogs.com/Aurora-Twinkle/p/8660778.html</a></p>
+</blockquote>
 
             </div>
             <hr>
@@ -309,6 +319,8 @@
                     
                       <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
                     
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%95%B0%E7%BB%84/">数组</a>
+                    
                   </div>
                 
                 
@@ -316,6 +328,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
                     
                   </div>
                 
@@ -332,12 +346,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/08/19/english/self-aware/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Self-awareness</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/19/english/self-aware/">
-                        <span class="hidden-mobile">Self-awareness</span>
+                      <a href="/2021/08/19/leetcode/leetcode-offer15/">
+                        <span class="hidden-mobile">剑指offer15 二进制中1的个数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -359,8 +379,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/20/test/';
-          this.page.identifier = '/2021/08/20/test/';
+          this.page.url = 'https://fanmeilin.github.io/2021/08/19/leetcode/leetcode-offer29/';
+          this.page.identifier = '/2021/08/19/leetcode/leetcode-offer29/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -537,6 +557,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
 
 
 
