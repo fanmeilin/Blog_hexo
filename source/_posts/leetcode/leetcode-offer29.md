@@ -1,7 +1,7 @@
 ---
 title: 剑指offer29 顺时针打印矩阵
 tags: [剑指,数组]
-categories:[剑指,数组]
+categories: [剑指,数组]
 date: 2021-08-19 21:00:34
 math: true
 ---
