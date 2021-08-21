@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>剑指offer17 打印从1到最大的n位数</title>
+      <link href="/2021/08/20/leetcode/leetcode-offer17/"/>
+      <url>/2021/08/20/leetcode/leetcode-offer17/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>打印从1到最大的n位数</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: n = <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>,<span class="hljs-number">9</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>用返回一个整数列表来代替打印</li><li>n 为正整数</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>借用python的类型转换的包容性，直接可以返回列表</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-keyword">return</span> [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>,n))] <span class="hljs-comment">#或者10**n</span><br></code></pre></td></tr></tbody></table></figure><p>实际上，考点是大数越界情况下的打印。<br>解决思路，用字符串的全排列来解决数字的越界情况。基于分治算法的思想，先固定高位，向低位递归，当个位已被固定时，添加数字的字符串。例如当 n = 2时（数字范围 1 - 99 ），固定十位为 0- 9 ，按顺序依次开启递归，固定个位 0 - 9 ，终止递归并添加数字字符串。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; [<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">x</span>):</span><br>            <span class="hljs-keyword">if</span> x == n:<br>                s = <span class="hljs-string">''</span>.join(num[self.start:])<br>                <span class="hljs-keyword">if</span> s != <span class="hljs-string">'0'</span>: res.append(<span class="hljs-built_in">int</span>(s))<br>                <span class="hljs-keyword">if</span> n - self.start == self.nine: self.start -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>                <span class="hljs-keyword">if</span> i == <span class="hljs-number">9</span>: self.nine += <span class="hljs-number">1</span><br>                num[x] = <span class="hljs-built_in">str</span>(i)<br>                dfs(x + <span class="hljs-number">1</span>)<br>            self.nine -= <span class="hljs-number">1</span><br>        <br>        num, res = [<span class="hljs-string">'0'</span>] * n, []<br>        self.nine = <span class="hljs-number">0</span><br>        self.start = n - <span class="hljs-number">1</span><br>        dfs(<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure><ul><li>字符串左边界定义： 声明变量 start 规定字符串的左边界，以保证添加的数字字符串 num[start:] 中无高位多余的 0 。例如当 n = 2 时, 1 - 9时 start = 1， 10 - 99 时 start = 0。</li><li>左边界 start 变化规律： 观察可知，当输出数字的所有位都是 9 时，则下个数字需要向更高位进 11 ，此时左边界 start 需要减11 （即高位多余的 0 减少一个）。例如当 n = 3（数字范围 1 - 999 ）时，左边界 start 需要减 1 的情况有： “009” 进位至 “010” ， “099” 进位至 “100” 。设数字各位中 9 的数量为 nine ，所有位都为 9 的判断条件可用以下公式表示：n - start = nine统计 nine 的方法： 固定第 x 位时，当 i = 9则执行 nine = nine + 1 ，并在回溯前恢复 nine = nine - 1</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 大数 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 大数 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>拉普拉斯算子</title>
       <link href="/2021/08/20/img_process/laplace/"/>
       <url>/2021/08/20/img_process/laplace/</url>

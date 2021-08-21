@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>拉普拉斯算子 - 待时</title>
+  <title>剑指offer17 打印从1到最大的n位数 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="拉普拉斯算子">
+            <span class="h2" id="subtitle" title="剑指offer17 打印从1到最大的n位数">
               
             </span>
 
@@ -231,7 +231,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 14:27" pubdate>
+      <time datetime="2021-08-20 17:11" pubdate>
         2021年8月20日 下午
       </time>
     </span>
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      552 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      15
+      7
        分钟
     </span>
   
@@ -283,49 +283,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">拉普拉斯算子</h1>
+            <h1 style="display: none">剑指offer17 打印从1到最大的n位数</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p> ​    图像锐化处理的作用是使灰度反差增强，从而使模糊图像变得更加清晰。图像模糊的实质就是图像受到平均运算或积分运算，因此可以对图像进行逆运算，如微分运算能够突出图像细节，使图像变得更为清晰。<br>​    积分运算的模板可以平滑图像，反过来对应微分运算的模板卷积可以锐化图像。锐化模板系数的取值再中心为正数而周围为负数。或者中心为负数周围为正数。而拉普拉斯算子就是一种常用的线性锐化滤波的方法。</p>
+<p>打印从1到最大的n位数</p>
 </blockquote>
-<h2 id="拉普拉斯的背景"><a href="#拉普拉斯的背景" class="headerlink" title="拉普拉斯的背景"></a>拉普拉斯的背景</h2><p>在图像中的边缘区域，像素值会发生“跳跃”，对这些像素求导，在其一阶导数在边缘位置为极值（Sobel算子）：</p>
-<p><img src="https://picture.mulindya.com/laplace-pic1.png" srcset="/img/loading.gif" lazyload alt="img"></p>
-<p>如果对像素值求二阶导数，会发现边缘处的导数值为0；<strong>但是并不是说二阶导数为0就意味着是边缘</strong>。</p>
-<p><img src="https://picture.mulindya.com/laplace-pic2.png" srcset="/img/loading.gif" lazyload></p>
-<h2 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h2><h3 id="像素二阶导数"><a href="#像素二阶导数" class="headerlink" title="像素二阶导数"></a>像素二阶导数</h3><p>二阶导数的计算方法：<br>$$<br>\nabla^2f = \frac{\partial^2 f}{\partial x^2}+\frac{\partial^2 f}{\partial y^2}<br>$$<br>分别沿着X和Y方向有二阶偏导数均可借用差分计算：<br>$$<br>\frac{\partial^2 f}{\partial x^2} = f(x+1,y)+f(x-1,y)-2f(x,y)<br>$$</p>
-<p>$$<br>\frac{\partial^2 f}{\partial y^2} = f(x,y+1)+f(x,y-1)-2f(x,y)<br>$$</p>
-<p>那么可以得到<br>$$<br>\nabla^2f = f(x+1,y)+f(x-1,y)+f(x,y+1)+f(x,y-1)-4f(x,y)<br>$$</p>
-<h3 id="模板卷积"><a href="#模板卷积" class="headerlink" title="模板卷积"></a>模板卷积</h3><p>对应的模板卷积即为</p>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: n = <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>,<span class="hljs-number">9</span>]<br></code></pre></td></tr></tbody></table></figure>
 
-$$
-\begin{bmatrix} 0 &amp; 1 &amp; 0\\ 1 &amp; -4 &amp; 1 \\ 0 &amp; 1 &amp; 0 \end{bmatrix} 或者\begin{bmatrix} 0 &amp; -1 &amp; 0 \\ -1 &amp; 4 &amp; -1 \\ 0 &amp; -1 &amp; 0 \end{bmatrix}
-$$
+<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<li>用返回一个整数列表来代替打印</li>
+<li>n 为正整数</li>
+</ul>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>借用python的类型转换的包容性，直接可以返回列表</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-keyword">return</span> [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>,n))] <span class="hljs-comment">#或者10**n</span><br></code></pre></td></tr></tbody></table></figure>
+<p>实际上，考点是大数越界情况下的打印。<br>解决思路，用字符串的全排列来解决数字的越界情况。基于分治算法的思想，先固定高位，向低位递归，当个位已被固定时，添加数字的字符串。例如当 n = 2时（数字范围 1 - 99 ），固定十位为 0- 9 ，按顺序依次开启递归，固定个位 0 - 9 ，终止递归并添加数字字符串。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; [<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">x</span>):</span><br>            <span class="hljs-keyword">if</span> x == n:<br>                s = <span class="hljs-string">''</span>.join(num[self.start:])<br>                <span class="hljs-keyword">if</span> s != <span class="hljs-string">'0'</span>: res.append(<span class="hljs-built_in">int</span>(s))<br>                <span class="hljs-keyword">if</span> n - self.start == self.nine: self.start -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>                <span class="hljs-keyword">if</span> i == <span class="hljs-number">9</span>: self.nine += <span class="hljs-number">1</span><br>                num[x] = <span class="hljs-built_in">str</span>(i)<br>                dfs(x + <span class="hljs-number">1</span>)<br>            self.nine -= <span class="hljs-number">1</span><br>        <br>        num, res = [<span class="hljs-string">'0'</span>] * n, []<br>        self.nine = <span class="hljs-number">0</span><br>        self.start = n - <span class="hljs-number">1</span><br>        dfs(<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
 
-
-<p>前者是mask中心为负数，后者是mask中心为正数；他们的目的和效果是一致的，只是表现形式稍有不同，前者在卷积后，在边缘的亮处为负数，在边缘暗处为正数。后者相反。</p>
-<p>mask为负数时，在边缘的亮处为负数，在边缘暗处为正数。可以参见下图：</p>
-<p><img src="https://picture.mulindya.com/laplace-pic3.png" srcset="/img/loading.gif" lazyload></p>
-<p>上述是考虑中心像素4邻域，类似还有考虑8邻域，此时中心点区8或-8，周围为-1或1。</p>
-
-$$
-\begin{bmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; -8 &amp; 1 \\ 1 &amp; 1 &amp; 1 \end{bmatrix} 或者\begin{bmatrix} -1 &amp; -1 &amp; -1 \\ -1 &amp; 8 &amp; -1 \\ -1 &amp; -1 &amp; -1 \end{bmatrix}
-$$
-
-
-
-<h2 id="图像锐化"><a href="#图像锐化" class="headerlink" title="图像锐化"></a>图像锐化</h2><p>锐化处理可选择拉普拉斯算子对原图像进行处理，产生描述灰度突变的图像，再将拉普拉斯图像与原始图像叠加而产生锐化图像。拉普拉斯锐化的基本方法可以由下式表示：<br>$$<br>g(x,y) = \begin{cases} f(x,y) - \nabla^2f(x,y) &amp; \text{mask中心为负数}\f(x,y) + \nabla^2f(x,y) &amp; \text{mask中心为正数} \end{cases}<br>$$</p>
-<p>这种简单的锐化方法既可以产生拉普拉斯锐化处理的效果，同时又能保留背景信息，将原始图像叠加到拉普拉斯变换的处理结果中去，可以使图像中的各灰度值得到保留，使灰度突变处的对比度得到增强，<strong>最终结果是在保留图像背景的前提下，突现出图像中小的细节信息</strong>。</p>
-<p>缺点是没有了边缘的方向信息；双倍加强了噪声的影响。</p>
-<blockquote>
-<p>锐化处理的公式从模板形式容易看出，如果在图像中一个较暗的区域中出现了一个亮点，那么用拉普拉斯运算就会使这个亮点变得更亮。因为图像中的边缘就是那些灰度发生跳变的区域，所以拉普拉斯锐化模板在边缘检测中很有用。一般增强技术对于陡峭的边缘和缓慢变化的边缘很难确定其边缘线的位置。但此算子却可用二次微分正峰和负峰之间的过零点来确定，对孤立点或端点更为敏感，因此特别适用于以<strong>突出图像中的孤立点、孤立线或线端点为目的的场合</strong>。同梯度算子一样，拉普拉斯算子也会增强图像中的噪声，有时用拉普拉斯算子进行边缘检测时，可将图像先进行<strong>平滑处理</strong>。</p>
-</blockquote>
-<h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>在OpenCV内使用函数cv2.Laplacian()实现Laplacian算子的计算，该函数的语法格式为：</p>
-<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">dst = cv2.<span class="hljs-constructor">Laplacian( <span class="hljs-params">src</span>, <span class="hljs-params">ddepth</span>[, <span class="hljs-params">ksize</span>[, <span class="hljs-params">scale</span>[, <span class="hljs-params">delta</span>[, <span class="hljs-params">borderType</span>]]]] )</span><br></code></pre></td></tr></tbody></table></figure>
-
-<p>式中：<br>● dst代表目标图像。<br>● src代表原始图像。<br>● ddepth代表目标图像的深度。<br>● ksize代表用于计算二阶导数的核尺寸大小。该值必须是正的奇数。<br>● scale代表计算Laplacian值的缩放比例因子，该参数是可选的。默认情况下，该值为1，表示不进行缩放。<br>● delta代表加到目标图像上的可选值，默认为0。<br>● borderType : 用于推断图像外部像素的边界模式，一般是DORDER_DEFAULT,不支持BORDER_WRAP.</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br>img = cv2.imread(<span class="hljs-string">"img.png"</span>,<span class="hljs-number">0</span>)<br>laplacian = cv2.Laplacian(img,cv2.CV_64F)<br>laplacian = cv2.convertScaleABs(laplacian)<br>cv2.imshow(img)<br>cv2.imshow(laplacian)<br></code></pre></td></tr></tbody></table></figure>
-<p>原图<br><img src="https://picture.mulindya.com/laplace-pic4.png" srcset="/img/loading.gif" lazyload><br>处理之后<br><img src="https://picture.mulindya.com/laplace-pic5.png" srcset="/img/loading.gif" lazyload></p>
+<ul>
+<li>字符串左边界定义： 声明变量 start 规定字符串的左边界，以保证添加的数字字符串 num[start:] 中无高位多余的 0 。例如当 n = 2 时, 1 - 9时 start = 1， 10 - 99 时 start = 0。</li>
+<li>左边界 start 变化规律： 观察可知，当输出数字的所有位都是 9 时，则下个数字需要向更高位进 11 ，此时左边界 start 需要减11 （即高位多余的 0 减少一个）。例如当 n = 3（数字范围 1 - 999 ）时，左边界 start 需要减 1 的情况有： “009” 进位至 “010” ， “099” 进位至 “100” 。设数字各位中 9 的数量为 nine ，所有位都为 9 的判断条件可用以下公式表示：n - start = nine统计 nine 的方法： 固定第 x 位时，当 i = 9则执行 nine = nine + 1 ，并在回溯前恢复 nine = nine - 1</li>
+</ul>
 
             </div>
             <hr>
@@ -335,7 +314,9 @@ $$
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E5%A4%A7%E6%95%B0/">大数</a>
                     
                   </div>
                 
@@ -343,7 +324,9 @@ $$
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%9B%BE%E5%83%8F%E5%A4%84%E7%90%86/">图像处理</a>
+                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%A7%E6%95%B0/">大数</a>
                     
                   </div>
                 
@@ -360,18 +343,12 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/20/leetcode/leetcode-offer17/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer17 打印从1到最大的n位数</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/20/leetcode/leetcode-offer22/">
-                        <span class="hidden-mobile">剑指offer22 链表中倒数第k个节点</span>
+                      <a href="/2021/08/20/img_process/laplace/">
+                        <span class="hidden-mobile">拉普拉斯算子</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -393,8 +370,8 @@ $$
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/20/img_process/laplace/';
-          this.page.identifier = '/2021/08/20/img_process/laplace/';
+          this.page.url = 'https://fanmeilin.github.io/2021/08/20/leetcode/leetcode-offer17/';
+          this.page.identifier = '/2021/08/20/leetcode/leetcode-offer17/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -571,45 +548,6 @@ $$
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 
