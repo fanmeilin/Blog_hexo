@@ -3,6 +3,7 @@ title: YOLO学习
 tags: [深度学习,目标检测]
 categories: [深度学习,目标检测]
 date: 2021-08-21 15:56:11
+math: true
 ---
 
 > YOLO系列是基于深度学习的回归方法。YOLO：you only look once的优点是实时快速目标检测。一直都很想把YOLO系统的学习一下。在此，记录下相关的知识和个人理解。做笔记也算是督促我好好的整理相关内容叭！ok开始！
@@ -38,7 +39,7 @@ date: 2021-08-21 15:56:11
 
 - 每个网格需要预测B个边界框(BBox)的位置信息和对应的置信度（confidence）;一个BBox对应四个位置信息和一个confidence信息，confidence表示所预测的Box中含有objext的置信度和box的预测情况。
 
-  也就是$conf = Pr(object)\times IOU^{truth}_{pred}$ 如果有object落在其中的grid cell里，那么第一项为1否则取0.
+  > 也就是$conf = Pr(object)\times IOU^{truth}_{pred}$ 如果有object落在其中的grid cell里，那么第一项为1否则取0.
 
 每个bounding box要预测(x, y, w, h)和confidence共5个值，每个网格还要预测一个类别信息，记为C类。则SxS个网格，每个网格要预测B个bounding box还要预测C个categories。判断这个落在此网格的物体是c个物体中的哪一个物体。输出就是S x S x (5*B+C)的一个tensor。（**注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的。**）
 
@@ -47,3 +48,4 @@ date: 2021-08-21 15:56:11
 ![](https://picture.mulindya.com/yolov1-pic2.png)
 
 未完待续。。。。
+
