@@ -4,6 +4,95 @@
   
   
   <entry>
+    <title>剑指offer18 删除链表的节点</title>
+    <link href="/2021/08/21/leetcode/leetcode-offer18/"/>
+    <url>/2021/08/21/leetcode/leetcode-offer18/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>删除链表的节点</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给定单向链表的头指针和一个要删除的节点的值，定义一个函数删除该节点。返回删除后的链表的头节点。<br>注意：此题对比原题有改动</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: head = [4,5,1,9], val = 5</span><br><span class="hljs-section">输出: [4,1,9]</span><br><span class="hljs-section">解释: 给定你链表中值为&nbsp;5&nbsp;的第二个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 1 -&gt; 9.</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: head = [4,5,1,9], val = 1</span><br><span class="hljs-section">输出: [4,5,9]</span><br><span class="hljs-section">解释: 给定你链表中值为&nbsp;1&nbsp;的第三个节点，那么在调用了你的函数之后，该链表应变为 4 -&gt; 5 -&gt; 9.</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>题目保证链表中节点的值互不相同</li><li>若使用 C 或 C++ 语言，你不需要 free 或 delete 被删除的节点</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>常规操作</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">deleteNode</span>(<span class="hljs-params">self, head: ListNode, val: <span class="hljs-built_in">int</span></span>) -&gt; ListNode:</span><br>        p = head<br>        <span class="hljs-keyword">if</span>(head.val==val):<span class="hljs-keyword">return</span> p.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">while</span>(p.<span class="hljs-built_in">next</span>):<br>            <span class="hljs-keyword">if</span>(p.<span class="hljs-built_in">next</span>.val == val):<br>                p.<span class="hljs-built_in">next</span> = p.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>                <span class="hljs-keyword">return</span> head<br>            p = p.<span class="hljs-built_in">next</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>链表</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>链表</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>剑指offer24 反转链表</title>
+    <link href="/2021/08/21/leetcode/leetcode-offer24/"/>
+    <url>/2021/08/21/leetcode/leetcode-offer24/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>反转链表</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">输入: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;NULL<br>输出: <span class="hljs-number">5</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;NULL<br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>0 &lt;= 节点个数 &lt;= 5000</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>比较常规，遍历链表把元素移动到头节点。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseList</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(head):<span class="hljs-keyword">return</span> head<br>        p = head.<span class="hljs-built_in">next</span><br>        head.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">while</span>(p):<br>            t = p.<span class="hljs-built_in">next</span><br>            p.<span class="hljs-built_in">next</span> = head<br>            head = p<br>            p = t<br>        <span class="hljs-keyword">return</span> head<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>链表</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>链表</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>剑指offer16  数值的整数次方</title>
+    <link href="/2021/08/21/leetcode/leetcode-offer16/"/>
+    <url>/2021/08/21/leetcode/leetcode-offer16/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>数值的整数次方</p></blockquote><h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。</p><h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.00000</span>, n = <span class="hljs-number">10</span><br>输出：<span class="hljs-number">1024.00000</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.10000</span>, n = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">9.26100</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul><li>-100.0 &lt; x &lt; 100.0</li><li>$-2^{31}$ &lt;= n &lt;= $2^{31}-1$</li><li>$-10^4$ &lt;= $x^n$ &lt;= $10^4$</li></ul><h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>一种方法是将x乘以n次，但是这种时间复杂度是O(n)。判题时时间超出限制。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n):<br>            result *= x<br>            n -=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure><p>实际上可以利用x *= x 和对n右移操作可以得到$x,x^2,x^4,x^8,x^{16}…..$，而$x^{11}$可以二进制指数表示为$x^{1011}$也就是$x \times x^2 \times x^8$。这样原本需要循环11次就只需要循环4次</p><p>根据提示条件，循环最多不会超过32次。就很棒！</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n): <span class="hljs-comment">#时间复杂度大大降低 不超过32次 O(logn)</span><br>            <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>):result *= x <span class="hljs-comment">#看最后一位是否为1</span><br>            x *= x<br>            n = n&gt;&gt;<span class="hljs-number">1</span> <span class="hljs-comment">#n右移 1011-》101</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>快速幂</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>idea</tag>
+      
+      <tag>快速幂</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指offer17 打印从1到最大的n位数</title>
     <link href="/2021/08/20/leetcode/leetcode-offer17/"/>
     <url>/2021/08/20/leetcode/leetcode-offer17/</url>

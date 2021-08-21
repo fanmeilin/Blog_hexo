@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer17 打印从1到最大的n位数 - 待时</title>
+  <title>剑指offer16  数值的整数次方 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer17 打印从1到最大的n位数">
+            <span class="h2" id="subtitle" title="剑指offer16  数值的整数次方">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-20 17:11" pubdate>
-        2021年8月20日 下午
+      <time datetime="2021-08-21 11:08" pubdate>
+        2021年8月21日 上午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      552 字
+      331 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      4
        分钟
     </span>
   
@@ -283,28 +283,29 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer17 打印从1到最大的n位数</h1>
+            <h1 style="display: none">剑指offer16  数值的整数次方</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>打印从1到最大的n位数</p>
+<p>数值的整数次方</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入数字 n，按顺序打印出从 1 到最大的 n 位十进制数。比如输入 3，则打印出 1、2、3 一直到最大的 3 位数 999。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: n = <span class="hljs-number">1</span><br>输出: [<span class="hljs-number">1,2,3,4</span>,<span class="hljs-number">5,6,7,8</span>,<span class="hljs-number">9</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。</p>
+<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.00000</span>, n = <span class="hljs-number">10</span><br>输出：<span class="hljs-number">1024.00000</span><br></code></pre></td></tr></tbody></table></figure>
+
+<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.10000</span>, n = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">9.26100</span><br></code></pre></td></tr></tbody></table></figure>
 
 <h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
-<li>用返回一个整数列表来代替打印</li>
-<li>n 为正整数</li>
+<li>-100.0 &lt; x &lt; 100.0</li>
+<li>$-2^{31}$ &lt;= n &lt;= $2^{31}-1$</li>
+<li>$-10^4$ &lt;= $x^n$ &lt;= $10^4$</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>借用python的类型转换的包容性，直接可以返回列表</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-keyword">return</span> [i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">pow</span>(<span class="hljs-number">10</span>,n))] <span class="hljs-comment">#或者10**n</span><br></code></pre></td></tr></tbody></table></figure>
-<p>实际上，考点是大数越界情况下的打印。<br>解决思路，用字符串的全排列来解决数字的越界情况。基于分治算法的思想，先固定高位，向低位递归，当个位已被固定时，添加数字的字符串。例如当 n = 2时（数字范围 1 - 99 ），固定十位为 0- 9 ，按顺序依次开启递归，固定个位 0 - 9 ，终止递归并添加数字字符串。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printNumbers</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; [<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">x</span>):</span><br>            <span class="hljs-keyword">if</span> x == n:<br>                s = <span class="hljs-string">''</span>.join(num[self.start:])<br>                <span class="hljs-keyword">if</span> s != <span class="hljs-string">'0'</span>: res.append(<span class="hljs-built_in">int</span>(s))<br>                <span class="hljs-keyword">if</span> n - self.start == self.nine: self.start -= <span class="hljs-number">1</span><br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>):<br>                <span class="hljs-keyword">if</span> i == <span class="hljs-number">9</span>: self.nine += <span class="hljs-number">1</span><br>                num[x] = <span class="hljs-built_in">str</span>(i)<br>                dfs(x + <span class="hljs-number">1</span>)<br>            self.nine -= <span class="hljs-number">1</span><br>        <br>        num, res = [<span class="hljs-string">'0'</span>] * n, []<br>        self.nine = <span class="hljs-number">0</span><br>        self.start = n - <span class="hljs-number">1</span><br>        dfs(<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>一种方法是将x乘以n次，但是这种时间复杂度是O(n)。判题时时间超出限制。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n):<br>            result *= x<br>            n -=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
 
-<ul>
-<li>字符串左边界定义： 声明变量 start 规定字符串的左边界，以保证添加的数字字符串 num[start:] 中无高位多余的 0 。例如当 n = 2 时, 1 - 9时 start = 1， 10 - 99 时 start = 0。</li>
-<li>左边界 start 变化规律： 观察可知，当输出数字的所有位都是 9 时，则下个数字需要向更高位进 11 ，此时左边界 start 需要减11 （即高位多余的 0 减少一个）。例如当 n = 3（数字范围 1 - 999 ）时，左边界 start 需要减 1 的情况有： “009” 进位至 “010” ， “099” 进位至 “100” 。设数字各位中 9 的数量为 nine ，所有位都为 9 的判断条件可用以下公式表示：n - start = nine统计 nine 的方法： 固定第 x 位时，当 i = 9则执行 nine = nine + 1 ，并在回溯前恢复 nine = nine - 1</li>
-</ul>
+<p>实际上可以利用x *= x 和对n右移操作可以得到$x,x^2,x^4,x^8,x^{16}…..$，而$x^{11}$可以二进制指数表示为$x^{1011}$也就是$x \times x^2 \times x^8$。这样原本需要循环11次就只需要循环4次</p>
+<p>根据提示条件，循环最多不会超过32次。就很棒！</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n): <span class="hljs-comment">#时间复杂度大大降低 不超过32次 O(logn)</span><br>            <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>):result *= x <span class="hljs-comment">#看最后一位是否为1</span><br>            x *= x<br>            n = n&gt;&gt;<span class="hljs-number">1</span> <span class="hljs-comment">#n右移 1011-》101</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
+
 
             </div>
             <hr>
@@ -316,7 +317,7 @@
                     
                       <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E5%A4%A7%E6%95%B0/">大数</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
                     
                   </div>
                 
@@ -326,7 +327,9 @@
                     
                       <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%A4%A7%E6%95%B0/">大数</a>
+                      <a class="hover-with-bg" href="/tags/idea/">idea</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%BF%AB%E9%80%9F%E5%B9%82/">快速幂</a>
                     
                   </div>
                 
@@ -343,9 +346,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/21/leetcode/leetcode-offer16/">
+                      <a href="/2021/08/21/leetcode/leetcode-offer24/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer16  数值的整数次方</span>
+                        <span class="hidden-mobile">剑指offer24 反转链表</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -353,8 +356,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/20/img_process/laplace/">
-                        <span class="hidden-mobile">拉普拉斯算子</span>
+                      <a href="/2021/08/20/leetcode/leetcode-offer17/">
+                        <span class="hidden-mobile">剑指offer17 打印从1到最大的n位数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -376,8 +379,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/20/leetcode/leetcode-offer17/';
-          this.page.identifier = '/2021/08/20/leetcode/leetcode-offer17/';
+          this.page.url = 'https://fanmeilin.github.io/2021/08/21/leetcode/leetcode-offer16/';
+          this.page.identifier = '/2021/08/21/leetcode/leetcode-offer16/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -554,6 +557,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
 
 
 
