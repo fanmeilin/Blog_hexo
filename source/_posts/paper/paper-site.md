@@ -75,6 +75,10 @@ date: 2021-08-13 15:18:31
 
 [**Semi-orthogonal Embedding for Efficient Unsupervised Anomaly Segmentation**](https://paper.mulindya.com/Semi-orthogonal%20Embedding%20for%20Efficient%20Unsupervised%20Anomaly%20Segmentation.pdf) （很多数学知识）
 
+### Swin
+
+[**Swin Transformer: Hierarchical Vision Transformer using Shifted Windows**](https://paper.mulindya.com/Swin%20Transformer%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows.pdf)
+
 ### 其他
 
 谷歌提出的使用MPL代替Transformer，CNN（[也引发了一些争议](https://zhuanlan.zhihu.com/p/370780575)）

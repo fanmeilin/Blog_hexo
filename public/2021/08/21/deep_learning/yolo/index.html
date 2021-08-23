@@ -311,7 +311,9 @@
 <li><p>首先将一幅图像分成S*S个网格（grid cell）,如果某个物体的中心落在这个网格中，那么这个网格就负责预测这个物体。</p>
 </li>
 <li><p>每个网格需要预测B个边界框(BBox)的位置信息和对应的置信度（confidence）;一个BBox对应四个位置信息和一个confidence信息，confidence表示所预测的Box中含有objext的置信度和box的预测情况。</p>
+<blockquote>
 <p>也就是$conf = Pr(object)\times IOU^{truth}_{pred}$ 如果有object落在其中的grid cell里，那么第一项为1否则取0.</p>
+</blockquote>
 </li>
 </ul>
 <p>每个bounding box要预测(x, y, w, h)和confidence共5个值，每个网格还要预测一个类别信息，记为C类。则SxS个网格，每个网格要预测B个bounding box还要预测C个categories。判断这个落在此网格的物体是c个物体中的哪一个物体。输出就是S x S x (5*B+C)的一个tensor。（<strong>注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的。</strong>）</p>
@@ -561,6 +563,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
 
 
 
