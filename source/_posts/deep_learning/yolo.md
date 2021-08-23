@@ -48,9 +48,14 @@ math: true
 ![](https://picture.mulindya.com/yolov1-pic2.png)
 
 在test的时候，每个网格预测的class信息与BBox得到的confidenci信息相乘，就可以得到每个BBox的class-specific confidence score：
+
+{raw}
 $$
 Pr(Class_i \vert Object)*Pr(Object)*IOU^{truth}_{pred} = Pr(Class_i)*IOU^{truth}_{pred}
 $$
+
+{endraw}
+
 得到每个box的class-specific confidence score之后，设置阈值，过滤掉得分低的boxes，对保留的boxes进行NMS处理，即可得到最终的检测结果。
 
 > NMS：non-maximum suppression 非极大抑制，其操作即是从集合中找到得分score最高的候选框，与其他候选框计算IOU，删除重合率高的候选框，因为这些候选框和最高score的框“竞争”同一个物体，但是score又不够高，所以是应该被淘汰的。确定了这个最高score的BBOX之后就可以不考虑他了，再继续找寻最高score的候选框，把与他竞争的候选框给pass掉即可，以此类推。
