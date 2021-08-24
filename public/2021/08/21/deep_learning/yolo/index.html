@@ -319,7 +319,10 @@
 <p>每个bounding box要预测(x, y, w, h)和confidence共5个值，每个网格还要预测一个类别信息，记为C类。则SxS个网格，每个网格要预测B个bounding box还要预测C个categories。判断这个落在此网格的物体是c个物体中的哪一个物体。输出就是S x S x (5*B+C)的一个tensor。（<strong>注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的。</strong>）</p>
 <p>举例说明: 在PASCAL VOC中，图像输入为448x448，取S=7，B=2，一共有20个类别(C=20)。则输出就是7x7x30的一个tensor。*其中30也就是2*5+20，整个网络结构如下图所示：</p>
 <p><img src="https://picture.mulindya.com/yolov1-pic2.png" srcset="/img/loading.gif" lazyload></p>
-<p>在test的时候，每个网格预测的class信息与BBox得到的confidenci信息相乘，就可以得到每个BBox的class-specific confidence score：<br>$$<br>Pr(Class_i \vert Object)*Pr(Object)*IOU^{truth}<em>{pred} = Pr(Class_i)*IOU^{truth}</em>{pred}<br>$$<br>得到每个box的class-specific confidence score之后，设置阈值，过滤掉得分低的boxes，对保留的boxes进行NMS处理，即可得到最终的检测结果。</p>
+<p>在test的时候，每个网格预测的class信息与BBox得到的confidenci信息相乘，就可以得到每个BBox的class-specific confidence score：</p>
+<p>{raw}<br>$$<br>Pr(Class_i \vert Object)*Pr(Object)*IOU^{truth}<em>{pred} = Pr(Class_i)*IOU^{truth}</em>{pred}<br>$$</p>
+<p>{endraw}</p>
+<p>得到每个box的class-specific confidence score之后，设置阈值，过滤掉得分低的boxes，对保留的boxes进行NMS处理，即可得到最终的检测结果。</p>
 <blockquote>
 <p>NMS：non-maximum suppression 非极大抑制，其操作即是从集合中找到得分score最高的候选框，与其他候选框计算IOU，删除重合率高的候选框，因为这些候选框和最高score的框“竞争”同一个物体，但是score又不够高，所以是应该被淘汰的。确定了这个最高score的BBOX之后就可以不考虑他了，再继续找寻最高score的候选框，把与他竞争的候选框给pass掉即可，以此类推。</p>
 </blockquote>

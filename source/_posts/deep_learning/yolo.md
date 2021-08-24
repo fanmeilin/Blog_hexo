@@ -6,7 +6,7 @@ date: 2021-08-21 15:56:11
 math: true
 ---
 
-> YOLO系列是基于深度学习的回归方法。YOLO：you only look once的优点是实时快速目标检测。一直都很想把YOLO系统的学习一下。在此，记录下相关的知识和个人理解。做笔记也算是督促我好好的整理相关内容叭！ok开始！
+> YOLO系列是基于深度学习的回归方法。YOLO：you only look once的优点是实时快速目标检测。一直都很想把YOLO系统的学习一下。在此，记录下相关的知识和个人理解。做笔记也算是督促我好好的整理相关内容叭！ok开始！:wink:
 
 > 参考：
 > https://zhuanlan.zhihu.com/p/136382095
@@ -49,12 +49,11 @@ math: true
 
 在test的时候，每个网格预测的class信息与BBox得到的confidenci信息相乘，就可以得到每个BBox的class-specific confidence score：
 
-{raw}
+{% raw %}
 $$
-Pr(Class_i \vert Object)*Pr(Object)*IOU^{truth}_{pred} = Pr(Class_i)*IOU^{truth}_{pred}
+Pr(Class_i \vert Object) \times Pr(Object) \times IOU^{truth}_{pred} = Pr(Class_i) \times IOU^{truth}_{pred}
 $$
-
-{endraw}
+{% endraw %}
 
 得到每个box的class-specific confidence score之后，设置阈值，过滤掉得分低的boxes，对保留的boxes进行NMS处理，即可得到最终的检测结果。
 
