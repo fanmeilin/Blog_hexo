@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      331 字
+      328 字
     </span>
   
 
@@ -289,23 +289,24 @@
               <blockquote>
 <p>数值的整数次方</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.00000</span>, n = <span class="hljs-number">10</span><br>输出：<span class="hljs-number">1024.00000</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.10000</span>, n = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">9.26100</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h2 id="题目">题目</h2>
+<p>实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.00000</span>, n = <span class="hljs-number">10</span><br>输出：<span class="hljs-number">1024.00000</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">2.10000</span>, n = <span class="hljs-number">3</span><br>输出：<span class="hljs-number">9.26100</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>-100.0 &lt; x &lt; 100.0</li>
 <li>$-2^{31}$ &lt;= n &lt;= $2^{31}-1$</li>
 <li>$-10^4$ &lt;= $x^n$ &lt;= $10^4$</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>一种方法是将x乘以n次，但是这种时间复杂度是O(n)。判题时时间超出限制。</p>
+<h2 id="题解">题解</h2>
+<p>一种方法是将x乘以n次，但是这种时间复杂度是O(n)。判题时时间超出限制。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n):<br>            result *= x<br>            n -=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
-
-<p>实际上可以利用x *= x 和对n右移操作可以得到$x,x^2,x^4,x^8,x^{16}…..$，而$x^{11}$可以二进制指数表示为$x^{1011}$也就是$x \times x^2 \times x^8$。这样原本需要循环11次就只需要循环4次</p>
+<p>实际上可以利用x *= x 和对n右移操作可以得到$x,x<sup>2,x</sup>4,x<sup>8,x</sup>{16}…$，而$x<sup>{11}$可以二进制指数表示为$x</sup>{1011}$也就是$x \times x^2 \times x^8$。这样原本需要循环11次就只需要循环4次</p>
 <p>根据提示条件，循环最多不会超过32次。就很棒！</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myPow</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">float</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">float</span>:</span><br>        <span class="hljs-keyword">if</span>(n==<span class="hljs-number">0</span>):<span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        result=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span>(n&lt;<span class="hljs-number">0</span>):<br>            n = -n<br>            x = <span class="hljs-number">1</span>/x<br>        <span class="hljs-keyword">while</span>(n): <span class="hljs-comment">#时间复杂度大大降低 不超过32次 O(logn)</span><br>            <span class="hljs-keyword">if</span>(n &amp; <span class="hljs-number">1</span>):result *= x <span class="hljs-comment">#看最后一位是否为1</span><br>            x *= x<br>            n = n&gt;&gt;<span class="hljs-number">1</span> <span class="hljs-comment">#n右移 1011-》101</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -454,6 +455,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

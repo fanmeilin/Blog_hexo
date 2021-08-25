@@ -289,19 +289,21 @@
               <blockquote>
 <p>重建二叉树</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。</p>
+<h2 id="题目">题目</h2>
+<p>输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。</p>
 <p>假设输入的前序遍历和中序遍历的结果中都不含重复的数字。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><p><img src="https://picture.mulindya.com/leetcode-offer07-tree.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
+<h3 id="示例-1：">示例 1：</h3>
+<p><img src="https://picture.mulindya.com/leetcode-offer07-tree.jpg" srcset="/img/loading.gif" lazyload alt="img"></p>
 <figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">Input: <span class="hljs-attr">preorder</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>], <span class="hljs-attr">inorder</span> = [<span class="hljs-number">9</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">20</span>,<span class="hljs-number">7</span>]<br>Output: [<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">Input: preorder = <span class="hljs-comment">[-1]</span>, inorder = <span class="hljs-comment">[-1]</span><br>Output: <span class="hljs-comment">[-1]</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">Input: preorder = <span class="hljs-comment">[-1]</span>, inorder = <span class="hljs-comment">[-1]</span><br>Output: <span class="hljs-comment">[-1]</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= 节点个数 &lt;= 5000</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>使用闭包函数，构建对应区域的树，返回根节点。关键步骤是查找到rootindex在中序遍历中的位置，然后分别构建对应的子树。在查找时可以先建立哈希表，使用字典和枚举结合构建flag <code>flag = {ele:i for i,ele in enumerate(inorder)}</code>。可以减少执行时间的开销。</p>
+<h2 id="题解">题解</h2>
+<p>使用闭包函数，构建对应区域的树，返回根节点。关键步骤是查找到rootindex在中序遍历中的位置，然后分别构建对应的子树。在查找时可以先建立哈希表，使用字典和枚举结合构建flag <code>flag = {ele:i for i,ele in enumerate(inorder)}</code>。可以减少执行时间的开销。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buildTree</span>(<span class="hljs-params">self, preorder: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], inorder: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; TreeNode:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">rootindex,ins,ine</span>):</span><br>            <span class="hljs-keyword">if</span>(ins&gt;ine): <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>            root = TreeNode(preorder[rootindex])<br>            <span class="hljs-comment"># t = ins</span><br>            <span class="hljs-comment"># while(inorder[t]!=preorder[rootindex]):t+=1</span><br>            t = flag[preorder[rootindex]]<br>            root.left = func(rootindex+<span class="hljs-number">1</span>,ins,t-<span class="hljs-number">1</span>)<br>            root.right = func(rootindex+t-ins+<span class="hljs-number">1</span>,t+<span class="hljs-number">1</span>,ine)<br>            <span class="hljs-keyword">return</span> root<br>        <span class="hljs-comment"># 构建哈希表 在查找时更方便</span><br>        flag = {ele:i <span class="hljs-keyword">for</span> i,ele <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(inorder)} <span class="hljs-comment">#使用字典构建</span><br>        root = func(<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(inorder)-<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> root<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -448,6 +450,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

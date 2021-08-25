@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      20
+      19
        分钟
     </span>
   
@@ -289,21 +289,23 @@
               <blockquote>
 <p>本文主要介绍Sobel算子，主要用于边缘检测；由于该算子引入了局部平均，对噪声有平滑作用，因此还可以消除噪声。</p>
 </blockquote>
-<h2 id="图像边缘与梯度"><a href="#图像边缘与梯度" class="headerlink" title="图像边缘与梯度"></a>图像边缘与梯度</h2><p>在图像边缘，灰度值的变化较大，因此图像在此处的梯度值也较大。一般情况，图像梯度时计算图像的边缘信息。图像梯度严格来说时需要求导数，但是在图像计算上时使用像素值的差得到梯度的近似值。<br>图像强度的显著变化可分为：</p>
+<h2 id="图像边缘与梯度">图像边缘与梯度</h2>
+<p>在图像边缘，灰度值的变化较大，因此图像在此处的梯度值也较大。一般情况，图像梯度时计算图像的边缘信息。图像梯度严格来说时需要求导数，但是在图像计算上时使用像素值的差得到梯度的近似值。<br>
+图像强度的显著变化可分为：</p>
 <ul>
 <li>阶跃变化函数，即图像强度在不连续处的两边的像素灰度值有着显著的差异；</li>
 <li>线条（屋顶）变化函数，即图像强度突然从一个值变化到另一个值，保持一较小行程后又回到原来的值。</li>
 </ul>
-<p><img src="https://picture.mulindya.com/sobel-pic1.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/sobel-pic1.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>（a）（b）分别是阶跃函数和屋顶函数的二维图像；（c）（d）是阶跃和屋顶函数的函数图象；（e）（f）对应一阶倒数；（g）（h）是二阶倒数。</p>
-<h2 id="Sobel算子"><a href="#Sobel算子" class="headerlink" title="Sobel算子"></a>Sobel算子</h2><p>常用如下两个模板进行边缘检测，将Gx，Gy与图像卷积，即可得到横向和纵向的亮度差分近似值。</p>
+<h2 id="Sobel算子">Sobel算子</h2>
+<p>常用如下两个模板进行边缘检测，将Gx，Gy与图像卷积，即可得到横向和纵向的亮度差分近似值。</p>
 
 $$
 G_x = \begin{bmatrix} -1 &amp; 0 &amp; 1 \\ -2 &amp; 0 &amp; 2\\-1 &amp; 0 &amp; 1\end{bmatrix} \qquad G_y = \begin{bmatrix} 1 &amp; 2 &amp; 1 \\ 0 &amp; 0 &amp; 0\\-1 &amp; -2 &amp; -1\end{bmatrix}
 $$
 
-
-<p>图像每一个像素的梯度可以使用$G = \sqrt{G^2_x+G^2_y}$来表示，梯度的方向使用$\Theta = arctan(\frac{G_y}{G_x})$。</p>
+<p>图像每一个像素的梯度可以使用$G = \sqrt{G<sup>2_x+G</sup>2_y}$来表示，梯度的方向使用$\Theta = arctan(\frac{G_y}{G_x})$。</p>
 <p>还有另外一个比<code>Sobel</code>函数的近似效果更好的 <code>Scharr</code>函数，其内核矩阵如下:</p>
 
 $$
@@ -311,43 +313,43 @@ G_x = \begin{bmatrix} -3 &amp; 0 &amp; 3 \\ -10 &amp; 0 &amp; 10 \\ -3 &amp; 0 &
 $$
 
 
-
-<h2 id="代码使用"><a href="#代码使用" class="headerlink" title="代码使用"></a>代码使用</h2><h3 id="cv2-Sobel"><a href="#cv2-Sobel" class="headerlink" title="cv2.Sobel()"></a>cv2.Sobel()</h3><p>Sobel算子依然是一种过滤器，只是其是带有方向的</p>
+<h2 id="代码使用">代码使用</h2>
+<h3 id="cv2-Sobel">cv2.Sobel()</h3>
+<p>Sobel算子依然是一种过滤器，只是其是带有方向的</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">dst = cv2.Sobel(src, ddepth, dx, dy[,ksize[, scale[, delta[, borderType]]]])<br></code></pre></td></tr></tbody></table></figure>
-
 <ul>
 <li>dst代表目标函数</li>
-<li> src代表原始图像</li>
-<li> ddpeth代表输出图像的深度 ，-1表示采用的是与原图像相同的深度。目标图像的深度必须大于等于原图像的深度；</li>
-<li>  dx代表x方向上的求导阶数 ，0表示这个方向上没有求导，一般为0、1、2。</li>
-<li>  dy代表y方向上的求导阶数，0表示这个方向上没有求导，一般为0、1、2。</li>
-<li>  ksize代表Sobel核的大小，该值为-1时，则会使用Scharr算子进行运算,一般选择为1、3、5、7</li>
-<li>  scale代表计算导数时所采用的缩放因子，默认为1，无缩放</li>
-<li> delta代表加在目标图像dst上的值，该值是可选的，默认为0</li>
-<li> borderType代表边界样式，这个参数默认值为cv2.BORDER_DEFAULT。</li>
+<li>src代表原始图像</li>
+<li>ddpeth代表输出图像的深度 ，-1表示采用的是与原图像相同的深度。目标图像的深度必须大于等于原图像的深度；</li>
+<li>dx代表x方向上的求导阶数 ，0表示这个方向上没有求导，一般为0、1、2。</li>
+<li>dy代表y方向上的求导阶数，0表示这个方向上没有求导，一般为0、1、2。</li>
+<li>ksize代表Sobel核的大小，该值为-1时，则会使用Scharr算子进行运算,一般选择为1、3、5、7</li>
+<li>scale代表计算导数时所采用的缩放因子，默认为1，无缩放</li>
+<li>delta代表加在目标图像dst上的值，该值是可选的，默认为0</li>
+<li>borderType代表边界样式，这个参数默认值为cv2.BORDER_DEFAULT。</li>
 </ul>
 <blockquote>
-<p>其中ddepth设计图像深度的概念：<br>图像深度是指存储每个像素值所用的位数，例如cv2.CV_8U，指的是8位无符号数，取值范围为0~255，超出范围则会被截断（截断指的是，当数值大于255保留为255，当数值小于0保留为0，其余不变）。</p>
+<p>其中ddepth设计图像深度的概念：<br>
+图像深度是指存储每个像素值所用的位数，例如cv2.CV_8U，指的是8位无符号数，取值范围为0~255，超出范围则会被截断（截断指的是，当数值大于255保留为255，当数值小于0保留为0，其余不变）。</p>
 <p>具体还有：CV_16S（16位无符号数），CV_16U（16位有符号数），CV_32F（32位浮点数），CV_64F（64位浮点数）等.</p>
 </blockquote>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-comment">#载入原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#求X方向梯度，并且输出图像一个为CV_8U,一个为CV_64F</span><br>img_gradient_X_8U=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>img_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#将图像深度改为CV_8U</span><br>img_gradient_X_64Fto8U=cv2.convertScaleAbs(img_gradient_X_64F)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'X_gradient_8U'</span>,img_gradient_X)<br>cv2.imshow(<span class="hljs-string">'X_gradient_64Fto8U'</span>,img_gradient_X_64Fto8U)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://picture.mulindya.com/sobel-pic2.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="https://picture.mulindya.com/sobel-pic2.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><code>cv2.imshow()</code>的默认显示为8位无符号数，即[0,255]，因此在显示<code>CV_64F</code>的图像前使用了函数<code>cv2.convertScaleAbs()</code>将图像深度为<code>CV_64F</code>的梯度图像重新转化为<code>CV_8U</code>。</p>
-<h3 id="cv2-convertScaleAbs"><a href="#cv2-convertScaleAbs" class="headerlink" title="cv2.convertScaleAbs()"></a>cv2.convertScaleAbs()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.convert<span class="hljs-constructor">ScaleAbs(<span class="hljs-params">src</span>[,<span class="hljs-params">alpha</span>[,<span class="hljs-params">beta</span>]])</span><br></code></pre></td></tr></tbody></table></figure>
-
+<h3 id="cv2-convertScaleAbs">cv2.convertScaleAbs()</h3>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.convert<span class="hljs-constructor">ScaleAbs(<span class="hljs-params">src</span>[,<span class="hljs-params">alpha</span>[,<span class="hljs-params">beta</span>]])</span><br></code></pre></td></tr></tbody></table></figure>
 <p>先计算数组绝对值，后转化为8位无符号数</p>
 <ul>
 <li>src:输入图像（多维数组）</li>
 <li>alpha:比例因子</li>
 <li>beta:保存新图像（数组）前可以增加的值</li>
 </ul>
-<h3 id="归一化"><a href="#归一化" class="headerlink" title="归一化"></a>归一化</h3><p>防止梯度大小被截断最简单的方法就是先将输入图像归一化（实际归一化的过程就已经实现了图像深度的转变）。在使用深度大于8U的格式之前将灰度先归一化，就不用<code>convertScaleAbs</code>转换了。</p>
+<h3 id="归一化">归一化</h3>
+<p>防止梯度大小被截断最简单的方法就是先将输入图像归一化（实际归一化的过程就已经实现了图像深度的转变）。在使用深度大于8U的格式之前将灰度先归一化，就不用<code>convertScaleAbs</code>转换了。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment">#载入灰度原图，图像深度为CV_8U</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#原图归一化,实际图像深度已经变为CV_64F</span><br>img_standard=img_original/<span class="hljs-number">255</span><br><span class="hljs-comment">#采用灰度原图求X方向梯度</span><br>original_gradient_X_64F=cv2.Sobel(img_original,cv2.CV_64F,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>original_gradient_X_64Fto8U=cv2.convertScaleAbs(original_gradient_X_64F)<br><span class="hljs-comment">#采用归一化的图像求X方向梯度</span><br>standard_gradient_X=cv2.Sobel(img_standard,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br><span class="hljs-comment">#图像显示</span><br>cv2.imshow(<span class="hljs-string">'original'</span>,img_original)<br>cv2.imshow(<span class="hljs-string">'original_X'</span>,original_gradient_X_64Fto8U)<br>cv2.imshow(<span class="hljs-string">'standard_X'</span>,standard_gradient_X)<br>cv2.waitKey()<br>cv2.destroyAllWindows()<br></code></pre></td></tr></tbody></table></figure>
-
-<p><img src="https://picture.mulindya.com/sobel-pic3.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="cv2-addWeighted"><a href="#cv2-addWeighted" class="headerlink" title="cv2.addWeighted()"></a>cv2.addWeighted()</h3><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.add<span class="hljs-constructor">Weighted(<span class="hljs-params">src1</span>, <span class="hljs-params">alpha</span>, <span class="hljs-params">src2</span>, <span class="hljs-params">beta</span>, <span class="hljs-params">gamma</span>[, <span class="hljs-params">dst</span>[, <span class="hljs-params">dtype</span>]])</span> → dst<br></code></pre></td></tr></tbody></table></figure>
-
+<p><img src="https://picture.mulindya.com/sobel-pic3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="cv2-addWeighted">cv2.addWeighted()</h3>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">cv2.add<span class="hljs-constructor">Weighted(<span class="hljs-params">src1</span>, <span class="hljs-params">alpha</span>, <span class="hljs-params">src2</span>, <span class="hljs-params">beta</span>, <span class="hljs-params">gamma</span>[, <span class="hljs-params">dst</span>[, <span class="hljs-params">dtype</span>]])</span> → dst<br></code></pre></td></tr></tbody></table></figure>
 <ul>
 <li>src1 输入的第一个数组</li>
 <li>alpha 第一个数组的权重</li>
@@ -356,21 +358,26 @@ $$
 <li>dst 输出的数组名称</li>
 <li>gamma 计算和时所采用的缩放因子，默认为1，无缩放</li>
 <li>dtype 输出图像的深度，-1表示和input相同</li>
-<li><blockquote>
+<li></li>
+</ul>
+<blockquote>
 <p>dst = src1 * alpha + src2 * beta + gamma;</p>
 </blockquote>
-</li>
-</ul>
 <p>注意：由参数说明可以看出，被叠加的两幅图像必须是尺寸相同、类型相同的；并且，当输出图像array的深度为CV_32S时，这个函数就不适用了，这时候就会内存溢出或者算出的结果压根不对。</p>
-<h3 id="边缘检测"><a href="#边缘检测" class="headerlink" title="边缘检测"></a>边缘检测</h3><p>通过cv2.Sobel()我们可以轻松计算出X,Y方向的梯度大小，根据公式</p>
-<p>$$<br>G = \sqrt{G^2_x+G^2_y}<br>$$<br>可以求出梯度图像，实际操作时，为了简化运算，我们使用公式</p>
-<p>$$<br>G = \vert{G_x}\vert+\vert{G_y}\vert<br>$$</p>
+<h3 id="边缘检测">边缘检测</h3>
+<p>通过cv2.Sobel()我们可以轻松计算出X,Y方向的梯度大小，根据公式</p>
+<p>$$<br>
+G = \sqrt{G<sup>2_x+G</sup>2_y}<br>
+$$<br>
+可以求出梯度图像，实际操作时，为了简化运算，我们使用公式</p>
+<p>$$<br>
+G = \vert{G_x}\vert+\vert{G_y}\vert<br>
+$$</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-comment">#载入灰度原图，并且归一化</span><br>img_original=cv2.imread(<span class="hljs-string">'E:\ShannonT\\notebook workspace\\images\\4.28.9.jpg'</span>,<span class="hljs-number">0</span>)/<span class="hljs-number">255</span><br><span class="hljs-comment">#分别求X,Y方向的梯度</span><br>grad_X=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>)<br>grad_Y=cv2.Sobel(img_original,-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>)<br><span class="hljs-comment">#求梯度图像</span><br>grad=cv2.addWeighted(grad_X,<span class="hljs-number">0.5</span>,grad_Y,<span class="hljs-number">0.5</span>,<span class="hljs-number">0</span>)<br>cv2.imshow(<span class="hljs-string">'gradient'</span>,grad)<br></code></pre></td></tr></tbody></table></figure>
-
-<h2 id="官方说明"><a href="#官方说明" class="headerlink" title="官方说明"></a>官方说明</h2><p>当年作者并没有公开发表过论文，仅仅是在一次博士生课题讨论会(1968)上提出(“A 3x3 Isotropic Gradient Operator for Image Processing”)，后在1973年出版的一本专著（”Pattern Classification and Scene Analysis”）的脚注里作为注释出现和公开的。</p>
+<h2 id="官方说明">官方说明</h2>
+<p>当年作者并没有公开发表过论文，仅仅是在一次博士生课题讨论会(1968)上提出(“A 3x3 Isotropic Gradient Operator for Image Processing”)，后在1973年出版的一本专著（“Pattern Classification and Scene Analysis”）的脚注里作为注释出现和公开的。</p>
 <p>详细介绍，请参考以下内容。</p>
 <iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf" width="100%" height="450"></iframe>
-
 
             </div>
             <hr>
@@ -513,6 +520,7 @@ $$
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

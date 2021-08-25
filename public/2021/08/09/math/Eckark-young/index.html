@@ -287,12 +287,16 @@
             
             <div class="markdown-body">
               <p>最佳低秩逼近和奇异值的关系(<em>Eckart</em>-<em>Young定理</em>)</p>
-<h3 id="定理"><a href="#定理" class="headerlink" title="定理"></a>定理</h3><p>Suppose a matrix $A\in \mathbb{R}^{m\times n}$has an SVD-decomposition$A=U\Sigma V^T$. Let $k &lt; r= \mathsf{rank}(A)$and truncated matrix<br>$$<br>A_k = \sum_{i=1}^k \sigma_i \mathbf u_i \mathbf v_i^T,<br>$$<br>then, for any matrix B of rank k , the minimal error is achieved with $A_k$:</p>
+<h3 id="定理">定理</h3>
+<p>Suppose a matrix $A\in \mathbb{R}^{m\times n}$has an SVD-decomposition$A=U\Sigma V^T$. Let $k &lt; r= \mathsf{rank}(A)$and truncated matrix<br>
+$$<br>
+A_k = \sum_{i=1}^k \sigma_i \mathbf u_i \mathbf v_i^T,<br>
+$$<br>
+then, for any matrix B of rank k , the minimal error is achieved with $A_k$:</p>
 
 $$
 \min_{\mathsf{rank}(B)=k}||A-B||_2 = || A - A_k||_2 = \sigma_{k+1}.
 $$
-
 
 <p>The same holds for Frobenius norm as well</p>
 
@@ -301,9 +305,10 @@ $$
 $$
 
 
-
-<h3 id="证明-2-norm-case"><a href="#证明-2-norm-case" class="headerlink" title="证明 (2-norm case)"></a>证明 (2-norm case)</h3><p>Since $U^\ A_k V = \mathrm{diag}(\sigma_1,\ldots, \sigma_k,0,\ldots,0)$ it means that $A_k$ is rank K. Moreover, $U^T (A-A_k) V =  \mathrm{diag}(0,\ldots, 0,\sigma_{k+1},\ldots, \sigma_p)$with the largest singular value is $\sigma_{k+1}$ and thus $||A-A_k||_2 = \sigma_{k+1}$.</p>
-<h3 id="证明-Frobenius-norm-case"><a href="#证明-Frobenius-norm-case" class="headerlink" title="证明 (Frobenius norm case)"></a>证明 (Frobenius norm case)</h3><blockquote>
+<h3 id="证明-2-norm-case">证明 (2-norm case)</h3>
+<p>Since $U^\ A_k V = \mathrm{diag}(\sigma_1,\ldots, \sigma_k,0,\ldots,0)$ it means that $A_k$ is rank K. Moreover, $U^T (A-A_k) V =  \mathrm{diag}(0,\ldots, 0,\sigma_{k+1},\ldots, \sigma_p)$with the largest singular value is $\sigma_{k+1}$ and thus $||A-A_k||_2 = \sigma_{k+1}$.</p>
+<h3 id="证明-Frobenius-norm-case">证明 (Frobenius norm case)</h3>
+<blockquote>
 <p>Lemma: If $A,B \in \mathbb{R}^{m\times n}$ , with B having rank K , then $\sigma_{k+i}(A) \le \sigma_i(A-B) \text{ for all }; i.$</p>
 </blockquote>
 <p>To prove the lemma, first consider the case i=1, we have proved that $\sigma_{k+1}(A) \le \sigma_1(A-B) = ||A-B||_2$in the 2-norm case. Then we do the general case:</p>
@@ -311,9 +316,6 @@ $$
 $$
 \begin{aligned} 	\sigma_i(A-B) = &amp; \sigma_i(A-B) + \sigma_1(B-B_k)\qquad\text{since } B=B_k\\ 	=&amp; \sigma_1(A-B - (A-B)_{i-1}) + \sigma_1(B-B_k)\qquad\\ 	\ge &amp; \sigma_1(A-B - (A-B)_{i-1}+B-B_k)   \\ 	=&amp; \sigma_1(A  - (A-B)_{i-1} -B_k)\\ 	\ge &amp; \sigma_1(A - A_{k+i-1})\\ 	=&amp; \sigma_{k+i}(A)   \end{aligned} 
 $$
-
-
-
 
 <blockquote>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/361938622">https://zhuanlan.zhihu.com/p/361938622</a></p>
@@ -465,6 +467,7 @@ $$
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

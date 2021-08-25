@@ -289,30 +289,39 @@
               <blockquote>
 <p>斐波那契数列</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。斐波那契数列的定义如下：</p>
-<p>$$<br>F(0) = 0,   F(1) = 1 \\<br>F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>$$<br>斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。</p>
+<h2 id="题目">题目</h2>
+<p>写一个函数，输入 n ，求斐波那契（Fibonacci）数列的第 n 项（即 F(N)）。斐波那契数列的定义如下：</p>
+<p>$$<br>
+F(0) = 0,   F(1) = 1 \\<br>
+F(N) = F(N - 1) + F(N - 2), 其中 N &gt; 1.<br>
+$$<br>
+斐波那契数列由 0 和 1 开始，之后的斐波那契数就是由之前的两数相加而得出。</p>
 <p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">2</span><br>输出：<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">5</span><br>输出：<span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">2</span><br>输出：<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">5</span><br>输出：<span class="hljs-number">5</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= n &lt;= 100</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>有三种方向：</p>
+<h2 id="题解">题解</h2>
+<p>有三种方向：</p>
 <ul>
-<li><p>使用递归</p>
+<li>
+<p>使用递归</p>
 <p>大量重复计算，时间超时。</p>
 </li>
-<li><p>使用数组存储</p>
+<li>
+<p>使用数组存储</p>
 <p>新建长度为n的数组，在递归基础上，存储计算的结果，后直接取用。但是占用了额外的空间$O(n)$</p>
 </li>
-<li><p>使用动态规划</p>
+<li>
+<p>使用动态规划</p>
 <p><code>以其公式F(N) = F(N - 1) + F(N - 2)为转移方程。</code></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">fib</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        a,b = <span class="hljs-number">0</span>,<span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            a,b = b,a+b <span class="hljs-comment">#sum = a+b a = b b = sum a相当于f(i) b相当于f(i+1)</span><br>        <span class="hljs-keyword">return</span> a%<span class="hljs-number">1000000007</span><br>    <span class="hljs-comment"># def fib(self, n: int) -&gt; int:</span><br>    <span class="hljs-comment">#     if(n==0): return 0</span><br>    <span class="hljs-comment">#     if(n==1): return 1</span><br>    <span class="hljs-comment">#     return (self.fib(n-1)+self.fib(n-2))%1000000007 #超时 递归时间复杂度大</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p>循环n次</p>
 <p>注意<code>a,b = b,a+b</code> 相当于sum = a+b ；a = b； b = sum ；</p>
 <p>第i轮中 a相当于f(i)，b相当于f(i+1) 。因此最后返回a</p>
@@ -464,6 +473,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

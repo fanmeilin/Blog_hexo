@@ -291,18 +291,25 @@
 <p>当一个 git 项目包含子模块（submodule) 时，直接克隆下来的子模块目录里面是空的。</p>
 </blockquote>
 <p><strong>有两种方法解决</strong>：</p>
-<h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>如果项目已经克隆到了本地，执行下面的步骤：</p>
+<h3 id="方法一">方法一</h3>
+<p>如果项目已经克隆到了本地，执行下面的步骤：</p>
 <ol>
-<li><p>初始化本地子模块配置文件</p>
-<figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git submodule <span class="hljs-keyword">init</span><br></code></pre></td></tr></tbody></table></figure></li>
-<li><p>更新项目，抓取子模块内容。</p>
-<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git submodule update</span><br></code></pre></td></tr></tbody></table></figure></li>
-<li><p>进入对应子模块目录，执行</p>
-<figure class="highlight brainfuck"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">submodule</span> <span class="hljs-comment">update</span> --<span class="hljs-comment">init</span> --<span class="hljs-comment">recursive</span><br></code></pre></td></tr></tbody></table></figure></li>
+<li>
+<p>初始化本地子模块配置文件</p>
+<figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git submodule <span class="hljs-keyword">init</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>更新项目，抓取子模块内容。</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git submodule update</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>进入对应子模块目录，执行</p>
+<figure class="highlight brainfuck"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">submodule</span> <span class="hljs-comment">update</span> --<span class="hljs-comment">init</span> --<span class="hljs-comment">recursive</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
 </ol>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>另外一种更简单的方法，就是在执行 <code>git clone</code> 时加上 <code>--recursive</code> 参数。它会自动初始化并更新每一个子模块。例如：</p>
+<h3 id="方法二">方法二</h3>
+<p>另外一种更简单的方法，就是在执行 <code>git clone</code> 时加上 <code>--recursive</code> 参数。它会自动初始化并更新每一个子模块。例如：</p>
 <figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone --recursive https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/example/</span>example.git<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -445,6 +452,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

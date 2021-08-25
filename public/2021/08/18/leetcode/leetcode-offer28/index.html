@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      327 字
+      323 字
     </span>
   
 
@@ -289,20 +289,31 @@
               <blockquote>
 <p>对称的二叉树</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。</p>
+<h2 id="题目">题目</h2>
+<p>请实现一个函数，用来判断一棵二叉树是不是对称的。如果一棵二叉树和它的镜像一样，那么它是对称的。</p>
 <p>例如，二叉树&nbsp;[1,2,2,3,4,4,3] 是对称的。</p>
-<p>&nbsp; &nbsp; 1<br>&nbsp; &nbsp;/ <br>&nbsp; 2 &nbsp; 2<br>&nbsp;/ \ / <br>3 &nbsp;4 4 &nbsp;3<br>但是下面这个&nbsp;[1,2,2,null,3,null,3] 则不是镜像对称的:</p>
-<p>&nbsp; &nbsp; 1<br>&nbsp; &nbsp;/ <br>&nbsp; 2 &nbsp; 2<br>&nbsp; &nbsp;\ &nbsp; <br>&nbsp; &nbsp;3 &nbsp; &nbsp;3</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<p>1<br>
+&nbsp; &nbsp;/ <br>
+&nbsp; 2 &nbsp; 2<br>
+&nbsp;/ \ / <br>
+3 &nbsp;4 4 &nbsp;3<br>
+但是下面这个&nbsp;[1,2,2,null,3,null,3] 则不是镜像对称的:</p>
+<p>1<br>
+&nbsp; &nbsp;/ <br>
+&nbsp; 2 &nbsp; 2<br>
+&nbsp; &nbsp;\ &nbsp; <br>
+&nbsp; &nbsp;3 &nbsp; &nbsp;3</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">root</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= 节点个数 &lt;= 1000</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>如果root为空就直接返回True，然后判断其左右子树是否为镜像结构。如果两个子节点为空则为真，如果一空则为假，然后分别判断其对称结构。 <code>judge(A.left,B.right) and judge(A.right,B.left)</code> 注意是镜像因此左右时相反的呢</p>
+<h2 id="题解">题解</h2>
+<p>如果root为空就直接返回True，然后判断其左右子树是否为镜像结构。如果两个子节点为空则为真，如果一空则为假，然后分别判断其对称结构。 <code>judge(A.left,B.right) and judge(A.right,B.left)</code> 注意是镜像因此左右时相反的呢</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSymmetric</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">judge</span>(<span class="hljs-params">A,B</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (A <span class="hljs-keyword">or</span> B): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> (A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">or</span> (A.val!=B.val): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> judge(A.left,B.right) <span class="hljs-keyword">and</span> judge(A.right,B.left) <br>        <span class="hljs-keyword">return</span> judge(root.left,root.right)<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -449,6 +460,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

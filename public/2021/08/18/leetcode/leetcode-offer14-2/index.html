@@ -289,27 +289,29 @@
               <blockquote>
 <p>剪绳子2</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] .请问 k[0]<em>k[1]</em>…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
+<h2 id="题目">题目</h2>
+<p>给你一根长度为 n 的绳子，请把绳子剪成整数长度的 m 段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为 k[0],k[1]…k[m - 1] .请问 k[0]<em>k[1]</em>…*k[m - 1] 可能的最大乘积是多少？例如，当绳子的长度是8时，我们把它剪成长度分别为2、3、3的三段，此时得到的最大乘积是18。</p>
 <p>答案需要取模 1e9+7（1000000007），如计算初始结果为：1000000008，请返回 1。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 2<br>输出: 1<br>解释:<span class="hljs-number"> 2 </span>=<span class="hljs-number"> 1 </span>+ 1,<span class="hljs-number"> 1 </span>×<span class="hljs-number"> 1 </span>= 1<br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 10<br>输出: 36<br>解释:<span class="hljs-number"> 10 </span>=<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 3 </span>+ 4,<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 4 </span>= 36<br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 2<br>输出: 1<br>解释:<span class="hljs-number"> 2 </span>=<span class="hljs-number"> 1 </span>+ 1,<span class="hljs-number"> 1 </span>×<span class="hljs-number"> 1 </span>= 1<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入: 10<br>输出: 36<br>解释:<span class="hljs-number"> 10 </span>=<span class="hljs-number"> 3 </span>+<span class="hljs-number"> 3 </span>+ 4,<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 3 </span>×<span class="hljs-number"> 4 </span>= 36<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li><code>2 &lt;= n &lt;= 1000</code></li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>使用动态规划具体参照剪绳子1</p>
+<h2 id="题解">题解</h2>
+<p>使用动态规划具体参照剪绳子1</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cuttingRope</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        dp = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n+<span class="hljs-number">1</span>)]<br>        dp[<span class="hljs-number">2</span>] = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>,n+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>,i):<br>                dp[i] = <span class="hljs-built_in">max</span>(dp[i],<span class="hljs-built_in">max</span>(j*(i-j),j*dp[i-j]))<br>        <span class="hljs-keyword">return</span> dp[n]%<span class="hljs-number">1000000007</span><br></code></pre></td></tr></tbody></table></figure>
-
 <p>但是这种方式时间复杂度较大。</p>
 <p>步骤如下：(数学可以证明尽量分成多的3)<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/jian-sheng-zi-lcof/solution/mian-shi-ti-14-i-jian-sheng-zi-tan-xin-si-xiang-by/">参见题解</a></p>
 <ul>
 <li>如果 n == 2，返回1，如果 n == 3，返回2，两个可以合并成n小于4的时候返回n - 1</li>
 <li>如果 n == 4，返回4</li>
-<li>如果 n &gt; 4，分成尽可能多的长度为3的小段，每次循环长度n减去3，乘积res乘以3；最后返回时乘以小于等于4的最后一小段；每次乘法操作后记得取余就行<br>以上2和3可以合并</li>
+<li>如果 n &gt; 4，分成尽可能多的长度为3的小段，每次循环长度n减去3，乘积res乘以3；最后返回时乘以小于等于4的最后一小段；每次乘法操作后记得取余就行<br>
+以上2和3可以合并</li>
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cuttingRope</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> n &lt; <span class="hljs-number">4</span>:<br>            <span class="hljs-keyword">return</span> n - <span class="hljs-number">1</span><br>        res = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> n &gt; <span class="hljs-number">4</span>: <span class="hljs-comment"># 找寻尽量多的3</span><br>            res = res * <span class="hljs-number">3</span> % <span class="hljs-number">1000000007</span><br>            n -= <span class="hljs-number">3</span><br>        <span class="hljs-keyword">return</span> res * n % <span class="hljs-number">1000000007</span> <span class="hljs-comment">#乘以剩余的</span><br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -456,6 +458,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

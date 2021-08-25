@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      236 字
+      239 字
     </span>
   
 
@@ -286,31 +286,33 @@
             <h1 style="display: none">dvc相关设置</h1>
             
             <div class="markdown-body">
-              <blockquote>
-</blockquote>
-<p>运行 sh setup.sh detection报错：</p>
+              <blockquote></blockquote>
+<p>运行 sh <a target="_blank" rel="noopener" href="http://setup.sh">setup.sh</a> detection报错：</p>
 <blockquote>
-<p>(base) root@9b1a4b217508:/workspace/fanmeilin/project/task/ai_lab# sh setup.sh detection<br>setup.sh: 12: setup.sh: dvc: not found<br>cp: failed to get attributes of ‘assets/examples’: No such file or directory<br>[*] copy DETECTION skeleton scripts to upper directory</p>
+<p>(base) root@9b1a4b217508:/workspace/fanmeilin/project/task/ai_lab# sh <a target="_blank" rel="noopener" href="http://setup.sh">setup.sh</a> detection<br>
+<a target="_blank" rel="noopener" href="http://setup.sh">setup.sh</a>: 12: <a target="_blank" rel="noopener" href="http://setup.sh">setup.sh</a>: dvc: not found<br>
+cp: failed to get attributes of ‘assets/examples’: No such file or directory<br>
+[*] copy DETECTION skeleton scripts to upper directory</p>
 </blockquote>
 <p>原因是未安装dvc，运行下面的命令安装dvc</p>
 <figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pip</span> install dvc==<span class="hljs-number">2</span>.<span class="hljs-number">3</span>.<span class="hljs-number">0</span><br><span class="hljs-attribute">pip</span> install 'dvc[s<span class="hljs-number">3</span>]'<br></code></pre></td></tr></tbody></table></figure>
-
 <blockquote>
 <p>在Win平台下可能会报错：</p>
 <figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs subunit"><span class="hljs-keyword">ERROR: </span>Cannot uninstall 'ruamel-yaml'. It is a distutils installed project and thus we cannot accurately determine which files belong to it which would lead to only a partial uninstall.<br></code></pre></td></tr></tbody></table></figure>
-
 <p>此时需要进入python 的lib/site-packages 中删除 ‘ruamel-yaml’ 相关的文件</p>
 </blockquote>
 <p><strong>注意：</strong> dvc 2.3.0 版本与之后的hash计算方法不同，不能混用</p>
-<p>再次执行 sh setup.sh detection报错</p>
+<p>再次执行 sh <a target="_blank" rel="noopener" href="http://setup.sh">setup.sh</a> detection报错</p>
 <blockquote>
-<p>ERROR: unexpected error - Cannot connect to host ceph01:80 ssl:default [Name or service not known]: [Errno -2] Name or service not known  </p>
+<p>ERROR: unexpected error - Cannot connect to host ceph01:80 ssl:default [Name or service not known]: [Errno -2] Name or service not known</p>
 </blockquote>
 <p>则修改etc/hosts文件</p>
 <ul>
-<li>配置hosts文件，在hosts文件中增加以下内容<br><code>192.168.10.91 ceph01</code></li>
+<li>配置hosts文件，在hosts文件中增加以下内容<br>
+<code>192.168.10.91 ceph01</code></li>
 </ul>
-<h5 id="详细dvc的各种操作，可移步-师兄博客-DVC-使用手册"><a href="#详细dvc的各种操作，可移步-师兄博客-DVC-使用手册" class="headerlink" title="详细dvc的各种操作，可移步 师兄博客 DVC 使用手册"></a><em>详细dvc的各种操作，可移步</em> <a target="_blank" rel="noopener" href="https://www.zywvvd.com/2020/12/17/dvc/dvc/">师兄博客 DVC 使用手册</a></h5>
+<h5 id="详细dvc的各种操作，可移步-师兄博客-DVC-使用手册"><em>详细dvc的各种操作，可移步</em> <a target="_blank" rel="noopener" href="https://www.zywvvd.com/2020/12/17/dvc/dvc/">师兄博客 DVC 使用手册</a></h5>
+
             </div>
             <hr>
             <div>
@@ -452,6 +454,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

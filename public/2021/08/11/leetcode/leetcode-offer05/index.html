@@ -289,15 +289,17 @@
               <blockquote>
 <p>替换空格</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>请实现一个函数，把字符串 <code>s</code> 中的每个空格替换成”%20”。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight perl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">输入：s = <span class="hljs-string">"We are happy."</span><br>输出：<span class="hljs-string">"We%20are%20happy."</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h2 id="题目">题目</h2>
+<p>请实现一个函数，把字符串 <code>s</code> 中的每个空格替换成"%20"。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight perl"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs perl">输入：s = <span class="hljs-string">"We are happy."</span><br>输出：<span class="hljs-string">"We%20are%20happy."</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= s 的长度 &lt;= 10000</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>直接替换即可。相当于使用replace方法</p>
+<h2 id="题解">题解</h2>
+<p>直接替换即可。相当于使用replace方法</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">replaceSpace</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>       <span class="hljs-comment">#相当于现成函数 return s.replace(" ","%20")</span><br>        result = <span class="hljs-string">""</span><br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span> x==<span class="hljs-string">' '</span>:<br>                x = <span class="hljs-string">"%20"</span><br>            result += x<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -444,6 +446,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

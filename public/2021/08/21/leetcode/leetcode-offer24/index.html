@@ -289,15 +289,17 @@
               <blockquote>
 <p>反转链表</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">输入: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;NULL<br>输出: <span class="hljs-number">5</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;NULL<br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h2 id="题目">题目</h2>
+<p>定义一个函数，输入一个链表的头节点，反转该链表并输出反转后链表的头节点。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">输入: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>-&gt;NULL<br>输出: <span class="hljs-number">5</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">1</span>-&gt;NULL<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= 节点个数 &lt;= 5000</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>比较常规，遍历链表把元素移动到头节点。</p>
+<h2 id="题解">题解</h2>
+<p>比较常规，遍历链表把元素移动到头节点。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseList</span>(<span class="hljs-params">self, head: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(head):<span class="hljs-keyword">return</span> head<br>        p = head.<span class="hljs-built_in">next</span><br>        head.<span class="hljs-built_in">next</span> = <span class="hljs-literal">None</span><br>        <span class="hljs-keyword">while</span>(p):<br>            t = p.<span class="hljs-built_in">next</span><br>            p.<span class="hljs-built_in">next</span> = head<br>            head = p<br>            p = t<br>        <span class="hljs-keyword">return</span> head<br></code></pre></td></tr></tbody></table></figure>
-
 
             </div>
             <hr>
@@ -444,6 +446,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      513 字
+      508 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      6
        分钟
     </span>
   
@@ -289,30 +289,44 @@
               <blockquote>
 <p>树的子结构</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)<br>B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
-<p>例如:<br>给定的树 A:</p>
-<p>&nbsp; &nbsp; &nbsp;3<br>&nbsp; &nbsp; / <br>&nbsp; &nbsp;4 &nbsp; 5<br>&nbsp; / <br>&nbsp;1 &nbsp; 2<br>给定的树 B：</p>
-<p>&nbsp; &nbsp;4&nbsp;<br>&nbsp; /<br>&nbsp;1<br>返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="示例-2："><a href="#示例-2：" class="headerlink" title="示例 2："></a>示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h3 id="提示："><a href="#提示：" class="headerlink" title="提示："></a>提示：</h3><ul>
+<h2 id="题目">题目</h2>
+<p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)<br>
+B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
+<p>例如:<br>
+给定的树 A:</p>
+<p>3<br>
+&nbsp; &nbsp; / <br>
+&nbsp; &nbsp;4 &nbsp; 5<br>
+&nbsp; / <br>
+&nbsp;1 &nbsp; 2<br>
+给定的树 B：</p>
+<p>4&nbsp;<br>
+&nbsp; /<br>
+&nbsp;1<br>
+返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
 <li>0 &lt;= 节点个数 &lt;= 10000</li>
 </ul>
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>python代码真的！好！简洁！</p>
+<h2 id="题解">题解</h2>
+<p>python代码真的！好！简洁！</p>
 <p><code>isSubStructure</code>的作用是先序查找A，B的匹配情况。而在内部会对匹配的<code>judgechildren(A,B)</code>进行判断，查看是否为其子结构。</p>
 <p>如果B为空了则表示匹配成功。如果根节点不匹配或者A为空了就直接返回失败。如果可以继续判断，就继续判断对应的左右子树。</p>
 <p><code>(judgechildren(A,B) or self.isSubStructure(A.left,B) or self.isSubStructure(A.right,B))</code> 判断AB两子树；先序判断左右子树，<code>注意这里是self.isSubStructure</code>进行递归哦~~</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSubStructure</span>(<span class="hljs-params">self, A: TreeNode, B: TreeNode</span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">judgechildren</span>(<span class="hljs-params">A,B</span>):</span> <span class="hljs-comment">#判断以AB为根节点的条件下，B是否为A的子结构</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(B): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> A) <span class="hljs-keyword">or</span> (A.val!=B.val): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> judgechildren(A.right,B.right) <span class="hljs-keyword">and</span> judgechildren(A.left,B.left)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bool</span>(A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">and</span> (judgechildren(A,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.left,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.right,B))<br></code></pre></td></tr></tbody></table></figure>
-
 <blockquote>
 <p>bool(A and B)注意要转换为bool变量</p>
 </blockquote>
 <ul>
-<li><p>时间复杂度为O(MN)</p>
+<li>
+<p>时间复杂度为O(MN)</p>
 </li>
-<li><p>空间复杂度 O(M)： 当树 A和树 B 都退化为链表时，递归调用深度最大。当 M≤N 时，遍历树 A 与递归判断的总递归深度为 M ；当 M&gt;N 时，最差情况为遍历至树 A叶子节点，此时总递归深度为 M。</p>
+<li>
+<p>空间复杂度 O(M)： 当树 A和树 B 都退化为链表时，递归调用深度最大。当 M≤N 时，遍历树 A 与递归判断的总递归深度为 M ；当 M&gt;N 时，最差情况为遍历至树 A叶子节点，此时总递归深度为 M。</p>
 </li>
 </ul>
 
@@ -463,6 +477,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

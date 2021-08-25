@@ -289,13 +289,14 @@
               <blockquote>
 <p>链表中倒数第k个节点</p>
 </blockquote>
-<h2 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h2><p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。</p>
+<h2 id="题目">题目</h2>
+<p>输入一个链表，输出该链表中倒数第k个节点。为了符合大多数人的习惯，本题从1开始计数，即链表的尾节点是倒数第1个节点。</p>
 <p>例如，一个链表有 6 个节点，从头节点开始，它们的值依次是 1、2、3、4、5、6。这个链表的倒数第 3 个节点是值为 4 的节点。</p>
-<h3 id="示例-1："><a href="#示例-1：" class="headerlink" title="示例 1："></a>示例 1：</h3><figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">给定一个链表: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>, 和 k = <span class="hljs-number">2.</span><br>返回链表 <span class="hljs-number">4</span>-&gt;<span class="hljs-number">5.</span><br></code></pre></td></tr></tbody></table></figure>
-
-<h2 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h2><p>一种方法是先确定链表的长度，然后再移动对应的结点个数。那么就需要O(2n)</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs clean">给定一个链表: <span class="hljs-number">1</span>-&gt;<span class="hljs-number">2</span>-&gt;<span class="hljs-number">3</span>-&gt;<span class="hljs-number">4</span>-&gt;<span class="hljs-number">5</span>, 和 k = <span class="hljs-number">2.</span><br>返回链表 <span class="hljs-number">4</span>-&gt;<span class="hljs-number">5.</span><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="题解">题解</h2>
+<p>一种方法是先确定链表的长度，然后再移动对应的结点个数。那么就需要O(2n)</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getKthFromEnd</span>(<span class="hljs-params">self, head: ListNode, k: <span class="hljs-built_in">int</span></span>) -&gt; ListNode:</span><br>        y = x = head<br>        cnt = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">while</span>(x):<br>            cnt += <span class="hljs-number">1</span><br>            x = x.<span class="hljs-built_in">next</span><br>        t = cnt - k<br>        <span class="hljs-keyword">while</span>(t):<br>            y = y.<span class="hljs-built_in">next</span><br>            t -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> y<br></code></pre></td></tr></tbody></table></figure>
-
 <p>使用快慢指针，使得x与y相距k元素，然后x遍历到最后，y就可以得到对应的结果。此时只需要O(n)</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getKthFromEnd</span>(<span class="hljs-params">self, head: ListNode, k: <span class="hljs-built_in">int</span></span>) -&gt; ListNode:</span><br>        y = x = head<br>        <span class="hljs-keyword">while</span>(x):<br>            <span class="hljs-keyword">if</span>(k&lt;=<span class="hljs-number">0</span>):y = y.<span class="hljs-built_in">next</span><br>            x = x.<span class="hljs-built_in">next</span><br>            k -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> y<br></code></pre></td></tr></tbody></table></figure>
             </div>
@@ -443,6 +444,7 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
   
   <div class="statistics">
     

@@ -24,9 +24,9 @@ math: true
 
 ## YOLOv1
 
-**论文下载：**http://arxiv.org/abs/1506.02640
+**论文下载：** http://arxiv.org/abs/1506.02640
 
-**代码下载：**https://github.com/pjreddie/darknet
+**代码下载：** https://github.com/pjreddie/darknet
 
 核心思想：将整张图作为网络的输入（与Faster-RCNN类似），直接在输出层对BBox的位置和类别进行回归。
 
@@ -66,7 +66,7 @@ $$
 
 ### 损失函数
 
-最重要的是设计损失函数，作者使用了sum-squared error loss（https://blog.csdn.net/shengyan5515/article/details/84036734）
+最重要的是设计损失函数，作者使用了sum-squared error loss（https://blog.csdn.net/shengyan5515/article/details/84036734 ）
 
 > 关于YOLO的损失函数，采用sum-squared error整合localization error（bboxes的坐标误差）和classification error，其中classification error包括两部分，一部分是没有包含object的box的confidence loss权值，另一部分则是有包含object的box的confidence loss权值
 
