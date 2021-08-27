@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>hexo中公式显示 - 待时</title>
+  <title>子模块为空的解决方案 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo中公式显示">
+            <span class="h2" id="subtitle" title="子模块为空的解决方案">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-05 20:38" pubdate>
-        2021年8月5日 晚上
+      <time datetime="2021-08-06 02:09" pubdate>
+        2021年8月6日 凌晨
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      721 字
+      178 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      2
        分钟
     </span>
   
@@ -283,65 +283,33 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo中公式显示</h1>
+            <h1 style="display: none">子模块为空的解决方案</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>公式的显示问题。Hexo中Mathjax是用于显示公式的插件，但是多行显示会出现问题，有时还会出现乱码的情况。</p>
+<p>针对子模块文件夹为空的情况，采取下列解决方案。</p>
+<p>当一个 git 项目包含子模块（submodule) 时，直接克隆下来的子模块目录里面是空的。</p>
 </blockquote>
-<h3 id="配置">配置</h3>
-<p>在根目录下的config_fluid.yml​文件中打开math的相关配置。</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 数学公式，开启之前需要更换 Markdown 渲染器，否则复杂公式会有兼容问题，具体请见：https://hexo.fluid-dev.com/docs/guide/##latex-数学公式</span><br><span class="hljs-comment"># Mathematical formula. If enable, you need to change the Markdown renderer, see: https://hexo.fluid-dev.com/docs/en/guide/#math</span><br><span class="hljs-attr">math:</span><br>  <span class="hljs-comment"># 开启后文章默认可用，自定义页面如需使用，需在 Front-matter 中指定 `math: true`</span><br>  <span class="hljs-comment"># If you want to use math on the custom page, you need to set `math: true` in Front-matter</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-comment"># 开启后，只有在文章 Front-matter 里指定 `math: true` 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度</span><br>  <span class="hljs-comment"># If true, only set `math: true` in Front-matter will enable math, to load faster when the page does not contain math</span><br>  <span class="hljs-attr">specific:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-comment"># Options: mathjax | katex</span><br>  <span class="hljs-attr">engine:</span> <span class="hljs-string">mathjax</span><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="出现的问题">出现的问题</h3>
-<h4 id="问题1">问题1</h4>
-<ul>
-<li>由于hexo解码时关注，%% 等连续字符，会将这部分代码解读为其他带有特殊含义的内容</li>
-<li>如果公式中恰巧出现了此类字符，会报出上述错误</li>
-</ul>
-<h4 id="问题2">问题2</h4>
-<ul>
-<li>由于hexo在公式中的<code>\\</code>错会成了转义符，也就是说他只看见了一个反斜杠，不会执行换行命令，导致公式堆成一行</li>
-</ul>
-<h3 id="解决方案">解决方案</h3>
-<h4 id="临时方案">临时方案</h4>
-<h5 id="针对问题1">针对问题1</h5>
-<ul>
-<li>可以在连续的 <code>{</code> <code>}</code> <code>%</code>中间插入空格，分开就没事了</li>
-</ul>
-<h5 id="针对问题2">针对问题2</h5>
-<ul>
-<li>可以将<code>\\</code>换成<code>\\\\</code>，可以实现公式的多行正确显示</li>
-</ul>
-<h4 id="终极方案">终极方案</h4>
-<ul>
+<p><strong>有两种方法解决</strong>：</p>
+<h3 id="方法一">方法一</h3>
+<p>如果项目已经克隆到了本地，执行下面的步骤：</p>
+<ol>
 <li>
-<p>在官方文档中提到了可以为hexo提供标记，阻止其按照自己的规则解释我们的字符串，显示其原本的含义</p>
+<p>初始化本地子模块配置文件</p>
+<figure class="highlight csharp"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs csharp">git submodule <span class="hljs-keyword">init</span><br></code></pre></td></tr></tbody></table></figure>
 </li>
 <li>
-<p>标记为</p>
-<figure class="highlight django"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">{% <span class="hljs-name">raw</span> %}</span><span class="xml"></span><br><span class="xml">$$</span><br><span class="xml">...</span><br><span class="xml">$$</span><br><span class="xml"></span><span class="hljs-template-tag">{% <span class="hljs-name">endraw</span> %}</span><br></code></pre></td></tr></tbody></table></figure>
-</li>
-</ul>
-<h3 id="多行显示和对齐">多行显示和对齐</h3>
-<ul>
-<li>
-<p>默认是显示为一行要实现公式多行和对齐可以使用{aligned}模式，使用"&amp;“来标记对齐位置。”\\"表示换行</p>
-  <figure class="highlight taggerscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">$$<br><span class="hljs-symbol">\b</span>egin{aligned}<br><span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}C<span class="hljs-symbol">\b</span>oldsymbol{x}	&amp;=<span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\r</span>ight]<span class="hljs-symbol">\b</span>oldsymbol{x} 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight] 	<span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\r</span>ight] 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft<span class="hljs-symbol">\V</span>ert <span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight<span class="hljs-symbol">\V</span>ert ^{2}<span class="hljs-symbol">\r</span>ight) 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\s</span>igma_{X}^{2}<br><span class="hljs-symbol">\e</span>nd{aligned}<br>$$<br></code></pre></td></tr></tbody></table></figure>
+<p>更新项目，抓取子模块内容。</p>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">git submodule update</span><br></code></pre></td></tr></tbody></table></figure>
 </li>
 <li>
-<p>显示为</p>
+<p>进入对应子模块目录，执行</p>
+<figure class="highlight brainfuck"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs brainfuck"><span class="hljs-comment">git</span> <span class="hljs-comment">submodule</span> <span class="hljs-comment">update</span> --<span class="hljs-comment">init</span> --<span class="hljs-comment">recursive</span><br></code></pre></td></tr></tbody></table></figure>
 </li>
-</ul>
-
-$$
-\begin{aligned}
-\boldsymbol{x}^{\mathrm{T}}C\boldsymbol{x}	&amp;=\boldsymbol{x}^{\mathrm{T}}\mathrm{E}\left[\left(X-\mu\right)\left(X-\mu\right)^{\mathrm{T}}\right]\boldsymbol{x} 	
-\\&amp;=\mathrm{E}\left[\boldsymbol{x}^{\mathrm{T}}\left(X-\mu\right)\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right] 	\\&amp;=\mathrm{E}\left[\left(\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right)^{\mathrm{T}}\left(\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right)\right] 	
-\\&amp;=\mathrm{E}\left(\left\Vert \left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right\Vert ^{2}\right) 	
-\\&amp;=\sigma_{X}^{2}
-\end{aligned}
-$$
-
+</ol>
+<h3 id="方法二">方法二</h3>
+<p>另外一种更简单的方法，就是在执行 <code>git clone</code> 时加上 <code>--recursive</code> 参数。它会自动初始化并更新每一个子模块。例如：</p>
+<figure class="highlight awk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">git clone --recursive https:<span class="hljs-regexp">//gi</span>thub.com<span class="hljs-regexp">/example/</span>example.git<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -351,9 +319,7 @@ $$
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E9%85%8D%E7%BD%AE/">配置</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E9%85%8D%E7%BD%AE/hexo/">hexo</a>
+                      <a class="hover-with-bg" href="/categories/git/">git</a>
                     
                   </div>
                 
@@ -361,11 +327,7 @@ $$
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
-                    
-                      <a class="hover-with-bg" href="/tags/fluid/">fluid</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
+                      <a class="hover-with-bg" href="/tags/git/">git</a>
                     
                   </div>
                 
@@ -382,9 +344,9 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/06/git_config/git-submodule/">
+                      <a href="/2021/08/06/math/low-rank-app/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">子模块为空的解决方案</span>
+                        <span class="hidden-mobile">低秩逼近的思考</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -392,8 +354,8 @@ $$
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/05/math/covariance-matrix/">
-                        <span class="hidden-mobile">直观理解协方差矩阵</span>
+                      <a href="/2021/08/05/config/hexo-math-config/">
+                        <span class="hidden-mobile">hexo中公式显示</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -415,8 +377,8 @@ $$
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/05/hexo_config/hexo-math-config/';
-          this.page.identifier = '/2021/08/05/hexo_config/hexo-math-config/';
+          this.page.url = 'https://fanmeilin.github.io/2021/08/06/config/git-submodule/';
+          this.page.identifier = '/2021/08/06/config/git-submodule/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -594,45 +556,6 @@ $$
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 

@@ -8,11 +8,15 @@ date: 2021-08-25 11:27:25
 > swin_transformer的结构和代码实现部分，在此基础上添加freeze的相关操作，记录如下。
 
 ## 论文中的架构
+
 ![](https://picture.mulindya.com/swin-pic1.png)
 
 ## 论文笔记
 
-<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/Swin%20Transformer%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows.pdf' width=100% height=350></iframe>
+<details>
+<summary>Swin Transformer:Hierarchical Vision Transformer using Shifted Windows</summary>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/Swin%20Transformer%20Hierarchical%20Vision%20Transformer%20using%20Shifted%20Windows.pdf' width=100% height=650></iframe>
+</details>
 
 ## model架构
 

@@ -308,8 +308,8 @@
 </li>
 </ol>
 <h2 id="YOLOv1">YOLOv1</h2>
-<p>**论文下载：**<a target="_blank" rel="noopener" href="http://arxiv.org/abs/1506.02640">http://arxiv.org/abs/1506.02640</a></p>
-<p>**代码下载：**<a target="_blank" rel="noopener" href="https://github.com/pjreddie/darknet">https://github.com/pjreddie/darknet</a></p>
+<p><strong>论文下载：</strong> <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1506.02640">http://arxiv.org/abs/1506.02640</a></p>
+<p><strong>代码下载：</strong> <a target="_blank" rel="noopener" href="https://github.com/pjreddie/darknet">https://github.com/pjreddie/darknet</a></p>
 <p>核心思想：将整张图作为网络的输入（与Faster-RCNN类似），直接在输出层对BBox的位置和类别进行回归。</p>
 <p>实现方法：</p>
 <p><img src="https://picture.mulindya.com/yolov1-pic1.png" srcset="/img/loading.gif" lazyload alt=""></p>
@@ -344,7 +344,7 @@ $$
 <li>根据预测的7*7*2的目标窗口，首先通过阈值去除可能性地的窗口，再采用NMS去除冗余的窗口。</li>
 </ol>
 <h3 id="损失函数">损失函数</h3>
-<p>最重要的是设计损失函数，作者使用了sum-squared error loss（<a target="_blank" rel="noopener" href="https://blog.csdn.net/shengyan5515/article/details/84036734%EF%BC%89">https://blog.csdn.net/shengyan5515/article/details/84036734）</a></p>
+<p>最重要的是设计损失函数，作者使用了sum-squared error loss（<a target="_blank" rel="noopener" href="https://blog.csdn.net/shengyan5515/article/details/84036734">https://blog.csdn.net/shengyan5515/article/details/84036734</a> ）</p>
 <blockquote>
 <p>关于YOLO的损失函数，采用sum-squared error整合localization error（bboxes的坐标误差）和classification error，其中classification error包括两部分，一部分是没有包含object的box的confidence loss权值，另一部分则是有包含object的box的confidence loss权值</p>
 </blockquote>
@@ -436,7 +436,7 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/24/hexo_config/hexo-emoji/">
+                      <a href="/2021/08/24/config/hexo-emoji/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">博客中的emoji</span>
                         <span class="visible-mobile">上一篇</span>
