@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>YOLO学习 - 待时</title>
+  <title>YOLOv2 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="YOLO学习">
+            <span class="h2" id="subtitle" title="YOLOv2">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-21 15:56" pubdate>
-        2021年8月21日 下午
+      <time datetime="2021-08-27 10:57" pubdate>
+        2021年8月27日 上午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.6k 字
+      433 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      18
+      4
        分钟
     </span>
   
@@ -283,121 +283,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">YOLO学习</h1>
+            <h1 style="display: none">YOLOv2</h1>
             
             <div class="markdown-body">
-              <blockquote>
-<p>YOLO系列是基于深度学习的回归方法。YOLO：you only look once的优点是实时快速目标检测。一直都很想把YOLO系统的学习一下。在此，记录下相关的知识和个人理解。做笔记也算是督促我好好的整理相关内容叭！ok开始！😉</p>
-</blockquote>
-<blockquote>
-<p>参考：<br>
-<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/136382095">https://zhuanlan.zhihu.com/p/136382095</a><br>
-<a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/df1JaGtnoEY4FQford4UIw">https://mp.weixin.qq.com/s/df1JaGtnoEY4FQford4UIw</a></p>
-</blockquote>
-<h2 id="YOLO-和-Faster-R-CNN">YOLO 和 Faster R-CNN</h2>
-<p>两个网络的差异有两个方面：</p>
-<ol>
-<li>
-<p>Yolo没有显示求取region proposal的过程，虽然Faster R-CNN中的RPN于Fast R-CNN共享卷积层，但是在模型训练过程中，还是需要反复的训练RPN于Fast R-CNN，也就是说这种方式还是需要”look twice“ ：确定候选框和分类；而Yolo系列只需要”look once“</p>
-<blockquote>
-<p>关于Faster R-CNN的知识后续再填坑…</p>
-</blockquote>
-</li>
-<li>
-<p>Yolo将检测统一为一个回归问题。而R-CNN将检测结果分为两个部分进行求解：分类<code>物体的类别</code> ， 回归<code>物体的bounding  box</code></p>
-</li>
-</ol>
-<h2 id="YOLOv1">YOLOv1</h2>
-<p><strong>论文下载：</strong> <a target="_blank" rel="noopener" href="http://arxiv.org/abs/1506.02640">http://arxiv.org/abs/1506.02640</a></p>
-<p><strong>代码下载：</strong> <a target="_blank" rel="noopener" href="https://github.com/pjreddie/darknet">https://github.com/pjreddie/darknet</a></p>
-<p>核心思想：将整张图作为网络的输入（与Faster-RCNN类似），直接在输出层对BBox的位置和类别进行回归。</p>
-<p>实现方法：</p>
-<p><img src="https://picture.mulindya.com/yolov1-pic1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<ul>
-<li>
-<p>首先将一幅图像分成S*S个网格（grid cell）,如果某个物体的中心落在这个网格中，那么这个网格就负责预测这个物体。</p>
-</li>
-<li>
-<p>每个网格需要预测B个边界框(BBox)的位置信息和对应的置信度（confidence）;一个BBox对应四个位置信息和一个confidence信息，confidence表示所预测的Box中含有objext的置信度和box的预测情况。</p>
-<blockquote>
-<p>也就是$conf = Pr(object)\times IOU^{truth}_{pred}$ 如果有object落在其中的grid cell里，那么第一项为1否则取0.</p>
-</blockquote>
-</li>
-</ul>
-<p>每个bounding box要预测(x, y, w, h)和confidence共5个值，每个网格还要预测一个类别信息，记为C类。则SxS个网格，每个网格要预测B个bounding box还要预测C个categories。判断这个落在此网格的物体是c个物体中的哪一个物体。输出就是S x S x (5*B+C)的一个tensor。（<strong>注意：class信息是针对每个网格的，confidence信息是针对每个bounding box的。</strong>）</p>
-<p>举例说明: 在PASCAL VOC中，图像输入为448x448，取S=7，B=2，一共有20个类别(C=20)。则输出就是7x7x30的一个tensor。*其中30也就是2*5+20，整个网络结构如下图所示：</p>
-<p><img src="https://picture.mulindya.com/yolov1-pic2.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>在test的时候，每个网格预测的class信息与BBox得到的confidenci信息相乘，就可以得到每个BBox的class-specific confidence score：</p>
+              <h2 id="YOLOv2">YOLOv2</h2>
+<p><strong>论文地址</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1612.08242">https://arxiv.org/abs/1612.08242</a></p>
+<p>Yolov2与Yolov1在保持速度的基础上，对预测效果的准确度，耗费时间，鲁棒性三个方面进行了改进，检测能力提高到9000种不同对象。文章提出了一种新的<strong>训练方法–联合训练</strong>方法。这种算法可以将两种数据集混合到一起，使用一种分层的观点进行分类，用大型的分类数据集扩充检测的数据集。也成为YOLO9000.</p>
+<p>联合训练的思路：<strong>在检测数据集和分类数据集上训练物体检测器（Object Detectors），用检测数据集学习物体的准确位置，用分类数据集来增加分类的类别两。提升健壮性。</strong></p>
+<p>Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分类信息，物体检测的部分来自于CoCo的检测数据集</p>
+<h3 id="改进点">改进点</h3>
+<h4 id="BN-batch-normalization-批量归一化">BN(batch normalization) 批量归一化</h4>
+<p>BN层有助于解决反向传播过程的<strong>梯度消失和梯度爆炸</strong>的问题，<strong>降低</strong>对超参数的<strong>敏感性</strong>，同时对batch归一化时，起到了一定的<strong>正则化</strong>的效果（去掉的dropout层）。通常，在网络的线性变换与激活函数之前增加一个BN层，BN层可以将其特征量归一化使得变换后的特征均值为0，方差为1，从而每一批训练样本都有类似的分布。同时还有修正的参数$\gamma,\beta$可以恢复原有信息。实验结果mAP提升2.4%</p>
+<p>一般的归一化公式：</p>
 
 $$
-Pr(Class_i \vert Object) \times Pr(Object) \times IOU^{truth}_{pred} = Pr(Class_i) \times IOU^{truth}_{pred}
+\widehat x^{(k)} = \frac{x^{(k)}-E[x^{(k)}]}{\sqrt {Var[x^{(k)}]}} \\
 $$
 
-<p>得到每个box的class-specific confidence score之后，设置阈值，过滤掉得分低的boxes，对保留的boxes进行NMS处理，即可得到最终的检测结果。</p>
-<blockquote>
-<p>NMS：non-maximum suppression 非极大抑制，其操作即是从集合中找到得分score最高的候选框，与其他候选框计算IOU，删除重合率高的候选框，因为这些候选框和最高score的框“竞争”同一个物体，但是score又不够高，所以是应该被淘汰的。确定了这个最高score的BBOX之后就可以不考虑他了，再继续找寻最高score的候选框，把与他竞争的候选框给pass掉即可，以此类推。</p>
-</blockquote>
-<h4 id="流程">流程</h4>
-<ol>
-<li>输入一张图像将其分为7*7的网格</li>
-<li>对于每一个网格,预测两个边框；（包括边框的置信度和其对应的类别概率）</li>
-<li>根据预测的7*7*2的目标窗口，首先通过阈值去除可能性地的窗口，再采用NMS去除冗余的窗口。</li>
-</ol>
-<h3 id="损失函数">损失函数</h3>
-<p>最重要的是设计损失函数，作者使用了sum-squared error loss（<a target="_blank" rel="noopener" href="https://blog.csdn.net/shengyan5515/article/details/84036734">https://blog.csdn.net/shengyan5515/article/details/84036734</a> ）</p>
-<blockquote>
-<p>关于YOLO的损失函数，采用sum-squared error整合localization error（bboxes的坐标误差）和classification error，其中classification error包括两部分，一部分是没有包含object的box的confidence loss权值，另一部分则是有包含object的box的confidence loss权值</p>
-</blockquote>
-<p><img src="https://picture.mulindya.com/yolov1-pic3.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h4 id="问题：">问题：</h4>
-<ul>
-<li>8维的localization error(4*2),和20维的classification error同等重要是不合理的</li>
-<li>如果一个网格中没有object(大部分),将这些网格的box对应confidence设置为0，是比较“暴力”的，会让loss特别大，网络不稳定并且不容易收敛。</li>
-</ul>
-<h4 id="解决方案：">解决方案：</h4>
-<ul>
-<li>
-<p>对于坐标预测赋予更大的权重（重视框的位置）</p>
-</li>
-<li>
-<p>对没有object的confidence loss，赋予小的权重(注意力转移到其他地方)</p>
-</li>
-<li>
-<p>对存在object的box的confidence loss和类别的预测权重正常取1</p>
-</li>
-</ul>
-<blockquote>
-<p>为什么第二项出现了根号呢？</p>
-<p>是因为我们的误差度量量反应出大box的小偏差要小于小box。为了逐步解决这个问题，我们预测了边界框的宽度和高度的平⽅根，而不是直接预测宽度和⾼度。因为根号之后曲线越大越平缓。这样对小的box的偏差相对更加敏感。</p>
-</blockquote>
-<p>观察损失函数可以看出：</p>
-<ul>
-<li>
-<p>只有在网格中存在object的时候才会对classification error进行计算</p>
-</li>
-<li>
-<p>只有当某个网格的box的和对于的ground truth box是负责回归的，才会对这个box 的位置xywh损失进行计算，确定对应ground truth box就需要将这个box与这个网格中的所有bbox计算IOU，最大的那个ground truth是由这个网络负责预测的。</p>
-<p>激活函数使用的是leak relu，模型是使用预训练的Imagenet。</p>
-</li>
-</ul>
-<h3 id="优点">优点</h3>
-<ul>
-<li>
-<p>快速，pipline简单</p>
-</li>
-<li>
-<p>背景误检率低</p>
-</li>
-<li>
-<p>通用性强，对艺术品中的物体也可以检测，对非自然的图像物体的检测率比一般的DOM，R-CNN都要好很多</p>
-</li>
-</ul>
-<h3 id="缺点">缺点</h3>
-<ul>
-<li>由于输出层是全连接层，因此在检测时，YOLO训练模型只能支持与训练图像分辨率相同的图像</li>
-<li>每个格子可以预测B个Bbox，但是最终只能选择IOU最高的BBox作为物体检测结果，也就是说，一个各自只能最多预测出一个物体；当物体比较小或者分布密集的时候也只能检测出一个。</li>
-<li>在loss的求解方程中，大目标和小目标的IOU误差在loss计算上是接近的（即使用了平方根缓解），因此对于小物体的检测准确性不高。</li>
-</ul>
+<p><img src="https://picture.mulindya.com/yolov2-pic1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="High-resolution-classifier（高分辨率图像分类器）">High resolution classifier（高分辨率图像分类器）</h4>
 
             </div>
             <hr>
@@ -421,6 +325,8 @@ $$
                     
                       <a class="hover-with-bg" href="/tags/%E7%9B%AE%E6%A0%87%E6%A3%80%E6%B5%8B/">目标检测</a>
                     
+                      <a class="hover-with-bg" href="/tags/yolo/">yolo</a>
+                    
                   </div>
                 
               </div>
@@ -436,18 +342,12 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/24/config/hexo-emoji/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">博客中的emoji</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/21/leetcode/leetcode-offer19/">
-                        <span class="hidden-mobile">剑指offer19</span>
+                      <a href="/2021/08/25/config/pdf-config/">
+                        <span class="hidden-mobile">在博客中显示pdf&折叠</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -469,8 +369,8 @@ $$
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/21/deep_learning/yolo/';
-          this.page.identifier = '/2021/08/21/deep_learning/yolo/';
+          this.page.url = 'https://fanmeilin.github.io/2021/08/27/deep_learning/yolov2/';
+          this.page.identifier = '/2021/08/27/deep_learning/yolov2/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

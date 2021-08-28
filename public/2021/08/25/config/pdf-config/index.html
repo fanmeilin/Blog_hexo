@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>在博客中显示pdf - 待时</title>
+  <title>在博客中显示pdf&amp;折叠 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="在博客中显示pdf">
+            <span class="h2" id="subtitle" title="在博客中显示pdf&折叠">
               
             </span>
 
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      154 字
+      244 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      3
        分钟
     </span>
   
@@ -283,7 +283,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">在博客中显示pdf</h1>
+            <h1 style="display: none">在博客中显示pdf&amp;折叠</h1>
             
             <div class="markdown-body">
               <blockquote>
@@ -299,6 +299,14 @@
 <p>file设置为文件的地址，宽高可以自己设置。</p>
 <h2 id="效果">效果</h2>
 <iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf" width="100%" height="450"></iframe>
+<h2 id="折叠">折叠</h2>
+<p>通过html的details元素可以折叠隐藏的内容。</p>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs xml">使用 <span class="hljs-tag">&lt;<span class="hljs-name">details</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">details</span>&gt;</span> 标签包裹需要隐藏的内容<br>在其中使用<span class="hljs-tag">&lt;<span class="hljs-name">summary</span>&gt;</span> <span class="hljs-tag">&lt;/<span class="hljs-name">summary</span>&gt;</span>标签包裹需要隐藏内容的标题<br></code></pre></td></tr></tbody></table></figure>
+<p>这样如果需要阅读pdf就可以展开，不需要就隐藏，真是炒鸡便利！😉</p>
+<details>
+<summary>展开pdf</summary>
+<iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf" width="100%" height="650"></iframe>
+</details>
 
             </div>
             <hr>
@@ -334,6 +342,12 @@
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/08/27/deep_learning/yolov2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">YOLOv2</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
