@@ -24,11 +24,20 @@ math: true
 
 ## YOLOv1
 
+### 综述
+
 **论文下载：** http://arxiv.org/abs/1506.02640
 
 **代码下载：** https://github.com/pjreddie/darknet
 
-核心思想：将整张图作为网络的输入（与Faster-RCNN类似），直接在输出层对BBox的位置和类别进行回归。
+**核心思想**：将整张图作为网络的输入（与Faster-RCNN类似），直接在输出层对BBox的位置和类别进行回归。
+
+### 论文
+
+<details>
+<summary> yolov1 论文：You Only Look Once:Unified, Real-Time Object Detection</summary>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/You%20Only%20Look%20Once.pdf' width=100% height=450></iframe>' width=100% height=450></iframe>
+</details>
 
 实现方法：
 

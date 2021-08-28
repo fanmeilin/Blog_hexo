@@ -8,13 +8,24 @@ math: true
 
 ## YOLOv2
 
+### 综述
+
 **论文地址**：https://arxiv.org/abs/1612.08242
 
 Yolov2与Yolov1在保持速度的基础上，对预测效果的准确度，耗费时间，鲁棒性三个方面进行了改进，检测能力提高到9000种不同对象。文章提出了一种新的**训练方法--联合训练**方法。这种算法可以将两种数据集混合到一起，使用一种分层的观点进行分类，用大型的分类数据集扩充检测的数据集。也成为YOLO9000.
 
 联合训练的思路：**在检测数据集和分类数据集上训练物体检测器（Object Detectors），用检测数据集学习物体的准确位置，用分类数据集来增加分类的类别两。提升健壮性。**
 
-Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分类信息，物体检测的部分来自于CoCo的检测数据集
+Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分类信息，物体检测的部分来自于CoCo的检测数据集。
+
+### 论文
+
+
+<details>
+<summary> yolov2 论文：YOLO9000: Better, Faster, Stronger</summary>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' width=100% height=450></iframe>' width=100% height=450></iframe>
+</details>
+
 
 ### 改进点
 
