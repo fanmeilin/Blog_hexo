@@ -287,10 +287,16 @@
             
             <div class="markdown-body">
               <h2 id="YOLOv2">YOLOv2</h2>
+<h3 id="综述">综述</h3>
 <p><strong>论文地址</strong>：<a target="_blank" rel="noopener" href="https://arxiv.org/abs/1612.08242">https://arxiv.org/abs/1612.08242</a></p>
 <p>Yolov2与Yolov1在保持速度的基础上，对预测效果的准确度，耗费时间，鲁棒性三个方面进行了改进，检测能力提高到9000种不同对象。文章提出了一种新的<strong>训练方法–联合训练</strong>方法。这种算法可以将两种数据集混合到一起，使用一种分层的观点进行分类，用大型的分类数据集扩充检测的数据集。也成为YOLO9000.</p>
 <p>联合训练的思路：<strong>在检测数据集和分类数据集上训练物体检测器（Object Detectors），用检测数据集学习物体的准确位置，用分类数据集来增加分类的类别两。提升健壮性。</strong></p>
-<p>Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分类信息，物体检测的部分来自于CoCo的检测数据集</p>
+<p>Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分类信息，物体检测的部分来自于CoCo的检测数据集。</p>
+<h3 id="论文">论文</h3>
+<details>
+<summary> yolov2 论文：YOLO9000: Better, Faster, Stronger</summary>
+<iframe src="/js/pdfjs_old/web/viewer.html?file=<iframe src=" js="" pdfjs_old="" web="" viewer.html?file="https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf'" width="100%" height="450"></iframe>' width=100% height=450&gt;
+</details>
 <h3 id="改进点">改进点</h3>
 <h4 id="BN-batch-normalization-批量归一化">BN(batch normalization) 批量归一化</h4>
 <p>BN层有助于解决反向传播过程的<strong>梯度消失和梯度爆炸</strong>的问题，<strong>降低</strong>对超参数的<strong>敏感性</strong>，同时对batch归一化时，起到了一定的<strong>正则化</strong>的效果（去掉的dropout层）。通常，在网络的线性变换与激活函数之前增加一个BN层，BN层可以将其特征量归一化使得变换后的特征均值为0，方差为1，从而每一批训练样本都有类似的分布。同时还有修正的参数$\gamma,\beta$可以恢复原有信息。实验结果mAP提升2.4%</p>

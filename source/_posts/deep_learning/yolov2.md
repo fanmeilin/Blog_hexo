@@ -23,7 +23,7 @@ Yolo9000就是使用联合训练的算法，拥有来自于Imagenet的9000种分
 
 <details>
 <summary> yolov2 论文：YOLO9000: Better, Faster, Stronger</summary>
-<iframe src='/js/pdfjs_old/web/viewer.html?file=<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/An%20Isotropic%203x3%20Image%20Gradient%20Operator.pdf' width=100% height=450></iframe>' width=100% height=450></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/YOLO9000Better_Faster_Stronger.pdf' width=100% height=450></iframe>' width=100% height=450></iframe>
 </details>
 
 
