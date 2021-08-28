@@ -36,7 +36,7 @@ math: true
 
 <details>
 <summary> yolov1 论文：You Only Look Once:Unified, Real-Time Object Detection</summary>
-<iframe src='/js/pdfjs_old/web/viewer.html?file=<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/You%20Only%20Look%20Once.pdf' width=100% height=450></iframe>' width=100% height=450></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/yolov1.pdf' width=100% height=650></iframe>
 </details>
 
 实现方法：
