@@ -99,7 +99,7 @@ $$
 对象检测面临一个问题：即目标检测的对象有大有小，输入图像经过多层网络提取特征，最后输出的特征图中（比如YOLO2中输入416*416经过卷积网络下采样最后输出是13*13），较小的对象可能特征已经不明显甚至被忽略掉了。为了更好的检测出一些比较小的对象，最后输出的特征图需要保留一些更细节的信息。
 
 YOLO2引入一种称为passthrough层的方法在特征图中保留一些细节信息。具体来说，就是在最后一个pooling之前，特征图的大小是26\*26\*512，将其1拆4，直接传递（passthrough）到pooling后（并且又经过一组卷积）的特征图，两者叠加到一起作为输出的特征图。
-![](https://mmbiz.qpic.cn/sz_mmbiz_png/gYUsOT36vfrVPO5dCS8SFFLceGUMkGDWjLDkibibfuO5LIGloXSRnzrichTTuS9FezhwDY4LiavUiaJO3QtDEwgIXRQ/640?wx_fmt=png&tp=webp&wxfrom=5&wx_lazy=1&wx_co=1)
+![](https://picture.mulindya.com/yolov2-pic11.png)
 
 具体怎样1拆4，下面借用一副图看的很清楚。图中示例的是1个4\*4拆成4个2\*2。另外，根据YOLO2的代码，特征图先用1\*1卷积从 26\*26\*512 降维到 26\*26\*64，再做1拆4并passthrough。
 
