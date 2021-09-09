@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>获取两个向量角度</title>
+      <link href="/2021/09/08/img_process/getAngle/"/>
+      <url>/2021/09/08/img_process/getAngle/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>获取两个向量的夹角</p></blockquote><p><img src="https://picture.mulindya.com/getAngle.jpg" alt=""></p><p>比如AB向量表示为[1,-3,5,-1],前两位是A的坐标，后两位是B的坐标。</p><p>直接计算出每个向量与x正轴的夹角，然后相减即可；核心的部分使用atan2函数（atan和atan2优先使用atan2）。</p><blockquote><p>atan与atan2的区别：<br>atan 和 atan2 都是求反正切函数，如：有两个点 point(x1,y1), 和 point(x2,y2);<br>那么这两个点形成的斜率的角度计算方法分别是：<br>float angle = atan( (y2-y1)/(x2-x1) ); 或 float angle = atan2( y2-y1, x2-x1 );<br>atan2 的优点在于如果 x2-x1等于0 依然可以计算，但是atan函数就会导致程序出错；</p></blockquote><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_angle</span>(<span class="hljs-params">vec1,vec2</span>):</span><br>    dx1 = vec1[<span class="hljs-number">2</span>] - vec1[<span class="hljs-number">0</span>]<br>    dy1 = vec1[<span class="hljs-number">3</span>] - vec1[<span class="hljs-number">1</span>]<br>    dx2 = vec2[<span class="hljs-number">2</span>] - vec2[<span class="hljs-number">0</span>]<br>    dy2 = vec2[<span class="hljs-number">3</span>] - vec2[<span class="hljs-number">1</span>]<br>    angle1 = math.atan2(dy1,dx1)*<span class="hljs-number">180</span>/math.pi <span class="hljs-comment">#atan2结果为弧度制(可以处理90度的情况)</span><br>    angle2 = math.atan2(dy2,dx2)*<span class="hljs-number">180</span>/math.pi<br>    angle = <span class="hljs-built_in">abs</span>(angle1-angle2)<br>    <span class="hljs-keyword">if</span>(angle&gt;<span class="hljs-number">180</span>):angle = <span class="hljs-number">360</span>-angle<br>    <span class="hljs-keyword">return</span> angle<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 图像处理 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 图像处理，角度 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>YOLOv2</title>
       <link href="/2021/08/27/deep_learning/yolov2/"/>
       <url>/2021/08/27/deep_learning/yolov2/</url>
