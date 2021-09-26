@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer35 复杂链表的复制 - 待时</title>
+  <title>剑指offer30 包含min函数的栈 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer35 复杂链表的复制">
+            <span class="h2" id="subtitle" title="剑指offer30 包含min函数的栈">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-16 16:50" pubdate>
-        2021年9月16日 下午
+      <time datetime="2021-09-17 17:07" pubdate>
+        2021年9月17日 下午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      656 字
+      559 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      8
+      7
        分钟
     </span>
   
@@ -283,47 +283,31 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer35 复杂链表的复制</h1>
+            <h1 style="display: none">剑指offer30 包含min函数的栈</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>复杂链表的复制</p>
+<p>包含min函数的栈</p>
 </blockquote>
 <h2 id="题目">题目</h2>
-<p>请实现 copyRandomList 函数，复制一个复杂链表。在复杂链表中，每个节点除了有一个 next 指针指向下一个节点，还有一个 random 指针指向链表中的任意节点或者 null。</p>
+<p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。</p>
 <h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：head = <span class="hljs-comment">[<span class="hljs-comment">[7,null]</span>,<span class="hljs-comment">[13,0]</span>,<span class="hljs-comment">[11,4]</span>,<span class="hljs-comment">[10,2]</span>,<span class="hljs-comment">[1,0]</span>]</span><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[7,null]</span>,<span class="hljs-comment">[13,0]</span>,<span class="hljs-comment">[11,4]</span>,<span class="hljs-comment">[10,2]</span>,<span class="hljs-comment">[1,0]</span>]</span><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="示例-2：">示例 2：</h3>
-<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：head = <span class="hljs-string">[[1,1],[2,1]]</span><br>输出：<span class="hljs-string">[[1,1],[2,1]]</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="示例-3：">示例 3：</h3>
-<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：head = <span class="hljs-string">[[3,null],[3,0],[3,null]]</span><br>输出：<span class="hljs-string">[[3,null],[3,0],[3,null]]</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="示例-4：">示例 4：</h3>
-<figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：head = <span class="hljs-comment">[]</span><br>输出：<span class="hljs-comment">[]</span><br>解释：给定的链表为空（空指针），因此返回 null。<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight pf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pf">M<span class="hljs-keyword">in</span>Stack <span class="hljs-keyword">min</span>Stack = new M<span class="hljs-keyword">in</span>Stack();<br><span class="hljs-keyword">min</span>Stack.push(-<span class="hljs-number">2</span>);<br><span class="hljs-keyword">min</span>Stack.push(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">min</span>Stack.push(-<span class="hljs-number">3</span>);<br><span class="hljs-keyword">min</span>Stack.<span class="hljs-keyword">min</span>();   --&gt; 返回 -<span class="hljs-number">3</span>.<br><span class="hljs-keyword">min</span>Stack.pop();<br><span class="hljs-keyword">min</span>Stack.top();      --&gt; 返回 <span class="hljs-number">0</span>.<br><span class="hljs-keyword">min</span>Stack.<span class="hljs-keyword">min</span>();   --&gt; 返回 -<span class="hljs-number">2</span>.<br></code></pre></td></tr></tbody></table></figure>
 <h3 id="提示：">提示：</h3>
 <ul>
-<li>-10000 &lt;= Node.val &lt;= 10000</li>
-<li>Node.random 为空（null）或指向链表中的节点。</li>
-<li>节点数目不超过 1000 。</li>
+<li>各函数的调用总次数不超过 20000 次</li>
 </ul>
 <h2 id="题解">题解</h2>
-<p>通常普通的链表复制只需要遍历链表，每轮新建立一个节点，在添加前驱节点到当前节点的引用指向即可，但是本题的节点新增了random指针，因此需要处理random指针。</p>
+<p>emm这样子使用min函数，不太科学，时间复杂度为O(N)</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        initialize your data structure here.</span><br><span class="hljs-string">        """</span><br>        self.stack = []<br>        self.minnum = sys.maxsize <span class="hljs-comment">#float("inf")</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">push</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        <span class="hljs-keyword">if</span>(self.minnum&gt;x): self.minnum = x<br>        self.stack.append(x)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pop</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        item = self.top()<br>        self.stack.pop()<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">len</span>(self.stack) == <span class="hljs-number">0</span>): <br>            self.minnum = sys.maxsize <span class="hljs-comment">#float("inf")</span><br>        <span class="hljs-keyword">elif</span>(item==self.minnum):<br>            self.minnum = <span class="hljs-built_in">min</span>(self.stack)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.stack[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">min</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.minnum<br><br><span class="hljs-comment"># Your MinStack object will be instantiated and called as such:</span><br><span class="hljs-comment"># obj = MinStack()</span><br><span class="hljs-comment"># obj.push(x)</span><br><span class="hljs-comment"># obj.pop()</span><br><span class="hljs-comment"># param_3 = obj.top()</span><br><span class="hljs-comment"># param_4 = obj.min()</span><br></code></pre></td></tr></tbody></table></figure>
+<p>-实际上应该创建两个栈，一个作为普通的栈A记录数据，另一个B用于辅助栈min的实现；使得A中的最小元素始终对应于B的栈顶元素。<strong>栈B的主要目的是记录最小值，所以不一定是需要所有完整的数据。</strong></p>
 <ul>
-<li>第一种方法是使用<code>哈希表</code></li>
-<li>第二种方法是使用<code>拼接+拆分</code></li>
+<li>在调用push函数时，注意要维护好栈B，也就是说判断x时小于等于栈顶元素，才压入栈B；</li>
+<li>在调用pop函数时，要保持A，B元素的一致性，在A中pop的元素是B的栈顶元素就要同步删除掉栈B的栈顶元素；</li>
 </ul>
-<h4 id="哈希表">哈希表</h4>
-<p>先构建原链表节点和新链表节点的键值对映射关系，再遍历构建新链表节点的next和random的引用指向。</p>
-<p>这里可以直接使用字典，键值对就是（原节点，新节点），然后直接在字典中构建；</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">copyRandomList</span>(<span class="hljs-params">self,head:<span class="hljs-string">'Node'</span></span>)-&gt;'Node':</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> head:<span class="hljs-keyword">return</span><br>        dic = {}<br>        cur = head<br>        <span class="hljs-keyword">while</span> cur:<br>            dic[cur] = Node(cur.val)<br>            cur = cur.<span class="hljs-built_in">next</span><br>        cur = head<br>        <span class="hljs-keyword">while</span> cur:<br>            dic[cur].<span class="hljs-built_in">next</span> = dic.get(cur.<span class="hljs-built_in">next</span>)<br>            dic[cur].random = dic.get(cur.random)<br>            cur = cur.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> dic[head]<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>dict.get(key,default=None) key是字典中要查找的键，default是指定键值不存在时，返回默认值；</p>
-</blockquote>
-<p>此时时间复杂度为O(N),空间复杂度为O(N)。</p>
-<h4 id="拼接-拆分">拼接+拆分</h4>
-<p>构建拼接链表<code>原节点1-&gt;新节点1-&gt;原节点2-&gt;新节点2-&gt;......</code>,这时，在访问原节点的random时可以找到新对应新节点的random的指向节点。<br>
-当访问<code>cur.random</code>时，对应的新节点<code>cur.next</code>的随机指向节点为<code>cur.random.next</code>，就可以解决random的问题，再进行拆分链表。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">copyRandomList</span>(<span class="hljs-params">self,head:<span class="hljs-string">'Node'</span></span>)-&gt;'Node':</span><br>		<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> head:<span class="hljs-keyword">return</span><br>		cur = head<br>		<span class="hljs-comment">#复制各个节点，并构建拼接链表</span><br>		<span class="hljs-keyword">while</span> cur:<br>			tmp = Node(cur.val)<br>			tmp.<span class="hljs-built_in">next</span> = cur.<span class="hljs-built_in">next</span><br>			cur.<span class="hljs-built_in">next</span> = tmp<br>			cur = tmp.<span class="hljs-built_in">next</span><br>		<span class="hljs-comment">#构建random指向</span><br>		cur = head<br>		<span class="hljs-keyword">while</span> cur:<br>			<span class="hljs-keyword">if</span> cur.random:<br>				cur.<span class="hljs-built_in">next</span>.random = cur.random.<span class="hljs-built_in">next</span><br>            cur = cur.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>        <span class="hljs-comment">#拆分链表</span><br>        cur = res = head.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">while</span> cur.<span class="hljs-built_in">next</span>:<br>            cur.<span class="hljs-built_in">next</span> = cur.<span class="hljs-built_in">next</span>.<span class="hljs-built_in">next</span><br>            cur = cur.<span class="hljs-built_in">next</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
-<p>此时时间复杂度为O(N),空间复杂度为O(1)。</p>
+<p>这种方式可以保证在删除掉A和B的栈顶元素（最小值）之后，B的栈顶元素依然还是A的最小值。</p>
+<p>嗯厉害~ o(<em>￣▽￣</em>)o</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        initialize your data structure here.</span><br><span class="hljs-string">        """</span><br>        self.A,self.B = [],[]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">push</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:</span><br>		self.A.append(x)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.B <span class="hljs-keyword">or</span> self.B[-<span class="hljs-number">1</span>]&gt;=x: <span class="hljs-comment">#注意是大于等于，因为需要记录避免后续弹出导致元素不同步</span><br>            self.B.append(x)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pop</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>		<span class="hljs-keyword">if</span>(self.A.pop() == self.B[-<span class="hljs-number">1</span>]): <span class="hljs-comment">#如果是相同元素就注意同步删除</span><br>            self.B.pop()<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.A[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">min</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.B[-<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -335,6 +319,8 @@
                     
                       <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
                     
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%A0%88/">栈</a>
+                    
                   </div>
                 
                 
@@ -342,6 +328,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%88/">栈</a>
                     
                   </div>
                 
@@ -358,18 +346,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/17/leetcode/leetcode-offer30/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer30 包含min函数的栈</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/09/package_usage/random-summarize/">
-                        <span class="hidden-mobile">随机数的总结</span>
+                      <a href="/2021/09/16/leetcode/leetcode-offer35/">
+                        <span class="hidden-mobile">剑指offer35 复杂链表的复制</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -391,8 +373,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/09/16/leetcode/leetcode-offer35/';
-          this.page.identifier = '/2021/09/16/leetcode/leetcode-offer35/';
+          this.page.url = 'https://fanmeilin.github.io/2021/09/17/leetcode/leetcode-offer30/';
+          this.page.identifier = '/2021/09/17/leetcode/leetcode-offer30/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
