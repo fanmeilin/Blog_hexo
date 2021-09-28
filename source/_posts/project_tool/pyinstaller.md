@@ -1,7 +1,7 @@
 ---
 title: pyinstaller打包exe
 tags: [项目打包]
-categories: [配置,pyinstaller]
+categories: [工具,pyinstaller]
 date: 2021-09-26 20:11:18
 ---
 
