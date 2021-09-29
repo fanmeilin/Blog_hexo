@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      330 字
+      1.5k 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      18
        分钟
     </span>
   
@@ -289,6 +289,7 @@
               <blockquote>
 <p>pyinstaller打包方式一般可以分为<strong>直接输入指令</strong>和<strong>利用spec文件</strong>进行打包两种方式，直接输入指令就是根据指令生成spec文件，再根据spec文件的内容进行打包操作，因此spec文件就是核心部分，在此对其内容的相关配置进行归纳。</p>
 </blockquote>
+<h3 id="spec文件参数">spec文件参数</h3>
 <p>spec文件参数：a，pyz，exe，coll，block_cipher;</p>
 <table>
 <thead>
@@ -320,6 +321,73 @@
 </tr>
 </tbody>
 </table>
+<p>以上内容中修改比较多的是a,exe的内容，coll和pyz基本上没有遇到需要修改的情况。</p>
+<h3 id="参数a，exe的说明">参数a，exe的说明</h3>
+<p>下面对a和exe参数内容进行详细介绍：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">参数</th>
+<th style="text-align:center">子参数</th>
+<th style="text-align:left">具体含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">scripts</td>
+<td style="text-align:left">第一个参数，他是一个脚本列表，可以传入多个py脚本，效果与命令行中指定多个py文件相同，比如说“pyinstaller <a target="_blank" rel="noopener" href="http://XXX1.py">XXX1.py</a> <a target="_blank" rel="noopener" href="http://XXX2.py">XXX2.py</a>”，pyinstaller会依次分析执行，并且把第一个py文件的名称作为spec和dist下的文件夹及程序名称</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">pathex</td>
+<td style="text-align:left">默认有一个spec目录，当我们有一些模块不在该项目路径下的时候，可以将使用到的模块路径添加到pathex变量中，相当于“-p DIR/-paths DIR”</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">datas</td>
+<td style="text-align:left">作用是将本地文件打包时拷贝到目标路径下。datas是一个元素为元组的列表，每个元组有两个元素，都必须是字符串类型，元组的第一个元素是数据文件（文件夹），元组的第二个元素为运行时这些文件（文件夹）的位置。例如：datas = [(‘./src/a.txt’,‘./dst’)]表示打包时将’./src/a.txt’文件添加到相对exe目录先的dist目录中，也可以使用通配符datas = [(‘./myfile/*.mp3’,‘sfx’)]，表示将myfile下的所有mp3文件都copy到sfx文件夹中，也可以添加整个文件夹：datas = [(‘./myfile/data’,‘data’)]，表示将myfile下的data文件夹下所有文件都copy到data文件夹下，同命令“-add-data”</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">binaries</td>
+<td style="text-align:left">添加二进制文件，也是一个列表，定义方式与datas参数一样，同命令“-add-binary”</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">hiddenimports</td>
+<td style="text-align:left">指定脚本中需要隐式导入的模块，比如在import、imp.find_module()、exec、eval等语句中导入模块，这些模块PyInstaller是找不到的，需要手动指定导入，这个选项可以使用多次。同命令“–hidden-import MODULENAME/–hiddenimport MODULENAME”。</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">hookspath</td>
+<td style="text-align:left">指定额外的hook文件（可以是py文件）的查找路径，这些文件的作用是在pyinstaller运行时改变一些python或者其他库原有的函数或者变量的执行逻辑（并不会改变这些库本身的代码），以便能顺利的打包完成，这个选项可以使用多次。同命令“–additional-hooks-dir HOOKSPATH”。</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">runtime_hooks</td>
+<td style="text-align:left">指定自定义的运行hook文件路径（可以时py文件），在打包好的exe程序中，运行这个exe程序时，指定的hook文件会在所有代码和模块之前运行，包括main文件，以满足一些运行环境的特殊要求，这个选项可以使用多次，同命令“-runtime-hook RUNTIME_HOOKS”.</td>
+</tr>
+<tr>
+<td style="text-align:center">Analysis参数</td>
+<td style="text-align:center">excludes</td>
+<td style="text-align:left">指定可以被忽略的可选的模块或包，因为某些模块只是PyInstaller根据自身的逻辑去查找的，这些模块对于exe程序本身并没有用到，但是在日志中还是会提示“module not found”，这种日志可以不用管，或者使用这个参数选项来指定不用导入，这个选项可以使用多次。同命令“–exclude-module EXCLUDES”。</td>
+</tr>
+<tr>
+<td style="text-align:center">exe参数</td>
+<td style="text-align:center">console</td>
+<td style="text-align:left">设置是否显示命令行窗口，同命令 “-W/-c”</td>
+</tr>
+<tr>
+<td style="text-align:center">exe参数</td>
+<td style="text-align:center">icon</td>
+<td style="text-align:left">设置程序图标，默认spec是没有图标的，需要手动添加，参数值就是图片路径的字符串，同命令“-i/-icon”</td>
+</tr>
+</tbody>
+</table>
+<h3 id="我的记录">我的记录</h3>
+<p>在此记录一下detectui的spec文件呢~~~</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- mode: python ; coding: utf-8 -*-</span><br><br><br>block_cipher = <span class="hljs-literal">None</span><br><br><br>a = Analysis([<span class="hljs-string">'detectui.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\__init__.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\torch_utils.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\autoanchor.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\datasets.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\general.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\google_utils.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\metrics.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\plots.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\__init__.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\common.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\experimental.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\yolo.py'</span>,<br>              <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\detectInfo.py'</span>,<br>              ],<br>             pathex=[<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise'</span>,<br>             <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models'</span>,<br>             <span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils'</span>,<br>             <span class="hljs-string">'D:\\anaconda3\\envs\\torch\\Lib\\site-packages\\scipy\\.libs'</span>,<br>             <span class="hljs-string">'D:\\anaconda3\\envs\\torch\\Lib\\site-packages\\torch\\lib'</span>,<br>              ],<br>             binaries=[],<br>             datas=[<br>             (<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\weights\\best.pt'</span>,<span class="hljs-string">'.\\weights'</span>),<br>             (<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\*.yaml'</span>,<span class="hljs-string">'.\\models'</span>),<br>             (<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\models\\hub\\*.yaml'</span>,<span class="hljs-string">'.\\models\\hub'</span>),<br>             (<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\icon.jpg'</span>,<span class="hljs-string">'.'</span>),<br>             (<span class="hljs-string">'E:\\masterProjects\\foot\\footRevise\\utils\\__pycache__\\torch_utils.pyc'</span>,<span class="hljs-string">'.\\utils'</span>),<br>             ],<br>             hiddenimports=[<span class="hljs-string">'pkg_resources.py2_warn'</span>,<span class="hljs-string">'pkg_resources.markers'</span>],<br>             hookspath=[],<br>             hooksconfig={},<br>             runtime_hooks=[],<br>             excludes=[],<br>             win_no_prefer_redirects=<span class="hljs-literal">False</span>,<br>             win_private_assemblies=<span class="hljs-literal">False</span>,<br>             cipher=block_cipher,<br>             noarchive=<span class="hljs-literal">False</span>)<br><span class="hljs-keyword">for</span> d <span class="hljs-keyword">in</span> a.datas:<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">'_C.cp38-win_amd64.pyd'</span> <span class="hljs-keyword">in</span> d[<span class="hljs-number">0</span>]:<br>		    a.datas.remove(d)<br>		    <span class="hljs-keyword">break</span><br>pyz = PYZ(a.pure, a.zipped_data,<br>             cipher=block_cipher)<br><br>exe = EXE(pyz,<br>          a.scripts,<br>          [],<br>          exclude_binaries=<span class="hljs-literal">True</span>,<br>          name=<span class="hljs-string">'detectui'</span>,<br>          debug=<span class="hljs-literal">False</span>,<br>          bootloader_ignore_signals=<span class="hljs-literal">False</span>,<br>          strip=<span class="hljs-literal">False</span>,<br>          upx=<span class="hljs-literal">True</span>,<br>          console=<span class="hljs-literal">False</span>,<br>          icon=<span class="hljs-string">'icon.ico'</span>)<br>coll = COLLECT(exe,<br>               a.binaries,<br>               a.zipfiles,<br>               a.datas,<br>               strip=<span class="hljs-literal">False</span>,<br>               upx=<span class="hljs-literal">True</span>,<br>               name=<span class="hljs-string">'detectui'</span>)<br><br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
