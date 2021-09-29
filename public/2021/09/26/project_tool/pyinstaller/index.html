@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer30 包含min函数的栈 - 待时</title>
+  <title>pyinstaller打包exe - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer30 包含min函数的栈">
+            <span class="h2" id="subtitle" title="pyinstaller打包exe">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-09-17 17:07" pubdate>
-        2021年9月17日 下午
+      <time datetime="2021-09-26 20:11" pubdate>
+        2021年9月26日 晚上
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      559 字
+      910 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      10
        分钟
     </span>
   
@@ -283,31 +283,123 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer30 包含min函数的栈</h1>
+            <h1 style="display: none">pyinstaller打包exe</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>包含min函数的栈</p>
+<p>pyinstaller的作用是可以将python应用程序打包为独立的可执行文件，相对与同类工具而言，其优势在于可以和python配合使用，构建较小的可执行文件并且完全多平台，完全兼容性。</p>
 </blockquote>
-<h2 id="题目">题目</h2>
-<p>定义栈的数据结构，请在该类型中实现一个能够得到栈的最小元素的 min 函数在该栈中，调用 min、push 及 pop 的时间复杂度都是 O(1)。</p>
-<h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight pf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pf">M<span class="hljs-keyword">in</span>Stack <span class="hljs-keyword">min</span>Stack = new M<span class="hljs-keyword">in</span>Stack();<br><span class="hljs-keyword">min</span>Stack.push(-<span class="hljs-number">2</span>);<br><span class="hljs-keyword">min</span>Stack.push(<span class="hljs-number">0</span>);<br><span class="hljs-keyword">min</span>Stack.push(-<span class="hljs-number">3</span>);<br><span class="hljs-keyword">min</span>Stack.<span class="hljs-keyword">min</span>();   --&gt; 返回 -<span class="hljs-number">3</span>.<br><span class="hljs-keyword">min</span>Stack.pop();<br><span class="hljs-keyword">min</span>Stack.top();      --&gt; 返回 <span class="hljs-number">0</span>.<br><span class="hljs-keyword">min</span>Stack.<span class="hljs-keyword">min</span>();   --&gt; 返回 -<span class="hljs-number">2</span>.<br></code></pre></td></tr></tbody></table></figure>
-<h3 id="提示：">提示：</h3>
+<blockquote>
+<p>pyinstaller的主要目标是与第三方软件包兼容，因此在使用pyinstaller会将所有的外部包继承在pyinstaller本身中。</p>
+</blockquote>
+<h2 id="安装">安装</h2>
+<p>直接从pypi安装pyinstaller：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyinstaller<br></code></pre></td></tr></tbody></table></figure>
+<p>然后在自己的程序目录中运行</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller yourprogram.py<br></code></pre></td></tr></tbody></table></figure>
+<p>就会生成dist文件夹，在dist文件夹下可以找到对应的exe文件。</p>
+<h2 id="命令选项说明">命令选项说明</h2>
+<p>PyInstaller 支持如表所示的常用选项。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">选项</th>
+<th style="text-align:center">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">-h，–help</td>
+<td style="text-align:center">查看该模块的帮助信息</td>
+</tr>
+<tr>
+<td style="text-align:center">-F，-onefile</td>
+<td style="text-align:center">产生单个的可执行文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-D，–onedir</td>
+<td style="text-align:center">产生一个目录（包含多个文件）作为可执行程序（默认）</td>
+</tr>
+<tr>
+<td style="text-align:center">-a，–ascii</td>
+<td style="text-align:center">不包含 Unicode 字符集支持</td>
+</tr>
+<tr>
+<td style="text-align:center">-d，–debug</td>
+<td style="text-align:center">产生 debug 版本的可执行文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-w，–windowed，–noconsolc</td>
+<td style="text-align:center">指定程序运行时不显示命令行窗口（仅对 Windows 有效）</td>
+</tr>
+<tr>
+<td style="text-align:center">-c，–nowindowed，–console</td>
+<td style="text-align:center">指定使用命令行窗口运行程序（仅对 Windows 有效）</td>
+</tr>
+<tr>
+<td style="text-align:center">-o DIR，–out=DIR</td>
+<td style="text-align:center">指定 spec 文件的生成目录。如果没有指定，则默认使用当前目录来生成 spec 文件</td>
+</tr>
+<tr>
+<td style="text-align:center">-p DIR，–path=DIR</td>
+<td style="text-align:center">设置 Python 导入模块的路径（和设置 PYTHONPATH 环境变量的作用相似）。也可使用路径分隔符（Windows 使用分号，Linux 使用冒号）来分隔多个路径</td>
+</tr>
+<tr>
+<td style="text-align:center">-n NAME，–name=NAME</td>
+<td style="text-align:center">指定项目（产生的 spec）名字。如果省略该选项，那么第一个脚本的主文件名将作为 spec 的名字</td>
+</tr>
+</tbody>
+</table>
+<p>在此表列出的只是 PyInstaller 模块所支持的常用选项，如果需要了解 PyInstaller 选项的详细信息，则可通过 pyinstaller -h 或者–help查看帮助</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller --<span class="hljs-built_in">help</span><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="使用pyinstaller">使用pyinstaller</h2>
 <ul>
-<li>各函数的调用总次数不超过 20000 次</li>
+<li>
+<p>打包成一个单一可执行文件</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller -F &lt;options&gt; test.py<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>打包成一个文件夹</p>
+<figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">pyinstaller --onefile/-D <span class="hljs-symbol">&lt;options&gt;</span> test.<span class="hljs-keyword">py</span> （默认）<br></code></pre></td></tr></tbody></table></figure>
+</li>
 </ul>
-<h2 id="题解">题解</h2>
-<p>emm这样子使用min函数，不太科学，时间复杂度为O(N)</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        initialize your data structure here.</span><br><span class="hljs-string">        """</span><br>        self.stack = []<br>        self.minnum = sys.maxsize <span class="hljs-comment">#float("inf")</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">push</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        <span class="hljs-keyword">if</span>(self.minnum&gt;x): self.minnum = x<br>        self.stack.append(x)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pop</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        item = self.top()<br>        self.stack.pop()<br>        <span class="hljs-keyword">if</span>(<span class="hljs-built_in">len</span>(self.stack) == <span class="hljs-number">0</span>): <br>            self.minnum = sys.maxsize <span class="hljs-comment">#float("inf")</span><br>        <span class="hljs-keyword">elif</span>(item==self.minnum):<br>            self.minnum = <span class="hljs-built_in">min</span>(self.stack)<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.stack[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">min</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.minnum<br><br><span class="hljs-comment"># Your MinStack object will be instantiated and called as such:</span><br><span class="hljs-comment"># obj = MinStack()</span><br><span class="hljs-comment"># obj.push(x)</span><br><span class="hljs-comment"># obj.pop()</span><br><span class="hljs-comment"># param_3 = obj.top()</span><br><span class="hljs-comment"># param_4 = obj.min()</span><br></code></pre></td></tr></tbody></table></figure>
-<p>-实际上应该创建两个栈，一个作为普通的栈A记录数据，另一个B用于辅助栈min的实现；使得A中的最小元素始终对应于B的栈顶元素。<strong>栈B的主要目的是记录最小值，所以不一定是需要所有完整的数据。</strong></p>
+<p>默认情况下打包会在当前目录下生成dist和build文件夹以及.spec文件，dist中即打包出来的可执行文件目录，build文件夹下为构建过程临时文件目录，.spec为打包的配置文件。</p>
+<h3 id="各自的优缺点">各自的优缺点</h3>
 <ul>
-<li>在调用push函数时，注意要维护好栈B，也就是说判断x时小于等于栈顶元素，才压入栈B；</li>
-<li>在调用pop函数时，要保持A，B元素的一致性，在A中pop的元素是B的栈顶元素就要同步删除掉栈B的栈顶元素；</li>
+<li>
+<p>启动时间</p>
+<p>单一可执行文件比文件夹的启动时间要长很多，因为当程序运行时，单一的可执行文件需要解压程序的第三方依赖文件到临时文件夹，会耗费一定的不必要时间。</p>
+</li>
+<li>
+<p>文件结构</p>
+<p>单一可执行文件的文件结构和工程目录是一样的，其路径与工程目录的效果是一样的，但是生成文件夹就不一样了，若程序中包含相对路径，这个相对路径是基于该文件夹目录的。</p>
+</li>
 </ul>
-<p>这种方式可以保证在删除掉A和B的栈顶元素（最小值）之后，B的栈顶元素依然还是A的最小值。</p>
-<p>嗯厉害~ o(<em>￣▽￣</em>)o</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MinStack</span>:</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        initialize your data structure here.</span><br><span class="hljs-string">        """</span><br>        self.A,self.B = [],[]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">push</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:</span><br>		self.A.append(x)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self.B <span class="hljs-keyword">or</span> self.B[-<span class="hljs-number">1</span>]&gt;=x: <span class="hljs-comment">#注意是大于等于，因为需要记录避免后续弹出导致元素不同步</span><br>            self.B.append(x)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pop</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>		<span class="hljs-keyword">if</span>(self.A.pop() == self.B[-<span class="hljs-number">1</span>]): <span class="hljs-comment">#如果是相同元素就注意同步删除</span><br>            self.B.pop()<br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">top</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.A[-<span class="hljs-number">1</span>]<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">min</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">return</span> self.B[-<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="spec文件">spec文件</h2>
+<p>.spec文件类似于cmake的.makefile文件，都是用于<code>控制编译构建过程</code>的配置文件。正常使用实际上不需要管spec文件的，但是下面几种情况需要修改spec文件：</p>
+<ul>
+<li>
+<p>需要打包资源文件</p>
+</li>
+<li>
+<p>需要include一些pyinstaller不知道的run-time库</p>
+</li>
+<li>
+<p>为可执行文件添加run-time选项</p>
+</li>
+<li>
+<p>多程序打包</p>
+</li>
+</ul>
+<p>后面可以直接通过.spec文件来打包</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller &lt;options&gt; test.spec<br></code></pre></td></tr></tbody></table></figure>
+<p>当通过spec文件来生成app文件时只有下面参数是有用的：</p>
+<ul>
+<li><code>-upx-dir</code>  Path to UPX utility (default: search the execution path)</li>
+<li><code>-distpath</code>   Where to put the bundled app (default: .\dist)</li>
+<li><code>-y –noconfirm</code>  Replace output directory (default: SPECPATH\dist\SPECNAME) without asking for confirmation</li>
+<li><code>-a –ascii</code> Do not include unicode encoding support (default: included if available)</li>
+</ul>
 
             </div>
             <hr>
@@ -317,9 +409,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+                      <a class="hover-with-bg" href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%A0%88/">栈</a>
+                      <a class="hover-with-bg" href="/categories/%E5%B7%A5%E5%85%B7/pyinstaller/">pyinstaller</a>
                     
                   </div>
                 
@@ -327,9 +419,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
-                    
-                      <a class="hover-with-bg" href="/tags/%E6%A0%88/">栈</a>
+                      <a class="hover-with-bg" href="/tags/%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/">项目打包</a>
                     
                   </div>
                 
@@ -346,9 +436,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/26/project_tool/pyinstaller/">
+                      <a href="/2021/09/28/project_tool/spec/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">pyinstaller打包exe</span>
+                        <span class="hidden-mobile">利用spec文件打包</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -356,8 +446,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/09/16/leetcode/leetcode-offer35/">
-                        <span class="hidden-mobile">剑指offer35 复杂链表的复制</span>
+                      <a href="/2021/09/17/leetcode/leetcode-offer30/">
+                        <span class="hidden-mobile">剑指offer30 包含min函数的栈</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -379,8 +469,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/09/17/leetcode/leetcode-offer30/';
-          this.page.identifier = '/2021/09/17/leetcode/leetcode-offer30/';
+          this.page.url = 'https://fanmeilin.github.io/2021/09/26/project_tool/pyinstaller/';
+          this.page.identifier = '/2021/09/26/project_tool/pyinstaller/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

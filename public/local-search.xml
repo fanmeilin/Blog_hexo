@@ -4,16 +4,43 @@
   
   
   <entry>
+    <title>利用spec文件打包</title>
+    <link href="/2021/09/28/project_tool/spec/"/>
+    <url>/2021/09/28/project_tool/spec/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>pyinstaller打包方式一般可以分为<strong>直接输入指令</strong>和<strong>利用spec文件</strong>进行打包两种方式，直接输入指令就是根据指令生成spec文件，再根据spec文件的内容进行打包操作，因此spec文件就是核心部分，在此对其内容的相关配置进行归纳。</p></blockquote><p>spec文件参数：a，pyz，exe，coll，block_cipher;</p><table><thead><tr><th style="text-align:center">变量</th><th style="text-align:left">含义</th></tr></thead><tbody><tr><td style="text-align:center">a</td><td style="text-align:left">Analysis类的实例,要求传入各种脚本用于分析程序的导入和依赖，a中的内容主要包括四部分：scripts：可以在命令行中输入的python脚本；pure，程序代码文件中的纯python模块；binaries：程序代码文件中需要的非python模块，包括add-binary参数指定的内容；datas：非二进制文件，包括add-data参数指定的内容</td></tr><tr><td style="text-align:center">pyz</td><td style="text-align:left">pyz的实例，是一个.pyz文件，包含了所有pure的所有python模块</td></tr><tr><td style="text-align:center">exe</td><td style="text-align:left">exe类的实例，这个类是用来处理Analysis和PYZ的结果。也是用来生成最后的exe可执行程序</td></tr><tr><td style="text-align:center">coll</td><td style="text-align:left">collect类的实例，用于创建输出目录，在-F模式（单一exe程序）下，是没有collect实例的，并且所有脚本，模块和二进制文件都包含在最终生成的exe文件中</td></tr><tr><td style="text-align:center">block_cipher</td><td style="text-align:left">加密密钥</td></tr></tbody></table>]]></content>
+    
+    
+    <categories>
+      
+      <category>工具</category>
+      
+      <category>pyinstaller</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>项目打包</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>pyinstaller打包exe</title>
-    <link href="/2021/09/26/config/pyinstaller/"/>
-    <url>/2021/09/26/config/pyinstaller/</url>
+    <link href="/2021/09/26/project_tool/pyinstaller/"/>
+    <url>/2021/09/26/project_tool/pyinstaller/</url>
     
     <content type="html"><![CDATA[<blockquote><p>pyinstaller的作用是可以将python应用程序打包为独立的可执行文件，相对与同类工具而言，其优势在于可以和python配合使用，构建较小的可执行文件并且完全多平台，完全兼容性。</p></blockquote><blockquote><p>pyinstaller的主要目标是与第三方软件包兼容，因此在使用pyinstaller会将所有的外部包继承在pyinstaller本身中。</p></blockquote><h2 id="安装">安装</h2><p>直接从pypi安装pyinstaller：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pip install pyinstaller<br></code></pre></td></tr></tbody></table></figure><p>然后在自己的程序目录中运行</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller yourprogram.py<br></code></pre></td></tr></tbody></table></figure><p>就会生成dist文件夹，在dist文件夹下可以找到对应的exe文件。</p><h2 id="命令选项说明">命令选项说明</h2><p>PyInstaller 支持如表所示的常用选项。</p><table><thead><tr><th style="text-align:center">选项</th><th style="text-align:center">含义</th></tr></thead><tbody><tr><td style="text-align:center">-h，–help</td><td style="text-align:center">查看该模块的帮助信息</td></tr><tr><td style="text-align:center">-F，-onefile</td><td style="text-align:center">产生单个的可执行文件</td></tr><tr><td style="text-align:center">-D，–onedir</td><td style="text-align:center">产生一个目录（包含多个文件）作为可执行程序（默认）</td></tr><tr><td style="text-align:center">-a，–ascii</td><td style="text-align:center">不包含 Unicode 字符集支持</td></tr><tr><td style="text-align:center">-d，–debug</td><td style="text-align:center">产生 debug 版本的可执行文件</td></tr><tr><td style="text-align:center">-w，–windowed，–noconsolc</td><td style="text-align:center">指定程序运行时不显示命令行窗口（仅对 Windows 有效）</td></tr><tr><td style="text-align:center">-c，–nowindowed，–console</td><td style="text-align:center">指定使用命令行窗口运行程序（仅对 Windows 有效）</td></tr><tr><td style="text-align:center">-o DIR，–out=DIR</td><td style="text-align:center">指定 spec 文件的生成目录。如果没有指定，则默认使用当前目录来生成 spec 文件</td></tr><tr><td style="text-align:center">-p DIR，–path=DIR</td><td style="text-align:center">设置 Python 导入模块的路径（和设置 PYTHONPATH 环境变量的作用相似）。也可使用路径分隔符（Windows 使用分号，Linux 使用冒号）来分隔多个路径</td></tr><tr><td style="text-align:center">-n NAME，–name=NAME</td><td style="text-align:center">指定项目（产生的 spec）名字。如果省略该选项，那么第一个脚本的主文件名将作为 spec 的名字</td></tr></tbody></table><p>在此表列出的只是 PyInstaller 模块所支持的常用选项，如果需要了解 PyInstaller 选项的详细信息，则可通过 pyinstaller -h 或者–help查看帮助</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller --<span class="hljs-built_in">help</span><br></code></pre></td></tr></tbody></table></figure><h2 id="使用pyinstaller">使用pyinstaller</h2><ul><li><p>打包成一个单一可执行文件</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller -F &lt;options&gt; test.py<br></code></pre></td></tr></tbody></table></figure></li><li><p>打包成一个文件夹</p><figure class="highlight vim"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim">pyinstaller --onefile/-D <span class="hljs-symbol">&lt;options&gt;</span> test.<span class="hljs-keyword">py</span> （默认）<br></code></pre></td></tr></tbody></table></figure></li></ul><p>默认情况下打包会在当前目录下生成dist和build文件夹以及.spec文件，dist中即打包出来的可执行文件目录，build文件夹下为构建过程临时文件目录，.spec为打包的配置文件。</p><h3 id="各自的优缺点">各自的优缺点</h3><ul><li><p>启动时间</p><p>单一可执行文件比文件夹的启动时间要长很多，因为当程序运行时，单一的可执行文件需要解压程序的第三方依赖文件到临时文件夹，会耗费一定的不必要时间。</p></li><li><p>文件结构</p><p>单一可执行文件的文件结构和工程目录是一样的，其路径与工程目录的效果是一样的，但是生成文件夹就不一样了，若程序中包含相对路径，这个相对路径是基于该文件夹目录的。</p></li></ul><h2 id="spec文件">spec文件</h2><p>.spec文件类似于cmake的.makefile文件，都是用于<code>控制编译构建过程</code>的配置文件。正常使用实际上不需要管spec文件的，但是下面几种情况需要修改spec文件：</p><ul><li><p>需要打包资源文件</p></li><li><p>需要include一些pyinstaller不知道的run-time库</p></li><li><p>为可执行文件添加run-time选项</p></li><li><p>多程序打包</p></li></ul><p>后面可以直接通过.spec文件来打包</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pyinstaller &lt;options&gt; test.spec<br></code></pre></td></tr></tbody></table></figure><p>当通过spec文件来生成app文件时只有下面参数是有用的：</p><ul><li><code>-upx-dir</code>  Path to UPX utility (default: search the execution path)</li><li><code>-distpath</code>   Where to put the bundled app (default: .\dist)</li><li><code>-y –noconfirm</code>  Replace output directory (default: SPECPATH\dist\SPECNAME) without asking for confirmation</li><li><code>-a –ascii</code> Do not include unicode encoding support (default: included if available)</li></ul>]]></content>
     
     
     <categories>
       
-      <category>配置</category>
+      <category>工具</category>
       
       <category>pyinstaller</category>
       
@@ -1023,9 +1050,9 @@
       
       <tag>剑指</tag>
       
-      <tag>数组</tag>
-      
       <tag>idea</tag>
+      
+      <tag>数组</tag>
       
     </tags>
     
@@ -1160,9 +1187,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组查找</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
@@ -1191,9 +1218,9 @@
       
       <tag>剑指</tag>
       
-      <tag>数组</tag>
-      
       <tag>idea</tag>
+      
+      <tag>数组</tag>
       
     </tags>
     
@@ -1504,11 +1531,11 @@
     
     <tags>
       
+      <tag>配置</tag>
+      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
-      
-      <tag>配置</tag>
       
     </tags>
     
