@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>使用python删除文件和文件夹</title>
+    <link href="/2021/10/06/python/delete-file/"/>
+    <url>/2021/10/06/python/delete-file/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>总结删除文件和文件夹的相关操作和函数。</p></blockquote><h3 id="删除单个文件">删除单个文件</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">os.remove(path)<br><span class="hljs-comment"># 如果path是一个目录，抛出OSError错误，如果文件不在或者路径错误，会抛出错误</span><br></code></pre></td></tr></tbody></table></figure><h3 id="删除文件夹">删除文件夹</h3><p>空文件夹</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">os.rmdir(dirName)<br>os.removedirs(dirName)<br><span class="hljs-comment"># 删除目录 dirName，要求dirName必须是个空目录，否则抛出OSError错误</span><br></code></pre></td></tr></tbody></table></figure><h3 id="递归删除文件夹">递归删除文件夹</h3><p>非空文件夹</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> shutil<br>shutil.rmtree()<br></code></pre></td></tr></tbody></table></figure><p>遍历一个文件夹，先删除子文件，再删除文件夹。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> os.walk(<span class="hljs-string">"filename"</span>, topdown=<span class="hljs-literal">False</span>):<br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> files:<br>        os.remove(os.path.join(root, name))<br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> dirs:<br>        os.rmdir(os.path.join(root, name))<br> <br><span class="hljs-comment"># os.walk的第一个参数是要遍历并删除子文件夹和文件的目录</span><br><span class="hljs-comment"># 上面的代码运行后，文件夹"filename"里的文件夹和文件全被删除，但是文件夹"filename"还存在</span><br><span class="hljs-comment"># 具体可以查下os.walk()的用法，以及其参数topdown的功能</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>剑指offer42 连续子数组最大和</title>
+    <link href="/2021/10/06/leetcode/leetcode-offer42/"/>
+    <url>/2021/10/06/leetcode/leetcode-offer42/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>连续子数组最大和</p></blockquote><h2 id="题目">题目</h2><p>输入一个整型数组，数组中的一个或连续多个整数组成一个子数组。求所有子数组的和的最大值。</p><p>要求时间复杂度为O(n)。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight subunit"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs subunit">输入: nums = [<span class="hljs-string">-2</span>,1,<span class="hljs-string">-3</span>,4,<span class="hljs-string">-1</span>,2,1,<span class="hljs-string">-5</span>,4]<br>输出: 6<br>解释: 连续子数组 [4,<span class="hljs-string">-1</span>,2,1] 的和最大，为 6。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= arr.length &lt;= 10^5</li><li>-100 &lt;= arr[i] &lt;= 100</li></ul><h2 id="题解">题解</h2><p>使用数组dp[i]用来表示从0到i下标元素的子数组中，包含i元素的最大和，例如：原始数列num=[-2,1,-3,4,-1,2,1,-5,4]，dp为[-2, 1, -2, 4, 3, 5, 6, 1, 5]。注意从下标1开始，dp[i] = num[i] + max(0, dp[i-1])，如果前项的最大和(相邻的子数组)对此项<strong>有增益</strong>就添加进去，否则就直接num[i]。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxSubArray</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(nums)):<br>            nums[i] += <span class="hljs-built_in">max</span>(nums[i - <span class="hljs-number">1</span>], <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(nums)<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>python将图片存进PDF中</title>
     <link href="/2021/10/06/python/FPDF/"/>
     <url>/2021/10/06/python/FPDF/</url>
@@ -12,8 +66,6 @@
     
     
     <categories>
-      
-      <category>图像处理</category>
       
       <category>python</category>
       
@@ -1585,11 +1637,11 @@
     
     <tags>
       
+      <tag>配置</tag>
+      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
-      
-      <tag>配置</tag>
       
     </tags>
     
