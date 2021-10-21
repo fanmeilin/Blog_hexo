@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer26 树的子结构 - 待时</title>
+  <title>剑指offer36 二叉搜索树和双向链表 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer26 树的子结构">
+            <span class="h2" id="subtitle" title="剑指offer36 二叉搜索树和双向链表">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-18 17:13" pubdate>
-        2021年8月18日 下午
+      <time datetime="2021-10-08 19:50" pubdate>
+        2021年10月8日 晚上
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      508 字
+      544 字
     </span>
   
 
@@ -283,52 +283,35 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer26 树的子结构</h1>
+            <h1 style="display: none">剑指offer36 二叉搜索树和双向链表</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>树的子结构</p>
+<p>二叉搜索树和双向链表</p>
 </blockquote>
 <h2 id="题目">题目</h2>
-<p>输入两棵二叉树A和B，判断B是不是A的子结构。(约定空树不是任意一个树的子结构)<br>
-B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
-<p>例如:<br>
-给定的树 A:</p>
-<p>3<br>
-&nbsp; &nbsp; / <br>
-&nbsp; &nbsp;4 &nbsp; 5<br>
-&nbsp; / <br>
-&nbsp;1 &nbsp; 2<br>
-给定的树 B：</p>
-<p>4&nbsp;<br>
-&nbsp; /<br>
-&nbsp;1<br>
-返回 true，因为 B 与 A 的一个子树拥有相同的结构和节点值。</p>
-<h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="示例-2：">示例 2：</h3>
-<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">A</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">B</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>]<br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure>
+<p>输入一棵二叉搜索树，将该二叉搜索树转换成一个排序的循环双向链表。要求不能创建任何新的节点，只能调整树中节点指针的指向<br>
+为了让您更好地理解问题，以下面的二叉搜索树为例：</p>
+<p><img src="https://picture.mulindya.com/leetcode-offer36-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>我们希望将这个二叉搜索树转化为双向循环链表。链表中的每个节点都有一个前驱和后继指针。对于双向循环链表，第一个节点的前驱是最后一个节点，最后一个节点的后继是第一个节点。</p>
+<p>下图展示了上面的二叉搜索树转化成的链表。“head” 表示指向链表中有最小元素的节点。</p>
+<p><img src="https://picture.mulindya.com/leetcode-offer36-2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>特别地，我们希望可以就地完成转换操作。当转化完成以后，树中节点的左指针需要指向前驱，树中节点的右指针需要指向后继。还需要返回链表中的第一个节点的指针。</p>
 <h3 id="提示：">提示：</h3>
 <ul>
-<li>0 &lt;= 节点个数 &lt;= 10000</li>
+<li>
+<p>注意：本题与主站 426 题相同：<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/">https://leetcode-cn.com/problems/convert-binary-search-tree-to-sorted-doubly-linked-list/</a></p>
+</li>
+<li>
+<p>注意：此题对比原题有改动。</p>
+</li>
 </ul>
 <h2 id="题解">题解</h2>
-<p>python代码真的！好！简洁！</p>
-<p><code>isSubStructure</code>的作用是先序查找A，B的匹配情况。而在内部会对匹配的<code>judgechildren(A,B)</code>进行判断，查看是否为其子结构。</p>
-<p>如果B为空了则表示匹配成功。如果根节点不匹配或者A为空了就直接返回失败。如果可以继续判断，就继续判断对应的左右子树。</p>
-<p><code>(judgechildren(A,B) or self.isSubStructure(A.left,B) or self.isSubStructure(A.right,B))</code> 判断AB两子树；先序判断左右子树，<code>注意这里是self.isSubStructure</code>进行递归哦~~</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isSubStructure</span>(<span class="hljs-params">self, A: TreeNode, B: TreeNode</span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">judgechildren</span>(<span class="hljs-params">A,B</span>):</span> <span class="hljs-comment">#判断以AB为根节点的条件下，B是否为A的子结构</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(B): <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span><br>            <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> A) <span class="hljs-keyword">or</span> (A.val!=B.val): <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>            <span class="hljs-keyword">return</span> judgechildren(A.right,B.right) <span class="hljs-keyword">and</span> judgechildren(A.left,B.left)<br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">bool</span>(A <span class="hljs-keyword">and</span> B) <span class="hljs-keyword">and</span> (judgechildren(A,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.left,B) <span class="hljs-keyword">or</span> self.isSubStructure(A.right,B))<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>bool(A and B)注意要转换为bool变量</p>
-</blockquote>
-<ul>
-<li>
-<p>时间复杂度为O(MN)</p>
-</li>
-<li>
-<p>空间复杂度 O(M)： 当树 A和树 B 都退化为链表时，递归调用深度最大。当 M≤N 时，遍历树 A 与递归判断的总递归深度为 M ；当 M&gt;N 时，最差情况为遍历至树 A叶子节点，此时总递归深度为 M。</p>
-</li>
-</ul>
+<p>本题的算法思想是在中序遍历的基础上，涉及对链表的处理，但是还是按照中序递归遍历的逻辑，使用self可以全局设置pre和head，pre是用来更新节点的左右指向，head是用于后续的头尾节点的处理，函数结束时的pre即为尾节点。</p>
+<p>中序遍历代码结构：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">root</span>):</span><br>	<span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:<br>		<span class="hljs-keyword">return</span><br>	dfs(root.left)<br>	<span class="hljs-built_in">print</span>(root)<br>	dfs(root.right)<br></code></pre></td></tr></tbody></table></figure>
+<p>注意边界条件的处理，以及self.pre和self.head的更新。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">"""</span><br><span class="hljs-string"># Definition for a Node.</span><br><span class="hljs-string">class Node:</span><br><span class="hljs-string">    def __init__(self, val, left=None, right=None):</span><br><span class="hljs-string">        self.val = val</span><br><span class="hljs-string">        self.left = left</span><br><span class="hljs-string">        self.right = right</span><br><span class="hljs-string">"""</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">treeToDoublyList</span>(<span class="hljs-params">self, root: <span class="hljs-string">'Node'</span></span>) -&gt; 'Node':</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mediumfunc</span>(<span class="hljs-params">root</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:<span class="hljs-keyword">return</span><br>            mediumfunc(root.left)<br>            <span class="hljs-keyword">if</span>(self.pre):<br>                self.pre.right = root<br>                root.left = self.pre<br>            <span class="hljs-keyword">else</span>:<br>                self.head = root<br>            self.pre = root <span class="hljs-comment">#注意在判断之后必须要更新pre</span><br>            mediumfunc(root.right)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span>(root):<br>            <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>        self.head = root<br>        self.pre = <span class="hljs-literal">None</span><br>        mediumfunc(root)<br>        self.head.left = self.pre<br>        self.pre.right = self.head<br>        <span class="hljs-keyword">return</span> self.head<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -350,8 +333,6 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
                     
                       <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/tags/idea/">idea</a>
-                    
                       <a class="hover-with-bg" href="/tags/%E6%A0%91/">树</a>
                     
                   </div>
@@ -369,9 +350,9 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/18/leetcode/leetcode-offer28/">
+                      <a href="/2021/10/20/python/cvread/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer28 对称的二叉树</span>
+                        <span class="hidden-mobile">cv读取带有中文路径的图片</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -379,8 +360,8 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/18/leetcode/leetcode-offer14-2/">
-                        <span class="hidden-mobile">剑指offer14.2 剪绳子2</span>
+                      <a href="/2021/10/08/project_tool/pipenv/">
+                        <span class="hidden-mobile">pipenv的安装和使用</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -402,8 +383,8 @@ B是A的子结构， 即 A中有出现和B相同的结构和节点值。</p>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/18/leetcode/leetcode-offer26/';
-          this.page.identifier = '/2021/08/18/leetcode/leetcode-offer26/';
+          this.page.url = 'https://fanmeilin.github.io/2021/10/08/leetcode/leetcode-offer36/';
+          this.page.identifier = '/2021/10/08/leetcode/leetcode-offer36/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

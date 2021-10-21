@@ -57,6 +57,8 @@ self.lab.setMinimumSize(img_width, img_height)
 
      scaled()是一个重载函数，按照指定的宽和高，根据给的size和aspectRatioMode从原有图像返回一个经过比例转换的图像，如果宽高为0，返回一个空图像
   所以，获取控件的改变后的宽高，就能设定图像转换的宽高转换比例，用scaled()的返回重新进行绘图即可自适应窗口。
+  
+  项目中这里使用 `Qt.IgnoreAspectRatio`
 
 ```python
 QPixmap::scaled(const QSize & size, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::FastTransformation) const
@@ -64,5 +66,12 @@ QPixmap::scaled(const QSize & size, Qt::AspectRatioMode aspectRatioMode = Qt::Ig
 IgnoreAspectRatio  #矩形框有多大，图片就缩放成多大，不限制原图片的长宽比
 KeepAspectRatio    #保持原图片的长宽比，且不超过矩形框的大小
 KeepAspectRatioByExpanding   #根据矩形框的大小最大缩放图片
+def scaled(self, *__args): # real signature unknown; restored from __doc__ with multiple overloads
+    """
+        scaled(self, int, int, aspectRatioMode: Qt.AspectRatioMode = Qt.IgnoreAspectRatio, transformMode: Qt.TransformationMode = Qt.FastTransformation) -> QPixmap
+        scaled(self, QSize, aspectRatioMode: Qt.AspectRatioMode = Qt.IgnoreAspectRatio, transformMode: Qt.TransformationMode = Qt.FastTransformation) -> QPixmap
+        """
+    return QPixmap
+
 ```
 
