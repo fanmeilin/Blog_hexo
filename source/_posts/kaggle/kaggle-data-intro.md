@@ -3,6 +3,7 @@ title: Sartorius竞赛数据说明
 tags: kaggle
 categories: kaggle
 date: 2021-10-21 17:37:18
+math: true
 ---
 
 > 数据说明

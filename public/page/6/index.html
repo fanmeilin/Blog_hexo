@@ -240,6 +240,128 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/12/deep_learning/gradient-clip/" target="_self">
+          梯度裁剪
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/12/deep_learning/gradient-clip/" target="_self">
+          
+          
+            
+          
+          
+阅读代码 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))，就此探究一下grap_clip。他的作用是梯度裁剪，为了防止梯度爆炸。其中max_norm是最大梯度阈值，norm_type是指定的范数类型。
+
+梯度爆炸
+梯度爆炸就是在梯度更新的时候偏导数很大，导致更新参数无法收敛到最值（总是跳到其他不好的地方）。
+$$
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-12 10:20" pubdate>
+              2021-08-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%A2%AF%E5%BA%A6/">深度学习，梯度</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/11/leetcode/leetcode-offer05/" target="_self">
+          剑指offer05 替换空格
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/11/leetcode/leetcode-offer05/" target="_self">
+          
+          
+            
+          
+          
+替换空格
+
+题目
+请实现一个函数，把字符串 s 中的每个空格替换成"%20"。
+示例 1：
+12输入：s = "We are happy."输出："We%20are%20happy."
+提示：
+
+0 &lt;= s 的长度 &lt;= 10000
+
+题解
+直接替换即可。相当于使用replace方法
+123456789class Solution:    def replaceSpace(self
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-11 18:36" pubdate>
+              2021-08-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+            
+              <a href="/categories/%E5%89%91%E6%8C%87/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+            
+              <a href="/tags/%E5%AD%97%E7%AC%A6%E4%B8%B2/">字符串</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/11/leetcode/leetcode-offer04/" target="_self">
           剑指offer04 二维数组中的查找
         </a>
@@ -287,9 +409,9 @@
             
               <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
             
-              <a href="/tags/%E6%95%B0%E7%BB%84%E6%9F%A5%E6%89%BE/">数组查找</a>
-            
               <a href="/tags/idea/">idea</a>
+            
+              <a href="/tags/%E6%95%B0%E7%BB%84%E6%9F%A5%E6%89%BE/">数组查找</a>
             
           </div>
         
@@ -356,9 +478,9 @@
             
               <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
             
-              <a href="/tags/idea/">idea</a>
-            
               <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
+            
+              <a href="/tags/idea/">idea</a>
             
           </div>
         
@@ -728,121 +850,6 @@ $$
               <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
             
               <a href="/tags/%E6%A0%88/">栈</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/09/math/Mahalanobis-distance/" target="_self">
-          Mahalanobis_distance
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/09/math/Mahalanobis-distance/" target="_self">
-          
-          
-            
-          
-          
-马氏距离(Mahalanobis Distance)是度量学习中一种常用的距离指标，同欧氏距离、曼哈顿距离、汉明距离等一样被用作评定数据之间的相似度指标。但却可以应对高维线性分布的数据中各维度间非独立同分布的问题。
-
-使用马氏距离，对高维非独立分布的数据进行距离度量。
-那我们为什么要用马氏距离呢？
-马氏距离有很多优点： 马氏距离不受量纲的影响，两点之间的马氏距离与原始数据的测量单位无关；由标准化
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-09 14:58" pubdate>
-              2021-08-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/math/">math</a>
-            
-              <a href="/categories/math/%E6%A6%82%E7%8E%87%E8%AE%BA/">概率论</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%A9%AC%E6%B0%8F%E8%B7%9D%E7%A6%BB/">马氏距离</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/09/math/Eckark-young/" target="_self">
-          Eckark_young定理
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/09/math/Eckark-young/" target="_self">
-          
-          
-            
-          
-          最佳低秩逼近和奇异值的关系(Eckart-Young定理)
-定理
-Suppose a matrix $A\in \mathbb{R}^{m\times n}$has an SVD-decomposition$A=U\Sigma V^T$. Let $k &lt; r= \mathsf{rank}(A)$and truncated matrix
-$$
-A_k = \sum_{i=1}^k \sigm
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-09 10:57" pubdate>
-              2021-08-09
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/math/">math</a>
-            
-              <a href="/categories/math/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/math/">math</a>
-            
-              <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
             
           </div>
         

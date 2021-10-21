@@ -3,6 +3,7 @@ title: kaggle比赛介绍--Sartorius - Cell Instance Segmentation
 tags: kaggle
 categories: kaggle
 date: 2021-10-21 16:18:08
+math: True
 ---
 
 > 最近参赛Sartorius - Cell Instance Segmentation，对竞赛题目和相关注意点进行梳理记录，以便后续回顾。
@@ -10,6 +11,8 @@ date: 2021-10-21 16:18:08
 ## 竞赛说明
 
 Sartorius - Cell Instance Segmentation，是一个有关医学图像**实例分割**的竞赛
+
+地址： https://www.kaggle.com/c/sartorius-cell-instance-segmentation/overview
 
 ### Description
 
@@ -88,7 +91,7 @@ Submission files may take several minutes to process due to the size.
 - 不同与一般的图像文件，首先需要将图片的像素点从上到下，从左到右标号为1，2，3.....,然后将图片的分割得到的像素点标识为`'起始点1 个数1 起始点2 个数2 .....'`，
 
 - 注意点是提交的预测在同一张图中预测的mask不允许有重合像素。也就是说该竞赛涉及对于不同的细胞系实例分割，并且在一张图上分割的细胞系mask，不能有交点。**训练数据中label是会出现重叠部分的，在预测的结果中需要消除预测重叠部分。**
-    
+  
     > Note: while predictions are not allowed to overlap, the training labels are provided in full (with overlapping portions included). This is to ensure that models are provided the full data for each object. Removing overlap in predictions is a task for the competitor.
 
 ##### attention（待尝试）
