@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      557 字
+      612 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      8
        分钟
     </span>
   
@@ -311,9 +311,10 @@
 <p>我们通常会使用Qt自带的scaled()函数；QImage、QPixmap等绘图设备类都提供scaled()函数。</p>
 <p>scaled()是一个重载函数，按照指定的宽和高，根据给的size和aspectRatioMode从原有图像返回一个经过比例转换的图像，如果宽高为0，返回一个空图像<br>
 所以，获取控件的改变后的宽高，就能设定图像转换的宽高转换比例，用scaled()的返回重新进行绘图即可自适应窗口。</p>
+<p>项目中这里使用 <code>Qt.IgnoreAspectRatio</code></p>
 </li>
 </ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">QPixmap::scaled(const QSize &amp; size, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::FastTransformation) const<br>其中aspectRatioMode<br>IgnoreAspectRatio  <span class="hljs-comment">#矩形框有多大，图片就缩放成多大，不限制原图片的长宽比</span><br>KeepAspectRatio    <span class="hljs-comment">#保持原图片的长宽比，且不超过矩形框的大小</span><br>KeepAspectRatioByExpanding   <span class="hljs-comment">#根据矩形框的大小最大缩放图片</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">QPixmap::scaled(const QSize &amp; size, Qt::AspectRatioMode aspectRatioMode = Qt::IgnoreAspectRatio, Qt::TransformationMode transformMode = Qt::FastTransformation) const<br>其中aspectRatioMode<br>IgnoreAspectRatio  <span class="hljs-comment">#矩形框有多大，图片就缩放成多大，不限制原图片的长宽比</span><br>KeepAspectRatio    <span class="hljs-comment">#保持原图片的长宽比，且不超过矩形框的大小</span><br>KeepAspectRatioByExpanding   <span class="hljs-comment">#根据矩形框的大小最大缩放图片</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">scaled</span>(<span class="hljs-params">self, *__args</span>):</span> <span class="hljs-comment"># real signature unknown; restored from __doc__ with multiple overloads</span><br>    <span class="hljs-string">"""</span><br><span class="hljs-string">        scaled(self, int, int, aspectRatioMode: Qt.AspectRatioMode = Qt.IgnoreAspectRatio, transformMode: Qt.TransformationMode = Qt.FastTransformation) -&gt; QPixmap</span><br><span class="hljs-string">        scaled(self, QSize, aspectRatioMode: Qt.AspectRatioMode = Qt.IgnoreAspectRatio, transformMode: Qt.TransformationMode = Qt.FastTransformation) -&gt; QPixmap</span><br><span class="hljs-string">        """</span><br>    <span class="hljs-keyword">return</span> QPixmap<br><br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
