@@ -291,6 +291,7 @@
 </blockquote>
 <h2 id="竞赛说明">竞赛说明</h2>
 <p>Sartorius - Cell Instance Segmentation，是一个有关医学图像<strong>实例分割</strong>的竞赛</p>
+<p>地址： <a target="_blank" rel="noopener" href="https://www.kaggle.com/c/sartorius-cell-instance-segmentation/overview">https://www.kaggle.com/c/sartorius-cell-instance-segmentation/overview</a></p>
 <h3 id="Description">Description</h3>
 <p>Neurological disorders, including neurodegenerative diseases such as Alzheimer’s and brain tumors, are a leading cause of death and disability across the globe. However, it is hard to quantify how well these deadly disorders respond to treatment. <strong>One accepted method is to review neuronal cells via light microscopy,</strong> which is both accessible and non-invasive. Unfortunately, <strong>segmenting individual neuronal cells</strong> in microscopic images can be challenging and time-intensive. Accurate instance segmentation of these cells—with the help of computer vision—could lead to new and effective drug discoveries to treat the millions of people with these disorders.</p>
 <p><img src="https://storage.googleapis.com/kaggle-media/competitions/Sartorius/Sartorius_Competition%20Description%20Image%20350x379.png" srcset="/img/loading.gif" lazyload alt="img"></p>
@@ -636,6 +637,45 @@ Dectron2: <a target="_blank" rel="noopener" href="https://github.com/facebookres
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
 
 
 
