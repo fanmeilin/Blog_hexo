@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>hexo中公式显示 - 待时</title>
+  <title>获得电脑的ppi - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="hexo中公式显示">
+            <span class="h2" id="subtitle" title="获得电脑的ppi">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-05 20:38" pubdate>
-        2021年8月5日 晚上
+      <time datetime="2021-10-26 14:02" pubdate>
+        2021年10月26日 下午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      721 字
+      785 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      10
+      11
        分钟
     </span>
   
@@ -283,66 +283,28 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">hexo中公式显示</h1>
+            <h1 style="display: none">获得电脑的ppi</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>公式的显示问题。Hexo中Mathjax是用于显示公式的插件，但是多行显示会出现问题，有时还会出现乱码的情况。</p>
+<p>获取电脑的分辨率，物理尺寸，PPI<br>
+首先介绍一下PPI和DPI：<br>
+PPI（Pixels Per Inch）每一英寸长度上有多少像素点；计算方式可以使用像素点除以屏幕尺寸。<br>
+分辨率DPI（Dots Per Inch）每一英寸有多少点，这里的点是可以改变的，可以是 1Dot = 1Pixel，也可以是 1Dot = N Pixel。在电脑里，分辩率是可以调节的，这里用的就是Dot ，密度用DPI描述；只有当使用屏幕最大分辩率的时候（即 1Dot = 1Pixel），这个时候 DPI = PPI。</p>
 </blockquote>
-<h3 id="配置">配置</h3>
-<p>在根目录下的config_fluid.yml​文件中打开math的相关配置。</p>
-<figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs yaml"><span class="hljs-comment"># 数学公式，开启之前需要更换 Markdown 渲染器，否则复杂公式会有兼容问题，具体请见：https://hexo.fluid-dev.com/docs/guide/##latex-数学公式</span><br><span class="hljs-comment"># Mathematical formula. If enable, you need to change the Markdown renderer, see: https://hexo.fluid-dev.com/docs/en/guide/#math</span><br><span class="hljs-attr">math:</span><br>  <span class="hljs-comment"># 开启后文章默认可用，自定义页面如需使用，需在 Front-matter 中指定 `math: true`</span><br>  <span class="hljs-comment"># If you want to use math on the custom page, you need to set `math: true` in Front-matter</span><br>  <span class="hljs-attr">enable:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-comment"># 开启后，只有在文章 Front-matter 里指定 `math: true` 才会在文章页启动公式转换，以便在页面不包含公式时提高加载速度</span><br>  <span class="hljs-comment"># If true, only set `math: true` in Front-matter will enable math, to load faster when the page does not contain math</span><br>  <span class="hljs-attr">specific:</span> <span class="hljs-literal">true</span><br><br>  <span class="hljs-comment"># Options: mathjax | katex</span><br>  <span class="hljs-attr">engine:</span> <span class="hljs-string">mathjax</span><br><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="出现的问题">出现的问题</h3>
-<h4 id="问题1">问题1</h4>
+<p>搜集了很多代码和方法，最后找到一个比较精准的方法是使用Tkinter。</p>
 <ul>
-<li>由于hexo解码时关注，%% 等连续字符，会将这部分代码解读为其他带有特殊含义的内容</li>
-<li>如果公式中恰巧出现了此类字符，会报出上述错误</li>
+<li>可以得到显示屏的尺寸，获取以毫米为单位宽高（winfo_screenmmheight()，winfo_screenmmwidth()），获取显示屏的pixels数目（winfo_screenheight()，winfo_screenwidth()）。</li>
 </ul>
-<h4 id="问题2">问题2</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># tk获取屏幕的分辨率和尺寸</span><br><span class="hljs-keyword">from</span> tkinter <span class="hljs-keyword">import</span> Tk<br><span class="hljs-comment"># creating tkinter window</span><br>base = Tk()<br><span class="hljs-comment">#screen's length and width in pixels and mm</span><br>length_1= base.winfo_screenheight()<br>width_1= base.winfo_screenwidth()<br>length_2 = base.winfo_screenmmheight()<br>width_2 = base.winfo_screenmmwidth()<br><span class="hljs-comment">#screen Depth</span><br>screendepth = base.winfo_screendepth()<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"width x length (in pixels) ="</span>,(width_1,length_1))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"width x length (in mm) ="</span>, (width_2, length_2))<br>width_ppn = width_1/width_2<br>length_ppn = length_1/length_2<br>ppn = <span class="hljs-built_in">round</span>((width_ppn+length_ppn)/<span class="hljs-number">2</span>,<span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(width_1/width_2,length_1/length_2,ppn)<br><br></code></pre></td></tr></tbody></table></figure>
 <ul>
-<li>由于hexo在公式中的<code>\\</code>错会成了转义符，也就是说他只看见了一个反斜杠，不会执行换行命令，导致公式堆成一行</li>
+<li>使用win32库中的分辨率方法win32print.GetDeviceCaps()，缩放后的分辨率GetSystemMetrics。</li>
 </ul>
-<h3 id="解决方案">解决方案</h3>
-<h4 id="临时方案">临时方案</h4>
-<h5 id="针对问题1">针对问题1</h5>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## 获取分辨率</span><br><span class="hljs-keyword">from</span> win32 <span class="hljs-keyword">import</span> win32api, win32gui, win32print<br><span class="hljs-keyword">from</span> win32.lib <span class="hljs-keyword">import</span> win32con<br><br><span class="hljs-keyword">from</span> win32.win32api <span class="hljs-keyword">import</span> GetSystemMetrics<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_real_resolution</span>():</span><br>    <span class="hljs-string">"""获取真实的分辨率"""</span><br>    hDC = win32gui.GetDC(<span class="hljs-number">0</span>)<br>    <span class="hljs-comment"># 横向分辨率</span><br>    w = win32print.GetDeviceCaps(hDC, win32con.DESKTOPHORZRES)<br>    <span class="hljs-comment"># 纵向分辨率</span><br>    h = win32print.GetDeviceCaps(hDC, win32con.DESKTOPVERTRES)<br>    <span class="hljs-keyword">return</span> w, h<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">get_screen_size</span>():</span><br>    <span class="hljs-string">"""获取缩放后的分辨率"""</span><br>    w = GetSystemMetrics (<span class="hljs-number">0</span>)<br>    h = GetSystemMetrics (<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> w, h<br><br>real_resolution = get_real_resolution()<br>screen_size = get_screen_size()<br><span class="hljs-built_in">print</span>(real_resolution)<br><span class="hljs-built_in">print</span>(screen_size)<br><br>screen_scale_rate = <span class="hljs-built_in">round</span>(real_resolution[<span class="hljs-number">0</span>] / screen_size[<span class="hljs-number">0</span>], <span class="hljs-number">2</span>)<br><span class="hljs-built_in">print</span>(screen_scale_rate)<br></code></pre></td></tr></tbody></table></figure>
 <ul>
-<li>可以在连续的 <code>{</code> <code>}</code> <code>%</code>中间插入空格，分开就没事了</li>
+<li>多屏的分辨率获取的方法。</li>
 </ul>
-<h5 id="针对问题2">针对问题2</h5>
-<ul>
-<li>可以将<code>\\</code>换成<code>\\\\</code>，可以实现公式的多行正确显示</li>
-</ul>
-<h4 id="终极方案">终极方案</h4>
-<ul>
-<li>
-<p>在官方文档中提到了可以为hexo提供标记，阻止其按照自己的规则解释我们的字符串，显示其原本的含义</p>
-</li>
-<li>
-<p>标记为</p>
-<figure class="highlight django"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs django"><span class="hljs-template-tag">{% <span class="hljs-name">raw</span> %}</span><span class="xml"></span><br><span class="xml">$$</span><br><span class="xml">...</span><br><span class="xml">$$</span><br><span class="xml"></span><span class="hljs-template-tag">{% <span class="hljs-name">endraw</span> %}</span><br></code></pre></td></tr></tbody></table></figure>
-</li>
-</ul>
-<h3 id="多行显示和对齐">多行显示和对齐</h3>
-<ul>
-<li>
-<p>默认是显示为一行要实现公式多行和对齐可以使用{aligned}模式，使用"&amp;“来标记对齐位置。”\\"表示换行</p>
-  <figure class="highlight taggerscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">$$<br><span class="hljs-symbol">\b</span>egin{aligned}<br><span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}C<span class="hljs-symbol">\b</span>oldsymbol{x}	&amp;=<span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\r</span>ight]<span class="hljs-symbol">\b</span>oldsymbol{x} 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\b</span>oldsymbol{x}^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight] 	<span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft[<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight)<span class="hljs-symbol">\r</span>ight] 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\m</span>athrm{E}<span class="hljs-symbol">\l</span>eft(<span class="hljs-symbol">\l</span>eft<span class="hljs-symbol">\V</span>ert <span class="hljs-symbol">\l</span>eft(X-<span class="hljs-symbol">\m</span>u<span class="hljs-symbol">\r</span>ight)^{<span class="hljs-symbol">\m</span>athrm{T}}<span class="hljs-symbol">\b</span>oldsymbol{x}<span class="hljs-symbol">\r</span>ight<span class="hljs-symbol">\V</span>ert ^{2}<span class="hljs-symbol">\r</span>ight) 	<br><span class="hljs-symbol">\\</span>&amp;=<span class="hljs-symbol">\s</span>igma_{X}^{2}<br><span class="hljs-symbol">\e</span>nd{aligned}<br>$$<br></code></pre></td></tr></tbody></table></figure>
-</li>
-<li>
-<p>显示为</p>
-</li>
-</ul>
-
-$$
-\begin{aligned}
-\boldsymbol{x}^{\mathrm{T}}C\boldsymbol{x}	&amp;=\boldsymbol{x}^{\mathrm{T}}\mathrm{E}\left[\left(X-\mu\right)\left(X-\mu\right)^{\mathrm{T}}\right]\boldsymbol{x} 	
-\\&amp;=\mathrm{E}\left[\boldsymbol{x}^{\mathrm{T}}\left(X-\mu\right)\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right] 	\\&amp;=\mathrm{E}\left[\left(\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right)^{\mathrm{T}}\left(\left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right)\right] 	
-\\&amp;=\mathrm{E}\left(\left\Vert \left(X-\mu\right)^{\mathrm{T}}\boldsymbol{x}\right\Vert ^{2}\right) 	
-\\&amp;=\sigma_{X}^{2}
-\end{aligned}
-$$
-
-
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#屏幕的尺寸</span><br><span class="hljs-comment"># -*- coding: utf-8 -*-</span><br><span class="hljs-string">"""</span><br><span class="hljs-string">功能：识别两块显示器各自的分辨率</span><br><span class="hljs-string">"""</span><br><span class="hljs-string">"""模块导入"""</span><br><span class="hljs-keyword">from</span> win32api <span class="hljs-keyword">import</span> GetSystemMetrics<br><span class="hljs-keyword">from</span> win32con <span class="hljs-keyword">import</span> SM_CMONITORS, SM_CXVIRTUALSCREEN, SM_CYVIRTUALSCREEN<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">Display_Detection</span>():</span><br>    <span class="hljs-comment"># 显示器数量检测</span><br>    MonitorNumber = GetSystemMetrics(SM_CMONITORS)<br>    <span class="hljs-comment"># 主屏幕尺寸检测</span><br>    MajorScreenWidth = GetSystemMetrics(<span class="hljs-number">0</span>)  <span class="hljs-comment"># 主屏幕宽</span><br>    MajorScreenHeight = GetSystemMetrics(<span class="hljs-number">1</span>)  <span class="hljs-comment"># 主屏幕高</span><br>    <span class="hljs-comment"># print("主屏幕尺寸：", GetSystemMetrics(0), "*", GetSystemMetrics(1))</span><br>    <span class="hljs-comment"># 屏幕最大尺寸</span><br>    aScreenWidth = GetSystemMetrics(SM_CXVIRTUALSCREEN)  <span class="hljs-comment"># 屏幕最大宽度</span><br>    aScreenHeight = GetSystemMetrics(SM_CYVIRTUALSCREEN)  <span class="hljs-comment"># 屏幕最大高度</span><br>    AllScreen=(aScreenWidth, aScreenHeight)<br>    <span class="hljs-comment"># print("屏幕总尺寸:", aScreenWidth, "*", aScreenHeight)</span><br>    <span class="hljs-comment"># 当前主流的分辨率基数是宽，偶数是高</span><br>    ResolvingPower = [<span class="hljs-number">1280</span>, <span class="hljs-number">720</span>, <span class="hljs-number">1920</span>, <span class="hljs-number">1080</span>, <span class="hljs-number">2560</span>, <span class="hljs-number">1440</span>, <span class="hljs-number">3840</span>, <span class="hljs-number">2160</span>, <span class="hljs-number">4096</span>, <span class="hljs-number">2160</span>, <span class="hljs-number">7680</span>, <span class="hljs-number">4320</span>]<br><br>    <span class="hljs-keyword">if</span> MonitorNumber &gt; <span class="hljs-number">1</span>:  <span class="hljs-comment"># 屏幕数量判断print(MonitorNumber)就可以知道有多少块屏幕</span><br>        SecondaryScreenWidth = aScreenWidth - MajorScreenWidth  <span class="hljs-comment"># 副屏宽=总屏幕宽-当前屏幕宽</span><br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"副屏宽"</span>,SecondaryScreenWidth)<br><br>        <span class="hljs-comment"># 主屏横竖屏检测</span><br>        <span class="hljs-keyword">if</span> GetSystemMetrics(<span class="hljs-number">0</span>) &gt; GetSystemMetrics(<span class="hljs-number">1</span>):<br>            MianScreen = (GetSystemMetrics(<span class="hljs-number">0</span>), GetSystemMetrics(<span class="hljs-number">1</span>))<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"主屏(横屏)尺寸："</span>, GetSystemMetrics(<span class="hljs-number">0</span>), <span class="hljs-string">"*"</span>, GetSystemMetrics(<span class="hljs-number">1</span>))<br>        <span class="hljs-keyword">else</span>:<br>            MianScreen = (GetSystemMetrics(<span class="hljs-number">0</span>), GetSystemMetrics(<span class="hljs-number">1</span>))<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"主屏(竖屏)尺寸："</span>, GetSystemMetrics(<span class="hljs-number">0</span>), <span class="hljs-string">"*"</span>, GetSystemMetrics(<span class="hljs-number">1</span>))<br><br>        <span class="hljs-comment"># 横屏状态</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(ResolvingPower) - <span class="hljs-number">1</span>, <span class="hljs-number">2</span>):<br>            <span class="hljs-comment"># print("i",ResolvingPower[i])</span><br>            <span class="hljs-keyword">if</span> SecondaryScreenWidth == ResolvingPower[i]:<br>                SecondaryScreen = (ResolvingPower[i], ResolvingPower[i + <span class="hljs-number">1</span>])<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">"副屏(横屏)尺寸："</span>, ResolvingPower[i], ResolvingPower[i + <span class="hljs-number">1</span>])<br>                <span class="hljs-comment"># return "副屏(竖屏)尺寸：",SecondaryScreen</span><br>                <span class="hljs-keyword">break</span><br>        <span class="hljs-comment"># 竖屏状态</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-built_in">len</span>(ResolvingPower) - <span class="hljs-number">1</span>, <span class="hljs-number">2</span>):<br>            <span class="hljs-comment"># print("i",ResolvingPower[i])</span><br>            <span class="hljs-keyword">if</span> SecondaryScreenWidth == ResolvingPower[i]:<br>                SecondaryScreen = (ResolvingPower[i], ResolvingPower[i + <span class="hljs-number">1</span>])<br>                <span class="hljs-built_in">print</span>(<span class="hljs-string">"副屏(竖屏)尺寸："</span>, ResolvingPower[i], ResolvingPower[i - <span class="hljs-number">1</span>])<br>                <span class="hljs-comment"># return "副屏(竖屏)尺寸",SecondaryScreen</span><br>                <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> MonitorNumber,AllScreen,MianScreen,SecondaryScreen<br><br><span class="hljs-comment">#调用</span><br>a=Display_Detection()<br><span class="hljs-built_in">print</span>(a)<span class="hljs-comment">#a可以任意遍历其中的内容a[0]代表屏幕数量等等...</span><br><br>主屏(横屏)尺寸： <span class="hljs-number">1920</span> * <span class="hljs-number">1080</span><br>副屏(竖屏)尺寸： <span class="hljs-number">1440</span> <span class="hljs-number">2560</span><br>(<span class="hljs-number">2</span>, (<span class="hljs-number">3360</span>, <span class="hljs-number">1080</span>), (<span class="hljs-number">1920</span>, <span class="hljs-number">1080</span>), (<span class="hljs-number">1440</span>, <span class="hljs-number">3840</span>))<br></code></pre></td></tr></tbody></table></figure>
             </div>
             <hr>
             <div>
@@ -351,9 +313,7 @@ $$
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E9%85%8D%E7%BD%AE/">配置</a>
-                    
-                      <a class="hover-with-bg" href="/categories/%E9%85%8D%E7%BD%AE/hexo/">hexo</a>
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
                     
                   </div>
                 
@@ -361,11 +321,7 @@ $$
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
-                    
-                      <a class="hover-with-bg" href="/tags/hexo/">hexo</a>
-                    
-                      <a class="hover-with-bg" href="/tags/fluid/">fluid</a>
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
                     
                   </div>
                 
@@ -382,18 +338,12 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/06/config/git-submodule/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">子模块为空的解决方案</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/05/math/covariance-matrix/">
-                        <span class="hidden-mobile">直观理解协方差矩阵</span>
+                      <a href="/2021/10/21/kaggle/kaggle-data-intro/">
+                        <span class="hidden-mobile">Sartorius竞赛数据说明</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -415,8 +365,8 @@ $$
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/05/config/hexo-math-config/';
-          this.page.identifier = '/2021/08/05/config/hexo-math-config/';
+          this.page.url = 'https://fanmeilin.github.io/2021/10/26/python/getppi/';
+          this.page.identifier = '/2021/10/26/python/getppi/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -594,45 +544,6 @@ $$
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 
