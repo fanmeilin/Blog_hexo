@@ -80,7 +80,7 @@ VideoWriter(filename, fourcc, fps, frameSize[, isColor]) -> <VideoWriter object>
 
 ## 实现代码
 
-flv2jpg.py:切分视频，按照指定帧频率保存图片。
+`flv2jpg.py`:切分视频，按照指定帧频率保存图片。
 
 ```python
 import cv2
@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
 ```
 
-main.py ：保存处理后的视频
+`main.py` ：保存处理后的视频
 
 ```python
 from flv2jpg import flv2jpg
