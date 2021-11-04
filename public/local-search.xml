@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指offer39 数组中出现次数超过一半的数字</title>
+    <link href="/2021/11/04/leetcode/leetcode-offer39/"/>
+    <url>/2021/11/04/leetcode/leetcode-offer39/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>数组中出现次数超过一半的数字</p></blockquote><h2 id="题目">题目</h2><p>数组中有一个数字出现的次数超过数组长度的一半，请找出这个数字。</p><p>你可以假设数组是非空的，并且给定的数组总是存在多数元素。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: [1, 2, 3, 2, 2, 2, 5, 4, 2]</span><br><span class="hljs-section">输出: 2</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= 数组长度 &lt;= 50000</li></ul><h2 id="题解">题解</h2><p>本题可以遍历数组哈希表统计时间和空间复杂度均为O(N)。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">majorityElement</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        countlist = {}<br>        length = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> countlist.get(x):<br>                countlist[x]+=<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:<br>                countlist[x] = <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span>(countlist[x]&gt;length/<span class="hljs-number">2</span>):<br>                <span class="hljs-keyword">return</span> x<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br></code></pre></td></tr></tbody></table></figure><h5 id="摩尔投票法：核心理念为票数正负抵消，时间复杂度为O-N-空间复杂度为O-1-。">摩尔投票法：核心理念为票数正负抵消，时间复杂度为O(N),空间复杂度为O(1)。</h5><ul><li>推论1：将指定的众数元素标记为+1，其他元素标记为-1，则所有数字的票数和大于0.</li><li>推论2:  若数组的前a个数字的票数和为0，则剩余的n-a个数字的票数之和一定大于0，即（n-a）个数字的众数仍为x，可以直接不考虑前面a个数字了。</li></ul><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">majorityElement</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        votes = <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> votes == <span class="hljs-number">0</span>: x = num<br>            votes += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> num == x <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> x<br><br></code></pre></td></tr></tbody></table></figure><p><strong>拓展</strong>： 由于题目说明 给定的数组总是存在多数元素 ，因此本题不用考虑 数组不存在众数 的情况。若考虑，需要加入一个 “验证环节” ，遍历数组 nums 统计 x 的数量。</p><p><strong>若 x 的数量超过数组长度一半，则返回 x ；</strong><br>否则，返回未找到众数；<br>时间和空间复杂度不变，仍为 O(N) 和 O(1) 。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">majorityElement</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        votes, count = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> votes == <span class="hljs-number">0</span>: x = num<br>            votes += <span class="hljs-number">1</span> <span class="hljs-keyword">if</span> num == x <span class="hljs-keyword">else</span> -<span class="hljs-number">1</span><br>        <span class="hljs-comment"># 验证 x 是否为众数</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">if</span> num == x: count += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> x <span class="hljs-keyword">if</span> count &gt; <span class="hljs-built_in">len</span>(nums) // <span class="hljs-number">2</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span> <span class="hljs-comment"># 当无众数时返回 0</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>数组</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>数组</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>图像合成视频</title>
     <link href="/2021/10/30/python/pic2video/"/>
     <url>/2021/10/30/python/pic2video/</url>
@@ -1891,11 +1920,11 @@
     
     <tags>
       
-      <tag>配置</tag>
-      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
+      
+      <tag>配置</tag>
       
     </tags>
     
