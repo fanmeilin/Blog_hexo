@@ -1,8 +1,8 @@
 ---
-title:论文总结《 Anatomical-guided attention enhances unsupervised PET image
+title: 论文总结《 Anatomical-guided attention enhances unsupervised PET image
 denoising performance》
 tags: paper
-categories: [paper,pet]
+categories: [文献,pet]
 date: 2021-11-03 13:04:40
 math: true
 ---
