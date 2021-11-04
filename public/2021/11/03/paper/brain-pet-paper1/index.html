@@ -1,0 +1,752 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>论文总结&lt;Anatomical-guided attention enhances unsupervised PET image denoising performance&gt; - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width','100%' ); <!--'100%'-->
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%'); <!--'100%'-->
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (true){ <!--!isMobile-->
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (true){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="论文总结<Anatomical-guided attention enhances unsupervised PET image denoising performance>">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-11-03 13:04" pubdate>
+        2021年11月3日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      96
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文总结&lt;Anatomical-guided attention enhances unsupervised PET image denoising performance&gt;</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>2021年2月投稿的一篇论文《Anatomical-guided attention enhances unsupervised PET image<br>
+denoising performance》提出使用Anatomical-guided的注意力加强非监督的PET图像降噪性能。</p>
+</blockquote>
+<h2 id="ABSTRACT">ABSTRACT</h2>
+<blockquote>
+<p>Although supervised convolutional neural networks (CNNs) often outperform conventional alternatives for denoising positron emission tomography (PET) images, they require many low- and high-quality reference PET image pairs. Herein, we propose an unsupervised 3D PET image denoising method based on an anatomical information-guided attention mechanism. The proposed magnetic resonance-guided deep decoder (MR-GDD) utilizes the spatial details and semantic features of MR-guidance image more effectively by introducing encoder-decoder and deep decoder subnetworks. Moreover, the specific shapes and patterns of the guidance image do not affect the denoised PET image, because the guidance image is input to the network through an attention gate. In a Monte Carlo simulation of [18F]fluoro-2-deoxy-D-glucose (FDG), the proposed method achieved the highest peak signal-to-noise ratio and structural similarity (27.92 ± 0.44 dB/0.886 ± 0.007), as compared with Gaussian filtering (26.68 ± 0.10 dB/0.807 ± 0.004), image guided filtering (27.40 ± 0.11 dB/0.849 ± 0.003), deep image prior (DIP) (24.22 ± 0.43 dB/0.737 ± 0.017), and MR-DIP (27.65 ± 0.42 dB/0.879 ± 0.007). Furthermore, we experimentally visualized the behavior of the optimization process, which is often unknown in unsupervised CNN-based restoration problems. For preclinical (using [18F]FDG and [11C]raclopride) and clinical (using [18F]florbetapir) studies, the proposed method demonstrates state-of-the-art denoising performance while retaining spatial resolution and quantitative accuracy, despite using a common network architecture for various noisy PET images with 1/10th of the full counts. These results suggest that the proposed MR-GDD can reduce PET scan times and PET tracer doses considerably without impacting patients.</p>
+</blockquote>
+<h5 id="总结">总结</h5>
+<p>使用监督训练CNN网络比传统的方法在PET降噪处理上效果表现的更好，但是需要 low- and high-quality reference PET image pairs作为label。因此基于解剖学信息指引的注意力机制提出了无监督的3D的PET图像的重建。</p>
+<ul>
+<li>此网络（MR-GDD）引入了两个子网络（encoder-decoder and deep decoder subnetworks）更效率地利用MR（核磁共振）图像的空间信息和语义特征。</li>
+<li>同时，由于guidance image通过attention gate后再输入网络，特定的guidance image的shapes和patterns不会影响降噪的PET图像。</li>
+<li>并且，我们通过实验可视化了优化过程的行为。这在无监督卷积图像重建通常是无法表示的。</li>
+</ul>
+<h2 id="Introduction">Introduction</h2>
+<blockquote>
+<p>Positron emission tomography (PET) is a functional imaging modality that observes the molecular-level activity in tissues caused by radioactive tracers. It offers excellent diagnostic accuracy both for observing normal tissues and for detecting specific diseases such as cancer and neurodegenerative disorders (Phelps, 2012). In response to the increased demand for more accurate dementia diagnosis in recent years, brain-dedicated PET scanners with enhanced sensitivity that are capable of acquiring high-resolution brain images have been developed (Tashima et al., 2019; Watanabe et al., 2017). The acquisition of high-quality diagnostic PET images requires the administration of high dose or a long scan time. However, massive radiation exposure to PET tracers may induce genetic damage and cancerous growths, thereby raising health risk concerns (ICRP, 2017). Therefore, to mitigate the radiation exposure-related risk, it is desirable to administer low-dose PET tracers. Unfortunately, this increases the statistical noise, thus degrading the quality of PET images and potentially affecting the diagnostic accuracy. Thus, improved noise suppression methods for PET images are essential.</p>
+</blockquote>
+<h5 id="逻辑">逻辑</h5>
+<p>为了治疗疾病 —&gt;  需要获取高像素的脑PET图像 —&gt;  需要高剂量&amp;长时间的扫描时间 —&gt; 引发健康风险 —&gt; 只能使用低剂量的PET示踪剂 —&gt; 改进用于 PET 图像的噪声抑制方法是必不可少的。</p>
+<blockquote>
+<p>Conventionally, Gaussian filtering (GF) is applied as a basic post-denoising method, despite compromising the spatial resolution and, thus, the quantitative accuracy of PET images. To avoid such compromises, various denoising algorithms, such as bilateral filtering (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0018">Hoifheinz et al., 2011</a>), non-local means filtering (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0001">Arabi and Zaidi, 2020</a>), image-guided filtering (IGF) (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0017">He et al., 2013</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0016">Hashimoto et al., 2018</a>), and block-matching filtering (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0027">Ote et al., 2020</a>) have been developed and applied to PET images. These post-denoising algorithms provide a better denoising performance than GF while retaining spatial resolution and quantitative accuracy.</p>
+</blockquote>
+<h5 id="传统降噪方法">传统降噪方法</h5>
+<p>高斯滤波 (GF) 被用作基本的后去噪方法，尽管会影响空间分辨率，从而影响 PET 图像的定量精度。后来使用双边滤波、非局部均值滤波、图像引导过滤（IGF）和块匹配过滤的去噪方法。这些去噪算法提供了比 GF 更好的去噪性能，同时保留了空间分辨率和定量精度。</p>
+<blockquote>
+<p>Aside from the above mentioned conventional <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/filtering-algorithm">filtering algorithms</a>, methods based on deep learning (DL) have been applied in various medical fields (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0023">Litjens et al., 2017</a>), and the use of <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/convolutional-neural-networks">convolutional neural networks</a> (CNNs) has been reported to improve the quality of PET images (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0010">Gong et al., 2019</a>a; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0012">Häggström et al., 2019</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0024">Liu and Qi, 2019</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0030">Sanaat et al., 2020</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0034">Sphuler et al., 2020</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0047">Zhou et al., 2020</a>). However, the general CNN-based denoising methods typically require a pair of large reference datasets comprising high-quality images. This is a major problem in clinical usage owing to the difficulty of preparing huge sets of low-noise PET data without unduly burdening patients. In addition, the huge volume of novel PET tracers being developed, makes it difficult to collect large amounts of training data for each domain. The interpretation of denoised PET images may suffer inherent biases if unknown cases are excluded from the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/training-dataset">training dataset</a>. Despite these challenges, DL algorithms often outperform conventional denoising algorithms. Therefore, there is a need for technology that can be uniformly adapted to various domains without using high-quality PET data.</p>
+</blockquote>
+<h5 id="深度学习方法的难题">深度学习方法的难题</h5>
+<p>除了上述传统过滤算法之外，基于深度学习 (DL) 的方法已应用于各个医学领域，使用卷积神经网络 (CNN) 可以提高PET 图像质量。而深度学习的去噪方法需要高质量图像的大型参考数据集。但是在不给患者造成过度负担的情况下准备大量的低噪声 PET 数据是一个难题，因此目标是需要能够在不使用高质量 PET 数据的情况下，统一适应各种情况的方法。</p>
+<blockquote>
+<p>In recent years, unsupervised or self-supervised DL approaches such as Noise2Noise and deep image prior (DIP) have demonstrated the potential to overcome these challenges (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0021">Lehtinen et al., 2018</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0040">Ulyanov et al., 2018</a>). In particular, the DIP algorithm is a powerful noise suppression method that does not require the preparation of a prior training dataset (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0015">Hashimoto et al., 2019</a>, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0014">2020</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0022">Lin and Huang, 2020</a>). Furthermore, PET reconstruction and denoising methods in which <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/computed-tomography">computed tomography</a> (CT) and magnetic resonance (MR) images serve as the prior images input to the DIP framework have been developed (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0008">Cui et al., 2019</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0011">Gong et al., 2019</a>b). Compared to PET alone, the denoising performance has been improved by using multi-modal data combined with anatomical information. However, while this method shows potential for adapting various PET image denoising approaches, the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/network-architecture">network architecture</a> does not fully utilize the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/semantic-feature">semantic features</a> or image details of anatomical-guidance images. Furthermore, the process of converting the guidance image to the PET image can result in the shape and pattern of the guidance image remaining in the output PET image, with the extent to which the features of the guidance image affect PET image denoising is yet to be elucidated. Moreover, the process by which the DIP algorithm optimizes the denoising remains unclear. Therefore, these issues must be clarified for future development.</p>
+</blockquote>
+<h5 id="深度学习改进方法：Noise2Noise；DIP；">深度学习改进方法：Noise2Noise；DIP；</h5>
+<h5 id="DIP的优点：">DIP的优点：</h5>
+<ul>
+<li>一种强大的噪声抑制方法，不需要准备先验训练数据集；</li>
+<li>其中计算机断层扫描 (CT) 和磁共振 (MR) 图像作为输入到 DIP 框架的先验图像；</li>
+<li>与单独的 PET 相比，通过使用多模态数据结合解剖信息，去噪性能得到了提高。</li>
+</ul>
+<h5 id="DIP的问题：">DIP的问题：</h5>
+<ul>
+<li>网络架构并没有充分利用解剖指导图像的语义特征或图像细节；</li>
+<li>引导图像转换为PET图像的过程会导致输出PET图像中保留引导图像的形状和图案；</li>
+<li>引导图像的特征对PET图像去噪的影响程度尚待确定且阐明；</li>
+<li>DIP算法优化去噪的过程仍不清楚。</li>
+</ul>
+<blockquote>
+<p>In this study, we propose an unsupervised 3D PET image denoising method that incorporates anatomical information into the DIP architecture via an attention mechanism. The attention gates (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0009">Fukui et al., 2019</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0032">Schlemper et al., 2019</a>) used in the proposed network help optimize a noisy PET image using multi-scale semantic features extracted from the guidance image. As such, this method can prevent the leakage of guidance image features. The guidance of multi-scale features can lead to an effective regularizer for PET image denoising. The main contributions of this study are as follows:</p>
+<ul>
+<li>We propose a new PET image denoising method guided by anatomical information using an unsupervised <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/deep-learning-method">DL method</a>.</li>
+<li>We demonstrate that the proposed network has the flexibility to handle the different PET tracer domains used to show the distribution of various tissues in the brains of human and non-human primates.</li>
+<li>The behavior of the optimization process is visualized experimentally, thereby providing useful insights that were unresolved in unsupervised CNN-based restoration problems.</li>
+</ul>
+</blockquote>
+<h5 id="本文的方法：">本文的方法：</h5>
+<p>使用了无监督的3D的PET图像降噪方法，该方法通过<strong>注意机制将解剖信息整合到 DIP 架构中</strong>，使用从引导图像中提取的多尺度语义特征来优化嘈杂的 PET 图像。多尺度特征的引导可以为 PET 图像去噪提供有效的正则化器。</p>
+<h5 id="贡献：">贡献：</h5>
+<ul>
+<li>
+<p>我们提出了一种新的 PET 图像去噪方法，该方法使用无监督的 DL 方法<strong>以解剖信息为指导</strong>；</p>
+</li>
+<li>
+<p>具有处理不同PET 示踪域的<strong>灵活性</strong>，可以用于显示人类和非人类灵长类动物大脑中各种组织的分布；</p>
+</li>
+<li>
+<p>优化过程的行为通过实验进行<strong>可视化</strong>，从而提供在基于 CNN 的无监督重建问题中未解决问题的相关见解。</p>
+</li>
+</ul>
+<h2 id="2-Related-work">2. Related work</h2>
+<blockquote>
+<p>The <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/positron-emission-tomography">PET</a> image restoration process is further complicated by the limited availability of information that can be extracted from noisy PET data. Another approach adopted for PET image denoising is to use anatomical prior extracted from the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/computed-tomography">CT</a> or MR images of the patient for <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/regularization">regularization</a>. Because multi-modal images have become easier to obtain owing to the increasing availability of PET/CT and PET/MR scanners, various <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/hybrid-method">hybrid methods</a> using anatomical priors have been developed to facilitate PET image denoising.</p>
+</blockquote>
+<p>PET 图像去噪采用的另一种方法是<strong>使用从患者的 CT 或 MR 图像中提取的解剖先验</strong>进行正则化。由于 PET/CT 和 PET/MR 扫描仪的可用性不断提高，多模态图像变得更容易获得，因此开发了各种使用解剖学先验的混合方法来促进 PET 图像去噪。</p>
+<h3 id="2-1-Classical-approach">2.1. Classical approach</h3>
+<blockquote>
+<p>Conventionally, hybrid denoising methods using anatomical priors have been adopted for PET image reconstruction and post-filtering. For example, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/maximum-a-posteriori">maximum a posteriori</a> image reconstruction has been incorporated alongside anatomical priors (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0007">Comtat et al., 2002</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0041">Vunckx et al., 2012</a>). In addition, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0035">Sudarshan et al. (2020)</a> proposed joint PET and MR image reconstruction using a patch-based joint-dictionary prior. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0003">Bland et al. (2018)</a> introduced MR-derived kernels to the kernel expectation maximization reconstruction. Although advanced image reconstruction algorithms can provide better denoising performance, they require significant computational resources and it is often difficult to set optimal parameters. Therefore, anatomically-guided post-denoising is often performed separately from the image reconstruction process. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0004">Chan et al. (2014)</a> proposed incorporating CT information and applying median non-local mean filtering to achieve PET denoising. Alternatively, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0045">Yan et al. (2015)</a> proposed MR-guided PET filtering by adapting a local linear model. In addition, the authors performed partial volume correction without MR image <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/parcellation">parcellation</a> by incorporating <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/partial-volume-effect">partial volume effects</a> into the model.</p>
+</blockquote>
+<h5 id="经典方法：">经典方法：</h5>
+<p>将解剖先验的混合去噪方法应用于PET图像重建和后滤波处理，将最大后验图像重建与解剖先验结合在一起。基于a patch-based joint-dictionary prior联合PET和MR图像重建</p>
+<h3 id="2-2-Supervised-DL-approach">2.2. Supervised DL approach</h3>
+<p>The supervised DL approach has recently demonstrated state-of-the-art performance in PET image denoising. When large amounts of training and label PET data pairs are available, the general <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/convolutional-neural-networks">CNN</a> can be trained according to the following operation:<br>
+$$<br>
+θ^*=argmin_θ \frac{1}{N_t}∑_{i∈D_t}∥x_{ref}<sup>i−f_θ(x_0</sup>i)∥<br>
+$$<br>
+where ∥·∥ is the L2 norm, f represents the CNN, θ denotes the trainable parameters contained in the weights and biases, Dt is a mini-batch sample of size Nt, x0i is the <em>i</em>th element in the training data (noisy PET images), and xrefi is the <em>i</em>th element in the label data (clean PET images). Regarding supervised PET image denoising using anatomical information, in separate studies, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0024">Liu and Qi et al. (2019)</a>, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0033">Schramm et al. (2021)</a>, and <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0005">Chen et al. (2019)</a> trained CNNs to map multi-modal images, including noisy PET and MR images, to obtain clean PET images. In accordance with these methods, the mapping function, fθ(x0i), in <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#eqn0001">Eq. (1)</a> is represented by fθ(x0i,gi) using anatomical-guidance images, g. The supervised DL approach requires a vast number of low-dose (or short-time scan), high-dose (or long-time scan), and guidance image pairs.</p>
+<h3 id="2-3-Unsupervised-DL-approach">2.3. Unsupervised DL approach</h3>
+<p>Unsupervised DL approaches such as DIP do not require label data for PET image denoising. The DIP training process is optimized as follows (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0040">Ulyanov et al., 2018</a>):<br>
+$$<br>
+θ<sup>*=argmin_θ∥x_0−f_θ(z)∥,x</sup><em>=f_{θ^</em>}(z)<br>
+$$<br>
+where x0 is a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/noisy-image">noisy image</a>, x* is the final <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/denoised-image">denoised image</a> output, and the network input z is random noise. The DIP algorithm uses a CNN to map a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/degraded-image">degraded image</a>, x0, and obtains the optimal denoised image by regularization of the architecture via moderate iteration. This is based purely on the prior information included in the CNN structure. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0015">Hashimoto et al. (2019</a>), (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0014">2020</a>) proposed dynamic PET image denoising by directly inputting static PET images into 3D and 4D DIP as prior information. In contrast, <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0008">Cui et al. (2019)</a> and <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0010">Gong et al. (2019</a>a) both proposed PET denoising methods that rely on inputting anatomical-guidance images, g (e.g., CT and MR images), instead of the DIP input, z. In these methods, the mapping function, fθ(z), in <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#eqn0002">Eq. (2)</a> is represented by fθ(g).</p>
+<p>The unsupervised DL approach can bridge the technical gap between the classical and supervised DL approaches for PET image denoising based on anatomical information. Nevertheless, previous methods often fail to clarify how the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/semantic-feature">semantic features</a> of the guidance image affect PET image denoising.</p>
+<h2 id="3-Methodology">3. Methodology</h2>
+<h3 id="3-1-MR-guided-deep-decoder">3.1. MR-guided deep decoder</h3>
+<p>To explicitly utilize the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/semantic-feature">semantic features</a> of anatomical-guidance image for <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/positron-emission-tomography">PET</a> image denoising, we propose a method for unsupervised 3D PET image denoising based on anatomical information that uses an MR-guided deep decoder (MR-GDD), which is inspired by <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0039">Uezato et al. (2020)</a>. <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#fig0001">Fig. 1</a> shows the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/network-structure">network structure</a> of the proposed MR-GDD, which comprises two <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/subnetwork">subnetworks</a>: an encoder-decoder subnetwork with a skip connection and a deep decoder subnetwork. The two subnetworks are connected by an upsampling refinement unit (URU) and a feature refinement unit (FRU), which incorporate an attention gate to weight the multi-scale features extracted from the MR image to the deep decoder subnetwork. This combined network performs end-to-end learning from scratch.</p>
+<p><img src="https://picture.mulindya.com/MR-guided-deep-decoder.jpg" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>Fig. 1. Overview of the proposed MR-GDD used for unsupervised 3D <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/positron-emission-tomography">PET</a> image denoising. This architecture consists of two <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/subnetwork">subnetworks</a> connected by attention gates: an encoder-decoder subnetwork with a skip connection (top) and a deep decoder subnetwork (bottom). This combined architecture is optimized using end-to-end learning. The attention gates in the upsampling refinement unit (URU) and the feature refinement unit (FRU) guide the optimization of noisy PET image using the multi-scale <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/semantic-feature">semantic features</a> extracted from the MR image. This architecture can prevent the semantic features of the MR image from leaking.</p>
+<h4 id="3-1-1-Encoder-decoder-subnetwork">3.1.1. Encoder-decoder subnetwork</h4>
+<p>The encoder-decoder subnetwork is designed to extract low-scale to high-scale hierarchical semantic features from the MR image. It is based on the 3D U-Net architecture (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0006">Çiçek et al., 2016</a>) and consists of encoding and decoding paths. In the encoding path, the combination of a 3 × 3 × 3 3D <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/convolution-layer">convolution layer</a> with <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/batch-normalization">batch normalization</a> (BN) and a leaky rectified linear unit (LReLU) is repeated twice, before being constructed by a 3 × 3 × 3 3D convolution layer with two strides for downsampling, followed by the BN and LReLU. At each downsampling step, the size of the feature maps is halved. In the decoding path, the outputs of the upsampling layer and the skip connection supplied from the encoding path are added, before the combination of the 3 × 3 × 3 3D convolution layer with the BN and LReLU is repeated twice. At each upsampling step, the size of the feature maps is doubled.</p>
+<h4 id="3-1-2-Deep-decoder-subnetwork">3.1.2. Deep decoder subnetwork</h4>
+<p>The deep decoder subnetwork reconstructs the denoised PET image from the network input filled with uniform noise. Each step in the deep decoder subnetwork is upsampled first by the URU, then by a 3 × 3 × 3 3D convolution layer, and finally by the BN, LReLU, and FRU. Owing to the presence the attention gates, the URU and FRU can generate conditional weights using the MR image features via a 1 × 1 × 1 3D convolution layer, LReLU, and <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/sigmoid-function">sigmoid function</a>, and then weights the features obtained from the pre-layer in the deep decoder. The URU promotes the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/spatial-locality">spatial locality</a> of MR image features, whereas the FRU promotes similar semantic alignment. Finally, a 1 × 1 × 1 3D convolution layer outputs a denoised PET image.</p>
+<h3 id="3-2-Loss-function-and-optimization">3.2. Loss function and optimization</h3>
+<p>To denoise the PET image, the training process of the proposed MR-GDD, which utilizes <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/unsupervised-learning">unsupervised learning</a> that does not require PET reference data, is optimized as follows:<br>
+$$<br>
+θ<sup>*=argmin_θ∥x_0−f_θ(z,g)∥,x</sup><em>=f_{θ^</em>}(z,g)<br>
+$$<br>
+where ∥·∥ is the L2 norm, f represents the proposed MR-GDD network, the training label x0 represents the noisy PET image, and the network inputs z and g are the random noise and the MR-guidance image, respectively. The input noise was generated by adding a fixed uniform random noise and <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/gaussian-white-noise">Gaussian noise</a> with different seed for each epoch. The attention gates used in the proposed architecture help optimize the noisy PET image by using the multi-scale semantic features extracted from a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/image-guided-intervention">guidance image</a> g. If the <em>k</em>-th scale feature of the encoder path in the encoder-decoder subnetwork is defined as Γk and the <em>k</em>-th scale features of the decoder path are defined as Ξk, the influence on the mapping function, f, can be expressed as follows:<br>
+$$<br>
+f=f_θ(z|Γ1,⋯Γk,Ξ1,⋯Ξk).<br>
+$$<br>
+In this method, the limited memory BFGS (L-BFGS) algorithm (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0048">Zhu et al., 1997</a>), which is a quasi-Newtonian method, is introduced to solve the nonlinear <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/least-square-problem">least squares problem</a> described by <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#eqn0003">Eq. (3)</a>. By considering the approximate <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/hessian-matrix">Hessian matrix</a> based on the second-order gradient, the L2 norm converges more stably and quickly than first-order <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/gradient-descent">gradient descent</a> algorithms, such as the stochastic gradient descent algorithm or Adam. In addition, because a small amount of data is generated as a result of using the unsupervised architecture, which does not require a prior <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/training-dataset">training dataset</a>, the MR-GDD can reduce the computational complexity and load required to performed denoising. We used the L-BFGS algorithm at a learning rate of 0.01 without line search to minimize the processing time. The proposed architecture was processed using PyTorch 1.6.0 on Ubuntu 16.04 with acceleration by a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/graphics-processing-unit">graphics processing unit</a> (NVIDIA Quadro RTX8000 with 48 GB memory).</p>
+<h2 id="4-Experimental-setup">4. Experimental setup</h2>
+<p>A simulation study using [18F]fluoro-2-deoxy-D-glucose (FDG), a preclinical study using [18F]FDG and [11C]raclopride, and a clinical study using [18F]florbetapir (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0043">Wong et al., 2010</a>) were performed to verify the effectiveness of the proposed <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/positron-emission-tomography">PET</a> image denoising method. In addition, the denoising performance of the proposed MR-GDD was compared against four other unsupervised algorithms under the same conditions as the proposed MR-GDD;</p>
+<ul>
+<li><em>Gaussian filtering (GF).</em> GF is a basic post-denoising method for suppressing noise in PET images. We used a 3D <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/gaussian-kernel">Gaussian kernel</a>.</li>
+<li><em>Image guided filtering (IGF).</em> IGF performs PET image denoising by adapting a local linear model using a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/image-guided-intervention">guidance image</a> (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0016">Hashimoto et al., 2018</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0017">He et al., 2013</a>). We used the MR image as the guidance image.</li>
+<li><em>Deep image prior (DIP).</em> The general DIP algorithm uses random noise as the network input (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0040">Ulyanov et al., 2018</a>). We used the encoder-decoder network in the proposed MR-GDD as the DIP architecture.</li>
+<li><em>MR-DIP.</em> MR-DIP uses an MR prior as a direct input in the DIP architecture (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0008">Cui et al., 2019</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0010">Gong et al., 2019</a>a). We used the same architecture as in the DIP algorithm.</li>
+</ul>
+<p>As a pre-processing step for all the data, voxel intensity normalization was performed on each of the MR and PET images. The MR image intensity was normalized in the [0, 1] range using a min-max normalization technique. Furthermore, the 99.95th <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/percentile">percentile</a> was defined for PET image intensity, which was also normalized in the [0, 1] range using a min-max normalization technique.</p>
+<h3 id="4-1-Simulation-study">4.1. Simulation study</h3>
+<p>We performed a <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/monte-carlo-method">Monte Carlo simulation</a> using the 3D brain phantom from BrainWeb (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0002">Aubert-Broche et al., 2006</a>). The Monte Carlo simulation modeled the geometry of a brain-dedicated PET scanner (HITS-655000 (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0042">Watanabe et al., 2017</a>), <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/computer-science/hamamatsu-photonics">Hamamatsu Photonics</a> K.K., Japan). The scanner consists of 32 detector blocks with <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/cerium">cerium</a> doped <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/lutetium">lutetium</a> <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/yttrium">yttrium</a> <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/orthosilicates">orthosilicate</a> crystals per ring, with 5 of these blocks aligned to the scanner axis. To ensure a mismatch between the MR and PET images, two hot spheres (with radii of 10 and 12 mm, respectively) were inserted exclusively into the PET image to present tumor regions. Then, we simulated a static [18F]FDG scan equivalent to 150 M counts, including attenuation and scattering effects. An attenuation map was created from the segmented MR image, and the attenuation effects of water and bone were considered. The gray matter:white matter:cerebrospinal fluid:left tumor:right tumor activity ratio was set to 1:0.25:0.05:2:2 based on the [18F]FDG contrast. We also simulated low-activity tumor data (left tumor:right tumor activity ratio was set to 1.5:1.2) for some low-grade tumors or pathology linked to <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/degenerative-disease">neurodegenerative disease</a>. To generate the reference PET image, the simulated list-mode data were reconstructed using a 3D list-mode dynamic row-action maximum-likelihood algorithm (DRAMA) (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0037">Tanaka and Kudo, 2010</a>) with two iterations and 40 subsets. The reconstructed image measured 128 × 128 × 83 voxels (2.6 × 2.6 × 2.4 mm/voxel). The reference image was reconstructed using all the list-mode data. The noisy PET image was obtained by periodically downsampling to 1/30th of the reference list-mode data (see Supplementary Material 0.1) and reconstructing the low-count image (5 M counts). The corresponding T1-weighted MR image was used as the guidance image.</p>
+<h3 id="4-2-Preclinical-study">4.2. Preclinical study</h3>
+<p>A preclinical study was conducted using monkeys and was approved by the Animal Ethics Committees of the Central <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/research-laboratories">Research Laboratory</a>, Hamamatsu Photonics K.K. PET scans using [18F]FDG and [11C]raclopride imaged the brains of conscious <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/rhesus-monkey">rhesus monkeys</a>, whose bodies and heads were fixed using an animal PET scanner (SHR-38000 (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0013">Hamamatsu 2021</a>), Hamamatsu Photonics K.K., Japan). After a 30 min transmission scan using a 68Ge-68Ga source, doses of [18F]FDG (113 MBq) and [11C]raclopride (282 MBq) were injected into each monkey, before dynamic PET scans were performed for 120 and 90 min, respectively. We performed image reconstruction using 3D DRAMA with two iterations and 60 subsets that incorporated attenuation correction via transmission scan data. The reconstructed images measured 256 × 256 × 103 voxels (0.65 × 0.65 × 1.0167 mm/voxel) and were cropped <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/pamicogrel">to 192</a> × 192 × 64 voxels to reduce the demand on the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/graphics-processing-unit">GPU</a> memory. The reference images were reconstructed using all the list-mode data for [18F]FDG and the list mode data for the 60 min period between 30 and 90 min of the scan such that the contrast created by the distribution of [11C]raclopride in the striatum to be observed clearly. Each noisy PET image was obtained by periodically downsampling to 1/10th of the reference list-mode data. The corresponding T1-weighted MR images were taken on another day and registered manually by two radiological <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/technologist">technologists</a>.</p>
+<h3 id="4-3-Clinical-study">4.3. Clinical study</h3>
+<p>An amyloid scan using [18F]florbetapir was conducted on the human brain of a cognitive normal subject using a Biograph mMR scanner (Siemens Healthineers, Germany) as part of the “Insight 46″ sub-study of the MRC National Survey of Health and Development (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0020">Lane et al., 2017</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0025">Markiewicz et al., 2018</a>a). The PET data were acquired dynamically for 60 min using a [18F]florbetapir dose of 409 MBq. During PET image reconstruction, attenuation correction was performed via a pseudo-CT image, which was synthesized using T1- and T2-weighted MR images that were acquired simultaneously, and enabled an μ-map to be was calculated. Image reconstruction was performed using an ordered subset expectation maximization (OS-EM) algorithm involving four iterations and 14 subsets using the NiftyPET package (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0026">Markiewicz et al., 2018</a>b). The reconstructed images comprised 334 × 334 × 127 voxels (2 × 2 × 2 mm/voxel), which were cropped to 128 × 128 × 83 voxels to reduce the demand on the GPU memory. The reference image was reconstructed using the list-mode data for the period from 30 to 60 min to observe the contrast between gray and white matter clearly. The noisy PET image was obtained by periodically downsampling to 1/10th of the reference list-mode data.</p>
+<h3 id="4-4-Evaluation-metrics">4.4. Evaluation metrics</h3>
+<p>To quantitatively evaluate the performance of different denoising methods, for the simulation study, we calculated the peak signal-to-noise ratio (PSNR) and structural similarity (SSIM) of the target image, x, and the reference image, xref, which are defined as<br>
+$$<br>
+PSNR=10log_{10}(\frac{max(x<sup>{ref})</sup>2}{\frac{1}{N_R}∑_{j∈R}(x_j−x_j<sup>{ref})</sup>2})<br>
+$$<br>
+and<br>
+$$<br>
+SSIM=\frac{1}{N_R}∑_{j∈R}\frac{(2μ_{jx}μ_{jx<sup>{ref}}+c_1)(2σ_{jxx</sup>{ref}}+c_2)}{(μ_{jx}<sup>2+μ_{jx</sup>{ref}}<sup>2+c_1)(σ_{jx}</sup>2+σ_{jx<sup>{ref}}</sup>2+c^2)}<br>
+$$<br>
+respectively. Here, R and NR represent the brain region in the PET image and the number of voxels, respectively, μ and σ are the mean and standard deviation of the square window corresponding to the <em>j</em>-th voxel, respectively, and σjxxref is the covariance between x and xref. Furthermore, c1=(0.01L)2 and c2=(0.03L)2 where L represents the dynamic range of the reference. The contrast-to-noise ratio (CNR) between gray matter and white matter was calculated as(7)CNR=|Sg¯−Sw¯|σg2+σw2,where Sg¯, Sw¯ and σg, σw are the mean activity and standard deviation corresponding to the regions of interest (ROIs) in the gray and white matter, respectively. The ROIs were constructed in the gray matter regions on the left and right brains of different slices, whereas the white matter regions were selected within the centrum semiovale (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0028">Paxinos et al., 2000</a>). In the [11C]raclopride calculation, the ROIs were set on the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/medicine-and-dentistry/putamen">putamen</a> instead of the gray matter. A Wilcoxon signed-rank test was performed on the PSNR, SSIM, and CNR to compare the performance of different denoising methods. As the noisy PET data were generated by downsampling the reference list-mode data, we generated multiple independent noisy samples (10 samples) to examine the uncertainty and test the statistical significance.</p>
+<p>We also evaluated the tradeoffs between noise and quantitative information of the <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/topics/engineering/denoised-image">denoised images</a> when FWHM (GF), ε (IGF), and epochs (CNNs) are changed. For the simulation study, we calculated the tradeoff between the mean squared bias and the variance in the ROI:(8)Bias2=∑j∈R(xj−xjref)2∑j∈R(xjref)2,(7)Variance=∑j∈R(xj−x¯)2∑j∈R(xjref)2,where R denotes the tumor regions, x¯ is the average pixel value inside the ROI. For preclinical study, we calculated the tradeoff between the mean uptake (putamen and caudate and striatum) and the standard deviation (white matter). Each ROI used for the evaluation was set manually to include any partial volume voxels on the MR image and was calculated via superimposition on the co-registered PET image.</p>
+<p>Thus far, the optimization process for the DIP algorithm has only been reported as a conceptual diagram (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0014">Hashimoto et al., 2020</a>; <a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0040">Ulyanov et al., 2018</a>), with several aspects such as the actual behavior remaining unclarified. To elucidate the DIP optimization process, we visualized it by performing nonlinear dimensionally reduction using the locally linear embedding (LLE) algorithm (<a target="_blank" rel="noopener" href="https://www.sciencedirect.com/science/article/pii/S1361841521002711#bib0031">Saul and Roweis, 2003</a>), which implements manifold learning. We projected the PET data used for optimization under different training conditions onto a three-dimensional manifold, considering a neighborhood of 15 for each point.</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/pet/">pet</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/paper/">paper</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/11/04/leetcode/leetcode-offer39/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer39 数组中出现次数超过一半的数字</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/10/30/python/pic2video/">
+                        <span class="hidden-mobile">图像合成视频</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2021/11/03/paper/brain-pet-paper1/';
+          this.page.identifier = '/2021/11/03/paper/brain-pet-paper1/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
