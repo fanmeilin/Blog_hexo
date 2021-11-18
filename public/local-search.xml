@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指offer55-Ⅰ 二叉树的深度</title>
+    <link href="/2021/11/16/leetcode-offer55-1/"/>
+    <url>/2021/11/16/leetcode-offer55-1/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>二叉树的深度</p></blockquote><h2 id="题目">题目</h2><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p><h3 id="示例-1：">示例 1：</h3><p>例如：</p><p>给定二叉树<code> [3,9,20,null,null,15,7]</code>,</p><figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript"> <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></td></tr></tbody></table></figure><p>返回它的最大深度 3 。</p><h3 id="提示：">提示：</h3><ul><li>节点总数 &lt;= 10000</li></ul><h2 id="题解">题解</h2><h4 id="解法一">解法一</h4><p>直接深度优先遍历即可，直接利用<code>maxDepth</code>函数，注意在内部调用<code>maxDepth</code>函数时要使用<code>self</code>来调用本函数。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(self.maxDepth(root.left),self.maxDepth(root.right))<br><br></code></pre></td></tr></tbody></table></figure><h4 id="解法二">解法二</h4><p>直接使用层序遍历得到深度。使用两个列表<code>tmp</code>和<code>queue</code>结合实现“队列”的作用。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        queue, res = [root], <span class="hljs-number">0</span>        <span class="hljs-comment">#使用列表实现queue</span><br>        <span class="hljs-keyword">while</span> queue:<br>            tmp = []                  <span class="hljs-comment">#初始化 保存一层的信息</span><br>            <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> queue:        <span class="hljs-comment">#将queue的下一层都添加到tmp中</span><br>                <span class="hljs-keyword">if</span> node.left: tmp.append(node.left)<br>                <span class="hljs-keyword">if</span> node.right: tmp.append(node.right)<br>            queue = tmp               <span class="hljs-comment">#更新</span><br>            res += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>树</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指offer50 第一个只出现一次的字符</title>
     <link href="/2021/11/15/leetcode/leetcode-offer50/"/>
     <url>/2021/11/15/leetcode/leetcode-offer50/</url>
@@ -1203,9 +1232,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>树</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
