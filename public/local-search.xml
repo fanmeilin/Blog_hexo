@@ -4,9 +4,38 @@
   
   
   <entry>
+    <title>剑指offer57 和为s的两个数字</title>
+    <link href="/2021/11/17/leetcode/leetcode-offer57/"/>
+    <url>/2021/11/17/leetcode/leetcode-offer57/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>和为s的两个数字</p></blockquote><h2 id="题目">题目</h2><p>输入一个递增排序的数组和一个数字s，在数组中查找两个数，使得它们的和正好是s。如果有多对数字的和等于s，则输出任意一对即可。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[2,7,11,15]</span>, target = 9<br>输出：<span class="hljs-comment">[2,7]</span> 或者 <span class="hljs-comment">[7,2]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[10,26,30,31,47,60]</span>, target = 40<br>输出：<span class="hljs-comment">[10,30]</span> 或者 <span class="hljs-comment">[30,10]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= nums.length &lt;= 10^5</li><li>1 &lt;= nums[i] &lt;= 10^6</li></ul><h2 id="题解">题解</h2><p>因为时单调递增的数组，那么可以直接从两端找起，向中间收缩。可以用递归的双指针，也可以使用while循环遍历，时间复杂度为O(N)。</p><h4 id="递归">递归</h4><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">find</span>(<span class="hljs-params">left,right</span>):</span><br>            <span class="hljs-keyword">if</span>(left&gt;=right): <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span>(nums[left]+nums[right]==target): <br>                self.result = [nums[left],nums[right]]<br>                <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span>(nums[left]+nums[right]&gt;target): find(left,right-<span class="hljs-number">1</span>)<br>            <span class="hljs-keyword">else</span>: find(left+<span class="hljs-number">1</span>,right)<br>        self.result = []<br>        find(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span>)<br>        <span class="hljs-keyword">return</span> self.result<br></code></pre></td></tr></tbody></table></figure><h4 id="循环">循环</h4><p>使用while循环比使用递归的方法，空间复杂度更小，更快。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        left,right = <span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span>(left&lt;right):<br>            <span class="hljs-keyword">if</span>(nums[left]+nums[right]==target): <span class="hljs-keyword">return</span> [nums[left],nums[right]]<br>            <span class="hljs-keyword">elif</span>(nums[left]+nums[right]&lt;target): left+=<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: right -= <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> []<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>双指针</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>双指针</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指offer55-Ⅰ 二叉树的深度</title>
-    <link href="/2021/11/16/leetcode-offer55-1/"/>
-    <url>/2021/11/16/leetcode-offer55-1/</url>
+    <link href="/2021/11/16/leetcode/leetcode-offer55-1/"/>
+    <url>/2021/11/16/leetcode/leetcode-offer55-1/</url>
     
     <content type="html"><![CDATA[<blockquote><p>二叉树的深度</p></blockquote><h2 id="题目">题目</h2><p>输入一棵二叉树的根节点，求该树的深度。从根节点到叶节点依次经过的节点（含根、叶节点）形成树的一条路径，最长路径的长度为树的深度。</p><h3 id="示例-1：">示例 1：</h3><p>例如：</p><p>给定二叉树<code> [3,9,20,null,null,15,7]</code>,</p><figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript"> <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></td></tr></tbody></table></figure><p>返回它的最大深度 3 。</p><h3 id="提示：">提示：</h3><ul><li>节点总数 &lt;= 10000</li></ul><h2 id="题解">题解</h2><h4 id="解法一">解法一</h4><p>直接深度优先遍历即可，直接利用<code>maxDepth</code>函数，注意在内部调用<code>maxDepth</code>函数时要使用<code>self</code>来调用本函数。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">max</span>(self.maxDepth(root.left),self.maxDepth(root.right))<br><br></code></pre></td></tr></tbody></table></figure><h4 id="解法二">解法二</h4><p>直接使用层序遍历得到深度。使用两个列表<code>tmp</code>和<code>queue</code>结合实现“队列”的作用。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxDepth</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        queue, res = [root], <span class="hljs-number">0</span>        <span class="hljs-comment">#使用列表实现queue</span><br>        <span class="hljs-keyword">while</span> queue:<br>            tmp = []                  <span class="hljs-comment">#初始化 保存一层的信息</span><br>            <span class="hljs-keyword">for</span> node <span class="hljs-keyword">in</span> queue:        <span class="hljs-comment">#将queue的下一层都添加到tmp中</span><br>                <span class="hljs-keyword">if</span> node.left: tmp.append(node.left)<br>                <span class="hljs-keyword">if</span> node.right: tmp.append(node.right)<br>            queue = tmp               <span class="hljs-comment">#更新</span><br>            res += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>]]></content>
     
@@ -1232,9 +1261,9 @@
       
       <tag>剑指</tag>
       
-      <tag>树</tag>
-      
       <tag>idea</tag>
+      
+      <tag>树</tag>
       
     </tags>
     
@@ -2034,11 +2063,11 @@
     
     <tags>
       
+      <tag>配置</tag>
+      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
-      
-      <tag>配置</tag>
       
     </tags>
     
