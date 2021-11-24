@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer32-1 从上到下打印二叉树 - 待时</title>
+  <title>剑指offer32-3 从上到下打印二叉树 Ⅲ - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer32-1 从上到下打印二叉树">
+            <span class="h2" id="subtitle" title="剑指offer32-3 从上到下打印二叉树 Ⅲ">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-11-21 17:39" pubdate>
-        2021年11月21日 下午
+      <time datetime="2021-11-22 20:15" pubdate>
+        2021年11月22日 晚上
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      200 字
+      423 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      2
+      6
        分钟
     </span>
   
@@ -283,21 +283,36 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer32-1 从上到下打印二叉树</h1>
+            <h1 style="display: none">剑指offer32-3 从上到下打印二叉树 Ⅲ</h1>
             
             <div class="markdown-body">
-              <blockquote></blockquote>
+              <blockquote>
+<p>从上到下打印二叉树 Ⅲ</p>
+</blockquote>
 <h2 id="题目">题目</h2>
-<p>从上到下打印出二叉树的每个节点，同一层的节点按照从左到右的顺序打印。</p>
+<p>请实现一个函数按照之字形顺序打印二叉树，即第一行按照从左到右的顺序打印，第二层按照从右到左的顺序打印，第三行再按照从左到右的顺序打印，其他行以此类推。</p>
 <h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">例如:<br>给定二叉树: [<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>],<br>    <span class="hljs-number">3</span><br>   / <span class="hljs-string">\</span><br>  <span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>    /  <span class="hljs-string">\</span><br>   <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br> 返回：  <br>   [<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br></code></pre></td></tr></tbody></table></figure>
+<p>例如:<br>
+给定二叉树: <code>[3,9,20,null,null,15,7]</code>,</p>
+<figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript">  <span class="hljs-number">3</span><br> / <span class="hljs-string">\</span><br><span class="hljs-number">9</span>  <span class="hljs-number">20</span><br>  /  <span class="hljs-string">\</span><br> <span class="hljs-number">15</span>   <span class="hljs-number">7</span><br></code></pre></td></tr></tbody></table></figure>
+<p>返回其层次遍历结果：</p>
+<figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs json">[<br>  [<span class="hljs-number">3</span>],<br>  [<span class="hljs-number">20</span>,<span class="hljs-number">9</span>],<br>  [<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br>]<br></code></pre></td></tr></tbody></table></figure>
 <h3 id="提示：">提示：</h3>
 <ul>
-<li>节点总数 &lt;= 1000</li>
+<li><code>节点总数 &lt;= 1000</code></li>
 </ul>
 <h2 id="题解">题解</h2>
-<p>常规的层序遍历</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root:<span class="hljs-keyword">return</span> []<br>        queue = deque()<br>        result = []<br>        queue.append(root)<br>        <span class="hljs-keyword">while</span>(queue):<br>            top = queue.popleft()<br>            result.append(top.val)<br>            <span class="hljs-keyword">if</span> top.left:queue.append(top.left)<br>            <span class="hljs-keyword">if</span> top.right:queue.append(top.right)<br>        <span class="hljs-keyword">return</span> result<br><br><span class="hljs-comment">#如果按照层数来打印，那么记录每次的queue长度（本层长度），按照现有队列中的元素来（本层）压入后续元素（下一层）。就可以分层次打印</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="解法一">解法一</h4>
+<p>记录本层的数字个数，将本层的元素全部弹出到列表中，同时将下层元素压进队列中；只是要根据flag，来将列表倒序 。</p>
+<blockquote>
+<p>列表倒叙的方法：</p>
+<p>1，temp.reverse()  直接原地修改哦~</p>
+<p>2，temp = temp[::-1]</p>
+</blockquote>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> root):<span class="hljs-keyword">return</span> []<br>        queue ,result,flag = deque(),[],<span class="hljs-literal">False</span><br>        queue.append(root)<br>        <span class="hljs-keyword">while</span>(queue):<br>            tmp = []<br>            num = <span class="hljs-built_in">len</span>(queue)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num):<br>                top = queue.popleft()<br>                tmp.append(top.val)<br>                <span class="hljs-keyword">if</span>(top.left): queue.append(top.left)<br>                <span class="hljs-keyword">if</span>(top.right): queue.append(top.right)<br>            <span class="hljs-keyword">if</span> flag: tmp = tmp[::-<span class="hljs-number">1</span>] <span class="hljs-comment">#tmp.reverse() # tmp = tmp[::-1]</span><br>            flag = <span class="hljs-keyword">not</span> flag<br>            result.append(<span class="hljs-built_in">list</span>(tmp))<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="解法二">解法二</h4>
+<p>去掉倒叙的操作，根据flag的值更改tmp的插入方向，将tmp声明为<code>deque()</code>，右插为<code>append</code>,左插为<code>appendleft</code>；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">levelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> root):<span class="hljs-keyword">return</span> []<br>        queue ,result,flag = deque(),[],<span class="hljs-literal">False</span><br>        queue.append(root)<br>        <span class="hljs-keyword">while</span>(queue):<br>            tmp = deque()<br>            num = <span class="hljs-built_in">len</span>(queue)<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(num):<br>                top = queue.popleft()<br>                <span class="hljs-keyword">if</span> flag: tmp.appendleft(top.val)<br>                <span class="hljs-keyword">else</span>:tmp.append(top.val)<br>                <span class="hljs-keyword">if</span>(top.left): queue.append(top.left)<br>                <span class="hljs-keyword">if</span>(top.right): queue.append(top.right)<br>            flag = <span class="hljs-keyword">not</span> flag<br>            result.append(<span class="hljs-built_in">list</span>(tmp))<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -309,6 +324,8 @@
                     
                       <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
                     
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%A0%91/">树</a>
+                    
                   </div>
                 
                 
@@ -316,6 +333,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%A0%91/">树</a>
                     
                   </div>
                 
@@ -332,12 +351,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2021/11/23/leetcode/leetcode-offer859/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer859 亲密字符串</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/11/20/leetcode/leetcode-offer38/">
-                        <span class="hidden-mobile">剑指offer38 字符串的排列</span>
+                      <a href="/2021/11/21/leetcode/leetcode-offer32-1/">
+                        <span class="hidden-mobile">剑指offer32-1 从上到下打印二叉树</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -359,8 +384,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/11/21/leetcode-offer32-1/';
-          this.page.identifier = '/2021/11/21/leetcode-offer32-1/';
+          this.page.url = 'https://fanmeilin.github.io/2021/11/22/leetcode/leetcode-offer32-3/';
+          this.page.identifier = '/2021/11/22/leetcode/leetcode-offer32-3/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
