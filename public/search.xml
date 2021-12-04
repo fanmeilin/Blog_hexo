@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>剑指offer20 有效的括号</title>
+      <link href="/2021/11/24/leetcode-offer20/"/>
+      <url>/2021/11/24/leetcode-offer20/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>有效的括号</p></blockquote><h2 id="题目">题目</h2><p>给定一个只包括 ‘(’，‘)’，‘{’，‘}’，‘[’，‘]’&nbsp;的字符串 s ，判断字符串是否有效。</p><p>有效字符串需满足：</p><p>左括号必须用相同类型的右括号闭合。<br>左括号必须以正确的顺序闭合。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">"()"</span><br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">"()[]{}"</span><br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-3：">示例 3：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">"(]"</span><br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-4：">示例 4：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">"([)]"</span><br>输出：<span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-5：">示例 5：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">s</span> = <span class="hljs-string">"{[]}"</span><br>输出：<span class="hljs-literal">true</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= s.length &lt;= 104</li><li>s 仅由括号 ‘()[]{}’ 组成</li></ul><h2 id="题解">题解</h2><p>使用<code>栈和字典</code>辅助判断，如果字符是对应括号的右括号，就弹出，否则压入，最后查看栈中是否还剩元素。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">isValid</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">bool</span>:</span><br>        stack = []<br>        mmap = {<span class="hljs-string">'('</span>:<span class="hljs-string">')'</span>,<span class="hljs-string">')'</span>:<span class="hljs-string">'a'</span>,<span class="hljs-string">'{'</span>:<span class="hljs-string">'}'</span>,<span class="hljs-string">'}'</span>:<span class="hljs-string">'b'</span>,<span class="hljs-string">'['</span>:<span class="hljs-string">']'</span>,<span class="hljs-string">']'</span>:<span class="hljs-string">'c'</span>}<br>        <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> s:<br>            <span class="hljs-keyword">if</span>(stack):<br>                top = stack[<span class="hljs-built_in">len</span>(stack)-<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> stack <span class="hljs-keyword">or</span> mmap[top] != ch):<br>                stack.append(ch)<br>            <span class="hljs-keyword">elif</span>(stack <span class="hljs-keyword">and</span>  mmap[top] == ch):<br>                stack.pop()<br>        <span class="hljs-keyword">return</span> <span class="hljs-keyword">not</span> stack<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 栈 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 栈 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer859 亲密字符串</title>
       <link href="/2021/11/23/leetcode/leetcode-offer859/"/>
       <url>/2021/11/23/leetcode/leetcode-offer859/</url>

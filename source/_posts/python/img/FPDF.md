@@ -1,7 +1,7 @@
 ---
 title: python将图片存进PDF中
-tags: python
-categories: python
+tags: [python,图像]
+categories: [python,图像]
 date: 2021-10-06 10:43:13
 ---
 

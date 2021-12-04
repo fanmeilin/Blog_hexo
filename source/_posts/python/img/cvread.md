@@ -1,7 +1,7 @@
 ---
 title: cv读取带有中文路径的图片
-tags: python
-categories: python
+tags: [python,图像]
+categories: [python,图像]
 date: 2021-10-20 21:12:21
 ---
 

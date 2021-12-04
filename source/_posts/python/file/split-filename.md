@@ -1,7 +1,7 @@
 ---
 title: 分割文件名相关操作
-tags: python
-categories: python
+tags: [python,文件]
+categories: [python,文件]
 date: 2021-10-07 10:34:04
 ---
 

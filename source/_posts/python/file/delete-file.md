@@ -1,7 +1,7 @@
 ---
 title: 使用python删除文件和文件夹
-tags: python
-categories: python
+tags: [python,文件]
+categories: [python,文件]
 date: 2021-10-06 15:33:02
 ---
 

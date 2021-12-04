@@ -1,7 +1,7 @@
 ---
 title: 图像合成视频
-tags: python
-categories: python
+tags: [python,图像]
+categories: [python,图像]
 date: 2021-10-30 09:50:29
 ---
 
