@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>cv读取带有中文路径的图片 - 待时</title>
+  <title>使用python删除文件和文件夹 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="cv读取带有中文路径的图片">
+            <span class="h2" id="subtitle" title="使用python删除文件和文件夹">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-10-20 21:12" pubdate>
-        2021年10月20日 晚上
+      <time datetime="2021-10-06 15:33" pubdate>
+        2021年10月6日 下午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      665 字
+      238 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      2
        分钟
     </span>
   
@@ -283,33 +283,22 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">cv读取带有中文路径的图片</h1>
+            <h1 style="display: none">使用python删除文件和文件夹</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>常规在读取图片时使用的代码是<code>cv.imread(path)</code>，但是路径中出现中文时就会出现，读取为空的情况，以下给出解决方法。</p>
+<p>总结删除文件和文件夹的相关操作和函数。</p>
 </blockquote>
-<h2 id="背景">背景</h2>
-<p>首先介绍一下<code>cv2.imread()函数</code></p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">cv2.imread(filepath,flags)<br>filepath:是要读入的图片路径<br>flags: 读入图片的格式<br>cv2.IMRAED_COLOR:默认选择此参数，读入彩色图片，BGR的格式，忽略了alpha通道，也可以使用数字<span class="hljs-number">1</span>代替。<br>cv2.IMREAD_GRAYSCALE:读入灰度图片，可以直接写<span class="hljs-number">0</span><br>cv2.IMREAD_UNCHANGED:顾名思义，读入完整图片，包括alpha通道，可以直接写-<span class="hljs-number">1</span>（BGRA）<br><br>cv2.COLOR_BGR2GRAY:可以转换颜色空间，由BGR转换为RGB<br>cv2.COLOR_RGB2GRAY:有RGB转换为灰度图格式<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>alpha通道，又称A通道，是一个8位的灰度通道，该通道用256级灰度来记录图像中的透明度复信息，定义透明、不透明和半透明区域，其中黑表示全透明，白表示不透明，灰表示半透明。如果读取的图片没有alpha通道则还是按照三通道读取。</p>
-</blockquote>
-<h2 id="解决方案">解决方案</h2>
-<p><strong>原因：</strong>  在读取含有中文字符的路径图片时会返回None，这是由于opencv不接受non-ascii的路径。</p>
-<p><strong>方法：</strong> 先使用numpy的fromfile将图片读取为np.uint8的格式，再使用cv的imdecode函数解码。</p>
-<p><strong>具体代码</strong></p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>im_path = <span class="hljs-string">'./测试数据/temp_long.jpg'</span><br>im = cv2.imdecode(np.fromfile(im_path, dtype=np.uint8))<br>cv2.imshow(<span class="hljs-string">"显示图片"</span>,im)<br><span class="hljs-built_in">print</span>(im.shape)<br>cv2.waitKey(<span class="hljs-number">0</span>)<br></code></pre></td></tr></tbody></table></figure>
-<p><strong>代码具体分析：</strong><br>
-先不直接读取图片，而是采用<code>numpy</code>中的<code>fromfile</code>读取文件，将图片按照int类型读入数据，读入的是一维数组，然后通过cv中<code>imdecode</code>来对数组解码得到图片，<code>imdecode</code>函数的作用是<code>从内存缓冲区中读取图像</code>，如果缓冲区太短或包含无效数据时，函数返回一个空矩阵(Mat::data==NULL)。如果是彩色图像，解码后的图像将按照B G R顺序存储通道。这函数有两个参数<code>imdecode(buf,flags)</code>，buf是输入数组或字节向量，flags 与cv::imread相同的flag。</p>
-<blockquote>
-<p>cv2.IMREAD_COLOR：加载彩色图片，这个是默认参数，可以直接写1 （BGR形式）<br>
-cv2.IMREAD_GRAYSCALE：以灰度模式加载图片，可以直接写0<br>
-cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
-</blockquote>
-<p><strong>保存</strong></p>
-<p>'.jpg’表示把当前图片img按照jpg格式编码，按照不同格式编码的结果不一样</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> cv2<br><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br>im_path = <span class="hljs-string">'./测试数据/temp_long.jpg'</span><br>im = cv2.imdecode(np.fromfile(im_path, dtype=np.uint8))<br>cv2.imshow(<span class="hljs-string">"显示图片"</span>,im)<br>cv2.imencode(<span class="hljs-string">'.jpg'</span>, im)[<span class="hljs-number">1</span>].tofile(<span class="hljs-string">'E:\测试路径/frameTest.jpg'</span>)<span class="hljs-comment">#英文或中文路径均适用</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="删除单个文件">删除单个文件</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">os.remove(path)<br><span class="hljs-comment"># 如果path是一个目录，抛出OSError错误，如果文件不在或者路径错误，会抛出错误</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="删除文件夹">删除文件夹</h3>
+<p>空文件夹</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">os.rmdir(dirName)<br>os.removedirs(dirName)<br><span class="hljs-comment"># 删除目录 dirName，要求dirName必须是个空目录，否则抛出OSError错误</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="递归删除文件夹">递归删除文件夹</h3>
+<p>非空文件夹</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> shutil<br>shutil.rmtree()<br></code></pre></td></tr></tbody></table></figure>
+<p>遍历一个文件夹，先删除子文件，再删除文件夹。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">for</span> root, dirs, files <span class="hljs-keyword">in</span> os.walk(<span class="hljs-string">"filename"</span>, topdown=<span class="hljs-literal">False</span>):<br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> files:<br>        os.remove(os.path.join(root, name))<br>    <span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> dirs:<br>        os.rmdir(os.path.join(root, name))<br> <br><span class="hljs-comment"># os.walk的第一个参数是要遍历并删除子文件夹和文件的目录</span><br><span class="hljs-comment"># 上面的代码运行后，文件夹"filename"里的文件夹和文件全被删除，但是文件夹"filename"还存在</span><br><span class="hljs-comment"># 具体可以查下os.walk()的用法，以及其参数topdown的功能</span><br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -321,6 +310,8 @@ cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
                     
                       <a class="hover-with-bg" href="/categories/python/">python</a>
                     
+                      <a class="hover-with-bg" href="/categories/python/%E6%96%87%E4%BB%B6/">文件</a>
+                    
                   </div>
                 
                 
@@ -328,6 +319,8 @@ cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E4%BB%B6/">文件</a>
                     
                   </div>
                 
@@ -344,9 +337,9 @@ cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/10/21/python/pyqtimg/">
+                      <a href="/2021/10/07/python/file/split-filename/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PyQt5中放置图片</span>
+                        <span class="hidden-mobile">分割文件名相关操作</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -354,8 +347,8 @@ cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/10/08/leetcode/leetcode-offer36/">
-                        <span class="hidden-mobile">剑指offer36 二叉搜索树和双向链表</span>
+                      <a href="/2021/10/06/leetcode/leetcode-offer42/">
+                        <span class="hidden-mobile">剑指offer42 连续子数组最大和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -377,8 +370,8 @@ cv2.IMREAD_UNCHANGED：包括alpha，可以直接写-1</p>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/10/20/python/cvread/';
-          this.page.identifier = '/2021/10/20/python/cvread/';
+          this.page.url = 'https://fanmeilin.github.io/2021/10/06/python/file/delete-file/';
+          this.page.identifier = '/2021/10/06/python/file/delete-file/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
