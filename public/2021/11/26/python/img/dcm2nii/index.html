@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1 字
+      1.4k 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      17
        分钟
     </span>
   
@@ -286,8 +286,47 @@
             <h1 style="display: none">dcm文件转换为3D的nii文件</h1>
             
             <div class="markdown-body">
-              <blockquote></blockquote>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><br></code></pre></td></tr></tbody></table></figure>
+              <blockquote>
+<p>记录dcm文件转换为nii文件的代码</p>
+</blockquote>
+<h1>前言</h1>
+<p>NIfTI 中的图像原始数据一般被存储成了三维图像，而dicom存储为二维图层，所以相对于DICOM文件，NIFTI文件更加易用于机器学习，因为NIfTI 是三维图像，处理一个单独的NIfTI 文件要比处理成百上千个DICOM文件更加容易一些。</p>
+<h1>医学图像格式</h1>
+<p>DICOM 和 NIFTI 是最常用的格式，下面对其进行简单介绍。</p>
+<h2 id="DICOM">DICOM</h2>
+<p>DICOM 代表的是医疗数字成像和通信。DICOM 是由美国国家电气制造商协会（NEMA）制定的标准。它定义了医疗成像领域中关于信息处理、存储、打印以及传输的标准，这些都是你在扫描仪或者某家医院的图片归档和通信系统（PACS）能够立即得到的文件格式。<br>
+它包括了文件格式和能够接收图像以及 DICOM 格式的病人数据的实体之间使用 TCP/IP 进行通信的协议。</p>
+<p>一个 DICOM 文件包含文件头部和同文件名的*.dcm 图像数据。文件头部的大小取决于它所提供的信息的多少。文件头包含以下信息：病人的 ID，病人的姓名，图像的模态以及其他信息。它定义了帧的数量以及图像的精度。这些信息会被图像浏览器在显示图像时用到。对于一个图像采样，会有很多个 DICOM 文件。</p>
+<h2 id="NIFTI">NIFTI</h2>
+<p>Nifti 格式最初是为神经影像学发明的。神经影像信息学技术计划（NIFTI）将 NIfTI 格式预设为 ANALYZE7.5 格式的替代品。它最初的应用领域是神经影像，但是也被用在其他领域。这种格式的主要特点就是它包含两个能够将每个体素的索引（i,j,k）和它的空间位置（x,y,z）关联起来的仿射坐标。</p>
+<h4 id="代码">代码</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#coding=utf-8</span><br><span class="hljs-keyword">import</span> SimpleITK <span class="hljs-keyword">as</span> sitk<br><span class="hljs-keyword">import</span> os,glob<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dcm2nii</span>(<span class="hljs-params">dcms_path, nii_path</span>):</span><br>    <span class="hljs-comment"># 1.构建dicom序列文件阅读器，并执行（即将dicom序列文件“打包整合”）</span><br>    reader = sitk.ImageSeriesReader()<br>    dicom_names = reader.GetGDCMSeriesFileNames(dcms_path)<br>    reader.SetFileNames(dicom_names)<br>    image2 = reader.Execute()<br>    <span class="hljs-comment"># 2.将整合后的数据转为array，并获取dicom文件基本信息</span><br>    image_array = sitk.GetArrayFromImage(image2)  <span class="hljs-comment"># z, y, x</span><br>    origin = image2.GetOrigin()  <span class="hljs-comment"># x, y, z</span><br>    spacing = image2.GetSpacing()  <span class="hljs-comment"># x, y, z</span><br>    direction = image2.GetDirection()  <span class="hljs-comment"># x, y, z</span><br>    <span class="hljs-comment"># 3.将array转为img，并保存为.nii.gz</span><br>    image3 = sitk.GetImageFromArray(image_array)<br>    image3.SetSpacing(spacing)<br>    image3.SetDirection(direction)<br>    image3.SetOrigin(origin)<br>    sitk.WriteImage(image3, nii_path)<br><br><br><span class="hljs-keyword">if</span> __name__ == <span class="hljs-string">'__main__'</span>:<br>    filelist = glob.glob(<span class="hljs-string">"./data/AD_result/I*"</span>)<br>    save_path = <span class="hljs-string">"./data/AD_nii"</span><br>    os.makedirs(save_path,exist_ok=<span class="hljs-literal">True</span>)<br>    <span class="hljs-keyword">for</span> dcms_path <span class="hljs-keyword">in</span> filelist:<br>        dirname = dcms_path.split(os.path.sep)[-<span class="hljs-number">1</span>]<br>        nii_path = os.path.join(save_path,dirname+ <span class="hljs-string">".nii"</span>)<br>        <span class="hljs-built_in">print</span>(nii_path)<br>       <span class="hljs-comment"># r'.\test.nii.gz'  # 所需.nii.gz文件保存路径</span><br>        dcm2nii(dcms_path, nii_path)<br><br></code></pre></td></tr></tbody></table></figure>
+<h1>图像自动处理工具SimpleITK的使用</h1>
+<p>参考：<a target="_blank" rel="noopener" href="https://www.ebaina.com/articles/140000012739">https://www.ebaina.com/articles/140000012739</a></p>
+<h4 id="安装SimpleITK库">安装SimpleITK库</h4>
+<figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs cmake">命令行模式下，任意位置输入：<br>  pip <span class="hljs-keyword">install</span> SimpleITK<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="SimpleITK处理医学图像">SimpleITK处理医学图像</h3>
+<p>做医学图像时，SimpleITK是一个很常用的库。实际上大家往往喜欢把不同类型的数据割裂开，nrrd用pynrrd处理，dicom用dicom处理，nii用nibabel处理……实际上根本没必要，SimpleITK完全可以统一处理，各种类型的读取和保存一步搞定。</p>
+<h4 id="读取">读取</h4>
+<h5 id="DICOM-2">DICOM</h5>
+<p>首先是最常见的DICOM。这个文件格式是CT机器直接输出的结果，每个病人会是一个文件夹，里面有若干个DICOM文件，每个DICOM文件都是一个切片，可以被单独查阅（通过SimpleITK的ReadImage）。但是，处理起来一般我们会希望把这些DICOM组合起来形成一个3D的矩阵，这样就可以用到SimpltITK里的<code>ImageSeriesReader()</code>来实现：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> SimpleITK <span class="hljs-keyword">as</span> sitk<br>reader = sitk.ImageSeriesReader() <br>img_names = reader.GetGDCMSeriesFileNames(img_path) <br>reader.SetFileNames(img_names) <br>image = reader.Execute() <br>image_array = sitk.GetArrayFromImage(image) <span class="hljs-comment"># z, y, x </span><br></code></pre></td></tr></tbody></table></figure>
+<h5 id="MHD">MHD</h5>
+<p>然后还有就是。这种格式的文件由一个MHD文件和一个RAW文件组成，其中MHD里面是病人和CT扫描结果的相关信息，RAW里面存的是真正的数组，对于这种格式，SimpleITK可以这样读取：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> SimpleITK <span class="hljs-keyword">as</span> sitk<br>itk_img = sitk.ReadImage(filename) <br>img_array = sitk.GetArrayFromImage(itk_img) <br></code></pre></td></tr></tbody></table></figure>
+<h5 id="NII">NII</h5>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> SimpleITK <span class="hljs-keyword">as</span> sitk<br>itk_img = sitk.ReadImage(filename)<br>img_array = sitk.GetArrayFromImage(itk_img) <br></code></pre></td></tr></tbody></table></figure>
+<p>不过，对于NII类型的文件，SimpleITK在保存上会有一些问题（读取没问题保存上竟然有问题我真是服了），如果slice的数量很大（之前有碰到过300多个slice的），保存起来会直接报错，所以如果碰到这种情况我会选择保存成nrrd（用pynrrd库）</p>
+<h4 id="保存">保存</h4>
+<p>说到保存，有几个天坑一定要说一下。</p>
+<p>首先，保存的通用代码是：</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">savedImg = sitk.<span class="hljs-constructor">GetImageFromArray(<span class="hljs-params">outputs3D</span>)</span> <br>savedImg.<span class="hljs-constructor">SetSpacing(<span class="hljs-params">spacing</span>)</span><br>savedImg.<span class="hljs-constructor">SetOrigin(<span class="hljs-params">origin</span>)</span> <br>sitk.<span class="hljs-constructor">WriteImage(<span class="hljs-params">savedImg</span>, <span class="hljs-params">input_nii</span>[:-4]+'<span class="hljs-params">_liverSegResult</span>.<span class="hljs-params">nii</span>')</span><br><br></code></pre></td></tr></tbody></table></figure>
+<p>这个里面，SetOrigin和SetSpacing我常常会忘记，所以导致保存的CT用ITKsnap看会变形。这里面的spacing和origin均可以从之前ReadImage()返回的对象上通过GetOrigin()和GetSpacing()获取，千万别忘了。当然，除了这两个之外还有个direction也是可以get和set的，不过一般情况下只要你代码没有搞一些矩阵的翻转等操作这个是不用管的。</p>
+<h3 id="使用SimpleITK读取和保存Nii-gz文件">使用SimpleITK读取和保存Nii.gz文件</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">## using simpleITK to load and save data.</span><br><span class="hljs-keyword">import</span> SimpleITK <span class="hljs-keyword">as</span> sitk<br>itk_img = sitk.ReadImage(<span class="hljs-string">'./nifti.nii.gz'</span>)<br>img = sitk.GetArrayFromImage(itk_img)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">"img shape:"</span>,img.shape)<br><br><span class="hljs-comment">## save </span><br>out = sitk.GetImageFromArray(img)<br><span class="hljs-comment"># # out.SetSpacing(itk_img.GetSpacing())</span><br><span class="hljs-comment"># # out.SetOrigin(itk_img.GetOrigin())</span><br>sitk.WriteImage(out,<span class="hljs-string">'simpleitk_save.nii.gz'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="可视化一层">可视化一层</h3>
+<p>下面的程序挑取一层进行可视化，并标注结节位置。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">a = image_array.transpose(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">0</span>)[:,:,<span class="hljs-number">0</span>]  <span class="hljs-comment"># transpose是将(z,x,y)的三维矩阵转为(x,y,z)的矩阵</span><br>plt.gca().add_patch( plt.Rectangle((<span class="hljs-number">147</span>,<span class="hljs-number">297</span>), <span class="hljs-number">24</span>,<span class="hljs-number">24</span>, fill=<span class="hljs-literal">False</span>,edgecolor=<span class="hljs-string">'r'</span>, linewidth=<span class="hljs-number">3</span>))<br>plt.imshow(a[:,:,<span class="hljs-number">1</span>]*<span class="hljs-number">255</span>)  <span class="hljs-comment"># 在图中画框</span><br>plt.show()<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -326,7 +365,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/04/leetcode-offer33/">
+                      <a href="/2021/12/04/leetcode/leetcode-offer33/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">剑指offer33</span>
                         <span class="visible-mobile">上一篇</span>
