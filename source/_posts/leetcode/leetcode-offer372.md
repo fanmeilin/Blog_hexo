@@ -1,7 +1,7 @@
 ---
-title: 剑指offerleetcode-offer372
-tags: 剑指
-categories: 剑指
+title: 剑指offer372 超级次方
+tags: [剑指,数组]
+categories: [剑指,数组]
 date: 2021-12-05 21:29:30
 ---
 
