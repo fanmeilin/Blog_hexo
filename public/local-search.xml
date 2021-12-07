@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指offer34 二叉树中和为某一值的路径</title>
+    <link href="/2021/12/06/leetcode/leetcode-offer34/"/>
+    <url>/2021/12/06/leetcode/leetcode-offer34/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>二叉树中和为某一值的路径</p></blockquote><h2 id="题目">题目</h2><p>给你二叉树的根节点 root 和一个整数目标和 targetSum ，找出所有 从根节点到叶子节点 路径总和等于给定目标和的路径。</p><p>叶子节点 是指没有子节点的节点。</p><h3 id="示例-1：">示例 1：</h3><p><img src="https://picture.mulindya.com/leetcode34-1.jpg" alt=""></p><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：root = [<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">8</span>,<span class="hljs-number">11</span>,null,<span class="hljs-number">13</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">2</span>,null,null,<span class="hljs-number">5</span>,<span class="hljs-number">1</span>], targetSum = <span class="hljs-number">22</span><br>输出：<span class="hljs-string">[[5,4,11,2],[5,8,4,5]]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><p><img src="https://picture.mulindya.com/leetcode34-2.jpg" alt=""></p><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：root = <span class="hljs-comment">[1,2,3]</span>, targetSum = 5<br>输出：<span class="hljs-comment">[]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例4：">示例4：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：root = <span class="hljs-comment">[1,2]</span>, targetSum = 0<br>输出：<span class="hljs-comment">[]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>树中节点总数在范围 <code>[0, 5000]</code> 内</li><li><code>-1000 &lt;= Node.val &lt;= 1000</code></li><li><code>-1000 &lt;= targetSum &lt;= 1000</code></li></ul><h2 id="题解">题解</h2><p>注存在节点的值是负数，因此<strong>不能按照当前得到的和进行剪枝操作</strong>，另一个需要注意的点是<strong>不能将对象append</strong>，对象的append直接引用的，再后续修改会影响到result的内容，所以可以将其进行copy，深拷贝，或者list实例化一下。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, val=0, left=None, right=None):</span><br><span class="hljs-comment">#         self.val = val</span><br><span class="hljs-comment">#         self.left = left</span><br><span class="hljs-comment">#         self.right = right</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pathSum</span>(<span class="hljs-params">self, root: TreeNode, target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> root): <span class="hljs-keyword">return</span> []<br>        result,nowlist = [],[]<br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findPath</span>(<span class="hljs-params">root,nowsum</span>):</span><br>            <span class="hljs-comment"># if(not root or (root and root.val + nowsum&gt;target)): return #还存在负数的情况因此不能剪枝</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> root): <span class="hljs-keyword">return</span><br>            tsum = root.val + nowsum<br>            nowlist.append(root.val)<br>            <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> root.left <span class="hljs-keyword">and</span> <span class="hljs-keyword">not</span> root.right <span class="hljs-keyword">and</span> tsum==target):<br>                result.append(nowlist.copy()) <span class="hljs-comment">#不能随便将一个对象append进去，后续此对象出现变化，会影响到result</span><br>            findPath(root.left,tsum)<br>            findPath(root.right,tsum)<br>            nowlist.pop()<br>               <br>        findPath(root,<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>树</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指offer372 超级次方</title>
     <link href="/2021/12/05/leetcode/leetcode-offer372/"/>
     <url>/2021/12/05/leetcode/leetcode-offer372/</url>
@@ -2398,11 +2427,11 @@
     
     <tags>
       
+      <tag>配置</tag>
+      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
-      
-      <tag>配置</tag>
       
     </tags>
     
