@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>剑指offer56-2 数组中数字出现的次数Ⅱ</title>
+      <link href="/2021/12/08/leetcode/leetcode-offer56-2/"/>
+      <url>/2021/12/08/leetcode/leetcode-offer56-2/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>数组中数字出现的次数Ⅱ</p></blockquote><h2 id="题目">题目</h2><p>在一个数组 <code>nums</code> 中除一个数字只出现一次之外，其他数字都出现了三次。请找出那个只出现一次的数字。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：nums = [<span class="hljs-number">3,4,3,3</span>]<br>输出：<span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[9,1,7,9,7,9,7]</span><br>输出：<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><p><code>1 &lt;= nums.length &lt;= 10000</code></p></li><li><p><code>1 &lt;= nums[i] &lt; 2^31</code></p></li></ul><h2 id="题解">题解</h2><p>使用哈希表记录次数，然后再寻找次数为1的数字。此时的时间复杂度为O(N),空间复杂度为O(N)。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        tmap = {}<br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            tmap[num] = tmap[num]+<span class="hljs-number">1</span> <span class="hljs-keyword">if</span> num <span class="hljs-keyword">in</span> tmap <span class="hljs-keyword">else</span> <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> tmap:<br>            <span class="hljs-keyword">if</span> tmap[num] == <span class="hljs-number">1</span>:<br>                <span class="hljs-keyword">return</span> num<br></code></pre></td></tr></tbody></table></figure><p>还有一种方法可以达到时间复杂度为O(N),空间复杂度为O(1);</p><p>其思想是每一位的二进制位对于出现3次的数字相加是3的倍数。这样可以把每一位相加对 3 除余数，可以得到出现一次的数字。</p><p><img src="https://picture.mulindya.com/leetcode-offer56-2.png" alt=""></p><p>实际上修改余数m，可以得到通用解法：**除了一个数字以外，其余数字都出现 m 次 **</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">singleNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        counts = [<span class="hljs-number">0</span>] * <span class="hljs-number">32</span> <span class="hljs-comment">#记录每一位的和</span><br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums:<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>                counts[j] += num &amp; <span class="hljs-number">1</span><br>                num &gt;&gt;= <span class="hljs-number">1</span> <span class="hljs-comment">#右移1位</span><br>        res, m = <span class="hljs-number">0</span>, <span class="hljs-number">3</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>):<br>            res &lt;&lt;= <span class="hljs-number">1</span><br>            res |= counts[<span class="hljs-number">31</span> - i] % m  <span class="hljs-comment"># 位或运算 从高位开始然后左移运算</span><br>        <span class="hljs-keyword">return</span> res <span class="hljs-comment"># if counts[31] % m == 0 else ~(res ^ 0xffffffff) #最高位为0则为正数，否则为负数</span><br></code></pre></td></tr></tbody></table></figure><p>负数此处的操作没有看懂。经测试，直接return res即可。</p><blockquote><p>由于 Python 的存储负数的特殊性，需要先将 0 - 32 位取反（即 res ^ 0xffffffff ），再将所有位取反（即 ~ ）。<strong>^表示二进制异或运算</strong><br>两个组合操作实质上是将数字 32 以上位取反， 0 - 32 位不变。</p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 数组 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 数组 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer53-1 数组中数字出现的次数</title>
       <link href="/2021/12/07/leetcode/leetcode-offer53-1/"/>
       <url>/2021/12/07/leetcode/leetcode-offer53-1/</url>

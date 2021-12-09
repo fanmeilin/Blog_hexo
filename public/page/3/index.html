@@ -240,6 +240,64 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/10/30/python/img/pic2video/" target="_self">
+          图像合成视频
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/10/30/python/img/pic2video/" target="_self">
+          
+          
+            
+          
+          
+在微生物项目中，需要将视频中的微生物检测识别出来，并且生成视频的格式保存，其中需要将检测的annotation图片合成为视频格式。大致流程：使用cv库，首先读取图片，resize到指定大小，存储到Video实例中；
+
+
+OpenCV 底层是用 FFMEPG 进行多媒体开发的，所以 OpenCV 它的长项不在于此，它只是提供了这种能力而已，如果要针对多媒体文件做复杂的处理，推荐的还是 FFMEPG
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-10-30 09:50" pubdate>
+              2021-10-30
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/python/">python</a>
+            
+              <a href="/categories/python/%E5%9B%BE%E5%83%8F/">图像</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/python/">python</a>
+            
+              <a href="/tags/%E5%9B%BE%E5%83%8F/">图像</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/10/29/python/squeeze/" target="_self">
           np.squeeze的用法
         </a>
@@ -711,69 +769,6 @@ os.path相关函数
             <i class="iconfont icon-date"></i>
             <time datetime="2021-10-07 10:34" pubdate>
               2021-10-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/python/">python</a>
-            
-              <a href="/categories/python/%E6%96%87%E4%BB%B6/">文件</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/python/">python</a>
-            
-              <a href="/tags/%E6%96%87%E4%BB%B6/">文件</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/10/06/python/file/delete-file/" target="_self">
-          使用python删除文件和文件夹
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/10/06/python/file/delete-file/" target="_self">
-          
-          
-            
-          
-          
-总结删除文件和文件夹的相关操作和函数。
-
-删除单个文件
-12os.remove(path)# 如果path是一个目录，抛出OSError错误，如果文件不在或者路径错误，会抛出错误
-删除文件夹
-空文件夹
-123os.rmdir(dirName)os.removedirs(dirName)# 删除目录 dirName，要求dirName必须是个空目录，否则抛出OSError错误
-递归删除文件夹
-非空
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-10-06 15:33" pubdate>
-              2021-10-06
             </time>
           </div>
         
