@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>将图像保存值Word中</title>
+    <link href="/2021/12/10/python/img/imageTodocx/"/>
+    <url>/2021/12/10/python/img/imageTodocx/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>利用python，向Word中保存信息，这里主要是记录对图像的保存；</p></blockquote><h2 id="按照python-docx">按照python-docx</h2><p>python-docx is a Python library for creating and updating Microsoft Word (.docx) files.</p><figure class="highlight cmake"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs cmake">pip <span class="hljs-keyword">install</span> python-docx<br></code></pre></td></tr></tbody></table></figure><h2 id="文档相关操作">文档相关操作</h2><h3 id="插入图片">插入图片</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 导入模块</span><br><span class="hljs-keyword">from</span> docx <span class="hljs-keyword">import</span> Document<br><span class="hljs-comment"># 此模块中包含 docx 中各类单位方法</span><br><span class="hljs-keyword">from</span> docx <span class="hljs-keyword">import</span> shared<br><br>doc = Document()<br>doc.add_heading(<span class="hljs-string">'python-docx 基础讲解（二）'</span>)<br><br><span class="hljs-comment"># 在文档中增加图片,并对设置图片大小</span><br><span class="hljs-comment"># 当只设置一个方向的长度（宽或高）时，另一方向会自动缩放</span><br>doc.add_picture(<span class="hljs-string">'1.png'</span>,width=shared.Inches(<span class="hljs-number">1</span>))  <span class="hljs-comment"># 按英寸设置</span><br>doc.add_picture(<span class="hljs-string">'1.png'</span>,height=shared.Cm(<span class="hljs-number">2</span>))  <span class="hljs-comment"># 按厘米设置</span><br><span class="hljs-comment">#也可以按照毫米设置shared.Mm(2)</span><br><br><span class="hljs-comment"># 保存文件</span><br>doc.save(<span class="hljs-string">'test2.docx'</span>)<br></code></pre></td></tr></tbody></table></figure><h3 id="页面大小设置">页面大小设置</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> docx <span class="hljs-keyword">import</span> Document <span class="hljs-comment"># 导入docx包</span><br><span class="hljs-keyword">from</span> docx.shared <span class="hljs-keyword">import</span> Cm, Inches, Pt <span class="hljs-comment"># 导入单位换算函数</span><br>document = Document() <span class="hljs-comment"># 新建word文档</span><br>section = document.sections[<span class="hljs-number">0</span>] <span class="hljs-comment"># 获取section对象</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">'默认页面的宽度和高度：'</span>, section.page_width.cm,<br>section.page_height.cm) <span class="hljs-comment"># 打印默认页面宽度和高度</span><br>section.page_width = Cm(<span class="hljs-number">40</span>)<br>section.page_height = Cm(<span class="hljs-number">40</span>)<br><br><span class="hljs-comment">#A3纸的格式是297*420mm</span><br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>python</category>
+      
+      <category>图像</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>python</tag>
+      
+      <tag>图像</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>剑指offer2_085 生成匹配的括号</title>
     <link href="/2021/12/09/leetcode/leetcode-offer2-085/"/>
     <url>/2021/12/09/leetcode/leetcode-offer2-085/</url>
