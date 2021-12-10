@@ -5,8 +5,8 @@
   
   <entry>
     <title>剑指offer2_085 生成匹配的括号</title>
-    <link href="/2021/12/09/leetcode-offer2-085/"/>
-    <url>/2021/12/09/leetcode-offer2-085/</url>
+    <link href="/2021/12/09/leetcode/leetcode-offer2-085/"/>
+    <url>/2021/12/09/leetcode/leetcode-offer2-085/</url>
     
     <content type="html"><![CDATA[<blockquote><p>生成匹配的括号</p></blockquote><h2 id="题目">题目</h2><p>正整数 <code>n</code> 代表生成括号的对数，请设计一个函数，用于能够生成所有可能的并且 <strong>有效的</strong> 括号组合。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">3</span><br>输出：[<span class="hljs-string">"((()))"</span>,<span class="hljs-string">"(()())"</span>,<span class="hljs-string">"(())()"</span>,<span class="hljs-string">"()(())"</span>,<span class="hljs-string">"()()()"</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs excel">输入：<span class="hljs-built_in">n</span> = <span class="hljs-number">1</span><br>输出：[<span class="hljs-string">"()"</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= n &lt;= 8</li></ul><h2 id="题解">题解</h2><p>巧妙的深度优先算法，记录生成当前的字符串，左括号，右括号的数目；<br>如果左括号个数不超，就增加左括号，如果可以增加右括号（<strong>现有的右括号小于左括号数目</strong>），那么增加右括号。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">generateParenthesis</span>(<span class="hljs-params">self, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">s,left,right</span>):</span><br>            <span class="hljs-keyword">if</span>(<span class="hljs-built_in">len</span>(s)==<span class="hljs-number">2</span>*n):<br>                result.append(s)<br>            <span class="hljs-keyword">if</span>(left&lt;n):dfs(s+<span class="hljs-string">"("</span>,left+<span class="hljs-number">1</span>,right) <span class="hljs-comment">#如果left数组少于n个就增加左括号</span><br>            <span class="hljs-keyword">if</span>(left&gt;right):dfs(s+<span class="hljs-string">")"</span>,left,right+<span class="hljs-number">1</span>) <span class="hljs-comment">#如果可以匹配左括号，可以增加右括号区匹配</span><br>        result = []<br>        dfs(<span class="hljs-string">""</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
     
@@ -24,9 +24,9 @@
       
       <tag>剑指</tag>
       
-      <tag>树</tag>
-      
       <tag>idea</tag>
+      
+      <tag>树</tag>
       
     </tags>
     
@@ -1714,9 +1714,9 @@
       
       <tag>剑指</tag>
       
-      <tag>树</tag>
-      
       <tag>idea</tag>
+      
+      <tag>树</tag>
       
     </tags>
     
@@ -2035,9 +2035,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
@@ -2203,9 +2203,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
