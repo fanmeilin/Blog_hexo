@@ -1,5 +1,5 @@
 ---
-title: 将图像保存值Word中
+title: 将图像保存至Word中
 tags: [python,图像]
 categories: [python,图像]
 date: 2021-12-10 13:20:28
