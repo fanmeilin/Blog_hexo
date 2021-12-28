@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>低秩逼近的思考 - 待时</title>
+  <title>剑指offer45 把数组排成最小的数 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="低秩逼近的思考">
+            <span class="h2" id="subtitle" title="剑指offer45 把数组排成最小的数">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-06 16:38" pubdate>
-        2021年8月6日 下午
+      <time datetime="2021-12-28 14:07" pubdate>
+        2021年12月28日 下午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.1k 字
+      456 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      6
        分钟
     </span>
   
@@ -283,42 +283,30 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">低秩逼近的思考</h1>
+            <h1 style="display: none">剑指offer45 把数组排成最小的数</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>阅读文章<strong>Semi-orthogonal Embedding for Effificient Unsupervised Anomaly Segmentation</strong>时出现一个概念–<strong>Low-rank approximation</strong> ，就此进行相关讨论。</p>
+<p>把数组排成最小的数</p>
 </blockquote>
-<h3 id="低秩（Low-Rank）">低秩（Low-Rank）</h3>
-<p>如果X是一个m行n列的数值矩阵，rank(X)是X的秩，假如rank (X)远小于m和n，则我们称X是低秩矩阵。低秩矩阵每行或每列都可以用其他的行或列线性表出，可见它包含大量的冗余信息。利用这种冗余信息，可以对缺失数据进行恢复，也可以对数据进行特征提取。</p>
-<p>图像处理中，<em>rank可以理解为图像所包含的信息的丰富程度</em>，在显示生活中，一张图片中大部分成分是相似的。比如给一张大草原的图片</p>
-<p><img src="https://picture.mulindya.com/low-rank-app-pic1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>草原是由很多草组成的，而草是相似的，所以如果全是草，那么这张图所包含的信息量是很少的的，因为可以理解为草是草的复制品。而上图的蒙古包，人，马之类的则可以理解为图片所包含的信息，实际上，相对于只有草的草原图片和有草和蒙古包的草原图片，后者的秩是较高的。也就是说，图片中比较突兀的成分，比如蒙古包，比如人像照片中的红眼亮点，会增加图像矩阵的秩。而现实生活中一张不错的图片的秩其实是比较低的，如果图像的秩比较高，往往是因为图像中的噪声比较严重。比如拍照的时候ISO感光度设置过高造成噪点太过泛滥之类的。所以，<em>图像处理的低秩性其实可以拿来去除照片中的噪点</em>。</p>
-<h3 id="低秩和稀疏">低秩和稀疏</h3>
-<p>我们认为图像有一些公共的模式，所有图像都由这些基本的模式组成。例如，如果图像是一个叉，可以看成是一个正斜线和反斜线的叠加。<strong>只要我们找到了所有的基底（称作字典</strong>，就是上面说的正斜线和反斜线之类的东西）**，就能通过基底的线性组合表示出所有的图像。**这就好像学画画，先学会基本的画正方体、球体、圆柱体等等，就可以组合出各种各样的复杂形状。</p>
-<p><strong>在很多情形下，基底的数量是很少的</strong>，比如一张照片拍的是一面砖墙，那么它显然具有周期重复的特点，换句话说低秩。即使整个图不低秩，往往也能找出一些相似的块，这些块是低秩的。再退一步，就算这也做不到，往往也可以把已有的数据看成一组低维的结果加上噪声，也即原来的数据<strong>可以被低秩矩阵很好的逼近</strong>。<strong>稀疏性</strong>的意思是（以稀疏表示为例），任给一个图像，<strong>字典可能是过完备的</strong>，从而用字典里的基向量表出这幅图有很多种不同的方案。我们希望<strong>选取使用基底数量最少的那种方案</strong>，</p>
-<p>应用：</p>
-<p><em><strong>1）矩阵填充(Matrix Completion)</strong></em></p>
-<p><em><strong>2）鲁棒PCA</strong></em></p>
-<p><em><strong>3）背景建模</strong></em></p>
-<p><em><strong>4）变换不变低秩纹理（TILT）</strong></em></p>
-<blockquote>
-<p>在论文 <strong>Semi-orthogonal Embedding for Effificient Unsupervised Anomaly Segmentation</strong>中有一段可以参考。</p>
-</blockquote>
-<p><strong>Low-rank approximation of precision matrix</strong></p>
-<p>The feature data <strong>X</strong> is subject to low-rank approximation due to the narrower target domain for anomaly-free images than the ImageNet dataset’s. The multi-scale features from different layers may also contribute to it due to the inter-dependency among the features from the layers. Inspired by the truncated SVD of a precision matrix, a low-rank embedding of input features with $W \in R^{F \times k}$,where <em>F &gt; k</em>, is considered as follows:</p>
-
-$$
-d^2_{i,j} = X^TW(W^TC_{i,j}W)^{−1}W^TX
-$$
-
-<p>where the below Theorem 1 shows the optimal <strong>W</strong>* is the eigenvectors related to the <em>k</em>-smallest eigenvalues of $C_{i,j}$ . Notice that 1) the computational complexity of the equation is cubically reduced to <em>O</em>($HWk^3$) set aside the cost of SVD, although which is the concern, 2) PCA embedding would fail to minimize approximation error since it uses the <em>k</em>-largest eigenvectors [14], and 3) near-zero eigenvalues may induce substantial anomaly scores.</p>
-<p>选取协方差矩阵的k个最小的特征值对应的特征向量，进行低秩逼近</p>
-<blockquote>
-<p>参考</p>
-<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28630628">https://www.zhihu.com/question/28630628</a></p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zouxy09/article/details/24972869">https://blog.csdn.net/zouxy09/article/details/24972869</a></p>
-</blockquote>
+<h2 id="题目">题目</h2>
+<p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: [10,2]</span><br><span class="hljs-section">输出: "102"</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: [<span class="hljs-number">3,30,34,5</span>,<span class="hljs-number">9</span>]<br>输出: "<span class="hljs-number">3033459</span>"<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
+<ul>
+<li>0 &lt; nums.length &lt;= 100</li>
+<li>输出结果可能非常大，所以你需要返回一个字符串而不是整数</li>
+<li>拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0</li>
+</ul>
+<h2 id="题解">题解</h2>
+<p>方法主要是用到自定义排序；<br>
+在<code>python3</code>中的自定义排序要重载<code>functools.cmp_to_key</code>函数，但是这里的规则是<strong>默认小的在前面</strong>；所以在比较的时候重载<code>mycmp</code>方法，a,b顺序满足条件时返回-1(num&lt;0)</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cmp_to_key</span>(<span class="hljs-params">mycmp</span>):</span><br>    <span class="hljs-string">"""Convert a cmp= function into a key= function"""</span><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">K</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>        __slots__ = [<span class="hljs-string">'obj'</span>]<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, obj</span>):</span><br>            self.obj = obj<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) == <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__le__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt;= <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__ge__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt;= <span class="hljs-number">0</span><br>        __hash__ = <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">return</span> K<br></code></pre></td></tr></tbody></table></figure>
+<p>另外，直接将ab拼接进行比较大小，这里直接使用字符串比较大小更快哦~</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">funccmp</span>(<span class="hljs-params">a,b</span>):</span><br>            x,y = a+b,b+a<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">int</span>(x)&lt;<span class="hljs-built_in">int</span>(y): <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sort_rule</span>(<span class="hljs-params">x, y</span>):</span><br>            a, b = x + y, y + x <span class="hljs-comment">#可以直接对字符串比较，更快</span><br>            <span class="hljs-keyword">if</span> a &gt; b: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> a &lt; b: <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        s = [<span class="hljs-built_in">str</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums]<br>        t = <span class="hljs-built_in">sorted</span>(s,key = functools.cmp_to_key(sort_rule))    <br>        <span class="hljs-comment">#重载比较函数，在python的重载cmp_to_key时默认是小的元素排在前面，所以在满足条件时返回-1，其他情况大于-1即可</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>.join(t)<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -328,9 +316,9 @@ $$
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/math/">math</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/categories/math/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -338,9 +326,9 @@ $$
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/math/">math</a>
+                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -357,18 +345,12 @@ $$
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/08/09/math/Eckark-young/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Eckark_young定理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/08/06/config/git-submodule/">
-                        <span class="hidden-mobile">子模块为空的解决方案</span>
+                      <a href="/2021/12/26/leetcode/leetcode14/">
+                        <span class="hidden-mobile">剑指leetcode14 最长公共前缀</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -390,8 +372,8 @@ $$
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/08/06/math/low-rank-app/';
-          this.page.identifier = '/2021/08/06/math/low-rank-app/';
+          this.page.url = 'https://fanmeilin.github.io/2021/12/28/leetcode-offer45/';
+          this.page.identifier = '/2021/12/28/leetcode-offer45/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -569,45 +551,6 @@ $$
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 

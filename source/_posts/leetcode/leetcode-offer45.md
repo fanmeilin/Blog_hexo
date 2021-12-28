@@ -77,3 +77,7 @@ class Solution:
         return ''.join(t)
 ```
 
+还有两个函数需要掌握
+- `''.join(t)`可以使用指定的字符串连接数组
+- 对列表循环操作创建可以使用`[func(x) for x in nums]` 
+- 也可以使用map函数 `list(map(func,nums))`或者lambda函数`list(map(lambda x:...,nums))`
