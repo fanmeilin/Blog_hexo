@@ -33,9 +33,11 @@ $$
 
 样本方差计算公式：
 
+{% raw %}
 $$
 S^{2}=\Sigma\left(X-\overline{X}\right)^{2}/\left(n-1\right)
 $$
+{% endraw %}
 
 其中，$S^{2}$为样本方差，$X$ 为变量，$\overline{X}$为样本均值，$n$ 为样本例数。如果要了解为什么要除以$n-1$，请看[这篇文章](https://link.zhihu.com/?target=https%3A//www.visiondummy.com/2014/03/divide-variance-n-1/)。
 

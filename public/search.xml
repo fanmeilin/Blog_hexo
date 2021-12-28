@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>剑指leetcode14 最长公共前缀</title>
+      <link href="/2021/12/26/leetcode/leetcode14/"/>
+      <url>/2021/12/26/leetcode/leetcode14/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>最长公共前缀</p></blockquote><h2 id="题目">题目</h2><p>编写一个函数来查找字符串数组中的最长公共前缀。</p><p>如果不存在公共前缀，返回空字符串 <code>""</code>。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight armasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs armasm">输入：<span class="hljs-keyword">strs</span> = [<span class="hljs-string">"flower"</span>,<span class="hljs-string">"flow"</span>,<span class="hljs-string">"flight"</span>]<br>输出：<span class="hljs-string">"fl"</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight armasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs armasm">输入：<span class="hljs-keyword">strs</span> = [<span class="hljs-string">"dog"</span>,<span class="hljs-string">"racecar"</span>,<span class="hljs-string">"car"</span>]<br>输出：<span class="hljs-string">""</span><br>解释：输入不存在公共前缀。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>1 &lt;= strs.length &lt;= 200</code></li><li><code>0 &lt;= strs[i].length &lt;= 200</code></li><li><code>strs[i]</code> 仅由小写英文字母组成</li></ul><h2 id="题解">题解</h2><p>对每一列进行核对是否是相同，如果不是相同的直接return前面的字符串。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">longestCommonPrefix</span>(<span class="hljs-params">self, strs: <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]</span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(strs) == <span class="hljs-number">0</span>:<br>           <span class="hljs-keyword">return</span> <span class="hljs-string">""</span><br><br>        rows, cols = <span class="hljs-built_in">len</span>(strs), <span class="hljs-built_in">len</span>(strs[<span class="hljs-number">0</span>])<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(cols):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(rows):<br>                <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(strs[j]) == i <span class="hljs-keyword">or</span> strs[j][i] != strs[<span class="hljs-number">0</span>][i]:<br>                    <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>][:i]<br><br>        <span class="hljs-keyword">return</span> strs[<span class="hljs-number">0</span>]<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer 力扣-21</title>
       <link href="/2021/12/23/leetcode/leetcode-21/"/>
       <url>/2021/12/23/leetcode/leetcode-21/</url>
