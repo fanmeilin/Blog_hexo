@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      456 字
+      522 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      6
+      7
        分钟
     </span>
   
@@ -307,6 +307,12 @@
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cmp_to_key</span>(<span class="hljs-params">mycmp</span>):</span><br>    <span class="hljs-string">"""Convert a cmp= function into a key= function"""</span><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">K</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>        __slots__ = [<span class="hljs-string">'obj'</span>]<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, obj</span>):</span><br>            self.obj = obj<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) == <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__le__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt;= <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__ge__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt;= <span class="hljs-number">0</span><br>        __hash__ = <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">return</span> K<br></code></pre></td></tr></tbody></table></figure>
 <p>另外，直接将ab拼接进行比较大小，这里直接使用字符串比较大小更快哦~</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">funccmp</span>(<span class="hljs-params">a,b</span>):</span><br>            x,y = a+b,b+a<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">int</span>(x)&lt;<span class="hljs-built_in">int</span>(y): <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sort_rule</span>(<span class="hljs-params">x, y</span>):</span><br>            a, b = x + y, y + x <span class="hljs-comment">#可以直接对字符串比较，更快</span><br>            <span class="hljs-keyword">if</span> a &gt; b: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> a &lt; b: <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        s = [<span class="hljs-built_in">str</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums]<br>        t = <span class="hljs-built_in">sorted</span>(s,key = functools.cmp_to_key(sort_rule))    <br>        <span class="hljs-comment">#重载比较函数，在python的重载cmp_to_key时默认是小的元素排在前面，所以在满足条件时返回-1，其他情况大于-1即可</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>.join(t)<br></code></pre></td></tr></tbody></table></figure>
+<p>还有两个函数需要掌握</p>
+<ul>
+<li><code>''.join(t)</code>可以使用指定的字符串连接数组</li>
+<li>对列表循环操作创建可以使用<code>[func(x) for x in nums]</code></li>
+<li>也可以使用map函数 <code>list(map(func,nums))</code>或者lambda函数<code>list(map(lambda x:...,nums))</code></li>
+</ul>
 
             </div>
             <hr>
@@ -372,8 +378,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/12/28/leetcode-offer45/';
-          this.page.identifier = '/2021/12/28/leetcode-offer45/';
+          this.page.url = 'https://fanmeilin.github.io/2021/12/28/leetcode/leetcode-offer45/';
+          this.page.identifier = '/2021/12/28/leetcode/leetcode-offer45/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
