@@ -4,6 +4,60 @@
   
   
   <entry>
+    <title>剑指offer57-2 和为s的连续正数序列</title>
+    <link href="/2021/12/30/leetcode/leetcode-offer57-2/"/>
+    <url>/2021/12/30/leetcode/leetcode-offer57-2/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>和为s的连续正数序列</p></blockquote><h2 id="题目">题目</h2><p>输入一个正整数 target ，输出所有和为 target 的连续正整数序列（至少含有两个数）。</p><p>序列内的数字由小到大排列，不同序列按照首个数字从小到大排列。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：target = <span class="hljs-number">9</span><br>输出：<span class="hljs-string">[[2,3,4],[4,5]]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：target = <span class="hljs-number">15</span><br>输出：<span class="hljs-string">[[1,2,3,4,5],[4,5,6],[7,8]]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= target &lt;= 10^5</li></ul><h2 id="题解">题解</h2><h3 id="遍历解法">遍历解法</h3><p>从1到<code>target//2</code>为首遍历是否存在连续的序列为target。使用两层循环，外层循环确定首元素，内层循环确定尾元素，如果遍历到的和大于target就终止；</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findContinuousSequence</span>(<span class="hljs-params">self, target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        limit = <span class="hljs-built_in">int</span>(target/<span class="hljs-number">2</span>)<br>        result = []<br>        <span class="hljs-keyword">for</span> head <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,limit+<span class="hljs-number">1</span>):<br>            temp,t,sumt = [head],head+<span class="hljs-number">1</span>,head<br>            <span class="hljs-keyword">while</span>(<span class="hljs-number">1</span>):<br>                sumt += t<br>                temp.append(t)  <br>                <span class="hljs-keyword">if</span> sumt==target:<br>                    result.append(temp)<br>                    <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">if</span> sumt&gt;target: <span class="hljs-keyword">break</span><br>                <span class="hljs-keyword">if</span> sumt&lt;target: t += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br><br></code></pre></td></tr></tbody></table></figure><h3 id="滑动窗口">滑动窗口</h3><p>使用滑动窗口来确定序列首尾位置；<br>在这里i，j分别表示首尾元素；</p><ul><li>序列元素和sumt小于target，就右移j；</li><li>序列元素和大于target，就右移i；</li></ul><p>这里不存在左移的情况，不左移i好理解，因为i是从头开始查找的嘛，左移不是重复了嘛，何况还要保证首元素的顺序；那么不左移j的原因是什么呢。也是同样的道理，这个窗口只是负责尾节点右移扩大和首节点右移缩小，是可以遍历所有的情况哒。比如<code>1,2,3,4,5...</code>,target为5，开始就会到<code>1,2,3</code>,然后再到<code>2,3</code>;即尾节点只负责增大序列和，首节点只负责缩小序列和。😉</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findContinuousSequence</span>(<span class="hljs-params">self, target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        <span class="hljs-comment">#滑动窗口</span><br>        i,j,sumt,result = <span class="hljs-number">1</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,[]<br>        <span class="hljs-keyword">while</span>(i&lt;=target//<span class="hljs-number">2</span>):<br>            <span class="hljs-keyword">if</span>(sumt&lt;target):<br>                j += <span class="hljs-number">1</span><br>                sumt += j<br>                <span class="hljs-keyword">continue</span><br>            <span class="hljs-keyword">if</span>(sumt==target):result.append(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(i,j+<span class="hljs-number">1</span>))) <span class="hljs-comment">#需要list转换</span><br>            sumt -= i<br>            i += <span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>滑动窗口</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>滑动窗口</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>足迹检测项目的总结</title>
+    <link href="/2021/12/29/project_summary/footprint-summary/"/>
+    <url>/2021/12/29/project_summary/footprint-summary/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>总结足迹检测项目</p></blockquote><h2 id="简介">简介</h2><p>根据刻度尺上的特征对产生畸变的脚印矫正。实现原图打印和标注；</p><h2 id="技术点">技术点</h2><p>根据刻度尺上的特征对产生畸变的脚印矫正。<br>使用霍夫变换拟合4个圆定位来仿射变换矫正图像</p><ul><li>霍夫变换-&gt;yolov5</li><li>仿射变换</li><li>pyqt5</li></ul><h2 id="难点">难点</h2><p>使用霍夫变换容易定位到背景的圆，并且可能出现圆不全的情况</p><h2 id="解决方案">解决方案</h2><p>使用深度学习的方法目标检测<br>使用多个特征融合选择进行仿射变换</p><h2 id="成果">成果</h2><p>达到不超过15度时，误差在2mm以内</p><h2 id="创新点">创新点</h2><p>使用多个特征融合矫正</p><h2 id="展望和改进">展望和改进</h2><p>尺子矫正后不均衡</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>项目</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>项目</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>python-embeded打包文件生成exe</title>
     <link href="/2021/12/29/project_tool/usePyembeded/"/>
     <url>/2021/12/29/project_tool/usePyembeded/</url>
@@ -2713,11 +2767,11 @@
     
     <tags>
       
-      <tag>配置</tag>
-      
       <tag>hexo</tag>
       
       <tag>fluid</tag>
+      
+      <tag>配置</tag>
       
     </tags>
     
