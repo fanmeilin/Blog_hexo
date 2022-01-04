@@ -19,7 +19,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>praticalML第二章笔记 - 待时</title>
+  <title>剑指offer58-1 翻转单词的顺序 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -221,7 +221,7 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="praticalML第二章笔记">
+            <span class="h2" id="subtitle" title="剑指offer58-1 翻转单词的顺序">
               
             </span>
 
@@ -231,8 +231,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-02 17:52" pubdate>
-        2022年1月2日 下午
+      <time datetime="2022-01-04 10:43" pubdate>
+        2022年1月4日 上午
       </time>
     </span>
   
@@ -243,7 +243,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      537 字
     </span>
   
 
@@ -253,7 +253,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      6
        分钟
     </span>
   
@@ -283,178 +283,32 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">praticalML第二章笔记</h1>
+            <h1 style="display: none">剑指offer58-1 翻转单词的顺序</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>斯坦福2021秋季的实用机器学习上线啦~ 😉 跟着沐神复习机器学习冲冲冲！ 记录一下笔记和重点，不一定很全哦~，只是记录自我感觉的重点。</p>
+<p>翻转单词的顺序</p>
 </blockquote>
-<h1>第二章 提升数据质量</h1>
-<blockquote>
+<h2 id="题目">题目</h2>
+<p>输入一个英文句子，翻转句子中单词的顺序，但单词内字符的顺序不变。为简单起见，标点符号和普通字母一样处理。例如输入字符串"I am a student. “，则输出"student. a am I”。</p>
+<h3 id="示例-1：">示例 1：</h3>
+<figure class="highlight smalltalk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk">输入: <span class="hljs-comment">"the sky is blue"</span><br>输出: <span class="hljs-comment">"blue is sky the"</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-2：">示例 2：</h3>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: " &nbsp;hello world! &nbsp;"</span><br><span class="hljs-section">输出:&nbsp;"world! hello"</span><br><span class="hljs-section">解释: 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="示例-3：">示例 3：</h3>
+<figure class="highlight smalltalk"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs smalltalk">输入: <span class="hljs-comment">"a good &nbsp; example"</span><br>输出:&nbsp;<span class="hljs-comment">"example good a"</span><br>解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="提示：">提示：</h3>
 <ul>
-<li>
-<p>噪声多？</p>
-</li>
-<li>
-<p>yes -&gt;数据清理</p>
-</li>
-<li>
-<p>no？ 格式对吗？</p>
-</li>
-<li>
-<p>No -&gt;数据变换</p>
-</li>
-<li>
-<p>yes 适合学习嘛？</p>
-</li>
-<li>
-<p>No -&gt;特征提取</p>
-</li>
+<li>无空格字符构成一个单词。</li>
+<li>输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。</li>
+<li>如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。</li>
 </ul>
-</blockquote>
-<h2 id="2-1-数据清理">2.1 数据清理</h2>
-<h3 id="2-1-1-outlier检测（异常）">2.1.1 outlier检测（异常）</h3>
-<p><img src="https://picture.mulindya.com/pML2-6.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="2-1-2-基于规则的检测">2.1.2 基于规则的检测</h3>
-<p>比如已知x决定y，但是出现了x-&gt;z那么z是一个异常情况。</p>
-<h3 id="2-1-3-基于模式的检测">2.1.3 基于模式的检测</h3>
-<ul>
-<li>Syntactic patterns  （语法模式）</li>
-</ul>
-<p>比如说大多数都是数字，少数是￥+数字，那么可以转换这些少数的字段为数字</p>
-<p>• e.g. Map a column to the most prominent data type and identify values do not fit<br>
-• eng, en, english -&gt; English</p>
-<ul>
-<li>Semantic patterns （语义模式）<br>
-• e.g. Add rules through knowledge graph<br>
-• Values in column “Country” need have capitals, so a value “Stanford” is invalid、</li>
-</ul>
-<h3 id="2-1-4-总结">2.1.4 总结</h3>
-<ul>
-<li>Types of data errors: outliers, rule violations, pattern violations</li>
-<li>Multiple tools exist to help data cleaning<br>
-• Graphic interface for interactive cleaning<br>
-• Automatically detect and fix</li>
-</ul>
-<blockquote>
-<p>现在也有很多数据清理的工具，有图形化界面，也可以自动分析处理。</p>
-</blockquote>
-<h2 id="2-2-数据变换">2.2 数据变换</h2>
-<p><strong>机器学习的流程：数据收集-数据标注-数据变换-特征工程-模型构建及训练</strong></p>
-<p>• ML algorithms prefer well defined fixed length, well-conditioned, nicely distributed input<br>
-• Next, data transformation methods for different data types</p>
-<p><img src="https://picture.mulindya.com/pML2-7.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="2-2-1-对实数归一化（Normalization）">2.2.1 对实数归一化（Normalization）</h3>
-<p>• Normalization makes training more stable</p>
-<p><img src="https://picture.mulindya.com/pML2-8.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<ul>
-<li>Min-max normalization: linearly map to a new min a and max b也就是通过线性变换把数值变换到a到b之间，先通过min，max的变换到0-1之间然后进行扩增和移动。</li>
-<li>Z-score normalization: 0 mean, 1 standard deviation 其目的是将分布变为均值为0方差为1，减去均值除以标准差。</li>
-<li>Decimal scaling 将数字转换为0.XX (到0-1)</li>
-<li>Log scaling 原始数据比较大（正数）时可以变换到log’空间’，在log中的加减是原始数据的乘除，所以比值类的数据可以变换到这种形式</li>
-</ul>
-<h3 id="2-2-2-图像变换">2.2.2 图像变换</h3>
-<ul>
-<li>
-<p>Our previous web scraping will scrape 15 TB images for a year<br>
-• 5 millions houses sold in US per year, ~20 images/house, ~153KB per image, ~1041x732 resolution</p>
-</li>
-<li>
-<p>cropping, downsampling, compression<br>
-• Save storage cost, faster loading at training<br>
-• At ~320x224 resolution, 15 TB -&gt; 1.4TB<br>
-• ML is good at low-resolution images<br>
-• Be aware of lossy compression<br>
-• Medium (80%-90%) jpeg compression may lead to 1% acc drop in ImageNet</p>
-</li>
-<li>
-<p>Image whitening（数据白化 可以理解为降维）<br>
-•make input less redundent<br>
-•model converages faster</p>
-</li>
-</ul>
-<p>机器学习对于低分辨的图片可以做的挺好的。所以剪裁，下采样是可以接受的。<strong>但是要注意下采样之后要使用较高质量的图片格式不要用jpeg。</strong></p>
-<p>白化的目的是去除输入数据的冗余信息。假设训练数据是图像，由于图像中相邻像素之间具有很强的相关性，所以用于训练时输入是冗余的；白化的目的就是降低输入的冗余性。白化分为PCA白化、ZCA白化.<br>
-输入数据集X，经过白化处理后，新的数据X’满足两个性质：<br>
-(1)特征之间相关性较低；<br>
-(2)所有特征具有相同的方差。</p>
-<h3 id="2-2-3-视频变换">2.2.3 视频变换</h3>
-<ul>
-<li>Input variability high<br>
-• Average video length: Movies ~2h, YouTube videos ~11min, Tiktok short videos ~15sec</li>
-<li>Tractable ML problems with short video clips (&lt;10sec)<br>
-• Ideally each clip is a coherent event (e.g. a human action)<br>
-• Semantic segmentation is extremely hard…</li>
-<li>Preprocessing to tradeoff storage, quality and loading speed</li>
-<li>Common practice: decode a playable video clip, sample a sequence of  frames, compute spectrograms for audio<br>
-• Easy to load to model, increased storage space</li>
-</ul>
-<p>采样关键的帧，图片不需要所有的信息，使用gpu来采样，需要权衡存储和解码。</p>
-<h3 id="2-2-3-文本变换">2.2.3 文本变换</h3>
-<ul>
-<li>Stemming and lemmatization: a word -&gt;  a common base form<br>
-• E.g. am, are, is   -&gt; be        car, cars, car’s, cars’  -&gt;  car<br>
-• Example: Topic modeling</li>
-<li>Tokenization: text string  a list of tokens (smallest unit to ML algorithms)<br>
-• By word: text.split(’ ‘)<br>
-• By char: text.split(‘’)<br>
-• By subwords:<br>
-• e.g. “a new gpu!”   “a”, “new”, “gp”, “##u”, “!”<br>
-• Custom vocabulary learned from the text corpus  (Unigram, WordPiece)</li>
-</ul>
-<p>方法是忽略语法，词根化，词源化，子词。</p>
-<h3 id="2-2-4-总结">2.2.4 总结</h3>
-<p>主要是格式的转换，需要权衡数据大小，数据质量，存储的方式。</p>
-<ul>
-<li>•Transform data into formats preferred by ML algorithms<br>
-• Tabular: normalize real value features<br>
-• Images: cropping, downsampling, whitening<br>
-• Videos: clipping, sampling frames<br>
-• Text: stemming, lemmatization, tokenization</li>
-<li>Need to balance storage, quality, and loading speed</li>
-</ul>
-<h2 id="2-3-特征工程">2.3 特征工程</h2>
-<ul>
-<li>
-<p>Before deep learning (DL), feature engineering (FE) was critical to using ML models<br>
-• Traditional CV: detect corners / interest points…</p>
-</li>
-<li>
-<p>DL train deep neural networks to automatically extract features<br>
-• Train CNN to replace feature extractor<br>
-• Features are more relevant to the final task<br>
-• Limitation: data hungry, computation heavy</p>
-</li>
-</ul>
-<p><img src="https://picture.mulindya.com/pML2-9.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>深度学习出现之前主要是研究特征工程抽取特征；</p>
-<p>深度学习没有改变流程但是现在并不是手动的过程，现在是自动抽取特征。</p>
-<h3 id="2-3-1-Tabular-Data-Features">2.3.1 Tabular Data Features</h3>
-<ul>
-<li>Tabular data are in the form of a table,  feature columns of numeric / categorical / string type</li>
-<li>Int/float: directly use or or bin to   unique int values</li>
-<li>Categorical data: one-hot encoding （独热编码）<br>
-• Map rare categories into “Unknown”</li>
-<li>Date-time: a feature list such as  日期特征<br>
-• [year, month, day, day_of_year, week_of_year, day_of_week]</li>
-<li>Feature combination: Cartesian product of two feature groups  特征组合<br>
-• [cat, dog] x [male, female] -&gt;  [(cat, male), (cat, female), (dog, male), (dog, female)]</li>
-</ul>
-<h3 id="2-3-2-文本特征">2.3.2 文本特征</h3>
-<p>将词源的独热编码加起来</p>
-<p>词表示为向量来表示语义信息</p>
-<p>使用预训练好的语言模型来特定表示（通过自监督学习来训练，可以抽取时序信息）</p>
-<p><img src="https://picture.mulindya.com/pML2-10.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="2-3-3-图像-视频特征">2.3.3 图像/视频特征</h3>
-<p>预训练的模型来抽取特征</p>
-<p><img src="https://picture.mulindya.com/pML2-11.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="2-3-4-总结">2.3.4 总结</h3>
-<ul>
-<li>Features are representations of raw data that are relevant to the target task</li>
-<li>Feature engineering VS Feature learning<br>
-• The latter is preferred if available (images/videos/audio/text)<br>
-• Will cover more later in “transfer learning”</li>
-</ul>
+<h2 id="题解">题解</h2>
+<p>使用双指针来定位词首尾位置，由于是倒序因此需要从后往前来搜索，先定位词的起始位置再跳过空格定位j的位置，截取单词到列表中，最后使用join连接字符串。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseWords</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-comment">#从后往前 利用双指针来判断单词块</span><br>        s = s.strip() <span class="hljs-comment"># 删除首尾空格</span><br>        <span class="hljs-comment"># Python strip() 方法用于移除字符串头尾指定的字符（默认为空格或换行符）或字符序列。</span><br>        <span class="hljs-comment"># 注意：该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。</span><br>        i,j = <span class="hljs-built_in">len</span>(s)-<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(s)-<span class="hljs-number">1</span><br>        res = []<br>        <span class="hljs-keyword">while</span>(i&gt;=<span class="hljs-number">0</span>):<br>            <span class="hljs-keyword">while</span>(i&gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> s[i]!=<span class="hljs-string">' '</span>): i -= <span class="hljs-number">1</span> <span class="hljs-comment">#确定词的起始位置</span><br>            res.append(s[i+<span class="hljs-number">1</span>:j+<span class="hljs-number">1</span>])<br>            <span class="hljs-keyword">while</span>(i&gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> s[i]==<span class="hljs-string">' '</span>): i -= <span class="hljs-number">1</span> <span class="hljs-comment">#确定j的位置</span><br>            j = i<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(res)<br></code></pre></td></tr></tbody></table></figure>
+<p>使用内置函数split的话这里直接使用<code>split()</code></p>
+<p>因为<code>s.split(" ")</code>解决不了单词间多空格的问题，<code>s.split()</code>可以解决。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseWords</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">' '</span>.join(s.strip().split()[::-<span class="hljs-number">1</span>])<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
@@ -464,7 +318,9 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8C%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">学习笔记，机器学习</a>
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -472,9 +328,9 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9D%8E%E6%B2%90/">李沐</a>
+                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                      <a class="hover-with-bg" href="/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a>
                     
                   </div>
                 
@@ -491,18 +347,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/04/leetcode/leetcode-offer58-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer58-1 翻转单词的顺序</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-1/">
-                        <span class="hidden-mobile">PracticeML第二章房价实例笔记</span>
+                      <a href="/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-2/">
+                        <span class="hidden-mobile">praticalML第二章笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -524,8 +374,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-2/';
-          this.page.identifier = '/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-2/';
+          this.page.url = 'https://fanmeilin.github.io/2022/01/04/leetcode/leetcode-offer58-1/';
+          this.page.identifier = '/2022/01/04/leetcode/leetcode-offer58-1/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');

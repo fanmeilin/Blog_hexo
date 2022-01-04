@@ -6,8 +6,7 @@ date: 2021-11-03 13:04:40
 math: true
 ---
 
-> 2021年2月投稿的一篇论文《Anatomical-guided attention enhances unsupervised PET image
-denoising performance》提出使用Anatomical-guided的注意力加强非监督的PET图像降噪性能。
+> 2021年2月投稿的一篇论文《Anatomical-guided attention enhances unsupervised PET image denoising performance》提出使用Anatomical-guided的注意力加强非监督的PET图像降噪性能。
 
 
 

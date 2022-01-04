@@ -240,6 +240,74 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/06/config/git-submodule/" target="_self">
+          子模块为空的解决方案
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/06/config/git-submodule/" target="_self">
+          
+          
+            
+          
+          
+针对子模块文件夹为空的情况，采取下列解决方案。
+当一个 git 项目包含子模块（submodule) 时，直接克隆下来的子模块目录里面是空的。
+
+有两种方法解决：
+方法一
+如果项目已经克隆到了本地，执行下面的步骤：
+
+
+初始化本地子模块配置文件
+1git submodule init
+
+
+更新项目，抓取子模块内容。
+1git submodule update
+
+
+进入对应子模块目录，执行
+1gi
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-06 02:09" pubdate>
+              2021-08-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/git/">git</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/git/">git</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/05/config/hexo-math-config/" target="_self">
           hexo中公式显示
         </a>
@@ -283,11 +351,11 @@
           <div class="post-meta">
             <i class="iconfont icon-tags"></i>
             
-              <a href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
-            
               <a href="/tags/hexo/">hexo</a>
             
               <a href="/tags/fluid/">fluid</a>
+            
+              <a href="/tags/%E9%85%8D%E7%BD%AE/">配置</a>
             
           </div>
         
