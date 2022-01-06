@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>leetcode17 电话号码的字母组合</title>
+      <link href="/2022/01/05/leetcode/leetcode17/"/>
+      <url>/2022/01/05/leetcode/leetcode17/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>电话号码的字母组合</p></blockquote><h2 id="题目">题目</h2><p>给定一个仅包含数字 2-9 的字符串，返回所有它能表示的字母组合。答案可以按 任意顺序 返回。</p><p>给出数字到字母的映射如下（与电话按键相同）。注意 1 不对应任何字母</p><p><img src="https://picture.mulindya.com/leetcode17-1.png" alt=""></p><h3 id="示例-1：">示例 1：</h3><figure class="highlight ada"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = <span class="hljs-string">"23"</span><br>输出：[<span class="hljs-string">"ad"</span>,<span class="hljs-string">"ae"</span>,<span class="hljs-string">"af"</span>,<span class="hljs-string">"bd"</span>,<span class="hljs-string">"be"</span>,<span class="hljs-string">"bf"</span>,<span class="hljs-string">"cd"</span>,<span class="hljs-string">"ce"</span>,<span class="hljs-string">"cf"</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight ada"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = <span class="hljs-string">""</span><br>输出：[]<br></code></pre></td></tr></tbody></table></figure><h3 id="示例3">示例3</h3><figure class="highlight ada"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs ada">输入：<span class="hljs-keyword">digits</span> = <span class="hljs-string">"2"</span><br>输出：[<span class="hljs-string">"a"</span>,<span class="hljs-string">"b"</span>,<span class="hljs-string">"c"</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>0 &lt;= digits.length &lt;= 4</code></li><li><code>digits[i]</code> 是范围 <code>['2', '9']</code> 的一个数字。</li></ul><h2 id="题解">题解</h2><p>使用树的深度优先遍历算法，digit的字符串相当于给出每一层的节点值（数字对应的字符），按照深度优先算法，遍历到最后一个节点即可添加到result中。</p><p>去掉最后一个字符是<code>word[:-1]</code>，这里 word[-1]表示最后一个字符。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">letterCombinations</span>(<span class="hljs-params">self, digits: <span class="hljs-built_in">str</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">str</span>]:</span><br>        record = {<span class="hljs-string">'2'</span>:<span class="hljs-string">'abc'</span>,<span class="hljs-string">'3'</span>:<span class="hljs-string">'def'</span>,<span class="hljs-string">'4'</span>:<span class="hljs-string">'ghi'</span>,<span class="hljs-string">'5'</span>:<span class="hljs-string">'jkl'</span>,<span class="hljs-string">'6'</span>:<span class="hljs-string">'mno'</span>,<span class="hljs-string">'7'</span>:<span class="hljs-string">'pqrs'</span>,<span class="hljs-string">'8'</span>:<span class="hljs-string">'tuv'</span>,<span class="hljs-string">'9'</span>:<span class="hljs-string">'wxyz'</span>}<br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">not</span> digits): <span class="hljs-keyword">return</span> []<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">dfs</span>(<span class="hljs-params">rindex</span>):</span><br>            <span class="hljs-keyword">if</span> rindex==<span class="hljs-built_in">len</span>(digits): <br>                self.result.append(self.word)<br>            <span class="hljs-keyword">if</span> rindex&gt;=<span class="hljs-built_in">len</span>(digits): <span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> record[digits[rindex]]:<br>                self.word += x<br>                dfs(rindex+<span class="hljs-number">1</span>)<br>                self.word = self.word[:-<span class="hljs-number">1</span>] <span class="hljs-comment">#切片去掉最后一个字符</span><br><br>        rindex = <span class="hljs-number">0</span><br>        self.result,self.word = [],<span class="hljs-string">""</span><br>        dfs(rindex)<br>        <span class="hljs-keyword">return</span> self.result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 树 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NIPS-2014-generative-adversarial-nets-Paper</title>
       <link href="/2022/01/04/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-gan/"/>
       <url>/2022/01/04/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-gan/</url>
