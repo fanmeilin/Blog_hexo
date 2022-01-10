@@ -240,6 +240,126 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2022/01/06/deep_learning/dsconv/" target="_self">
+          Depthwise Separable Convolution
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/01/06/deep_learning/dsconv/" target="_self">
+          
+          
+            
+          
+          Depthwise Separable Convolution
+
+在Mobilenet中使用DSconv，通过改进架构减少参数量的方法，所以也顺势记录一下Depthwise Separable卷积的原理。笔记来源于李宏毅的课程。😢
+
+传统的卷积过程
+
+Depthwise Convolution
+第一个步骤，每一个filter只作用到一个Chanel，这里input和output的channel是
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-06 10:20" pubdate>
+              2022-01-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/MobileNet/">MobileNet</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+              <a href="/tags/MobileNet/">MobileNet</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2022/01/05/deep_learning/KnowledgeDistillation/" target="_self">
+          Knowledge Distillation笔记
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2022/01/05/deep_learning/KnowledgeDistillation/" target="_self">
+          
+          
+            
+          
+          
+因为项目中要使用到知识蒸馏来训练网络，所以先好好学一下它的原理。在网上找到了李宏毅机器学习的模型压缩中讲到了这个，那，就开始学习叭😉
+
+知识蒸馏🌌
+概念
+先训练一个大的network（teacher），再根据这个network来制造小的network（student），同时student是根据teacher的结构做一些修剪得到的小网络，student network是根据teacher ne
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2022-01-05 16:38" pubdate>
+              2022-01-05
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+            
+              <a href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85/">李宏毅</a>
+            
+              <a href="/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/">知识蒸馏</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2022/01/05/leetcode/leetcode17/" target="_self">
           leetcode17 电话号码的字母组合
         </a>
@@ -767,130 +887,6 @@ pyqt5
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E9%A1%B9%E7%9B%AE/">项目</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/12/29/project_tool/usePyembeded/" target="_self">
-          python-embeded打包文件生成exe
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/12/29/project_tool/usePyembeded/" target="_self">
-          
-          
-            
-          
-          
-使用pyinstaller打包的文件太大了！！所以！所以！学到了另一招，将所需的环境配置到python-embeded中，然后使用c来调用py的启动文件，再gcc生成exe文件，酱紫工程文件就会小很多；实践证明，pyinstaller打包5.2G，采用这种方式后降低到1.5G哦~ 这种方式主要就是使用python-embeded来配置环境。
-
-下载embeded版本
-
-python37的embe
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-29 09:58" pubdate>
-              2021-12-29
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7/">工具</a>
-            
-              <a href="/categories/%E5%B7%A5%E5%85%B7/python-embeded/">python-embeded</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E9%A1%B9%E7%9B%AE%E6%89%93%E5%8C%85/">项目打包</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/12/28/leetcode/leetcode-offer45/" target="_self">
-          剑指offer45 把数组排成最小的数
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/12/28/leetcode/leetcode-offer45/" target="_self">
-          
-          
-            
-          
-          
-把数组排成最小的数
-
-题目
-输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。
-示例 1：
-12输入: [10,2]输出: "102"
-示例 2：
-12输入: [3,30,34,5,9]输出: "3033459"
-提示：
-
-0 &lt; nums.length &lt;= 100
-输出结果可能非常大，所以你需要返回一个字符串而不是整数
-拼接起来的数字可
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-12-28 14:07" pubdate>
-              2021-12-28
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
-            
-              <a href="/categories/%E5%89%91%E6%8C%87/%E6%8E%92%E5%BA%8F/">排序</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
-            
-              <a href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
             
           </div>
         

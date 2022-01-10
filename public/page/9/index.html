@@ -240,6 +240,125 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/17/leetcode/leetcode-offer07/" target="_self">
+          剑指offer07 重建二叉树
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/17/leetcode/leetcode-offer07/" target="_self">
+          
+          
+            
+          
+          
+重建二叉树
+
+题目
+输入某二叉树的前序遍历和中序遍历的结果，请构建该二叉树并返回其根节点。
+假设输入的前序遍历和中序遍历的结果中都不含重复的数字。
+示例 1：
+
+12Input: preorder = [3,9,20,15,7], inorder = [9,3,15,20,7]Output: [3,9,20,null,null,15,7]
+示例 2：
+12Input: preorder = [-
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-17 20:59" pubdate>
+              2021-08-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+            
+              <a href="/categories/%E5%89%91%E6%8C%87/%E6%A0%91/">树</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+            
+              <a href="/tags/%E6%A0%91/">树</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/08/17/deep_learning/gradient-exp/" target="_self">
+          梯度消失&amp;梯度爆炸
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/17/deep_learning/gradient-exp/" target="_self">
+          
+          
+            
+          
+          
+本文探讨深度学习中经常提到的概念–梯度消失和梯度爆炸 。他们是影响模型收敛，学习好坏的重要因素。对此现象也提出了很多对应的解决方案。我们来大致做一个总结，对其概念，原因和相关的解决方案进行探讨叭~~
+
+梯度爆炸&amp;梯度消失
+梯度爆炸就是在梯度更新的时候偏导数很大，导致更新参数无法收敛到最值（总是跳到其他不好的地方）。
+梯度消失就是在梯度更新的时候偏导数很小，导致更新参数无法收敛到最值（动不
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-17 10:42" pubdate>
+              2021-08-17
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/16/leetcode/leetcode-offer27/" target="_self">
           剑指offer27 二叉树的镜像
         </a>
@@ -678,9 +797,9 @@ r
             
               <a href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
             
-              <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
-            
               <a href="/tags/idea/">idea</a>
+            
+              <a href="/tags/%E6%95%B0%E7%BB%84/">数组</a>
             
           </div>
         
@@ -743,120 +862,6 @@ Accurate, Large Minibatch SGD Training ImageNet in 1 Hour.pd
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/13/deep_learning/fine-tuning/" target="_self">
-          fine-tuning的方法
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/13/deep_learning/fine-tuning/" target="_self">
-          
-          
-            
-          
-          
-收集关于深度学习的调参的相关笔记，主要用于网络训练的微调。
-
-训练技巧
-1.要做梯度归一化,即算出来的梯度除以minibatch size
-2.clip c(梯度裁剪): 限制最大梯度,其实是value = sqrt(w1^2 +w2^2….),如果value超过了阈值,就算一个衰减系数,让value的值等于阈值: 5,10,15
-3.防止过拟合
-​	一般常用的防止过拟合方法有使用L1正则项、L
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-13 14:28" pubdate>
-              2021-08-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-            
-              <a href="/tags/%E5%BE%AE%E8%B0%83/">微调</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/08/12/deep_learning/gradient-clip/" target="_self">
-          梯度裁剪
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/08/12/deep_learning/gradient-clip/" target="_self">
-          
-          
-            
-          
-          
-阅读代码 optimizer_config = dict(grad_clip=dict(max_norm=35, norm_type=2))，就此探究一下grap_clip。他的作用是梯度裁剪，为了防止梯度爆炸。其中max_norm是最大梯度阈值，norm_type是指定的范数类型。
-
-梯度爆炸
-梯度爆炸就是在梯度更新的时候偏导数很大，导致更新参数无法收敛到最值（总是跳到其他不好的地方）。
-$$
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-08-12 10:20" pubdate>
-              2021-08-12
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%EF%BC%8C%E6%A2%AF%E5%BA%A6/">深度学习，梯度</a>
             
           </div>
         

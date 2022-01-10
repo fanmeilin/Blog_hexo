@@ -19,9 +19,25 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>标签 - 深度学习 - 待时</title>
+  <title>Depthwise Separable Convolution - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
 
 
 
@@ -52,7 +68,7 @@
 
 <body>
 
-  <header style="height: 80vh;">
+  <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -146,7 +162,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('https://rmt.ladydaily.com/fetch/fluid/storage/bg/73twhs.png?w=1920&fmt=webp') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -205,17 +221,50 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="标签 - 深度学习">
+            <span class="h2" id="subtitle" title="Depthwise Separable Convolution">
               
             </span>
 
             
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-06 10:20" pubdate>
+        2022年1月6日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      311 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      3
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
           </div>
 
-          
-            <div class="scroll-down-bar">
-              <i class="iconfont icon-arrowdown"></i>
-            </div>
           
         </div>
       </div>
@@ -224,73 +273,152 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div class="py-5" id="board"
-          >
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
-
-<div class="list-group">
-  <p class="h4">共计 6 篇文章</p>
-  <hr>
-  
-  
-    
       
-      <p class="h5">2022</p>
-    
-    <a href="/2022/01/06/deep_learning/dsconv/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">Depthwise Separable Convolution</span>
-      <time style="float: right;">01-06</time>
-    </a>
-  
-    
-      
-      <p class="h5">2021</p>
-    
-    <a href="/2021/08/27/deep_learning/yolov2/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">YOLOv2</span>
-      <time style="float: right;">08-27</time>
-    </a>
-  
-    
-    <a href="/2021/08/25/deep_learning/swin/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">swin网络</span>
-      <time style="float: right;">08-25</time>
-    </a>
-  
-    
-    <a href="/2021/08/21/deep_learning/yolov1/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">YOLOv1</span>
-      <time style="float: right;">08-21</time>
-    </a>
-  
-    
-    <a href="/2021/08/17/deep_learning/gradient-exp/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">梯度消失&amp;梯度爆炸</span>
-      <time style="float: right;">08-17</time>
-    </a>
-  
-    
-    <a href="/2021/08/13/deep_learning/fine-tuning/" class="list-group-item list-group-item-action">
-      <span class="archive-post-title">fine-tuning的方法</span>
-      <time style="float: right;">08-13</time>
-    </a>
-  
-</div>
 
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Depthwise Separable Convolution</h1>
+            
+            <div class="markdown-body">
+              <h1>Depthwise Separable Convolution</h1>
+<blockquote>
+<p>在Mobilenet中使用DSconv，通过改进架构减少参数量的方法，所以也顺势记录一下Depthwise Separable卷积的原理。笔记来源于李宏毅的课程。😢</p>
+</blockquote>
+<h2 id="传统的卷积过程">传统的卷积过程</h2>
+<p><img src="https://picture.mulindya.com/kDistillation-3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="Depthwise-Convolution">Depthwise Convolution</h2>
+<p>第一个步骤，每一个filter只作用到一个Chanel，这里input和output的channel是相同的。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="Pointwise-Convolution">Pointwise Convolution</h2>
+<p>跨channel操作是通过Pointwise Convolution来得到Feature map，这里是1*1的大小filter 因为只用考虑不同channel之间的关系即可。前面的Depthwise Convolution是已经考虑Channel内部的关系。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-5.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/kDistillation-6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>所以参数量会减少K*K倍。</p>
+<h2 id="原理">原理</h2>
+<h3 id="Low-rank-approximation">Low rank approximation</h3>
+<p><img src="https://picture.mulindya.com/kDistillation-7.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这样可以减少参数。从W到U+V的参数规模，但是这样的变换会导致某些限制，减少w的可能性，因为使用U*V的秩是小于等于W的秩，所以映射的空间会减小。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>就可以对比传统的卷积和Depthwise卷积的原理就相当于W和UV的关系，把一层的映射拆成两次，所以参数量减少了，模型表示减小。</p>
+<h2 id="相关网络">相关网络</h2>
+<p>使用Depthwise Conv的网络架构</p>
+<p>•SqueezeNet<br>
+• <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1602.07360">https://arxiv.org/abs/1602.07360</a><br>
+•MobileNet<br>
+• <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1704.04861">https://arxiv.org/abs/1704.04861</a><br>
+•ShuffleNet<br>
+• <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1707.01083">https://arxiv.org/abs/1707.01083</a><br>
+•Xception<br>
+• <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1610.02357">https://arxiv.org/abs/1610.02357</a><br>
+•GhostNet<br>
+• <a target="_blank" rel="noopener" href="https://arxiv.org/abs/1911.11907">https://arxiv.org/abs/1911.11907</a></p>
 
-
-
-
-              </div>
             </div>
-          </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/MobileNet/">MobileNet</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/MobileNet/">MobileNet</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/05/deep_learning/KnowledgeDistillation/">
+                        <span class="hidden-mobile">Knowledge Distillation笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/06/deep_learning/dsconv/';
+          this.page.identifier = '/2022/01/06/deep_learning/dsconv/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
         </div>
       </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
     
 
     
@@ -395,9 +523,15 @@
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
@@ -432,6 +566,13 @@
 
 
 
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
 
 
 

@@ -1,0 +1,735 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>Knowledge Distillation笔记 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width','100%' ); <!--'100%'-->
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%'); <!--'100%'-->
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (true){ <!--!isMobile-->
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (true){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Knowledge Distillation笔记">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-05 16:38" pubdate>
+        2022年1月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      46
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Knowledge Distillation笔记</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>因为项目中要使用到知识蒸馏来训练网络，所以先好好学一下它的原理。在网上找到了李宏毅机器学习的模型压缩中讲到了这个，那，就开始学习叭😉</p>
+</blockquote>
+<h1>知识蒸馏🌌</h1>
+<h2 id="概念">概念</h2>
+<p>先训练一个大的network（teacher），再根据这个network来制造小的network（student），同时student是根据teacher的结构做一些修剪得到的小网络，student network是根据teacher network来学习的哦。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>student network是去拟合teacher的结果，可以使用Ensemble的网络作为teacher，这样表现得结果更好。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在使用知识蒸馏时有一个小技巧，可以稍微改一下Softmax的函数，T是一个超参数，可以使得函数点更加平滑。因为student要学习teacher给的结果，并且teacher给的结果要告诉student，哪些类别比较相似，而不是直接给出1，0，0（和真实结果没有差别），所以teacher 的输出不应该过度集中，需要更加平滑。这样分类结果不同，但是student学习更加有意义。同时不一定要用softmax之后的结果去拟合student，完全可以使用之前的，或者类似student的第6层拟合teacher的12层，第3层拟合teacher的第6层，这样结果往往会更好。</p>
+<h2 id="实例🌻">实例🌻</h2>
+<h3 id="Intuition">Intuition</h3>
+<p>通常模型Teacher比模型Student更强，在模型Teacher的帮助下，模型student可以"青出于蓝而胜于蓝"😉,因为从计算资源的角度上庞大的模型部署有很多问题，所以通过知识蒸馏可以训练一个相似的小模型去拟合大模型的训练效果，这样预测和部署会便捷很多。同时使用知识蒸馏的方法可以让小模型学到样本之间的相似关系。</p>
+<p><img src="https://picture.mulindya.com/kDistillation-9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里不仅仅知道西红柿是真实标签，还可以知道这个样本和柿子这个标签很相似，这样可以获取更多信息，这是蒸馏更有价值的地方。</p>
+<h3 id="Loss-Function-in-Pytorch">Loss Function in Pytorch</h3>
+<ul>
+<li><code>Softmax</code>：将一个数值序列映射到概率空间（每个元素分布并且所有和为1）</li>
+<li><code>log_softmax</code>：在softmax的基础上取对数</li>
+<li><code>NLLLoss</code>：对log_softmax与one-hot进行计算</li>
+<li><code>CrossEntropy</code>：衡量两个概率分布的差别（交叉熵）</li>
+</ul>
+<h4 id="代码实证">代码实证</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><span class="hljs-string">'''</span><br><span class="hljs-string">torch.nn.functional 涉及了所有 torch.nn 需要 类 和 方法 ，torch.nn 构建的模块通常就是调用 torch.nn.functional 里的方法实现的.</span><br><span class="hljs-string">'''</span><br>torch.manual_seed(<span class="hljs-number">0</span>)<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python">output = torch.randn(<span class="hljs-number">2</span>, <span class="hljs-number">3</span>)<br><span class="hljs-built_in">print</span>(output)<br><span class="hljs-comment">#tensor([[ 1.5410, -0.2934, -2.1788],</span><br><span class="hljs-comment">#        [ 0.5684, -1.0845, -1.3986]])</span><br><span class="hljs-built_in">print</span>(F.softmax(output, dim=<span class="hljs-number">1</span>))<br><span class="hljs-comment"># 这里dim的意思是计算Softmax的维度，这里设置dim=1，可以看到每一行的加和为1。0是对列 1 是对行</span><br><span class="hljs-comment">#tensor([[0.8446, 0.1349, 0.0205],</span><br><span class="hljs-comment">#       [0.7511, 0.1438, 0.1051]])</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="What-is-log-softmax">What is log_softmax</h4>
+<p>这个很好理解，其实就是对<code>softmax</code>处理之后的结果执行一次对数运算。可以理解为 <code>log(softmax(output))</code></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(F.log_softmax(output, dim=<span class="hljs-number">1</span>))<br><span class="hljs-built_in">print</span>(torch.log(F.softmax(output, dim=<span class="hljs-number">1</span>)))<br><span class="hljs-comment"># 输出结果是一致的</span><br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>tensor([[-0.1689, -2.0033, -3.8886],        [-0.2862, -1.9392, -2.2532]]) tensor([[-0.1689, -2.0033, -3.8886],        [-0.2862, -1.9392, -2.2532]])</p>
+</blockquote>
+<h4 id="损失函数">损失函数</h4>
+<h4 id="What-is-NLLLoss？">What is NLLLoss？</h4>
+<p>该函数的全称是<code>negative log likelihood loss</code>. 若$x_i=[q_1, q_2, …, q_N]$ 为神经网络对第i个样本的输出值，$y_i$为真实标签。则：<br>
+$$<br>
+f(x_i,y_i)=-q_{y_i}<br>
+$$<br>
+其中输入：log_softmax(output), target</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(F.nll_loss(torch.tensor([[-<span class="hljs-number">1.2</span>, -<span class="hljs-number">2</span>, -<span class="hljs-number">3</span>]]), torch.tensor([<span class="hljs-number">0</span>])))<br><span class="hljs-comment">#结果是tensor(1.2000) 就是取第0个的负数</span><br></code></pre></td></tr></tbody></table></figure>
+<p><strong>通常我们结合 log_softmax 和 nll_loss一起用</strong> 👋。</p>
+<h4 id="CrossEntropy交叉熵">CrossEntropy交叉熵</h4>
+<p><strong>在分类问题中，CrossEntropy等价于log_softmax 结合 nll_loss</strong></p>
+<p>$N$分类问题，对于一个特定的样本，已知其真实标签，<code>CrossEntropy</code>的计算公式为：</p>
+<p>$$<br>
+cross_entropy=-\sum_{k=1}^{N}\left(p_{k} * \log q_{k}\right)<br>
+$$</p>
+<p>其中p表示真实值，在这个公式中是one-hot形式；q是经过<code>softmax</code>计算后的结果， $q_k$为神经网络认为该样本为第$k$类的概率。</p>
+<p>仔细观察可以知道，因为p的元素不是0就是1，而且又是乘法，所以很自然地我们如果知道1所对应的index，那么就不用做其他无意义的运算了。所以在pytorch代码中target不是以one-hot形式表示的，而是直接用scalar表示。若该样本的真实标签为$y$,则交叉熵的公式可变形为：</p>
+<p>$$cross_entropy=-\sum_{k=1}^{N}\left(p_{k} * \log q_{k}\right)=-log , q_{y}$$</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">output = torch.tensor([[<span class="hljs-number">1.2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])<br>target = torch.tensor([<span class="hljs-number">0</span>])<br><br>log_sm_output = F.log_softmax(output, dim=<span class="hljs-number">1</span>)<br>nll_loss_of_log_sm_output = F.nll_loss(log_sm_output, target)<br><span class="hljs-built_in">print</span>(nll_loss_of_log_sm_output)<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">output = torch.tensor([[<span class="hljs-number">1.2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>]])<br>target = torch.tensor([<span class="hljs-number">0</span>])<br><br>ce_loss = F.cross_entropy(output, target)<br><span class="hljs-built_in">print</span>(ce_loss)<br><br>F.cross_entropy 《==》 F.log_softmax(output, dim=<span class="hljs-number">1</span>)+F.nll_loss(log_sm_output, target)<br></code></pre></td></tr></tbody></table></figure>
+<p>这两者是等价的哦~</p>
+<h4 id="T-softmax">T-softmax</h4>
+<p>T-softmax的目的是平滑分布，不让分布太过于极端。比如可以看下面的实例哈。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax</span>(<span class="hljs-params">x</span>):</span><br>    x_exp = np.exp(x)<br>    <span class="hljs-keyword">return</span> x_exp / np.<span class="hljs-built_in">sum</span>(x_exp)<br><br>output = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">1.6</span>, <span class="hljs-number">3.6</span>])<br><span class="hljs-built_in">print</span>(softmax(output))<br><span class="hljs-comment">#[0.02590865 0.11611453 0.85797681]</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_t</span>(<span class="hljs-params">x, t</span>):</span><br>    x_exp = np.exp(x / t)<br>    <span class="hljs-keyword">return</span> x_exp / np.<span class="hljs-built_in">sum</span>(x_exp)<br><br>output = np.array([<span class="hljs-number">0.1</span>, <span class="hljs-number">1.6</span>, <span class="hljs-number">3.6</span>])<br><span class="hljs-built_in">print</span>(softmax_t(output, <span class="hljs-number">5</span>))<br><span class="hljs-comment">#[0.22916797 0.3093444  0.46148762]</span><br></code></pre></td></tr></tbody></table></figure>
+<p>设置为5可以看到分布在【0，1】的数更加平滑了哦~</p>
+<h2 id="KD训练代码">KD训练代码</h2>
+<h3 id="导入包">导入包</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> torch<br><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn<br><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F<br><span class="hljs-keyword">from</span> torchvision <span class="hljs-keyword">import</span> datasets, transforms<br><span class="hljs-keyword">import</span> torch.utils.data<br>torch.manual_seed(<span class="hljs-number">0</span>)<br>torch.cuda.manual_seed(<span class="hljs-number">0</span>) <span class="hljs-comment">#设置GPU生成随机数的种子，方便下次复现实验结果。</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="网络架构">网络架构</h3>
+<h4 id="teacher网络">teacher网络</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TeacherNet</span>(<span class="hljs-params">nn.Module</span>):</span> <span class="hljs-comment">#继承Module</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">super</span>(TeacherNet, self).__init__()<br>        self.conv1 = nn.Conv2d(<span class="hljs-number">1</span>, <span class="hljs-number">32</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>)<br>        self.conv2 = nn.Conv2d(<span class="hljs-number">32</span>, <span class="hljs-number">64</span>, <span class="hljs-number">3</span>, <span class="hljs-number">1</span>)<br>        self.dropout1 = nn.Dropout2d(<span class="hljs-number">0.3</span>)<br>        self.dropout2 = nn.Dropout2d(<span class="hljs-number">0.5</span>)<br>        self.fc1 = nn.Linear(<span class="hljs-number">9216</span>, <span class="hljs-number">128</span>)<br>        self.fc2 = nn.Linear(<span class="hljs-number">128</span>, <span class="hljs-number">10</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        x = self.conv1(x)<br>        x = F.relu(x)<br>        x = self.conv2(x)<br>        x = F.relu(x)<br>        x = F.max_pool2d(x, <span class="hljs-number">2</span>)<br>        x = self.dropout1(x)<br>        x = torch.flatten(x, <span class="hljs-number">1</span>)<br>        x = self.fc1(x)<br>        x = F.relu(x)<br>        x = self.dropout2(x)<br>        output = self.fc2(x)<br>        <span class="hljs-keyword">return</span> output<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="student网络">student网络</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StudentNet</span>(<span class="hljs-params">nn.Module</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        <span class="hljs-built_in">super</span>(StudentNet, self).__init__()<br>        self.fc1 = nn.Linear(<span class="hljs-number">28</span> * <span class="hljs-number">28</span>, <span class="hljs-number">128</span>)<br>        self.fc2 = nn.Linear(<span class="hljs-number">128</span>, <span class="hljs-number">64</span>)<br>        self.fc3 = nn.Linear(<span class="hljs-number">64</span>, <span class="hljs-number">10</span>)<br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward</span>(<span class="hljs-params">self, x</span>):</span><br>        x = torch.flatten(x, <span class="hljs-number">1</span>)<br>        x = F.relu(self.fc1(x))<br>        x = F.relu(self.fc2(x))<br>        output = F.relu(self.fc3(x))<br>        <span class="hljs-keyword">return</span> output<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="teacher网络训练">teacher网络训练</h3>
+<h4 id="定义基本函数">定义基本函数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_teacher</span>(<span class="hljs-params">model, device, train_loader, optimizer, epoch</span>):</span><br>    model.train() <span class="hljs-comment">#train过程model.train()的作用是启用 Batch Normalization 和 Dropout。model.train()是保证BN层能够用到每一批数据的均值和方差</span><br>    trained_samples = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> batch_idx, (data, target) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_loader):<br>        data, target = data.to(device), target.to(device) <span class="hljs-comment">#放到GPU</span><br>        optimizer.zero_grad() <span class="hljs-comment">#归0</span><br>        output = model(data) <span class="hljs-comment">#得到结果</span><br>        loss = F.cross_entropy(output, target) <span class="hljs-comment">#计算损失 使用交叉熵</span><br>        loss.backward() <span class="hljs-comment">#后向传播更新参数</span><br>        optimizer.step() <span class="hljs-comment">#优化器调整超参数</span><br><br>        trained_samples += <span class="hljs-built_in">len</span>(data)<br>        progress = math.ceil(batch_idx / <span class="hljs-built_in">len</span>(train_loader) * <span class="hljs-number">50</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"\rTrain epoch %d: %d/%d, [%-51s] %d%%"</span> %<br>              (epoch, trained_samples, <span class="hljs-built_in">len</span>(train_loader.dataset),<br>               <span class="hljs-string">'-'</span> * progress + <span class="hljs-string">'&gt;'</span>, progress * <span class="hljs-number">2</span>), end=<span class="hljs-string">''</span>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_teacher</span>(<span class="hljs-params">model, device, test_loader</span>):</span><br>    model.<span class="hljs-built_in">eval</span>() <span class="hljs-comment">#保证BN层能够用全部训练数据的均值和方差</span><br>    test_loss = <span class="hljs-number">0</span><br>    correct = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">with</span> torch.no_grad(): <span class="hljs-comment">#冻结参数</span><br>        <span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> test_loader:<br>            data, target = data.to(device), target.to(device)<br>            output = model(data) <span class="hljs-comment">#模型得到结果</span><br>            test_loss += F.cross_entropy(output, target, reduction=<span class="hljs-string">'sum'</span>).item()  <span class="hljs-comment"># 统计所有的losssum up batch loss</span><br>            pred = output.argmax(dim=<span class="hljs-number">1</span>, keepdim=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># get the index of the max log-probability 得到每一行的最大值下标</span><br>            correct += pred.eq(target.view_as(pred)).<span class="hljs-built_in">sum</span>().item() <span class="hljs-comment">#eq是一个判断函数 view_as是拉成一列</span><br><br>    test_loss /= <span class="hljs-built_in">len</span>(test_loader.dataset) <span class="hljs-comment">#得到平均loss</span><br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">'\nTest: average loss: {:.4f}, accuracy: {}/{} ({:.0f}%)'</span>.<span class="hljs-built_in">format</span>(<br>        test_loss, correct, <span class="hljs-built_in">len</span>(test_loader.dataset),<br>        <span class="hljs-number">100.</span> * correct / <span class="hljs-built_in">len</span>(test_loader.dataset)))<br>    <span class="hljs-keyword">return</span> test_loss, correct / <span class="hljs-built_in">len</span>(test_loader.dataset)<br><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="训练主函数">训练主函数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">teacher_main</span>():</span><br>    epochs = <span class="hljs-number">10</span><br>    batch_size = <span class="hljs-number">64</span><br>    torch.manual_seed(<span class="hljs-number">0</span>) <span class="hljs-comment">#设置CPU生成随机数的种子，方便下次复现实验结果。</span><br><br>    device = torch.device(<span class="hljs-string">"cuda"</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">"cpu"</span>)<br><br>    train_loader = torch.utils.data.DataLoader(<br>        datasets.MNIST(<span class="hljs-string">'../data/MNIST'</span>, train=<span class="hljs-literal">True</span>, download=<span class="hljs-literal">True</span>,<br>                       transform=transforms.Compose([<br>                           transforms.ToTensor(),<br>                           transforms.Normalize((<span class="hljs-number">0.1307</span>,), (<span class="hljs-number">0.3081</span>,))<br>                       ])),<br>        batch_size=batch_size, shuffle=<span class="hljs-literal">True</span>)<br>    test_loader = torch.utils.data.DataLoader(<br>        datasets.MNIST(<span class="hljs-string">'../data/MNIST'</span>, train=<span class="hljs-literal">False</span>, download=<span class="hljs-literal">True</span>, transform=transforms.Compose([<br>            transforms.ToTensor(),<br>            transforms.Normalize((<span class="hljs-number">0.1307</span>,), (<span class="hljs-number">0.3081</span>,))<br>        ])),<br>        batch_size=<span class="hljs-number">1000</span>, shuffle=<span class="hljs-literal">True</span>)<br><br>    model = TeacherNet().to(device) <span class="hljs-comment">#模型装进GPU中</span><br>    optimizer = torch.optim.Adadelta(model.parameters()) <span class="hljs-comment">#定义优化器 其实需要传入模型参数让优化器知道参数空间</span><br>    <span class="hljs-string">'''</span><br><span class="hljs-string">    optimzier优化器的作用：优化器就是需要根据网络反向传播的梯度信息来</span><br><span class="hljs-string">    再次更新网络的参数，以起到降低loss函数计算值的作用。</span><br><span class="hljs-string">    '''</span><br>    <br>    teacher_history = [] <span class="hljs-comment">#保存历史数据</span><br><br>    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, epochs + <span class="hljs-number">1</span>):<br>        train_teacher(model, device, train_loader, optimizer, epoch)<br>        loss, acc = test_teacher(model, device, test_loader) <span class="hljs-comment">#相当于验证集作用 也可以绘图</span><br>        <br>        teacher_history.append((loss, acc))<br><br>    torch.save(model.state_dict(), <span class="hljs-string">"teacher.pt"</span>)<br>    <span class="hljs-keyword">return</span> model, teacher_history<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 训练教师网络</span><br>teacher_model, teacher_history = teacher_main()<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="student网络训练（重点）🌸">student网络训练（重点）🌸</h3>
+<h4 id="理论部分">理论部分</h4>
+<p><img src="https://picture.mulindya.com/kDistillation-10.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>这里的q是经过了<code>softmax</code>之后的分布</p>
+<p>student的loss来源于两个部分，Loss将两个loss相加</p>
+<ul>
+<li>studet的HARD Loss是根据one-hot的真实样本p分布得到（和一般的loss一样）</li>
+<li>student的SOFT loss是来源于teacher的分布q’‘（是将q’蒸馏平滑后的结果）</li>
+</ul>
+<h4 id="定义kd的loss">定义kd的loss</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 这里定义的是SOFT Loss + 交叉熵（HARD Loss）</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">distillation</span>(<span class="hljs-params">y, labels, teacher_scores, temp, alpha</span>):</span><br>    <span class="hljs-keyword">return</span> nn.KLDivLoss()(F.log_softmax(y / temp, dim=<span class="hljs-number">1</span>), F.softmax(teacher_scores / temp, dim=<span class="hljs-number">1</span>)) * (<br>            temp * temp * <span class="hljs-number">2.0</span> * alpha) + F.cross_entropy(y, labels) * (<span class="hljs-number">1.</span> - alpha) <span class="hljs-comment">#两个分布都是T_softmax来求相对熵</span><br><br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>nn.KLDivLoss()(input,target)相对熵损失 通过求散度得到Loss值</p>
+<p>用于衡量两个分布的相似性，越小越相似</p>
+</blockquote>
+
+$$
+l_{n}=y_{n} \cdot\left(\log y_{n}-x_{n}\right)
+$$
+
+<p>可以指定loss function的reduction参数，来设置每个样本loss的最后得到数据loss计算方式；</p>
+
+$$
+\ell(x, y)=\left\{\begin{array}{ll}L, &amp; \text { if reduction }=\text { 'none' } \\ \operatorname{mean}(L), &amp; \text { if reduction }=\text { 'mean' } \\ N*\operatorname {mean}(L), &amp; \text { if reduction }=\text { 'batchmean' } \\ \operatorname{sum}(L), &amp; \text { if reduction }=\text { 'sum' }\end{array} \right.
+$$
+
+<h4 id="定义基本函数-2">定义基本函数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train_student_kd</span>(<span class="hljs-params">model, device, train_loader, optimizer, epoch</span>):</span><br>    model.train()<br>    trained_samples = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> batch_idx, (data, target) <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(train_loader):<br>        data, target = data.to(device), target.to(device)<br>        optimizer.zero_grad()<br>        output = model(data)<br>        teacher_output = teacher_model(data)  <span class="hljs-comment">#得到teacher网络的推断用于后续计算student的loss</span><br>        teacher_output = teacher_output.detach()  <span class="hljs-comment"># 切断老师网络的反向传播</span><br>        loss = distillation(output, target, teacher_output, temp=<span class="hljs-number">5.0</span>, alpha=<span class="hljs-number">0.7</span>)<br>        loss.backward()<br>        optimizer.step()<br><br>        trained_samples += <span class="hljs-built_in">len</span>(data)<br>        progress = math.ceil(batch_idx / <span class="hljs-built_in">len</span>(train_loader) * <span class="hljs-number">50</span>)<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"\rTrain epoch %d: %d/%d, [%-51s] %d%%"</span> %<br>              (epoch, trained_samples, <span class="hljs-built_in">len</span>(train_loader.dataset),<br>               <span class="hljs-string">'-'</span> * progress + <span class="hljs-string">'&gt;'</span>, progress * <span class="hljs-number">2</span>), end=<span class="hljs-string">''</span>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_student_kd</span>(<span class="hljs-params">model, device, test_loader</span>):</span><br>    model.<span class="hljs-built_in">eval</span>()<br>    test_loss = <span class="hljs-number">0</span><br>    correct = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">with</span> torch.no_grad():<br>        <span class="hljs-keyword">for</span> data, target <span class="hljs-keyword">in</span> test_loader:<br>            data, target = data.to(device), target.to(device)<br>            output = model(data)<br>            test_loss += F.cross_entropy(output, target, reduction=<span class="hljs-string">'sum'</span>).item()  <span class="hljs-comment"># sum up batch loss item()函数可以理解为得到纯粹的数值</span><br>            pred = output.argmax(dim=<span class="hljs-number">1</span>, keepdim=<span class="hljs-literal">True</span>)  <span class="hljs-comment"># get the index of the max log-probability</span><br>            correct += pred.eq(target.view_as(pred)).<span class="hljs-built_in">sum</span>().item()<br><br>    test_loss /= <span class="hljs-built_in">len</span>(test_loader.dataset)<br><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">'\nTest: average loss: {:.4f}, accuracy: {}/{} ({:.0f}%)'</span>.<span class="hljs-built_in">format</span>(<br>        test_loss, correct, <span class="hljs-built_in">len</span>(test_loader.dataset),<br>        <span class="hljs-number">100.</span> * correct / <span class="hljs-built_in">len</span>(test_loader.dataset)))<br>    <span class="hljs-keyword">return</span> test_loss, correct / <span class="hljs-built_in">len</span>(test_loader.dataset)<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="训练主函数-2">训练主函数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">student_kd_main</span>():</span><br>    epochs = <span class="hljs-number">10</span><br>    batch_size = <span class="hljs-number">64</span><br>    torch.manual_seed(<span class="hljs-number">0</span>)<br><br>    device = torch.device(<span class="hljs-string">"cuda"</span> <span class="hljs-keyword">if</span> torch.cuda.is_available() <span class="hljs-keyword">else</span> <span class="hljs-string">"cpu"</span>)<br><br>    train_loader = torch.utils.data.DataLoader(<br>        datasets.MNIST(<span class="hljs-string">'../data/MNIST'</span>, train=<span class="hljs-literal">True</span>, download=<span class="hljs-literal">True</span>,<br>                       transform=transforms.Compose([<br>                           transforms.ToTensor(),<br>                           transforms.Normalize((<span class="hljs-number">0.1307</span>,), (<span class="hljs-number">0.3081</span>,))<br>                       ])),<br>        batch_size=batch_size, shuffle=<span class="hljs-literal">True</span>)<br>    test_loader = torch.utils.data.DataLoader(<br>        datasets.MNIST(<span class="hljs-string">'../data/MNIST'</span>, train=<span class="hljs-literal">False</span>, download=<span class="hljs-literal">True</span>, transform=transforms.Compose([<br>            transforms.ToTensor(),<br>            transforms.Normalize((<span class="hljs-number">0.1307</span>,), (<span class="hljs-number">0.3081</span>,))<br>        ])),<br>        batch_size=<span class="hljs-number">1000</span>, shuffle=<span class="hljs-literal">True</span>)<br><br>    model = StudentNet().to(device)<br>    optimizer = torch.optim.Adadelta(model.parameters())<br>    <br>    student_history = []<br>    <span class="hljs-keyword">for</span> epoch <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, epochs + <span class="hljs-number">1</span>):<br>        train_student_kd(model, device, train_loader, optimizer, epoch)<br>        loss, acc = test_student_kd(model, device, test_loader)<br>        student_history.append((loss, acc))<br><br>    torch.save(model.state_dict(), <span class="hljs-string">"student_kd.pt"</span>)<br>    <span class="hljs-keyword">return</span> model, student_history<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">student_kd_model, student_kd_history = student_kd_main()<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="绘制结果">绘制结果</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br>epochs = <span class="hljs-number">10</span><br>x = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, epochs+<span class="hljs-number">1</span>))<br><br>plt.subplot(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>plt.plot(x, [teacher_history[i][<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'teacher'</span>)<br>plt.plot(x, [student_kd_history[i][<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'student with KD'</span>)<br>plt.plot(x, [student_simple_history[i][<span class="hljs-number">1</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'student without KD'</span>)<br><br>plt.title(<span class="hljs-string">'Test accuracy'</span>)<br>plt.legend()<br><br><br>plt.subplot(<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>plt.plot(x, [teacher_history[i][<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'teacher'</span>)<br>plt.plot(x, [student_kd_history[i][<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'student with KD'</span>)<br>plt.plot(x, [student_simple_history[i][<span class="hljs-number">0</span>] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(epochs)], label=<span class="hljs-string">'student without KD'</span>)<br><br>plt.title(<span class="hljs-string">'Test loss'</span>)<br>plt.legend()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/kDistillation-13.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到在teacher的帮助下，student可以学得更好🐱</p>
+<h3 id="teacher网络的暗知识🎍">teacher网络的暗知识🎍</h3>
+<h4 id="softmax-t">softmax_t</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">from</span> matplotlib <span class="hljs-keyword">import</span> pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">softmax_t</span>(<span class="hljs-params">x, t</span>):</span><br>    x_exp = np.exp(x / t)<br>    <span class="hljs-keyword">return</span> x_exp / np.<span class="hljs-built_in">sum</span>(x_exp)<br><br>test_loader_bs1 = torch.utils.data.DataLoader(<br>    datasets.MNIST(<span class="hljs-string">'../data/MNIST'</span>, train=<span class="hljs-literal">False</span>, download=<span class="hljs-literal">True</span>, transform=transforms.Compose([<br>        transforms.ToTensor(),<br>        transforms.Normalize((<span class="hljs-number">0.1307</span>,), (<span class="hljs-number">0.3081</span>,))<br>    ])),<br>    batch_size=<span class="hljs-number">1</span>, shuffle=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="推断">推断</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python">teacher_model.<span class="hljs-built_in">eval</span>()<br><span class="hljs-keyword">with</span> torch.no_grad():<br>    data, target = <span class="hljs-built_in">next</span>(<span class="hljs-built_in">iter</span>(test_loader_bs1))<br>    data, target = data.to(<span class="hljs-string">'cuda'</span>), target.to(<span class="hljs-string">'cuda'</span>)<br>    output = teacher_model(data)<br><br>test_x = data.cpu().numpy() <span class="hljs-comment">#放进cpu转换成numpy</span><br>y_out = output.cpu().numpy()<br>y_out = y_out[<span class="hljs-number">0</span>, ::]<br><span class="hljs-built_in">print</span>(<span class="hljs-string">'Output (NO softmax):'</span>, y_out)<br><br><br><br>plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>)<br>plt.imshow(test_x[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, ::])<br><br>plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>)<br>plt.bar(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)), softmax_t(y_out, <span class="hljs-number">1</span>), width=<span class="hljs-number">0.3</span>) <span class="hljs-comment">#直方图</span><br><br>plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>)<br>plt.bar(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">range</span>(<span class="hljs-number">10</span>)), softmax_t(y_out, <span class="hljs-number">10</span>), width=<span class="hljs-number">0.3</span>)<br>plt.show()<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Output (NO softmax): [-31.14481   -30.600847   -3.2787514 -20.624037  -31.863455  -37.684086 -35.177486  -22.72263   -16.028662  -26.460657 ]</p>
+</blockquote>
+<p><img src="https://picture.mulindya.com/kDistillation-12.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>可以看到数据更加平滑，并且可以体现出这个数字不仅是2还和8有些类似⛄️。</p>
+<h2 id="本质🎈">本质🎈</h2>
+<p><img src="https://picture.mulindya.com/kDistillation-11.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在知识蒸馏中，本质上就是使用SOFT Loss来替代正则化项，去拟合teacher的效果。</p>
+<p>L2左边是极大似然，右边是先验知识（人为设置）</p>
+<p>这里用teacher的知识去正则化作为先验知识，嗯！nice！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%8E%E5%AE%8F%E6%AF%85/">李宏毅</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F/">知识蒸馏</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/06/deep_learning/dsconv/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Depthwise Separable Convolution</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/05/leetcode/leetcode17/">
+                        <span class="hidden-mobile">leetcode17 电话号码的字母组合</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/05/deep_learning/KnowledgeDistillation/';
+          this.page.identifier = '/2022/01/05/deep_learning/KnowledgeDistillation/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492</a>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
