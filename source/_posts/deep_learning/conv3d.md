@@ -14,9 +14,9 @@ math: true
 
 卷积核的维度指的的进行滑窗操作的维度，而滑窗操作不在channel维度上进行，不管有几个channel，它们都共享同一个滑窗位置（虽然2D多channel卷积的时候每个channel上的卷积核权重是独立的，但滑窗位置是共享的）。所以在讨论卷积核维度的时候，是不把channel维加进去的。
 
-<font color=purple>**2D conv的卷积核就是$(c, k_h, k_w)$，因此，对于RGB图像做2D卷积，卷积核可以是conv2D(3,3) 而不该是conv3D(3,3,3).**</font>
+<font color=purple> **2D conv的卷积核就是$(c, k_h, k_w)$，因此，对于RGB图像做2D卷积，卷积核可以是conv2D(3,3) 而不该是conv3D(3,3,3).** </font>
 
-<font color=purple>**3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维. **</font>
+<font color=purple> **3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维. ** </font>
 
 ## 2D卷积
 
@@ -76,12 +76,14 @@ torch.nn.Conv2d(in_channels, out_channels, kernel_size, stride=1, padding=0, dil
 Applies a 2D convolution over an input signal composed of several input planes.
 
 In the simplest case, the output value of the layer with input size $(N, C_{\text{in}}, H, W)$and output $(N, C_{\text{out}}, H_{\text{out}}, W_{\text{out}})$ can be precisely described as:
+
+{% raw %}
 $$
 \text{out}(N_i, C_{\text{out}_j}) = \text{bias}(C_{\text{out}_j}) + \sum_{k = 0}^{C_{\text{in}} - 1} \text{weight}(C_{\text{out}_j}, k) \star \text{input}(N_i, k)
 $$
+{% endraw %}
 
-
-where \star⋆ is the valid 2D [cross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) operator, N*N* is a batch size, C*C* denotes a number of channels, H*H* is a height of input planes in pixels, and W*W* is width in pixels.
+where ⋆ is the valid 2D [cross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) operator, N*N* is a batch size, C*C* denotes a number of channels, H*H* is a height of input planes in pixels, and W*W* is width in pixels.
 
 This module supports [TensorFloat32](https://pytorch.org/docs/stable/notes/cuda.html#tf32-on-ampere).
 
@@ -169,10 +171,14 @@ torch.nn.Conv3d(in_channels, out_channels, kernel_size, stride=1, padding=0, dil
 Applies a 3D convolution over an input signal composed of several input planes.
 
 In the simplest case, the output value of the layer with input size$ (N, C_{in}, D, H, W)$  and output $(N, C_{out}, D_{out}, H_{out}, W_{out})$ can be precisely described as:
+
+{% raw %}
 $$
 out(N_i, C_{out_j}) = bias(C_{out_j}) + \sum_{k = 0}^{C_{in} - 1} weight(C_{out_j}, k) \star input(N_i, k)
 $$
-where \star⋆ is the valid 3D [cross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) operator
+{% endraw %}
+
+where ⋆ is the valid 3D [cross-correlation](https://en.wikipedia.org/wiki/Cross-correlation) operator
 
 This module supports [TensorFloat32](https://pytorch.org/docs/stable/notes/cuda.html#tf32-on-ampere).
 
