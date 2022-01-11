@@ -294,8 +294,8 @@
 </blockquote>
 <h2 id="卷积核的维度">卷积核的维度</h2>
 <p>卷积核的维度指的的进行滑窗操作的维度，而滑窗操作不在channel维度上进行，不管有几个channel，它们都共享同一个滑窗位置（虽然2D多channel卷积的时候每个channel上的卷积核权重是独立的，但滑窗位置是共享的）。所以在讨论卷积核维度的时候，是不把channel维加进去的。</p>
-<p><font color="purple"> <strong>2D conv的卷积核就是$(c, k_h, k_w)$，因此，对于RGB图像做2D卷积，卷积核可以是conv2D(3,3) 而不该是conv3D(3,3,3).</strong> </font></p>
-<p><font color="purple"> **3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维. ** </font></p>
+<p><font color="purple"> <strong>2D conv的卷积核就是$(c, k_h, k_w)$，因此，对于RGB图像做2D卷积，卷积核可以是conv2D(3,3) 而不该是conv3D(3,3,3)；</strong></font><br>
+<font color="green"> **3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维. ** </font></p>
 <h2 id="2D卷积">2D卷积</h2>
 <h3 id="单通道">单通道</h3>
 <p>首先了解什么是卷积核，卷积核(filter)是由一组参数构成的张量，卷积核相当于权值，图像相当于输入量，卷积的操作就是根据卷积核对这些输入量进行加权求和。我们通常用卷积来提取图像的特征。</p>
@@ -453,8 +453,6 @@ $$
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">深度学习</a>
-                    
-                      <a class="hover-with-bg" href="/tags/yuan/">yuan</a>
                     
                   </div>
                 

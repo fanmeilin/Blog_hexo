@@ -15,7 +15,8 @@ math: true
 卷积核的维度指的的进行滑窗操作的维度，而滑窗操作不在channel维度上进行，不管有几个channel，它们都共享同一个滑窗位置（虽然2D多channel卷积的时候每个channel上的卷积核权重是独立的，但滑窗位置是共享的）。所以在讨论卷积核维度的时候，是不把channel维加进去的。
 
 <font color=purple> **2D conv的卷积核就是$(c, k_h, k_w)$，因此，对于RGB图像做2D卷积，卷积核可以是conv2D(3,3) 而不该是conv3D(3,3,3)；**</font>
-<font color=green> **3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维. ** </font>
+
+<font color=green> **3D conv的卷积核就是$(c, k_d, k_h, k_w)$，其中k_d就是多出来的第三维，根据具体应用，在视频中就是时间维，在CT图像中就是层数维.**  </font>
 
 
 ## 2D卷积
