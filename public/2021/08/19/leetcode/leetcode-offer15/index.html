@@ -187,16 +187,16 @@
 				var video_item = document.getElementById(id);
 
 				if (height / width < 0.56){
-					video_item.setAttribute('width','100%' ); <!--'100%'-->
+					video_item.setAttribute('width', '100%');
 					video_item.setAttribute('height', 'auto');
 				} else {
-					video_item.setAttribute('height', '100%'); <!--'100%'-->
+					video_item.setAttribute('height', '100%');
 					video_item.setAttribute('width', 'auto');
 				}
 			}
 
 			$.getJSON('/js/video_url.json', function(data){
-				if (true){ <!--!isMobile-->
+				if (!isMobile){
 					var video_list_length = data.length
 					var seed = Math.random()
 					index = Math.floor(seed * video_list_length)
@@ -210,7 +210,7 @@
 
 			});
 
-			if (true){
+			if (!isMobile){
 				window.onresize = function(){
 					set_video_attr('video_item')
 					}
@@ -464,8 +464,6 @@ n &amp; (n - 1) 解析： 二进制数字 n 最右边的 1变成 0，其余不�
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-  <!-- <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492-1号</a>
-  <a href="http://www.beian.miit.gov.cn/"  style="color:blue" target="_blank">http://www.beian.miit.gov.cn/</a> -->
   
   <div class="statistics">
     

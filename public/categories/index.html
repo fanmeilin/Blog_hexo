@@ -171,16 +171,16 @@
 				var video_item = document.getElementById(id);
 
 				if (height / width < 0.56){
-					video_item.setAttribute('width','100%' ); <!--'100%'-->
+					video_item.setAttribute('width', '100%');
 					video_item.setAttribute('height', 'auto');
 				} else {
-					video_item.setAttribute('height', '100%'); <!--'100%'-->
+					video_item.setAttribute('height', '100%');
 					video_item.setAttribute('width', 'auto');
 				}
 			}
 
 			$.getJSON('/js/video_url.json', function(data){
-				if (true){ <!--!isMobile-->
+				if (!isMobile){
 					var video_list_length = data.length
 					var seed = Math.random()
 					index = Math.floor(seed * video_list_length)
@@ -194,7 +194,7 @@
 
 			});
 
-			if (true){
+			if (!isMobile){
 				window.onresize = function(){
 					set_video_attr('video_item')
 					}
@@ -766,49 +766,6 @@
     <div class="category-sub row">
       <a
         class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-aa824d569d3361ac9753b4ef76ed8eec" role="tab" data-toggle="collapse" href="#collapse-aa824d569d3361ac9753b4ef76ed8eec"
-        aria-expanded="false"
-      >
-        双指针
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8F%8C%E6%8C%87%E9%92%88/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>2</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-aa824d569d3361ac9753b4ef76ed8eec" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-aa824d569d3361ac9753b4ef76ed8eec">
-    
-    
-      
-      
-        <a href="/2022/01/04/leetcode/leetcode-offer58-1/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer58-1 翻转单词的顺序</span>
-        </a>
-      
-    
-      
-      
-        <a href="/2021/11/17/leetcode/leetcode-offer57/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer57 和为s的两个数字</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category-sub row">
-      <a
-        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
         id="heading-c1bb62b63c65be3760b715faad0bdf8d" role="tab" data-toggle="collapse" href="#collapse-c1bb62b63c65be3760b715faad0bdf8d"
         aria-expanded="false"
       >
@@ -838,6 +795,49 @@
       
         <a href="/2021/08/14/leetcode/leetcode-offer12/" class="list-group-item list-group-item-action">
           <span class="category-post">剑指offer12 矩阵中的路径</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-aa824d569d3361ac9753b4ef76ed8eec" role="tab" data-toggle="collapse" href="#collapse-aa824d569d3361ac9753b4ef76ed8eec"
+        aria-expanded="false"
+      >
+        双指针
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8F%8C%E6%8C%87%E9%92%88/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>2</span>
+      </a>
+      <div class="category-collapse">
+        
+        
+          
+  <div id="collapse-aa824d569d3361ac9753b4ef76ed8eec" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-aa824d569d3361ac9753b4ef76ed8eec">
+    
+    
+      
+      
+        <a href="/2022/01/04/leetcode/leetcode-offer58-1/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer58-1 翻转单词的顺序</span>
+        </a>
+      
+    
+      
+      
+        <a href="/2021/11/17/leetcode/leetcode-offer57/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer57 和为s的两个数字</span>
         </a>
       
     
@@ -1068,42 +1068,6 @@
     <div class="category-sub row">
       <a
         class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
-        id="heading-ddc7d28b7b108cdca9ee7832f7314422" role="tab" data-toggle="collapse" href="#collapse-ddc7d28b7b108cdca9ee7832f7314422"
-        aria-expanded="false"
-      >
-        变量
-        <i class="iconfont icon-arrowright"></i>
-      </a>
-      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8F%98%E9%87%8F/" class="category-count col-2 col-md-1">
-        <i class="iconfont icon-articles"></i>
-        <span>1</span>
-      </a>
-      <div class="category-collapse">
-        
-        
-          
-  <div id="collapse-ddc7d28b7b108cdca9ee7832f7314422" class="collapse in" role="tabpanel"
-       aria-labelledby="heading-ddc7d28b7b108cdca9ee7832f7314422">
-    
-    
-      
-      
-        <a href="/2021/08/19/leetcode/leetcode-offer15/" class="list-group-item list-group-item-action">
-          <span class="category-post">剑指offer15 二进制中1的个数</span>
-        </a>
-      
-    
-  </div>
-
-        
-      </div>
-    </div>
-  
-    
-    
-    <div class="category-sub row">
-      <a
-        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
         id="heading-35888d4c3d6fecff777a2cd98ce71861" role="tab" data-toggle="collapse" href="#collapse-35888d4c3d6fecff777a2cd98ce71861"
         aria-expanded="false"
       >
@@ -1126,6 +1090,42 @@
       
         <a href="/2021/08/21/leetcode/leetcode-offer16/" class="list-group-item list-group-item-action">
           <span class="category-post">剑指offer16  数值的整数次方</span>
+        </a>
+      
+    
+  </div>
+
+        
+      </div>
+    </div>
+  
+    
+    
+    <div class="category-sub row">
+      <a
+        class="category-subitem collapsed list-group-item category-item-action col-10 col-md-11"
+        id="heading-ddc7d28b7b108cdca9ee7832f7314422" role="tab" data-toggle="collapse" href="#collapse-ddc7d28b7b108cdca9ee7832f7314422"
+        aria-expanded="false"
+      >
+        变量
+        <i class="iconfont icon-arrowright"></i>
+      </a>
+      <a href="/categories/%E5%89%91%E6%8C%87/%E5%8F%98%E9%87%8F/" class="category-count col-2 col-md-1">
+        <i class="iconfont icon-articles"></i>
+        <span>1</span>
+      </a>
+      <div class="category-collapse">
+        
+        
+          
+  <div id="collapse-ddc7d28b7b108cdca9ee7832f7314422" class="collapse in" role="tabpanel"
+       aria-labelledby="heading-ddc7d28b7b108cdca9ee7832f7314422">
+    
+    
+      
+      
+        <a href="/2021/08/19/leetcode/leetcode-offer15/" class="list-group-item list-group-item-action">
+          <span class="category-post">剑指offer15 二进制中1的个数</span>
         </a>
       
     
@@ -2592,8 +2592,6 @@
   <div class="footer-content">
      <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
   </div>
-  <!-- <a href="http://www.beian.miit.gov.cn/"  style="color:#f72b07" target="_blank">鄂ICP备2021014492-1号</a>
-  <a href="http://www.beian.miit.gov.cn/"  style="color:blue" target="_blank">http://www.beian.miit.gov.cn/</a> -->
   
   <div class="statistics">
     
