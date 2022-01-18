@@ -1,8 +1,8 @@
 ---
 title: praticalML第四章笔记
 tags: [李沐,机器学习]
-categories:[学习笔记，机器学习]
-date: 2022-01-12 15:31:26
+categories: [学习笔记，机器学习]
+date: 2022-01-17 15:31:26
 math: true
 ---
 
