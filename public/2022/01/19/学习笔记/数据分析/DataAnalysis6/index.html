@@ -1,0 +1,903 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>数据分析笔记--线性回归 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据分析笔记--线性回归">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-19 16:41" pubdate>
+        2022年1月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      26
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析笔记--线性回归</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本科实训的时候记录的数据分析的笔记，感觉还挺全面的，部署到博客中，今后对数据分析的应用可以方便回顾。😶</p>
+</blockquote>
+<blockquote>
+<p>本篇主要内容是线性回归，灰常重点，也很基础的内容，概念不难理解，主要可以关注多元线性回归中的变量筛选。还有实例代码和操作流程！标记星号⭐️</p>
+</blockquote>
+<h1>线性回归 ⛄️</h1>
+<h1>1 简单线性模型 📃</h1>
+<h2 id="1-1-简单线性回归">1.1 简单线性回归</h2>
+<p>表达形式：</p>
+<p><img src="https://picture.mulindya.com/image-20210120114327110.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>只有一个自变量和一个因变量 评估自变量在解释因变量变异或者表现时的显著性；在给定自变量的情况下预测因变量，扰动项又可以称之为随机误差，服从均值为0的正态分布；</p>
+<h2 id="1-2-线性回归拟合线">1.2 线性回归拟合线</h2>
+<p><img src="https://picture.mulindya.com/image-20210120115645575.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>简单线性回归原理就是拟合一条直线，使得实际值与预测值的差值平方和最小，当这个距离最小时，这条直线就是最好的回归拟合线</p>
+<p>实际值和预测值的差值就是残差</p>
+<p>线性回归的宗旨：使得残差平方最小化；</p>
+<h1>2 多元线性回归 📇</h1>
+<p><img src="https://picture.mulindya.com/image-20210121113429295.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在多元线性回归中，x1和x2都有明显的线性相关关系并且x1和x2无线性相关关系；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">model2 = ols(<span class="hljs-string">'avg_exp~Age+Income+dist_home_val+dist_avg_income'</span>,data=exp).fit()<br></code></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right"></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Dep. Variable:</td>
+<td style="text-align:right">avg_exp</td>
+<td>R-squared:</td>
+<td>0.542</td>
+</tr>
+<tr>
+<td style="text-align:right">Model:</td>
+<td style="text-align:right">OLS</td>
+<td>Adj. R-squared:</td>
+<td>0.513</td>
+</tr>
+<tr>
+<td style="text-align:right">Method:</td>
+<td style="text-align:right">Least Squares</td>
+<td>F-statistic:</td>
+<td>19.20</td>
+</tr>
+<tr>
+<td style="text-align:right">Date:</td>
+<td style="text-align:right">Thu, 21 Jan 2021</td>
+<td>Prob (F-statistic):</td>
+<td>1.82e-10</td>
+</tr>
+<tr>
+<td style="text-align:right">Time:</td>
+<td style="text-align:right">11:45:07</td>
+<td>Log-Likelihood:</td>
+<td>-498.59</td>
+</tr>
+<tr>
+<td style="text-align:right">No. Observations:</td>
+<td style="text-align:right">70</td>
+<td>AIC:</td>
+<td>1007.</td>
+</tr>
+<tr>
+<td style="text-align:right">Df Residuals:</td>
+<td style="text-align:right">65</td>
+<td>BIC:</td>
+<td>1018.</td>
+</tr>
+<tr>
+<td style="text-align:right">Df Model:</td>
+<td style="text-align:right">4</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td style="text-align:right">Covariance Type:</td>
+<td style="text-align:right">nonrobust</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>注</strong>：R-squared:用于评价模型解释力度 但是收到自变量个数和观测个数的影响；Prob (F-statistic):接近于0 说明当前回归模型是有意义的</p>
+<h1>3 多元线性回归变量筛选 📊</h1>
+<p>向前法 向后法 逐步法<br>
+这三种方法 赤池信息准则</p>
+<h2 id="3-1-方法：向前法-向后法-逐步法">3.1 方法：向前法 向后法 逐步法</h2>
+<p>这三种方法进入或者提出变量一个准则是AIC （赤池信息准则）也就是最小信息准则；AIC指标（赤池信息准则）是常用的利用趋势估计预测模型的指标之一；</p>
+<h2 id="3-2-AIC">3.2 AIC</h2>
+<p>在一般的情况下，AIC可以表示为： $AIC=2k-2ln(L)$</p>
+<p>其中：k是参数的数量，L是似然函数。</p>
+<p>假设条件是模型的<strong>误差服从独立正态分布。</strong></p>
+<p>让n为观察数，SSR(SUM SQAURE OF RESIDUE)为<strong>残差平方和</strong>，那么AIC变为： $AIC=2k+nln(SSR/n)$；</p>
+<p>增加自由参数的数目提高了拟合的优良性，AIC鼓励数据拟合的优良性但是尽量避免出现过度拟合(Overfitting)的情况。**所以优先考虑的模型应是AIC值最小的那一个。**假设在n个模型中做出选择，可一次算出n个模型的AIC值，并找出最小AIC值相对应的模型作为选择对象。</p>
+<p>即：AIC越小说明模型效果越好，越简洁；类似的准则还有BIC ,P值；</p>
+<blockquote>
+<p>BIC 和AIC</p>
+<p>1、简介</p>
+<p>BIC= Bayesian Information Criterions，贝叶斯信息准则。</p>
+<p>2、表达式</p>
+<p>BIC=ln(n)k-2ln(L)</p>
+<ul>
+<li>L是似然函数</li>
+<li>n是样本大小</li>
+<li>K是参数数量</li>
+</ul>
+<p>3、总结</p>
+<p>1、共性</p>
+<p>构造这些统计量所遵循的统计思想是一致的，就是在考虑拟合残差的同事，依自变量个数施加“惩罚”。</p>
+<p>2、不同点</p>
+<ul>
+<li>BIC的惩罚项比AIC大，考虑了样本个数，样本数量多，可以防止模型精度过高造成的模型复杂度过高。</li>
+<li>AIC和BIC前半部分是一样的，BIC考虑了样本数量，样本数量过多时，可有效防止模型精度过高造成的模型复杂度过高。</li>
+</ul>
+</blockquote>
+<h3 id="3-2-1-向前回归法">3.2.1 向前回归法</h3>
+<ol>
+<li>先将第一个变量代入回归方程，并且进行F检验和t检验，计算残差平方和，记为s1，如果通过检验，保留当前的变量；</li>
+<li>然后引入第二个变量，重新构建一个新的估计方差，并且进行F检验和t检验，计算残差平方和，记为s2；</li>
+</ol>
+<h3 id="3-2-2-向后回归法">3.2.2 向后回归法</h3>
+<p>自变量全部放入模型，进行F检验和t检验；</p>
+<h3 id="3-2-3-逐步回归法">3.2.3 逐步回归法</h3>
+<p>自变量全部放入模型，进行F检验和t检验；</p>
+<h2 id="3-3-使用向前回归法筛选代码">3.3 使用向前回归法筛选代码</h2>
+<p>将待筛选的自变量选出最好的组合：首先从一个变量选取最小的aic，然后再添加变量进行组合，在选取最小的aic直到aic大于当前选择参数所得的aic；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">forward_select</span>(<span class="hljs-params">data,label</span>):</span> <span class="hljs-comment">#data:数据 response:目标值</span><br>    <span class="hljs-comment">#todo 获取当前数据当前不重复变量</span><br>    params = <span class="hljs-built_in">set</span>(data.columns)<br>    <br>    <span class="hljs-comment">#将需要保留的变量进行存储</span><br>    selected = []<br>    <br>    <span class="hljs-comment">#将目标值移除当前变量列表</span><br>    params.remove(label)<br>    current_score = <span class="hljs-built_in">float</span>(<span class="hljs-string">'inf'</span>)<br>    best_new_score = <span class="hljs-built_in">float</span>(<span class="hljs-string">'inf'</span>)<br>    <br>    <span class="hljs-comment">#进行筛选</span><br>    <span class="hljs-keyword">while</span> params:<br>        aic_param = []<br>        <span class="hljs-keyword">for</span> param <span class="hljs-keyword">in</span> params:<br>            <span class="hljs-comment">#前y 后x,并且多变量用加号连接,+[],相当于在数组中添加元素</span><br>            formula = <span class="hljs-string">"{}~{}"</span>.<span class="hljs-built_in">format</span>(label,<span class="hljs-string">'+'</span>.join(selected+[param]))<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">'--------------&gt;formula'</span>,formula)<br>            <br>            <span class="hljs-comment">#建立模型 拿到aic</span><br>            aic = ols(formula=formula,data=data).fit().aic<br>            aic_param.append((aic,param)) <span class="hljs-comment">#元组装包</span><br>        <span class="hljs-comment">#得到分数最小的AIC</span><br>        aic_param.sort(reverse=<span class="hljs-literal">True</span>)<br>        best_new_score,best_param = aic_param.pop()<span class="hljs-comment">#列表的最末位</span><br>        <br>        <span class="hljs-comment">#与当前得分比较</span><br>        <span class="hljs-keyword">if</span> current_score&gt;best_new_score:<br>            params.remove(best_param)<br>            selected.append(best_param)<br>            current_score = best_new_score<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">'------------*************&gt;当前current_score'</span>,current_score)<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-built_in">print</span>(<span class="hljs-string">"over"</span>)<br>            <span class="hljs-keyword">break</span><br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">"#################################################"</span>)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">"获取到符合条件的变量进行展示"</span>)<br>    <span class="hljs-built_in">print</span>(selected)<br>        <br>    <span class="hljs-comment">#拼接真正的formula</span><br>    fin_formula = <span class="hljs-string">'{}~{}'</span>.<span class="hljs-built_in">format</span>(label,<span class="hljs-string">'+'</span>.join(selected))<br>    <span class="hljs-comment"># 进行线性模型的训练</span><br>    model = ols(formula=fin_formula,data=data).fit()<br>    <span class="hljs-keyword">return</span> model<br></code></pre></td></tr></tbody></table></figure>
+<p>formula前y后x,并且多变量用加号连接,数组+[],相当于在数组中添加元素；</p>
+<p>aic_param.pop()列表的最末位弹出，因此是降序排序；</p>
+<figure class="highlight clean"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs clean">--------------&gt;formula avg_exp~dist_avg_income<br>--------------&gt;formula avg_exp~Age<br>--------------&gt;formula avg_exp~Income<br>--------------&gt;formula avg_exp~dist_home_val<br>------------*************&gt;当前current_score <span class="hljs-number">1007.6801413968115</span><br>--------------&gt;formula avg_exp~dist_avg_income+Age<br>--------------&gt;formula avg_exp~dist_avg_income+Income<br>--------------&gt;formula avg_exp~dist_avg_income+dist_home_val<br>------------*************&gt;当前current_score <span class="hljs-number">1005.4969816306302</span><br>--------------&gt;formula avg_exp~dist_avg_income+Income+Age<br>--------------&gt;formula avg_exp~dist_avg_income+Income+dist_home_val<br>------------*************&gt;当前current_score <span class="hljs-number">1005.2487355956046</span><br>--------------&gt;formula avg_exp~dist_avg_income+Income+dist_home_val+Age<br>over<br>#################################################<br>获取到符合条件的变量进行展示<br>[<span class="hljs-string">'dist_avg_income'</span>, <span class="hljs-string">'Income'</span>, <span class="hljs-string">'dist_home_val'</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h1>线性回归实例 📒</h1>
+<p>对<code>creditcard_exp</code>客户价值分析，使用线性回归拟合模型来进行预测。📝</p>
+<h1>1数据处理</h1>
+<h2 id="1-1-读取数据（空格处理）">1.1 读取数据（空格处理）</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data  = pd.read_csv(<span class="hljs-string">'./data/creditcard_exp.csv'</span>,skipinitialspace=<span class="hljs-literal">True</span>) <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">skipinitialspace : boolean, default <span class="hljs-literal">False</span><br>    Skip spaces after delimiter.<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>注</strong>：使用skipinitialspace=True将空格设置为空值；</p>
+<h2 id="1-2-选取数据用来建模">1.2 选取数据用来建模</h2>
+<p>取出非空数据 并且取出2到后面列</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">exp = data[data[<span class="hljs-string">'avg_exp'</span>].notnull()].iloc[:,<span class="hljs-number">2</span>:].drop(<span class="hljs-string">'age2'</span>,axis=<span class="hljs-number">1</span>) <br></code></pre></td></tr></tbody></table></figure>
+<p><strong>注</strong>：notnull可以选取非空数据，返回的是bool变量；iloc选择行列；drop可以删除指定行列；</p>
+<h2 id="1-3-线性相关性分析">1.3 线性相关性分析</h2>
+<p>corr函数： 使用pandas中的corr函数可以分析相关系数</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python">Signature: exp.corr(method=<span class="hljs-string">'pearson'</span>, min_periods=<span class="hljs-number">1</span>)<br>Docstring:<br>Compute pairwise correlation of columns, excluding NA/null values<br><br>Parameters<br>----------<br>method : {<span class="hljs-string">'pearson'</span>, <span class="hljs-string">'kendall'</span>, <span class="hljs-string">'spearman'</span>}<br>    * pearson : standard correlation coefficient<br>    * kendall : Kendall Tau correlation coefficient<br>    * spearman : Spearman rank correlation<br>min_periods : <span class="hljs-built_in">int</span>, optional<br>    Minimum number of observations required per pair of columns<br>    to have a valid result. Currently only available <span class="hljs-keyword">for</span> pearson<br>    <span class="hljs-keyword">and</span> spearman correlation<br><br>Returns<br>-------<br>y : DataFrame<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">exp[[<span class="hljs-string">'Income'</span>,<span class="hljs-string">'avg_exp'</span>,<span class="hljs-string">'Age'</span>,<span class="hljs-string">'dist_home_val'</span>]].corr(method=<span class="hljs-string">'pearson'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">Income</th>
+<th style="text-align:right">avg_exp</th>
+<th style="text-align:right">Age</th>
+<th style="text-align:right">dist_home_val</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">Income</td>
+<td style="text-align:right">1.000000</td>
+<td style="text-align:right">0.674011</td>
+<td style="text-align:right">0.369129</td>
+<td>0.249153</td>
+</tr>
+<tr>
+<td style="text-align:right">avg_exp</td>
+<td style="text-align:right">0.674011</td>
+<td style="text-align:right">1.000000</td>
+<td style="text-align:right">0.258478</td>
+<td>0.319499</td>
+</tr>
+<tr>
+<td style="text-align:right">Age</td>
+<td style="text-align:right">0.369129</td>
+<td style="text-align:right">0.258478</td>
+<td style="text-align:right">1.000000</td>
+<td>0.109323</td>
+</tr>
+<tr>
+<td style="text-align:right">dist_home_val</td>
+<td style="text-align:right">0.249153</td>
+<td style="text-align:right">0.319499</td>
+<td style="text-align:right">0.109323</td>
+<td>1.000000</td>
+</tr>
+</tbody>
+</table>
+<p><strong>注</strong>：经过线性相关性分析 可以得到Income和avg_exp有较大相关性</p>
+<blockquote>
+<p>相关性系数（pearson、spearman、kendall，pointbiserialr）</p>
+<p>用途：</p>
+<p>检查两个变量之间变化趋势的方向以及程度，值范围-1到+1，0表示两个变量不相关，正值表示正相关，负值表示负相关，值越大相关性越强。</p>
+<ul>
+<li>
+<p>计算积距pearson相关系数，连续性变量才可采用;</p>
+</li>
+<li>
+<p>计算Spearman秩相关系数，适合于定序变量或不满足正态分布假设的等间隔数据;</p>
+</li>
+<li>
+<p>计算Kendall秩相关系数，适合于定序变量或不满足正态分布假设的等间隔数据。</p>
+</li>
+</ul>
+</blockquote>
+<h1>2 模型拟合</h1>
+<h2 id="2-1-构建最小二乘法的线性模型">2.1 构建最小二乘法的线性模型</h2>
+<figure class="highlight haskell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">from</span> statsmodels.formula.api <span class="hljs-keyword">import</span> ols<br><span class="hljs-title">model1</span> = ols('avg_exp~<span class="hljs-type">Income'</span>,<span class="hljs-class"><span class="hljs-keyword">data</span>=exp).fit()</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210121113456600.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="2-2-构建预测值和残差的表">2.2 构建预测值和残差的表</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.DataFrame([model1.predict(exp),model1.resid],index=[<span class="hljs-string">'预测值'</span>,<span class="hljs-string">'残差'</span>]).T<br></code></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right"></th>
+<th style="text-align:right">预测值</th>
+<th style="text-align:right">残差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">1825.141904</td>
+<td style="text-align:right">-608.111904</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">1806.803136</td>
+<td style="text-align:right">-555.303136</td>
+</tr>
+<tr>
+<td style="text-align:right">3</td>
+<td style="text-align:right">1379.274813</td>
+<td style="text-align:right">-522.704813</td>
+</tr>
+<tr>
+<td style="text-align:right">4</td>
+<td style="text-align:right">1568.506658</td>
+<td style="text-align:right">-246.676658</td>
+</tr>
+<tr>
+<td style="text-align:right">5</td>
+<td style="text-align:right">1238.281793</td>
+<td style="text-align:right">-422.251793</td>
+</tr>
+<tr>
+<td style="text-align:right">6</td>
+<td style="text-align:right">1402.035798</td>
+<td style="text-align:right">-250.885798</td>
+</tr>
+<tr>
+<td style="text-align:right">7</td>
+<td style="text-align:right">1413.088901</td>
+<td style="text-align:right">-179.318901</td>
+</tr>
+<tr>
+<td style="text-align:right">8</td>
+<td style="text-align:right">1168.156652</td>
+<td style="text-align:right">-365.636652</td>
+</tr>
+<tr>
+<td style="text-align:right">9</td>
+<td style="text-align:right">1849.935644</td>
+<td style="text-align:right">317.834356</td>
+</tr>
+<tr>
+<td style="text-align:right">10</td>
+<td style="text-align:right">1060.684535</td>
+<td style="text-align:right">-406.104535</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-3-进行预测">2.3 进行预测</h2>
+<figure class="highlight haxe"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs haxe">model1.predict(<span class="hljs-keyword">new</span><span class="hljs-type">_exp</span>)<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight basic"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs basic"><span class="hljs-symbol">2 </span>    <span class="hljs-number">1078.969552</span><br><span class="hljs-symbol">11 </span>    <span class="hljs-number">756.465245</span><br><span class="hljs-symbol">13 </span>    <span class="hljs-number">736.919530</span><br><span class="hljs-symbol">19 </span>    <span class="hljs-number">687.077955</span><br><span class="hljs-symbol">20 </span>    <span class="hljs-number">666.554953</span><br><span class="hljs-symbol">21 </span>    <span class="hljs-number">658.736667</span><br><span class="hljs-symbol">24 </span>    <span class="hljs-number">648.963809</span><br><span class="hljs-symbol">28 </span>    <span class="hljs-number">633.327237</span><br></code></pre></td></tr></tbody></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BA%BF%E6%80%A7%E5%9B%9E%E5%BD%92/">线性回归</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis7/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据分析笔记--逻辑回归</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis5/">
+                        <span class="hidden-mobile">数据分析笔记--RFM模型</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis6/';
+          this.page.identifier = '/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis6/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

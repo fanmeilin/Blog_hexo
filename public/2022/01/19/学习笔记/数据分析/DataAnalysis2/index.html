@@ -1,0 +1,895 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>数据分析笔记--数据分析 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据分析笔记--数据分析">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-19 15:41" pubdate>
+        2022年1月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析笔记--数据分析</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本科实训的时候记录的数据分析的笔记，感觉还挺全面的，部署到博客中，今后对数据分析的应用可以方便回顾。</p>
+</blockquote>
+<blockquote>
+<p>本篇主要内容是数据分析，包括单纯的描述性分析和报表分析，这里主要讲解了单连续变量描述统计量的描述性分析以及报表分析。可以参考本篇的图表绘制方法哦！ 👾</p>
+</blockquote>
+<h1>1 描述性分析 🎩</h1>
+<ol>
+<li>单分类变量描述频数，例如：value_counts()描述分类变量 柱形图</li>
+<li>单连续变量描述统计量（均值，中位数，四分位数，总和等），例如：聚合函数agg（）描述价格变量 直方图</li>
+<li>分类变量与分类变量描述频数，例如：交叉表crosstab()描述各地区与是否学区房 交叉表——堆叠柱状图</li>
+<li>单分类变量与单连续变量描述连续变量统计值，例如，分组groupby()描述各地区的房价分布</li>
+<li>双分类变量与连续变量描述连续变量统计值，透视表pivot_table()描述各地区房价与地域，学区房的关系</li>
+</ol>
+<h2 id="1-1-单变量描述">1.1 单变量描述</h2>
+<p>这里主要讲解单连续变量描述统计量。</p>
+<h3 id="基本的数据描述">基本的数据描述</h3>
+<ul>
+<li>
+<p>平均值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">data.loc[:,<span class="hljs-string">'price'</span>].mean()<br><span class="hljs-keyword">or</span><br>data.price.mean()<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>中位数</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.median()<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>标准差</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.std()<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>方差</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.var()<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>使用聚合函数</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.agg([<span class="hljs-string">'mean'</span>,<span class="hljs-string">'median'</span>,<span class="hljs-string">'std'</span>,<span class="hljs-string">'var'</span>])<br></code></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<h2 id="1-2-绘制图分析">1.2 绘制图分析</h2>
+<p>​	绘制直方图</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.hist(bins=<span class="hljs-number">20</span>) <br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113100910142.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.skew() <span class="hljs-comment">#大于0为右偏 小于0是左偏</span><br><span class="hljs-comment">#0.6794935869486859</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="1-2-1-偏度（Skewness）">1.2.1 偏度（Skewness）</h3>
+<p>Definition:是描述数据分布形态的统计量，其描述的是某总体取值分布的<strong>对称性</strong>，简单来说就是数据的不对称程度。。</p>
+<p>偏度是三阶中心距计算出来的。<br>
+（1）Skewness = 0 ，分布形态与正态分布偏度相同。<br>
+（2）Skewness &gt; 0 ，正偏差数值较大，为正偏或右偏。长尾巴拖在右边，数据右端有较多的极端值。<br>
+（3）Skewness &lt; 0 ，负偏差数值较大，为负偏或左偏。长尾巴拖在左边，数据左端有较多的极端值。<br>
+（4）数值的绝对值越大，表明数据分布越不对称，偏斜程度大。<br>
+计算公式：<br>
+$$<br>
+Skewness=E[((x-E(x))/(\sqrt{D(x)}))^3]<br>
+$$</p>
+<p>$$<br>
+| Skewness|越大，分布形态偏移程度越大。<br>
+$$</p>
+<p><img src="https://picture.mulindya.com/image-20210113101410092.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="1-2-2-峰度（Kurtosis）">1.2.2 峰度（Kurtosis）</h3>
+<p>Definition:偏度是描述某变量所有取值分布形态陡缓程度的统计量，简单来说就是数据分布顶的<strong>尖锐程度</strong>。<br>
+峰度是四阶标准矩计算出来的。<br>
+（1）Kurtosis=0 与正态分布的陡缓程度相同。<br>
+（2）Kurtosis&gt;0 比正态分布的高峰更加陡峭——尖顶峰<br>
+（3）Kurtosis&lt;0 比正态分布的高峰来得平台——平顶峰<br>
+计算公式：<br>
+$$<br>
+Kurtosis=E[ ( (x-E(x))/ (\sqrt(D(x))) )^4 ]-3<br>
+$$</p>
+<h3 id="1-2-3-分位数">1.2.3 分位数</h3>
+<p>其中0.25 和0.75 为四分位数，0.5是均值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.quantile([<span class="hljs-number">0.25</span>,<span class="hljs-number">0.5</span>,<span class="hljs-number">0.75</span>]) <br></code></pre></td></tr></tbody></table></figure>
+<p><strong>注意点</strong>：四分位 忽略NA值</p>
+<h1>2  报表分析 👑</h1>
+<p>报表展示数据主要信息 ；分为维度指标（分类指标） 和度量指标 （连续变量）；仅包含维度指标的报表为频次表（单个分类变量）和交叉表（两个和两个以上分类变量）。包含维度和度量两类指标的报表称之为汇总表 度量指标总是以某个统计量的形式出现，最常见的是均值，总和，频次。</p>
+<h2 id="2-1-表分析">2.1 表分析</h2>
+<h3 id="2-1-1交叉表">2.1.1交叉表</h3>
+<p>分析两个分类变量的联合分布情况 提供每个单元格频次,百分比和边沿分布。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">subway_school = pd.crosstab(data.subway,data.school)<br></code></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">subway\school</th>
+<th style="text-align:right">0</th>
+<th style="text-align:right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">0</td>
+<td style="text-align:right">2378</td>
+<td style="text-align:right">413</td>
+</tr>
+<tr>
+<td style="text-align:right">1</td>
+<td style="text-align:right">8919</td>
+<td style="text-align:right">4500</td>
+</tr>
+</tbody>
+</table>
+<p><strong>绘图：</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">subway_school.plot(kind=<span class="hljs-string">'bar'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>横轴默认为subway（行）</p>
+<p><img src="https://picture.mulindya.com/image-20210113123315967.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>进一步分析：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">subway_school.<span class="hljs-built_in">sum</span>(<span class="hljs-number">1</span>)是axis为<span class="hljs-number">1</span>的条件下的和（对列相加）<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">subway</span><br><span class="hljs-attribute">0</span>     <span class="hljs-number">2791</span><br><span class="hljs-attribute">1</span>    <span class="hljs-number">13419</span><br><span class="hljs-attribute">dtype</span>: int<span class="hljs-number">64</span><br></code></pre></td></tr></tbody></table></figure>
+<p><em><strong>div函数</strong></em>： sum的axis为1，在使用div函数时div函数中的axis应该取0，也就是对应的行中的数据占此行总数的比例</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">Signature: subway_school.div(other, axis=<span class="hljs-string">'columns'</span>, level=<span class="hljs-literal">None</span>, fill_value=<span class="hljs-literal">None</span>)<br>Docstring:<br>Floating division of dataframe <span class="hljs-keyword">and</span> other, element-wise (binary operator `truediv`).<br><br>Equivalent to ``dataframe / other``, but <span class="hljs-keyword">with</span> support to substitute a fill_value <span class="hljs-keyword">for</span><br>missing data <span class="hljs-keyword">in</span> one of the inputs.<br></code></pre></td></tr></tbody></table></figure>
+<p>实例代码：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">subway_school_per = subway_school.div(subway_school.<span class="hljs-built_in">sum</span>(<span class="hljs-number">1</span>),axis=<span class="hljs-number">0</span>) <span class="hljs-comment">#百分比</span><br>subway_school_per.plot(kind=<span class="hljs-string">'bar'</span>,stacked=<span class="hljs-literal">True</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113124417643.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="2-1-2-分类汇总">2.1.2 分类汇总</h3>
+<h4 id="2-1-2-1-使用groupby分析">2.1.2.1 使用groupby分析</h4>
+<p>**注意点：**groupbby分析返回的是对象</p>
+<ul>
+<li>
+<p>通过dist对price分组 在分组中求均值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.groupby(data.dist).mean()<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">dist</span><br><span class="hljs-attribute">chaoyang</span>       <span class="hljs-number">52800</span>.<span class="hljs-number">624651</span><br><span class="hljs-attribute">dongcheng</span>      <span class="hljs-number">71883</span>.<span class="hljs-number">595041</span><br><span class="hljs-attribute">fengtai</span>        <span class="hljs-number">42500</span>.<span class="hljs-number">904309</span><br><span class="hljs-attribute">haidian</span>        <span class="hljs-number">68757</span>.<span class="hljs-number">602261</span><br><span class="hljs-attribute">shijingshan</span>    <span class="hljs-number">40286</span>.<span class="hljs-number">889574</span><br><span class="hljs-attribute">xicheng</span>        <span class="hljs-number">85674</span>.<span class="hljs-number">778545</span><br><span class="hljs-attribute">Name</span>: price, dtype: float<span class="hljs-number">64</span><br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>绘图</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.groupby(data.dist).mean().plot(kind=<span class="hljs-string">'bar'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113110942085.png" srcset="/img/loading.gif" lazyload alt=""></p>
+</li>
+<li>
+<p>排序</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.groupby(data.dist).mean().sort_values(ascending=<span class="hljs-literal">False</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>sort_values:是对数值进行排序，ascending默认是True，也就是按升序排序；</p>
+</li>
+<li>
+<p>排序后绘图</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.groupby(data.dist).mean().sort_values(ascending=<span class="hljs-literal">False</span>).plot(kind=<span class="hljs-string">'bar'</span>)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+</ul>
+<p><img src="https://picture.mulindya.com/image-20210113110957663.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<ul>
+<li>
+<p>归并函数结果</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.price.groupby(data.dist).agg([<span class="hljs-string">'mean'</span>,<span class="hljs-string">'max'</span>,<span class="hljs-string">'min'</span>,<span class="hljs-string">'std'</span>]) <br></code></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">dist</th>
+<th style="text-align:right">mean</th>
+<th style="text-align:right">max</th>
+<th style="text-align:right">min</th>
+<th style="text-align:right">std</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">chaoyang</td>
+<td style="text-align:right">52800.624651</td>
+<td style="text-align:right">124800</td>
+<td style="text-align:right">23011</td>
+<td style="text-align:right">13305.691821</td>
+</tr>
+<tr>
+<td style="text-align:right">dongcheng</td>
+<td style="text-align:right">71883.595041</td>
+<td style="text-align:right">149254</td>
+<td style="text-align:right">20089</td>
+<td style="text-align:right">18368.096658</td>
+</tr>
+<tr>
+<td style="text-align:right">fengtai</td>
+<td style="text-align:right">42500.904309</td>
+<td style="text-align:right">87838</td>
+<td style="text-align:right">18348</td>
+<td style="text-align:right">8888.588815</td>
+</tr>
+<tr>
+<td style="text-align:right">haidian</td>
+<td style="text-align:right">68757.602261</td>
+<td style="text-align:right">135105</td>
+<td style="text-align:right">25568</td>
+<td style="text-align:right">17128.956039</td>
+</tr>
+<tr>
+<td style="text-align:right">shijingshan</td>
+<td style="text-align:right">40286.889574</td>
+<td style="text-align:right">100000</td>
+<td style="text-align:right">18854</td>
+<td style="text-align:right">10389.217354</td>
+</tr>
+<tr>
+<td style="text-align:right">xicheng</td>
+<td style="text-align:right">85674.778545</td>
+<td style="text-align:right">149871</td>
+<td style="text-align:right">21918</td>
+<td style="text-align:right">19964.458991</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h4 id="2-1-2-2-箱型图">2.1.2.2 箱型图</h4>
+<p><img src="https://picture.mulindya.com/image-20210113105256801.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>IQR： 内分位距，为上四分位数-下四分位数</p>
+<p>上边缘是上1.5倍IQR，等于上四分位+1.5*IQR</p>
+<p>下边缘是下1.5倍IQR，等于下四分位-1.5*IQR</p>
+<p><em>凡是超过上边缘，越过下边缘为异常值，不一定是错误值</em></p>
+<p><strong>代码实现：</strong></p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> seaborn <span class="hljs-keyword">as</span> sns<br>sns.boxplot(x=<span class="hljs-string">'dist'</span>,y=<span class="hljs-string">'price'</span>,data=data) <span class="hljs-comment">#箱形图 变量分布和异常值信息</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113110145360.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="2-1-3-汇总表">2.1.3 汇总表</h3>
+<h4 id="2-1-3-1-透视表">2.1.3.1 透视表</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.pivot_table(values=<span class="hljs-string">'price'</span>,index=<span class="hljs-string">'dist'</span>,columns=<span class="hljs-string">'school'</span>,aggfunc=np.mean)<br></code></pre></td></tr></tbody></table></figure>
+<p>使用index和columns指定行列，values是统计的对象，aggfunc是聚合函数–使用的是numpy的mean函数，也就是展现的是price的平均值；</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">dist\ school</th>
+<th style="text-align:right">0</th>
+<th style="text-align:right">1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right">chaoyang</td>
+<td style="text-align:right">51588.511689</td>
+<td style="text-align:right">57403.405360</td>
+</tr>
+<tr>
+<td style="text-align:right">dongcheng</td>
+<td style="text-align:right">66276.887931</td>
+<td style="text-align:right">78514.900392</td>
+</tr>
+<tr>
+<td style="text-align:right">fengtai</td>
+<td style="text-align:right">42291.003505</td>
+<td style="text-align:right">48871.617021</td>
+</tr>
+<tr>
+<td style="text-align:right">haidian</td>
+<td style="text-align:right">61385.803653</td>
+<td style="text-align:right">76911.258297</td>
+</tr>
+<tr>
+<td style="text-align:right">shijingshan</td>
+<td style="text-align:right">40353.883878</td>
+<td style="text-align:right">33107.333333</td>
+</tr>
+<tr>
+<td style="text-align:right">xicheng</td>
+<td style="text-align:right">76989.369511</td>
+<td style="text-align:right">92468.873623</td>
+</tr>
+</tbody>
+</table>
+<h5 id="2-1-3-1-1绘制直方图">2.1.3.1.1<strong>绘制直方图</strong></h5>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data.pivot_table(values=<span class="hljs-string">'price'</span>,index=<span class="hljs-string">'dist'</span>,columns=<span class="hljs-string">'school'</span>,aggfunc=np.mean).plot(kind=<span class="hljs-string">'bar'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113112824144.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-1-3-1-2绘制散点图">2.1.3.1.2<strong>绘制散点图</strong></h5>
+<p>分析两个连续变量 分析area是否影响price</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">data.plot.scatter(x=<span class="hljs-string">'AREA'</span>,y=<span class="hljs-string">'price'</span>)<br><span class="hljs-comment">#分析两个连续变量 分析area是否影响price</span><br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113121653569.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="2-1-3-1-3绘制双轴图">2.1.3.1.3<strong>绘制双轴图</strong></h5>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">fig = plt.figure() <span class="hljs-comment">#画布</span><br>ax1 = fig.add_subplot(<span class="hljs-number">111</span>) <span class="hljs-comment">#1行1列 的第一个</span><br>ax1.plot(x,gdp_list,<span class="hljs-string">'g-'</span>)<br>ax1.set_xlim(<span class="hljs-number">2000</span>,<span class="hljs-number">2018</span>)<br>ax2 = ax1.twinx()<br>ax2.plot(x,gdpcr,<span class="hljs-string">'b-'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113121558625.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="2-2-合并操作">2.2  合并操作</h2>
+<h3 id="2-2-1-merge操作">2.2.1 merge操作</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.merge(df3,df4)<br>pd.merge(df3,df4,on=<span class="hljs-string">'key'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113124935656.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="2-2-2-concat操作">2.2.2 concat操作</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">pd.concat([df3,df4]) <span class="hljs-comment">#进行堆叠</span><br>pd.concat([df3,df4],axis=<span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210113124828815.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/image-20210113124919494.png" srcset="/img/loading.gif" lazyload alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BB%98%E5%9B%BE/">绘图</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis3/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据分析笔记--数据查询和表相关操作</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis1/">
+                        <span class="hidden-mobile">数据分析笔记--索引操作</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis2/';
+          this.page.identifier = '/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis2/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

@@ -1,0 +1,768 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>数据分析笔记--RFM模型 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据分析笔记--RFM模型">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-19 16:24" pubdate>
+        2022年1月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      25
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析笔记--RFM模型</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本科实训的时候记录的数据分析的笔记，感觉还挺全面的，部署到博客中，今后对数据分析的应用可以方便回顾。</p>
+</blockquote>
+<blockquote>
+<p>本篇主要内容是客户生命周期以及在数据分析中常用的RFM模型，本篇的内容是对数据分析中更抽象的角度出发，对客户进行分析，提取有价值的信息。其他主要是对代码操作介绍比较硬核，相比其他的介绍，本篇既有代码的介绍，还包括一些价值分析中的一些概念。更加实际一些哦~ 😶</p>
+</blockquote>
+<h1>1 客户的生命周期 💬</h1>
+<h2 id="1-1-定义">1.1 定义</h2>
+<p>客户生命周期经历诞生，成长，成熟，衰老，死亡的过程。</p>
+<h2 id="1-2-电信行业为例">1.2 电信行业为例</h2>
+<p>生命周期包含着从成为该公司客户并且产生消费开始，经历消费成长，消费稳定，消费下降，最后离网过程；根据客户不同角色分为4个阶段；每个阶段对应不同的数据分析场景和数据挖掘主题；</p>
+<h2 id="1-3-客户终生价值线">1.3 客户终生价值线</h2>
+<p>客户在整个客户生命周期带来的总利润曲线</p>
+<p><img src="https://picture.mulindya.com/image-20210120093416691.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>第一阶段：潜在客户阶段，并不清楚谁会成为我们的客户，只有通过产品设计或者既有的客户画像，知道潜在客户的大致特征；</p>
+<p>第二阶段：响应客户阶段，当前阶段客户已经在递推点完成了申请信用卡的基本信息的填写，当前阶段我们需要对客户价值和信用进行预测，决定信用卡初始额度；若收到信用卡不激活，需执行客户营销策略，决定分配多少 资源进行营销；</p>
+<p>第三阶段：既得客户阶段，当前阶段客户已经成功激活信用卡，并且正常使用信用卡消费，只是客户使用产品单一；我们希望他们购买理财产品，分期还款业务等，会涉及交叉，销售精准营销等工作内容；</p>
+<p>第四阶段：流失客户阶段，对于高价值客户，尽量避免；在客户流失之前尽量挽回；但是对于低价值客户，价值如果一直无法得到提升，可以被动离开</p>
+<h1>2 RFM模型简介 💧</h1>
+<p><strong>R:最近一次消费（Recency）客户上一次的购买时间</strong></p>
+<p><strong>F:消费频率（Frequency）在限定时间内购买次数，最常购买的用户也是满意度最高的用户 体现忠诚度</strong></p>
+<p><strong>M:消费金额（Monetary）最近消费的平均金额 体现客户短期价值的重要变量</strong></p>
+<p><img src="https://picture.mulindya.com/image-20210119093821088.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">客户类型</th>
+<th style="text-align:center">消费特征</th>
+<th style="text-align:center">属性</th>
+<th style="text-align:center">方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">重要价值客户</td>
+<td style="text-align:center">消费额度高 购物频率高 最近购物时间近</td>
+<td style="text-align:center">重要也是忠诚度较高的大客户</td>
+<td style="text-align:center">细心维护</td>
+</tr>
+<tr>
+<td style="text-align:center">重要发展客户</td>
+<td style="text-align:center">消费额度高 购物频率不高 最近购物时间近</td>
+<td style="text-align:center">有巨大发展潜力</td>
+<td style="text-align:center">个性化推荐发放优惠券 增加粘性</td>
+</tr>
+<tr>
+<td style="text-align:center">重要挽留客户</td>
+<td style="text-align:center">消费额度高 购物频率不高 最近购物时间远</td>
+<td style="text-align:center">可能已经流失的重要客户</td>
+<td style="text-align:center">了解流失原因，进行预警，针对性改变</td>
+</tr>
+<tr>
+<td style="text-align:center">重要保持客户</td>
+<td style="text-align:center">消费额度高 购物频率高 最近购物时间远</td>
+<td style="text-align:center">可能是快要流失的客户</td>
+<td style="text-align:center">沟通了解其体验感变差的原因</td>
+</tr>
+<tr>
+<td style="text-align:center">一般价值客户</td>
+<td style="text-align:center">消费额度不高 购物频率高 最近购物时间近</td>
+<td style="text-align:center">感兴趣，活跃，价格敏感型</td>
+<td style="text-align:center">推荐金融产品增加购买力</td>
+</tr>
+<tr>
+<td style="text-align:center">一般发展客户</td>
+<td style="text-align:center">消费额度不高 购物频率不高 最近购物时间近</td>
+<td style="text-align:center">新晋用户 试探性体验</td>
+<td style="text-align:center">留意此类客户 进行短信发送优惠信息</td>
+</tr>
+<tr>
+<td style="text-align:center">一般保持客户</td>
+<td style="text-align:center">消费额度不高 购物频率高 最近购物时间远</td>
+<td style="text-align:center">快要流失的一般客户</td>
+<td style="text-align:center">一般性低成本营销</td>
+</tr>
+<tr>
+<td style="text-align:center">一般挽留客户</td>
+<td style="text-align:center">消费额度不高 购物频率不高 最近购物时间远</td>
+<td style="text-align:center">不是目标客户</td>
+<td style="text-align:center">经费有限时可以直接忽略</td>
+</tr>
+</tbody>
+</table>
+<h1>3 RFM模型分析代码 🐾</h1>
+<h2 id="3-1-R">3.1 R</h2>
+<h3 id="3-1-1-时间转化">3.1.1 时间转化</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> time<br>time.mktime(time.strptime(<span class="hljs-string">'14JUN09:17:58:34'</span>,<span class="hljs-string">'%d%b%y:%H:%M:%S'</span>))<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>注意点</strong>：将非标准的字符串时间格式转化时间数组(strptime) 再转化为为时间戳(mktime)便于计算</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">data[<span class="hljs-string">'newtime'</span>] = data[<span class="hljs-string">'time'</span>].<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x:time.mktime(time.strptime(x,<span class="hljs-string">'%d%b%y:%H:%M:%S'</span>)))<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>注意点</strong>：使用map指定新列newtime</p>
+<h3 id="3-1-2-根据id和type分组再显示最近时间">3.1.2 根据id和type分组再显示最近时间</h3>
+<p>查看每一个购物id的每个类型的最近时间</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">R1 = data.groupby([<span class="hljs-string">'cumid'</span>,<span class="hljs-string">'type'</span>])[[<span class="hljs-string">'newtime'</span>]].<span class="hljs-built_in">max</span>()<br></code></pre></td></tr></tbody></table></figure>
+<p>转化为透视表指定行列和内容</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">R2 = pd.pivot_table(R1,index=<span class="hljs-string">'cumid'</span>,columns=<span class="hljs-string">'type'</span>,values=<span class="hljs-string">'newtime'</span>) <br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119104539349.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-1-3-空值填充">3.1.3 空值填充</h3>
+<p>用最久远的购物时间替换缺失值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">R[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]] = R[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]].apply(<span class="hljs-keyword">lambda</span> x:x.replace(np.nan,<span class="hljs-built_in">min</span>(x)),axis=<span class="hljs-number">0</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>对选取的列进行替换 axis为0 对行应用function</p>
+<h3 id="3-1-4-查找最近的购物时间">3.1.4 查找最近的购物时间</h3>
+<p>最近的购物时间 购物时间越大 则时间戳越大</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">R[<span class="hljs-string">'rmax'</span>] = R[[<span class="hljs-string">'Normal'</span>,<span class="hljs-string">'Presented'</span>,<span class="hljs-string">'Special_offer'</span>]].apply(<span class="hljs-keyword">lambda</span> x:<span class="hljs-built_in">max</span>(x),axis=<span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119111110105.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="3-2-F-购物频次">3.2 F 购物频次</h2>
+<h3 id="3-2-1-分组统计用户购物的次数">3.2.1 分组统计用户购物的次数</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">F1 = data.groupby([<span class="hljs-string">'cumid'</span>,<span class="hljs-string">'type'</span>])[[<span class="hljs-string">'transID'</span>]].count()<br>F = pd.pivot_table(F1,index=<span class="hljs-string">'cumid'</span>,columns=<span class="hljs-string">'type'</span>,values=<span class="hljs-string">'transID'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119111839505.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-2-2-处理空值以及退货数据">3.2.2 处理空值以及退货数据</h3>
+<p>将空值替换为0值，将退货列处理为负数；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">F[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]] = F[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]].fillna(<span class="hljs-number">0</span>)<br>F[<span class="hljs-string">'returned_goods'</span>] = F[<span class="hljs-string">'returned_goods'</span>].<span class="hljs-built_in">map</span>(<span class="hljs-keyword">lambda</span> x:-x)<br>F.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119112103692.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-2-3-求出购物总次数">3.2.3 求出购物总次数</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">F[<span class="hljs-string">'total'</span>] = F.apply(<span class="hljs-keyword">lambda</span> x:<span class="hljs-built_in">sum</span>(x),axis=<span class="hljs-number">1</span>)<br>F.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119112143811.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="3-3-M-购物金额汇总">3.3 M 购物金额汇总</h2>
+<h3 id="3-3-1-根据用户，类别分类金额">3.3.1 根据用户，类别分类金额</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">M1 = data.groupby([<span class="hljs-string">'cumid'</span>,<span class="hljs-string">'type'</span>])[[<span class="hljs-string">'amount'</span>]].<span class="hljs-built_in">sum</span>()<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="3-3-2-构建透视图">3.3.2  构建透视图</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">M = pd.pivot_table(M1,index=<span class="hljs-string">'cumid'</span>,columns=<span class="hljs-string">'type'</span>,values=<span class="hljs-string">'amount'</span>)<br>M.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119114146934.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-3-3-缺失值填充">3.3.3 缺失值填充</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">M[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]] = M[[<span class="hljs-string">'Special_offer'</span>,<span class="hljs-string">'returned_goods'</span>]].fillna(<span class="hljs-number">0</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>补充：将其填充为0值</p>
+<h3 id="3-3-4-总金额汇总">3.3.4 总金额汇总</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">M[<span class="hljs-string">'mtotal'</span>] = M.apply(<span class="hljs-keyword">lambda</span> x:<span class="hljs-built_in">sum</span>(x),axis=<span class="hljs-number">1</span>)<br>M.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119114246668.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="3-4-RFM-模型结果分析">3.4 RFM 模型结果分析</h2>
+<h3 id="3-4-1-数据拼接">3.4.1 数据拼接</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">RFM = pd.concat([R[<span class="hljs-string">'rmax'</span>],F[<span class="hljs-string">'total'</span>],M[<span class="hljs-string">'mtotal'</span>]],axis=<span class="hljs-number">1</span>)<br>RFM.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119120421853.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-4-2-分箱打分">3.4.2 分箱打分</h3>
+<p>cut函数：将x数组离散化成bins个分组</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">Signature: pd.cut(x, bins, right=<span class="hljs-literal">True</span>, labels=<span class="hljs-literal">None</span>, retbins=<span class="hljs-literal">False</span>, precision=<span class="hljs-number">3</span>, include_lowest=<span class="hljs-literal">False</span>, duplicates=<span class="hljs-string">'raise'</span>)<br>Docstring:<br>Bin values into discrete intervals.<br><br>Use `cut` when you need to segment <span class="hljs-keyword">and</span> sort data values into bins. This<br>function <span class="hljs-keyword">is</span> also useful <span class="hljs-keyword">for</span> going <span class="hljs-keyword">from</span> a continuous variable to a<br>categorical variable. For example, `cut` could convert ages to groups of<br>age ranges. Supports binning into an equal number of bins, <span class="hljs-keyword">or</span> a<br>pre-specified array of bins.<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python">RFM[<span class="hljs-string">'rscore'</span>] = pd.cut(RFM.rmax,<span class="hljs-number">3</span>,labels=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],precision=<span class="hljs-number">2</span>)<br>RFM[<span class="hljs-string">'fscore'</span>] = pd.cut(RFM.total,<span class="hljs-number">3</span>,labels=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],precision=<span class="hljs-number">2</span>)<br>RFM[<span class="hljs-string">'mscore'</span>] = pd.cut(RFM.mtotal,<span class="hljs-number">3</span>,labels=[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>],precision=<span class="hljs-number">2</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>补充</strong>：<em><strong>cut与qcut</strong></em></p>
+<figure class="highlight sql"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">cut(x,bins,<span class="hljs-keyword">right</span><span class="hljs-operator">=</span><span class="hljs-literal">True</span>,labels<span class="hljs-operator">=</span><span class="hljs-keyword">None</span>,retbins<span class="hljs-operator">=</span><span class="hljs-literal">False</span>,<span class="hljs-keyword">precision</span><span class="hljs-operator">=</span><span class="hljs-number">3</span>,include_lowest<span class="hljs-operator">=</span><span class="hljs-literal">False</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>​    需要将数据值分段并排序到bins中时使用cut。 此函数对于从连续变量转换为离散变量也很有用。 例如，cut可以将年龄转换为年龄范围组。 支持bins到相同数量的箱柜或预先指定的bins阵列。</p>
+<figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">qcut(x, q, <span class="hljs-attribute">labels</span>=None, <span class="hljs-attribute">retbins</span>=<span class="hljs-literal">False</span>, <span class="hljs-attribute">precision</span>=3, <span class="hljs-attribute">duplicates</span>=<span class="hljs-string">'raise'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>​    基于分位数的离散化功能。 根据等级或基于样本分位数将变量分离为相等大小的桶。 例如，10个分位数的1000个值将产生一个分类对象，表示每个数据点的分位数成员资格</p>
+<h3 id="3-4-3-打标">3.4.3 打标</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">handler_Score</span>(<span class="hljs-params">x,y,z</span>):</span><br>    <span class="hljs-keyword">if</span> x==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> y==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> z==<span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'重要价值客户'</span><br>    <span class="hljs-keyword">elif</span> x==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span>(y <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> z==<span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'重要发展客户'</span><br>    <span class="hljs-keyword">elif</span> (x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> y==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> z==<span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'重要保持客户'</span><br>    <span class="hljs-keyword">elif</span> (x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> (y <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> z==<span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'重要挽留客户'</span><br>    <span class="hljs-keyword">elif</span> x==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> y==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> (z <span class="hljs-keyword">in</span>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]):<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'一般价值客户'</span><br>    <span class="hljs-keyword">elif</span> (z <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> (y <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> x==<span class="hljs-number">3</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'一般发展客户'</span><br>    <span class="hljs-keyword">elif</span> (x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> y==<span class="hljs-number">3</span> <span class="hljs-keyword">and</span> (z <span class="hljs-keyword">in</span>[<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]):<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'一般保持客户'</span><br>    <span class="hljs-keyword">elif</span> (x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> (y <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]) <span class="hljs-keyword">and</span> (x <span class="hljs-keyword">in</span> [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]):<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">'一般挽留客户'</span><br></code></pre></td></tr></tbody></table></figure>
+<p>应用于3个分数</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">RFM[<span class="hljs-string">'label'</span>] = RFM[[<span class="hljs-string">'rscore'</span>,<span class="hljs-string">'fscore'</span>,<span class="hljs-string">'mscore'</span>]].apply(<span class="hljs-keyword">lambda</span> x:handler_Score(x[<span class="hljs-number">0</span>],x[<span class="hljs-number">1</span>],x[<span class="hljs-number">2</span>]),axis=<span class="hljs-number">1</span>)<br>RFM.head()<br></code></pre></td></tr></tbody></table></figure>
+<p><img src="https://picture.mulindya.com/image-20210119121121466.png" srcset="/img/loading.gif" lazyload alt=""></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis6/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据分析笔记--线性回归</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis4/">
+                        <span class="hidden-mobile">数据分析笔记--数据清理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis5/';
+          this.page.identifier = '/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis5/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
