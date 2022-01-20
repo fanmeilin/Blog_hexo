@@ -1,0 +1,733 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>数据分析笔记--KNN - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+		<div class="banner" id="banner" parallax=true
+			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			   background-size: cover;">
+
+      <div class="full-bg-img" >
+
+		
+		<div id="banner_video_insert">
+		</div>
+		<script>
+						
+			var ua = navigator.userAgent;
+			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+				isMobile = isIphone || isAndroid;
+
+			function set_video_attr(id){
+				
+				var height = document.body.children[0].clientHeight
+
+				var width = document.body.children[0].clientWidth
+
+				var video_item = document.getElementById(id);
+
+				if (height / width < 0.56){
+					video_item.setAttribute('width', '100%');
+					video_item.setAttribute('height', 'auto');
+				} else {
+					video_item.setAttribute('height', '100%');
+					video_item.setAttribute('width', 'auto');
+				}
+			}
+
+			$.getJSON('/js/video_url.json', function(data){
+				if (!isMobile){
+					var video_list_length = data.length
+					var seed = Math.random()
+					index = Math.floor(seed * video_list_length)
+					
+					video_url = data[index]
+					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+
+					document.getElementById("banner_video_insert").innerHTML = video_html_res;
+					set_video_attr('video_item')
+				}
+
+			});
+
+			if (!isMobile){
+				window.onresize = function(){
+					set_video_attr('video_item')
+					}
+				}
+			</script>
+
+		
+
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="数据分析笔记--KNN">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-01-19 17:45" pubdate>
+        2022年1月19日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据分析笔记--KNN</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>本科实训的时候记录的数据分析的笔记，感觉还挺全面的，部署到博客中，今后对数据分析的应用可以方便回顾。😶</p>
+</blockquote>
+<blockquote>
+<p>本篇主要内容是KNN，是一个分类算法；注意点是距离的选取方式。这里的案例分析值得学习一下，可以学习sklearn的相关用法。☀️</p>
+</blockquote>
+<h1>1 KNN 🎅</h1>
+<h2 id="1-1-k近邻">1.1 k近邻</h2>
+<p>最近邻域法：属于惰性算法</p>
+<p>特点：不必事先创建全局的判别公式或者规则</p>
+<h2 id="1-2-k近邻的算法">1.2 k近邻的算法</h2>
+<ol>
+<li>为了判别未知数据的类别，以所有已知的类别实例作为参考</li>
+<li>重要步骤:计算未知实例与所有已知实例的距离</li>
+<li>选择参考的实例参数k</li>
+<li>根据少数服从多数的原则，让未知的实例归类于k个最近邻样本中最多数的类别（投票法则）</li>
+</ol>
+<h2 id="1-3-距离的算法选择">1.3 距离的算法选择</h2>
+<h3 id="1-3-1-欧氏距离">1.3.1 欧氏距离</h3>
+<p>欧几里得度量（euclidean metric）（也称欧氏距离）是一个通常采用的距离定义，指在m维空间中两个点之间的真实距离，或者向量的自然长度（即该点到原点的距离）。在二维和三维空间中的欧氏距离就是两点之间的实际距离。<br>
+$$<br>
+\rho = \sqrt{(x_2-x_1)<sup>2+(y_2-y_1)</sup>2}<br>
+$$</p>
+<h3 id="1-3-2-闵可夫斯基距离：">1.3.2 闵可夫斯基距离：</h3>
+<p>闵氏距离有时也指<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%97%B6%E7%A9%BA%E9%97%B4%E9%9A%94/894418">时空间隔</a></p>
+<p>②设n维空间中有两点坐标x, y，p为常数，闵式距离定义为 [1]</p>
+
+$$
+D(x,y) = (\sum_{u=1}^n|x_u - y_u|^p)^{\frac{1}{p}}
+$$
+
+<p>注意：</p>
+<p>（1）闵氏距离与特征参数的量纲有关，有不同量纲的特征参数的闵氏距离常常是无意义的。</p>
+<p>（2）闵氏距离没有考虑特征参数间的相关性，而马哈拉诺比斯距离解决了这个问题。</p>
+<h3 id="1-3-3-曼哈顿距离">1.3.3 曼哈顿距离</h3>
+<p>两点在南北方向上的距离加上在东西方向上的距离，即$d(i,j)=|x_i-x_j|+|y_i-y_j|$​。</p>
+<h3 id="1-3-4-对比说明">1.3.4 对比说明</h3>
+<p>欧式距离使用得最多 <strong>连续占比较大时使用欧式距离</strong> 分类变量</p>
+<p><strong>连续占比较小时使用曼哈顿距离</strong>  虚拟变量</p>
+<h2 id="1-4-交叉验证">1.4 交叉验证</h2>
+<p>在使用训练集对参数进行训练的时候，经常会发现人们通常会将一整个训练集分为三个部分（比如mnist手写训练集）。一般分为：训练集（train_set），评估集（valid_set），测试集（test_set）这三个部分。这其实是为了保证训练效果而特意设置的。其中测试集很好理解，其实就是完全不参与训练的数据，仅仅用来观测测试效果的数据。而训练集和评估集则牵涉到下面的知识了。</p>
+<p>因为在实际的训练中，训练的结果对于训练集的拟合程度通常还是挺好的（初始条件敏感），但是对于训练集之外的数据的拟合程度通常就不那么令人满意了。因此我们通常并不会把所有的数据集都拿来训练，而是分出一部分来（这一部分不参加训练）对训练集生成的参数进行测试，相对客观的判断这些参数对训练集之外的数据的符合程度。这种思想就称为交叉验证（Cross Validation）。</p>
+<p><em><strong>K-fold Cross Validation</strong></em></p>
+<p>另外一种折中的办法叫做K折交叉验证，和LOOCV的不同在于，我们每次的测试集将不再只包含一个数据，而是多个，具体数目将根据K的选取决定。比如，如果K=5，那么我们利用五折交叉验证的步骤就是：</p>
+<p>1.将所有数据集分成5份</p>
+<p>2.不重复地每次取其中一份做测试集，用其他四份做训练集训练模型，之后计算该模型在测试集上的<img src="https://www.zhihu.com/equation?tex=MSE_i" srcset="/img/loading.gif" lazyload alt="[公式]"></p>
+<p>3.将5次的<img src="https://www.zhihu.com/equation?tex=MSE_i" srcset="/img/loading.gif" lazyload alt="[公式]">取平均得到最后的MSE</p>
+
+$$
+CV_{(k)} = \frac{1}{k} \sum_{i=1}^k MSE_i
+$$
+
+<h2 id="1-5-ROC-AUC">1.5 ROC AUC</h2>
+<h3 id="1-5-1-ROC曲线">1.5.1 ROC曲线</h3>
+<p><img src="https://picture.mulindya.com/image-20210127114408570.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>受试者工作特征曲线</p>
+<p>ROC曲线的横坐标是假阳性率（FPR）纵坐标是真阳性率（TPR）</p>
+<p>假阳性率：在实际为0 被错误判定为1比例</p>
+<p>真阳性率：在实际为1 被正确判定为1比例</p>
+<p><img src="https://picture.mulindya.com/image-20210127114531940.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/image-20210127114733950.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="1-5-2-AUC">1.5.2 AUC</h3>
+<p>AUC（Area Under Curve）被定义为<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ROC%E6%9B%B2%E7%BA%BF/775606">ROC曲线</a>下与<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E5%9D%90%E6%A0%87%E8%BD%B4/9763108">坐标轴</a>围成的<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E9%9D%A2%E7%A7%AF/100551">面积</a>，显然这个面积的数值不会大于1。又由于<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/ROC%E6%9B%B2%E7%BA%BF/775606">ROC曲线</a>一般都处于y=x这条直线的上方，所以AUC的取值范围在0.5和1之间。AUC越接近1.0，检测方法真实性越高;等于0.5时，则真实性最低，无应用价值。</p>
+<p><strong>从AUC 判断分类器（预测模型）优劣的标准：</strong></p>
+<ul>
+<li>AUC = 1，是完美分类器。</li>
+<li>AUC = [0.85, 0.95], 效果很好</li>
+<li>AUC = [0.7, 0.85], 效果一般</li>
+<li>AUC = [0.5, 0.7],效果较低，但用于预测股票已经很不错了</li>
+<li>AUC = 0.5，跟随机猜测一样（例：丢铜板），模型没有预测价值。</li>
+<li>AUC &lt; 0.5，比随机猜测还差；但只要总是反预测而行，就优于随机猜测。</li>
+</ul>
+<h1>2 案例分析 🐱</h1>
+<h2 id="2-1-数据预处理">2.1 数据预处理</h2>
+<h3 id="2-1-1-极差标准化">2.1.1 极差标准化</h3>
+<p>$$<br>
+x’ = (x - min(X))/(max(X)-min(X))<br>
+$$</p>
+<h3 id="2-1-2-中心标准化">2.1.2 中心标准化</h3>
+<h3 id="2-1-3-哑变量生成">2.1.3 哑变量生成</h3>
+<h3 id="2-1-4-代码">2.1.4 代码</h3>
+<p>提取特征值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">features = data.loc[:,<span class="hljs-string">'income'</span>:<span class="hljs-string">'edueduclass'</span>]<br>features.head()<br></code></pre></td></tr></tbody></table></figure>
+<p>提取目标值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">label = data.Dated<br>label.head()<br></code></pre></td></tr></tbody></table></figure>
+<p>连续变量进行预处理，进行数据标准化，消除量纲不一致对各个变量产生得影响；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 数据预处理</span><br><span class="hljs-keyword">from</span> sklearn <span class="hljs-keyword">import</span> preprocessing<br>min_max_sca = preprocessing.MinMaxScaler()<br>features_sca = min_max_sca.fit_transform(features)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="2-2-切割数据集">2.2 切割数据集</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> train_test_split<br>X_train, X_test, y_train, y_test = train_test_split(features_sca,label,test_size=<span class="hljs-number">0.2</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="2-3-使用k近邻训练模型">2.3 使用k近邻训练模型</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.neighbors <span class="hljs-keyword">import</span> KNeighborsClassifier<br><span class="hljs-comment">#模型训练</span><br>model = KNeighborsClassifier()<br>model.fit(X_train,y_train)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="2-4-预测">2.4 预测</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">y_predict = model.predict(X_test)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="2-5-评估训练结果">2.5 评估训练结果</h2>
+<p>model.score（）：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">Signature: model.score(X, y, sample_weight=<span class="hljs-literal">None</span>)<br>Docstring:<br>Returns the mean accuracy on the given test data <span class="hljs-keyword">and</span> labels.<br><br>In multi-label classification, this <span class="hljs-keyword">is</span> the subset accuracy<br>which <span class="hljs-keyword">is</span> a harsh metric since you require <span class="hljs-keyword">for</span> each sample that<br>each label <span class="hljs-built_in">set</span> be correctly predicted.<br></code></pre></td></tr></tbody></table></figure>
+<p>metrics.classification_report（）</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python">Signature: metrics.classification_report(y_true, y_pred, labels=<span class="hljs-literal">None</span>, target_names=<span class="hljs-literal">None</span>, sample_weight=<span class="hljs-literal">None</span>, digits=<span class="hljs-number">2</span>, output_dict=<span class="hljs-literal">False</span>)<br>Docstring:<br>Build a text report showing the main classification metrics<br><br>Read more <span class="hljs-keyword">in</span> the :ref:`User Guide &lt;classification_report&gt;`.<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> sklearn.metrics <span class="hljs-keyword">as</span> metrics<br><span class="hljs-built_in">print</span>(metrics.classification_report(y_test,y_predict))<br><span class="hljs-comment">#计算平均准确率</span><br>model.score(X_test,y_test)<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="2-6-找出最优参数">2.6 找出最优参数</h2>
+<h3 id="2-6-1-找出最优得参数-k值">2.6.1 找出最优得参数 k值</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">x =[]<br>y=[]<br><span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">70</span>):<br>    modelk = KNeighborsClassifier(n_neighbors=item)<br>    modelk.fit(X_train,y_train)<br>    score = modelk.score(X_test,y_test)<br>    x.append(item)<br>    y.append(score)<br>   <span class="hljs-comment"># print("当k的值为：",item,'score is',score)</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="2-6-2-交叉验证">2.6.2 交叉验证</h3>
+<p>当样本量较小时，适合采用交叉验证 评估模型的效果 需要设定用户搜索空间</p>
+<p>十折交叉验证</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sklearn.model_selection <span class="hljs-keyword">import</span> ParameterGrid,GridSearchCV<br>grid = ParameterGrid({<span class="hljs-string">'n_neighbors'</span>:[<span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-number">15</span>)]})<br>new_model = KNeighborsClassifier()<br>knn_cv = GridSearchCV(new_model,grid,cv=<span class="hljs-number">10</span>,scoring=<span class="hljs-string">'roc_auc'</span>)<br>knn_cv.fit(X_train,y_train)<br></code></pre></td></tr></tbody></table></figure>
+<p>GridSearchCV(new_model,grid,cv=10,scoring=‘roc_auc’)中cv=10表示十折，评估标准是roc_auc</p>
+<h3 id="2-6-3-获取AUC">2.6.3 获取AUC</h3>
+<p>获取测试集上的AUC的值</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">metrics.roc_auc_score(y_test,knn_cv.predict(X_test))<br></code></pre></td></tr></tbody></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/">数据分析</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis10/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数据分析笔记--朴素贝叶斯</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis8/">
+                        <span class="hidden-mobile">数据分析笔记--决策树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis9/';
+          this.page.identifier = '/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis9/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
