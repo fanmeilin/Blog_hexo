@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指offer46 把数字翻译成字符串</title>
+    <link href="/2022/01/20/leetcode-offer46/"/>
+    <url>/2022/01/20/leetcode-offer46/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>把数字翻译成字符串</p></blockquote><h2 id="题目">题目</h2><p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">输入: <span class="hljs-number">12258</span><br>输出: <span class="hljs-number">5</span><br>解释: <span class="hljs-number">12258</span>有<span class="hljs-number">5</span>种不同的翻译，分别是<span class="hljs-string">"bccfi"</span>, <span class="hljs-string">"bwfi"</span>, <span class="hljs-string">"bczi"</span>, <span class="hljs-string">"mcfi"</span>和<span class="hljs-string">"mzi"</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>0 &lt;= num &lt; 231</code></li></ul><h2 id="题解">题解</h2><p>使用动态规划，record记录num的对应位的翻译数目，动态规划的转移方程如下：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">record[i+<span class="hljs-number">1</span>] = record[i] <span class="hljs-keyword">if</span> tempnum&gt;<span class="hljs-number">25</span> <span class="hljs-keyword">or</span> tempnum&lt;<span class="hljs-number">10</span> <span class="hljs-keyword">else</span> record[i]+record[i-<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure><p><code>tempnum</code>表示此位和前一位组成的数字，注意<code>tempnum</code>的范围，如果小于10，则还是等于前一位的record。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">translateNum</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> num&lt;<span class="hljs-number">10</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        record = [<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>)]<br>        s = <span class="hljs-built_in">str</span>(num)<br>        <span class="hljs-keyword">for</span> i,x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(s):<br>            <span class="hljs-keyword">if</span> i==<span class="hljs-number">0</span>: <span class="hljs-keyword">continue</span><br>            temp = s[i-<span class="hljs-number">1</span>]+s[i]<br>            tempnum = <span class="hljs-built_in">int</span>(temp)<br>            record[i+<span class="hljs-number">1</span>] = record[i] <span class="hljs-keyword">if</span> tempnum&gt;<span class="hljs-number">25</span> <span class="hljs-keyword">or</span> tempnum&lt;<span class="hljs-number">10</span> <span class="hljs-keyword">else</span> record[i]+record[i-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">return</span> record[<span class="hljs-built_in">len</span>(s)]<br></code></pre></td></tr></tbody></table></figure><p>瞻仰一下大佬的代码：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">translateNum</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        s = <span class="hljs-built_in">str</span>(num)<br>        a = b = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-built_in">len</span>(s) + <span class="hljs-number">1</span>):<br>            a, b = (a + b <span class="hljs-keyword">if</span> <span class="hljs-string">"10"</span> &lt;= s[i - <span class="hljs-number">2</span>:i] &lt;= <span class="hljs-string">"25"</span> <span class="hljs-keyword">else</span> a), a<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></tbody></table></figure><p>实际上只需要两个信息就可以推断当前的record，a表示当前信息，b为前一位信息，使用a，b来更新后续信息。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>数据分析笔记--神经网络</title>
     <link href="/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis11/"/>
     <url>/2022/01/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/DataAnalysis11/</url>
@@ -2688,9 +2717,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
@@ -3229,11 +3258,11 @@
       
       <tag>剑指</tag>
       
+      <tag>动态规划</tag>
+      
       <tag>idea</tag>
       
       <tag>斐波那契</tag>
-      
-      <tag>动态规划</tag>
       
     </tags>
     
@@ -3262,9 +3291,9 @@
       
       <tag>剑指</tag>
       
-      <tag>斐波那契</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>斐波那契</tag>
       
     </tags>
     
