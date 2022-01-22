@@ -4,9 +4,40 @@
   
     
     <entry>
+      <title>剑指offer52 两个链表的第一个公共节点</title>
+      <link href="/2022/01/21/leetcode/leetcode-offer52/"/>
+      <url>/2022/01/21/leetcode/leetcode-offer52/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>两个链表的第一个公共节点</p></blockquote><h2 id="题目">题目</h2><p>输入两个链表，找出它们的第一个公共节点。</p><p><img src="https://picture.mulindya.com/leetcode-offer52-1.png" alt=""></p><p>在节点 c1 开始相交。</p><h3 id="示例-1：">示例 1：</h3><p><img src="https://picture.mulindya.com/leetcode-offer52-2.png" alt=""></p><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span> = <span class="hljs-number">8</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">2</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">3</span><br>输出：Reference of the node <span class="hljs-keyword">with</span> <span class="hljs-attr">value</span> = <span class="hljs-number">8</span><br>输入解释：相交节点的值为 <span class="hljs-number">8</span> （注意，如果两个列表相交则不能为 <span class="hljs-number">0</span>）。从各自的表头开始算起，链表 A 为 [<span class="hljs-number">4</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]，链表 B 为 [<span class="hljs-number">5</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">8</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>]。在 A 中，相交节点前有 <span class="hljs-number">2</span> 个节点；在 B 中，相交节点前有 <span class="hljs-number">3</span> 个节点。<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><p><img src="https://picture.mulindya.com/leetcode-offer52-3.png" alt=""></p><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span>&nbsp;= <span class="hljs-number">2</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">1</span><br>输出：Reference of the node <span class="hljs-keyword">with</span> <span class="hljs-attr">value</span> = <span class="hljs-number">2</span><br>输入解释：相交节点的值为 <span class="hljs-number">2</span> （注意，如果两个列表相交则不能为 <span class="hljs-number">0</span>）。从各自的表头开始算起，链表 A 为 [<span class="hljs-number">0</span>,<span class="hljs-number">9</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>]，链表 B 为 [<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>]。在 A 中，相交节点前有 <span class="hljs-number">3</span> 个节点；在 B 中，相交节点前有 <span class="hljs-number">1</span> 个节点。<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-3：">示例 3：</h3><p><img src="https://picture.mulindya.com/leetcode-offer52-4.png" alt=""></p><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">intersectVal</span> = <span class="hljs-number">0</span>, <span class="hljs-attr">listA</span> = [<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>], <span class="hljs-attr">listB</span> = [<span class="hljs-number">1</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">skipA</span> = <span class="hljs-number">3</span>, <span class="hljs-attr">skipB</span> = <span class="hljs-number">2</span><br>输出：<span class="hljs-literal">null</span><br>输入解释：从各自的表头开始算起，链表 A 为 [<span class="hljs-number">2</span>,<span class="hljs-number">6</span>,<span class="hljs-number">4</span>]，链表 B 为 [<span class="hljs-number">1</span>,<span class="hljs-number">5</span>]。由于这两个链表不相交，所以 intersectVal 必须为 <span class="hljs-number">0</span>，而 skipA 和 skipB 可以是任意值。<br>解释：这两个链表不相交，因此返回 <span class="hljs-literal">null</span>。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>如果两个链表没有交点，返回 null.</li><li>在返回结果后，两个链表仍须保持原有的结构。</li><li>可假定整个链表结构中没有循环。</li><li>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</li><li>本题与主站 160 题相同：<a href="https://leetcode-cn.com/problems/intersection-of-two-linked-lists/">https://leetcode-cn.com/problems/intersection-of-two-linked-lists/</a></li></ul><h2 id="题解">题解</h2><p>这道题刚拿到觉得很简单，可以把数字用数组存下来，然后从后向前找寻公共节点。但是有一项要求<code>程序尽量满足 O(n) 时间复杂度，且仅用 O(1) 内存。</code>很难满足。</p><p>看大佬的题解真是妙不可言，甚至还被虐了</p><blockquote><p>《你的名字》</p><p>你变成我，走过我走过的路。<br>我变成你，走过你走过的路。<br>然后我们便相遇了…</p></blockquote><p>使用双指针A，B；当他们同时开始运动，A遍历完headA链表就遍历headB链表，而B遍历完headB链表就遍历A链表。A和B总会相遇要么是空，要么是公共节点。</p><p>背后的原理是：假设A链表的长度为a，B链表长度为b，公共部分为c；那么在相遇之前A会走a+b-c步，B会走b+a-c步，他们走的步数是相同的，所以只要他们同时开始运动，A指针按照A链表B链表，B指针按照B链表A链表，就会在节点处相遇！</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for singly-linked list.</span><br><span class="hljs-comment"># class ListNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.next = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIntersectionNode</span>(<span class="hljs-params">self, headA: ListNode, headB: ListNode</span>) -&gt; ListNode:</span><br>        <span class="hljs-comment"># 公共节点不仅值相等，实际上就是同一节点</span><br>        A,B = headA,headB<br>        <span class="hljs-keyword">while</span>(A!=B):<br>            A = A.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> A <span class="hljs-keyword">else</span> headB<br>            B = B.<span class="hljs-built_in">next</span> <span class="hljs-keyword">if</span> B <span class="hljs-keyword">else</span> headA<br>        <span class="hljs-keyword">return</span> A<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 双指针 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> idea </tag>
+            
+            <tag> 双指针 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer46 把数字翻译成字符串</title>
-      <link href="/2022/01/20/leetcode-offer46/"/>
-      <url>/2022/01/20/leetcode-offer46/</url>
+      <link href="/2022/01/20/leetcode/leetcode-offer46/"/>
+      <url>/2022/01/20/leetcode/leetcode-offer46/</url>
       
         <content type="html"><![CDATA[<blockquote><p>把数字翻译成字符串</p></blockquote><h2 id="题目">题目</h2><p>给定一个数字，我们按照如下规则把它翻译为字符串：0 翻译成 “a” ，1 翻译成 “b”，……，11 翻译成 “l”，……，25 翻译成 “z”。一个数字可能有多个翻译。请编程实现一个函数，用来计算一个数字有多少种不同的翻译方法。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight 1c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">输入: <span class="hljs-number">12258</span><br>输出: <span class="hljs-number">5</span><br>解释: <span class="hljs-number">12258</span>有<span class="hljs-number">5</span>种不同的翻译，分别是<span class="hljs-string">"bccfi"</span>, <span class="hljs-string">"bwfi"</span>, <span class="hljs-string">"bczi"</span>, <span class="hljs-string">"mcfi"</span>和<span class="hljs-string">"mzi"</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>0 &lt;= num &lt; 231</code></li></ul><h2 id="题解">题解</h2><p>使用动态规划，record记录num的对应位的翻译数目，动态规划的转移方程如下：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">record[i+<span class="hljs-number">1</span>] = record[i] <span class="hljs-keyword">if</span> tempnum&gt;<span class="hljs-number">25</span> <span class="hljs-keyword">or</span> tempnum&lt;<span class="hljs-number">10</span> <span class="hljs-keyword">else</span> record[i]+record[i-<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure><p><code>tempnum</code>表示此位和前一位组成的数字，注意<code>tempnum</code>的范围，如果小于10，则还是等于前一位的record。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">translateNum</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> num&lt;<span class="hljs-number">10</span>:<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>        record = [<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">32</span>)]<br>        s = <span class="hljs-built_in">str</span>(num)<br>        <span class="hljs-keyword">for</span> i,x <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(s):<br>            <span class="hljs-keyword">if</span> i==<span class="hljs-number">0</span>: <span class="hljs-keyword">continue</span><br>            temp = s[i-<span class="hljs-number">1</span>]+s[i]<br>            tempnum = <span class="hljs-built_in">int</span>(temp)<br>            record[i+<span class="hljs-number">1</span>] = record[i] <span class="hljs-keyword">if</span> tempnum&gt;<span class="hljs-number">25</span> <span class="hljs-keyword">or</span> tempnum&lt;<span class="hljs-number">10</span> <span class="hljs-keyword">else</span> record[i]+record[i-<span class="hljs-number">1</span>]<br>        <span class="hljs-keyword">return</span> record[<span class="hljs-built_in">len</span>(s)]<br></code></pre></td></tr></tbody></table></figure><p>瞻仰一下大佬的代码：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">translateNum</span>(<span class="hljs-params">self, num: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        s = <span class="hljs-built_in">str</span>(num)<br>        a = b = <span class="hljs-number">1</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">2</span>, <span class="hljs-built_in">len</span>(s) + <span class="hljs-number">1</span>):<br>            a, b = (a + b <span class="hljs-keyword">if</span> <span class="hljs-string">"10"</span> &lt;= s[i - <span class="hljs-number">2</span>:i] &lt;= <span class="hljs-string">"25"</span> <span class="hljs-keyword">else</span> a), a<br>        <span class="hljs-keyword">return</span> a<br></code></pre></td></tr></tbody></table></figure><p>实际上只需要两个信息就可以推断当前的record，a表示当前信息，b为前一位信息，使用a，b来更新后续信息。</p>]]></content>
       
@@ -2717,9 +2748,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
@@ -2916,9 +2947,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -3115,9 +3146,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组查找 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组查找 </tag>
             
         </tags>
       
@@ -3258,11 +3289,11 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> idea </tag>
             
             <tag> 斐波那契 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
@@ -3291,9 +3322,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 动态规划 </tag>
-            
             <tag> 斐波那契 </tag>
+            
+            <tag> 动态规划 </tag>
             
         </tags>
       
