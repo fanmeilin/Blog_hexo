@@ -19,25 +19,9 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer58-2 左旋转字符串 - 待时</title>
+  <title>分类 - 剑指 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -68,7 +52,7 @@
 
 <body>
 
-  <header style="height: 70vh;">
+  <header style="height: 60vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -162,7 +146,7 @@
 </nav>
 
 		<div class="banner" id="banner" parallax=true
-			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+			 style="background: url('https://picture.mulindya.com/7cc417b7ace4b99c19d3034179926555_3.jpg') no-repeat center center;
 			   background-size: cover;">
 
       <div class="full-bg-img" >
@@ -221,46 +205,9 @@
 
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="剑指offer58-2 左旋转字符串">
+            <span class="h2" id="subtitle" title="分类 - 剑指">
               
             </span>
-
-            
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-01-23 14:49" pubdate>
-        2022年1月23日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      238 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      3
-       分钟
-    </span>
-  
-
-  
-  
-</div>
 
             
           </div>
@@ -273,142 +220,46 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 61 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2021</p>
+    
+    <a href="/2021/08/10/leetcode/leetcode-offer09/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">剑指offer09 用两个栈实现队列</span>
+      <time style="float: right;">08-10</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">剑指offer58-2 左旋转字符串</h1>
-            
-            <div class="markdown-body">
-              <blockquote>
-<p>左旋转字符串</p>
-</blockquote>
-<h2 id="题目">题目</h2>
-<p>字符串的左旋转操作是把字符串前面的若干个字符转移到字符串的尾部。请定义一个函数实现字符串左旋转操作的功能。比如，输入字符串"abcdefg"和数字2，该函数将返回左旋转两位得到的结果"cdefgab"。</p>
-<h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入: <span class="hljs-attr">s</span> = <span class="hljs-string">"abcdefg"</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">2</span><br>输出: <span class="hljs-string">"cdefgab"</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="示例-2：">示例 2：</h3>
-<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入: <span class="hljs-attr">s</span> = <span class="hljs-string">"lrloseumgh"</span>, <span class="hljs-attr">k</span> = <span class="hljs-number">6</span><br>输出: <span class="hljs-string">"umghlrlose"</span><br></code></pre></td></tr></tbody></table></figure>
-<h3 id="提示：">提示：</h3>
-<ul>
-<li><code>1 &lt;= k &lt; s.length &lt;= 10000</code></li>
-</ul>
-<h2 id="题解">题解</h2>
-<p>直接使用切片</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseLeftWords</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-keyword">return</span> s[n:]+s[:n]<br></code></pre></td></tr></tbody></table></figure>
-<p>如果不允许使用切片可以使用字符串的拼接</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseLeftWords</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        res = <span class="hljs-string">""</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n, <span class="hljs-built_in">len</span>(s)):<br>            res += s[i]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>            res += s[i]<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
-<p>代码简洁可以直接求余运算</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">reverseLeftWords</span>(<span class="hljs-params">self, s: <span class="hljs-built_in">str</span>, n: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        res = <span class="hljs-string">""</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n, n + <span class="hljs-built_in">len</span>(s)):<br>            res += s[i % <span class="hljs-built_in">len</span>(s)]<br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                  <div class="post-meta mr-3">
-                    <i class="iconfont icon-category"></i>
-                    
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
-                    
-                  </div>
-                
-                
-                  <div class="post-meta">
-                    <i class="iconfont icon-tags"></i>
-                    
-                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
-                    
-                  </div>
-                
+  <nav aria-label="navigation">
+    <span class="pagination" id="pagination">
+      <a class="extend prev" rel="prev" href="/categories/%E5%89%91%E6%8C%87/page/5/#board"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/categories/%E5%89%91%E6%8C%87/">1</a><span class="space">&hellip;</span><a class="page-number" href="/categories/%E5%89%91%E6%8C%87/page/4/#board">4</a><a class="page-number" href="/categories/%E5%89%91%E6%8C%87/page/5/#board">5</a><span class="page-number current">6</span>
+    </span>
+  </nav>
+
+
+
+
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2022/01/24/leetcode/leetcode-offer53-2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">剑指offer53-Ⅱ 0~n-1种缺少的数字</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2022/01/22/leetcode/leetcode-offer53-1/">
-                        <span class="hidden-mobile">剑指offer53-1 在排序数组中查找数字Ⅰ</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-              <!-- Comments -->
-              <article class="comments" id="comments" lazyload>
-                
-                  
-                
-                
-  <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    
-      <script type="text/javascript">
-        var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/01/23/leetcode/leetcode-offer58-2/';
-          this.page.identifier = '/2022/01/23/leetcode/leetcode-offer58-2/';
-        };
-        Fluid.utils.loadComments('#disqus_thread', function() {
-          var d = document, s = d.createElement('script');
-          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
-          s.setAttribute('data-timestamp', new Date());
-          (d.head || d.body).appendChild(s);
-        });
-      </script>
-    
-    <noscript>Please enable JavaScript to view the comments</noscript>
-  </div>
-
-
-              </article>
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -522,15 +373,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 
@@ -565,13 +410,6 @@
 
 
 
-
-  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
-  <script>
-    if (window.mermaid) {
-      mermaid.initialize({"theme":"default"});
-    }
-  </script>
 
 
 

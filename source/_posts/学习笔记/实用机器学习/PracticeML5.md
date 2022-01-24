@@ -1,8 +1,8 @@
 ---
-title: praticalML第章笔记PracticeML5
+title: praticalML第五章笔记
 tags: [李沐,机器学习]
 categories: [学习笔记,机器学习]
-date: 2022-01-19 14:15:19
+date: 2022-01-24 14:15:19
 math: true
 ---
 
@@ -68,10 +68,17 @@ Bagging是生产词，来自于Bootstrap Aggrgrating
 - Learn  base learners in parallel, combine to reduce model variance
 
 - Each base learner is trained on a bootstrap sample
-	•Given a dataset of  examples, create a sample by randomly sampling examples with replacement
-	•Around  $ 1-\frac{1}{e} \approx 63\% $ unique examples will be sampled use the out-of-bag examples for validation
+  •Given a dataset of  examples, create a sample by randomly sampling examples with replacement
+  •Around 公式1 unique examples will be sampled use the out-of-bag examples for validation
+
+   {% raw %}
+  $$
+  公式1: \ 1-\frac{1}{e} \approx 63\%
+  $$
+   {% endraw %}
 
 - Combine learners by averaging the outputs (regression) or majority voting (classification)
+
 - Random forest: bagging with decision trees 
 	• usually select random subset of features for each bootstrap sample
 
