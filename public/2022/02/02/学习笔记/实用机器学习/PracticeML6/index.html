@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
 <script type="text/javascript" src="/js/jquery.js"></script>
 
 
@@ -19,7 +20,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>praticalML第一章笔记 - 待时</title>
+  <title>praticalML第六章笔记 Tuning - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -67,7 +68,16 @@
 
 
 <body>
-
+	<div id="banner_video_insert">
+	</div>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+    
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -161,78 +171,84 @@
   </div>
 </nav>
 
-		<div class="banner" id="banner" parallax=true
-			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
-			   background-size: cover;">
+	
+	<div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;">
 
-      <div class="full-bg-img" >
+		<div class="full-bg-img" >
+			<div id="banner_video_insert">
+			</div>	
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
 
-		
-		<div id="banner_video_insert">
-		</div>
-		<script>
-						
-			var ua = navigator.userAgent;
-			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-				isMobile = isIphone || isAndroid;
+					function set_video_attr(id){
 
-			function set_video_attr(id){
-				
-				var height = document.body.children[0].clientHeight
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
 
-				var width = document.body.children[0].clientWidth
-
-				var video_item = document.getElementById(id);
-
-				if (height / width < 0.56){
-					video_item.setAttribute('width', '100%');
-					video_item.setAttribute('height', 'auto');
-				} else {
-					video_item.setAttribute('height', '100%');
-					video_item.setAttribute('width', 'auto');
-				}
-			}
-
-			$.getJSON('/js/video_url.json', function(data){
-				if (!isMobile){
-					var video_list_length = data.length
-					var seed = Math.random()
-					index = Math.floor(seed * video_list_length)
-					
-					video_url = data[index]
-					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
-
-					document.getElementById("banner_video_insert").innerHTML = video_html_res;
-					set_video_attr('video_item')
-				}
-
-			});
-
-			if (!isMobile){
-				window.onresize = function(){
-					set_video_attr('video_item')
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
 					}
-				}
-			</script>
 
-		
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
 
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="praticalML第一章笔记">
-              
-            </span>
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
 
-            
-              <div class="mt-3">
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="praticalML第六章笔记 Tuning">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
   
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-30 15:35" pubdate>
-        2021年12月30日 下午
+      <time datetime="2022-02-02 12:13" pubdate>
+        2022年2月2日 中午
       </time>
     </span>
   
@@ -243,7 +259,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.7k 字
     </span>
   
 
@@ -253,7 +269,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      19
+      22
        分钟
     </span>
   
@@ -262,12 +278,12 @@
   
 </div>
 
-            
-          </div>
+				
+			  </div>
 
-          
-        </div>
-      </div>
+			  
+			</div>
+		</div>
     </div>
   </header>
 
@@ -283,212 +299,195 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">praticalML第一章笔记</h1>
+            <h1 style="display: none">praticalML第六章笔记 Tuning</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>斯坦福2021秋季的实用机器学习上线啦~ 😉 跟着沐神复习机器学习冲冲冲！ 记录一下笔记和重点，不一定很全哦~，只是记录自我感觉的重点。</p>
+<p>斯坦福2021秋季的实用机器学习上线啦~ 😉 跟着沐神复习机器学习冲冲冲！ 记录一下笔记和重点，不一定很全哦~，只是记录自我感觉的重点。这一章的内容主要是对建立的模型进行Tuning，包括模型调参，超参数优化，网络架构搜索。</p>
 </blockquote>
-<h1>第一章</h1>
-<h2 id="1-1-课程介绍">1.1 课程介绍</h2>
-<p>介绍机器学习balabala 工业界的机器学习哦</p>
-<h3 id="Role">Role</h3>
-<p>SDE , 领域专家 -&gt; 数据科学家 机器学习专家</p>
-<h3 id="Skill">Skill</h3>
-<p>数据科学家需要的技能：</p>
-<ul>
-<li><strong>数据</strong>： 收集处理数据，独立同分布</li>
-<li><strong>训练</strong>： 模型融合，微调，迁移学习，多模态</li>
-<li><strong>部署</strong>： 蒸馏，模型性能优化</li>
-<li><strong>监控</strong> ：模型公平性，可解释性</li>
-</ul>
-<h2 id="1-2-数据获取">1.2 数据获取</h2>
-<p>第一步是找数据，一般情况数据不够，问两个问题：</p>
+<h1>第六章</h1>
+<h2 id="6-1-模型调参-🐾">6.1 模型调参 🐾</h2>
+<h3 id="6-1-1-Manual-Hyperparameter-Tuning">6.1.1 Manual Hyperparameter Tuning</h3>
 <ul>
 <li>
-<p>是否能到不同的数据源来融合</p>
+<p>Start with a good baseline, e.g. default settings in high-quality toolkits, values reported in papers</p>
 </li>
 <li>
-<p>是否可以数据生成</p>
+<p>Tune a value, retrain the model to see the changes</p>
+</li>
+<li>
+<p>Repeat multiple times to gain insights about</p>
+<p>• Which hyperparameters are important 哪些参数比较重要</p>
+<p>• How sensitive the model to hyperparameters 敏感度</p>
+<p>• What are the good ranges  找寻好的区间</p>
 </li>
 </ul>
-<h3 id="Discover-what-data-is-available">Discover what data is available</h3>
+<p>一般来说，会从一个好的基线开始，找寻工具包有一个大致的参数，或者参考相关论文中，相关数据集中的参数设置，再在验证集上对比结果。</p>
+<p>当SGD调参调的比较好的时候通常比Adam要更好，但是Adam对学习率不那么敏感，更好调参。</p>
+<h4 id="参数的记录和保存">参数的记录和保存</h4>
+<ul>
+<li>
+<p>Needs careful experiment management</p>
+</li>
+<li>
+<p>Save your training logs and hyperparameters to compare, share and reproduce later</p>
+</li>
+</ul>
+<p>• The simplest way is saving logs in text and put key metrics in Excel</p>
+<p>• Better options exist, e.g. <strong>tenesorboard and weights &amp; bias</strong></p>
+<ul>
+<li>
+<p>Reproducing is hard, it relates to</p>
+<p>• Environment (hardware &amp; library)</p>
+<p>• Code</p>
+<p>• Randomness (seed)</p>
+</li>
+</ul>
+<p>最好记录好自己的训练日志，各种参数设置利于重复。</p>
+<p>推荐的工具：tenesorboard and weights &amp; bias（wandb）</p>
+<p>重复实验是比较难实现，因为实验和硬件，包环境，代码，<strong>随机种子</strong>相关。实在做不到的重复实验，想要达到效果可以使用多个模型进行Ensemble融合起来。</p>
+<h3 id="6-1-2-机器调参">6.1.2 机器调参</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在小的任务上可以使用机器调参。</p>
+<h4 id="AutoML">AutoML</h4>
+<p><img src="https://picture.mulindya.com/ParacticeML6-2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>在模型选择这一块，AutoML有所发展。</p>
+<h3 id="6-1-3-总结">6.1.3 总结</h3>
+<p>• Hyperparameter tuning aims to find a set of good values</p>
+<p>• It’s time consuming as data preprocessing</p>
+<p>• There is a trend to use algorithm for tuning</p>
+<p>调整参数的目的是找一组好的参数值，现在更倾向于使用算法来Tuning。</p>
+<h2 id="6-2-超参数优化-🌻">6.2 超参数优化 🌻</h2>
+<p><img src="https://picture.mulindya.com/ParacticeML6-3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="6-2-1-HPO-algorithms-Black-box-or-Multi-fidelity">6.2.1 HPO algorithms: Black-box or Multi-fidelity</h3>
+<ul>
+<li>Black-box: treats a training job as a black-box in HPO； 黑盒</li>
+</ul>
+<p>​	• Completes the training process for each trial</p>
+<ul>
+<li>Multi-fidelity: modifies the training job to speed up the search</li>
+</ul>
+<p>• Train on subsampled datasets</p>
+<p>• Reduce model size (e.g less #layers, #channels)</p>
+<p>• Stop bad configuration earlier</p>
+<p>调参的trick：在小数据集，减少模型的size，训练的时候减少epoch；</p>
+<p>这样可以很快的对参数的效果有一些比较和对比。</p>
+<p><img src="https://picture.mulindya.com/ParacticeML6-4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="6-2-2-常见的HPO策略">6.2.2 常见的HPO策略</h3>
 <ol>
-<li>判断公用数据集</li>
-<li>非常大的数据集</li>
-<li>采集新的数据</li>
+<li>
+<p>网格搜索 Grid Search</p>
+<p>暴力穷举，把所有的组合过一遍得到最好的结果</p>
+</li>
+<li>
+<p>随机搜索 Random Search</p>
+<p>循环n次，随机选择超参数的组合，在没有很好的头绪的时候可以先选择随机搜索来确定参数值</p>
+</li>
 </ol>
-<h3 id="Source">Source</h3>
-<ul>
-<li>mnist</li>
-<li>imageNet</li>
-<li>AudioSet：youtube sound</li>
-<li>Kinetics：youtube video</li>
-<li>KIITI：traffic senarios 自动驾驶</li>
-<li>Amazon Rewiew：用户评论</li>
-<li>SQuAD：维基百科的问答</li>
-<li>LibriSpeech：有声读物 文字&lt;-&gt;语音</li>
-<li>更多数据获取：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research">https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research</a></li>
-</ul>
-<h3 id="Where-to-Find-Datasets">Where to Find Datasets</h3>
-<p>• <a target="_blank" rel="noopener" href="https://paperswithcode.com/datasets">Paperswithcodes Datasets</a>: academic datasets with leaderboard<br>
-• <a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets">Kaggle Datasets</a>: ML datasets uploaded by data scientists<br>
-• <a target="_blank" rel="noopener" href="https://datasetsearch.research.google.com/">Google Dataset search</a>: search datasets in the Web<br>
-• Various toolkits datasets: <a target="_blank" rel="noopener" href="https://www.tensorflow.org/datasets">tensorflow</a>, <a target="_blank" rel="noopener" href="https://huggingface.co/docs/datasets/">huggingface</a>(专注于文本transformer的数据集)<br>
-• Various conference/company ML competitions<br>
-• <a target="_blank" rel="noopener" href="https://registry.opendata.aws/">Open Data on AWS</a>: 100+ large-scale raw data<br>
-• Data lakes in your own organization</p>
-<h3 id="数据集比较">数据集比较</h3>
-<table>
-<thead>
-<tr>
-<th style="text-align:center">数据集类别</th>
-<th style="text-align:center">优点</th>
-<th style="text-align:center">缺点</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:center">学术</td>
-<td style="text-align:center">干净，难度适中</td>
-<td style="text-align:center">选择面小，小数据集</td>
-</tr>
-<tr>
-<td style="text-align:center">竞赛</td>
-<td style="text-align:center">接近应用</td>
-<td style="text-align:center">偏向于简单，专注于热门业务</td>
-</tr>
-<tr>
-<td style="text-align:center">原始</td>
-<td style="text-align:center">应用灵活</td>
-<td style="text-align:center">需要很多精力预处理</td>
-</tr>
-</tbody>
-</table>
-<h3 id="数据融合">数据融合</h3>
-<ul>
-<li>Combine data from multiple sources into a coherent dataset</li>
-<li>Product data is often stored in multiple tables<br>
-• E.g. a table for house information, a table for sales, a table for listing agents</li>
-<li>Join tables by keys, which are often entity IDs</li>
-<li>Key issues: identify IDs, missing rows, redundant columns, value conflicts</li>
-</ul>
-<h3 id="数据生成">数据生成</h3>
-<ul>
-<li>Use GANs</li>
-<li>数据增强
-<ul>
-<li>image augmentation</li>
-<li>Back Translation（中文-英文-中文）</li>
-</ul>
-</li>
-</ul>
-<h2 id="1-3-网页数据抓取">1.3 网页数据抓取</h2>
-<h3 id="Web-Scraping">Web Scraping</h3>
-<p>•The goal is to extract data from website<br>
-• Noisy, weak labels, can be spammy<br>
-• Available at scale<br>
-• E.g. price comparison/tracking website<br>
-• Many ML datasets are obtained by web scraping<br>
-• E.g. ImageNet, Kinetics<br>
-• Web crawling VS scrapping<br>
-• Crawling: indexing whole pages on Internet  爬取所有信息<br>
-• Scraping: scraping particular data from web pages of a website 网页数据提取 ；特定的网站 ；特定数据</p>
-<h3 id="Web-Scraping-tools">Web Scraping tools</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-5.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="6-2-3-（BO）-Bayesian-Optimization">6.2.3 （BO） Bayesian Optimization</h3>
+<p>•<strong>BO</strong>: Iteratively learn a mapping from HP to objective function.  Based on previous trials. Select the next trial based on the current estimation.</p>
+<p>•<strong>Surrogate model</strong></p>
+<p>​	• Estimate how the objective function depends on HP</p>
+<p>​	• Probabilistic regression models: Random forest, Gaussian process, …</p>
+<p>贝叶斯优化，目前应用得不太广泛，了解一下</p>
+<h3 id="6-2-4-Successive-Halving-（SH算法）">6.2.4 Successive Halving （SH算法）</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>有很多超参数得选择，首先选择n组个超参数，训练m个epoch，淘汰n/2组超参数，然后再训练更多一点epoch 2m次epoch，这样每一次的选取计算开销是差不多的。</p>
+<h3 id="6-2-5-Hyperband（实际中可用）">6.2.5 Hyperband（实际中可用）</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-7.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>SH中选大的n，小的m。Hyperband实际上是将多个SH结合起来，然后在前面选取的超参数中选取减半n数目的比较好的参数组合，双倍m，目的是多跑一跑，给第一次在少量epoch的参数再次确认的机会。这样在n和m的选取上就不会那么敏感了。</p>
+<h3 id="6-2-6-总结">6.2.6 总结</h3>
 <ul>
 <li>
-<p>“curl” often doesn’t work<br>
-• Website owners use various ways to stop bots</p>
+<p>Black-box HPO: grid/<strong>random search</strong>, bayesian optimization</p>
 </li>
 <li>
-<p>Use headless browser: a web browser without a GUI</p>
-<p>python中可以使用selenium中的webdriver来模拟搜索，取消图形化界面使用命令行:happy:</p>
-  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver<br>chrome_options = webdriver.Chromeoptions()<br>chrome_options.headless = <span class="hljs-literal">True</span><br>chrome = webdriver.Chrome(chrome_options = chrome_options) <br><br>page = chrome.get(url)<br></code></pre></td></tr></tbody></table></figure>
+<p>Multi-fidelity HPO: Successive Halving, <strong>Hyperband</strong></p>
 </li>
 <li>
-<p>You need a lot of new IPs, easy to get through public clouds<br>
-• In all IPv4 IPs, AWS owns 1.75%, Azure 0.55%, GCP 0.25%</p>
+<p>In practice, start with random search</p>
+</li>
+<li>
+<p>Beware there are <strong>top performers</strong></p>
+<p>• You can find them by mining your training logs, or what common configurations used in paper/code</p>
 </li>
 </ul>
-<p>最后一点，要注意版权问题哦~</p>
-<h2 id="1-4-数据标注">1.4 数据标注</h2>
-<h3 id="情况描述">情况描述</h3>
-<p><img src="https://picture.mulindya.com/pML1.4-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="三种方案">三种方案</h3>
-<h3 id="1-半监督学习-Semi-supervised-learning-SSL">1. 半监督学习(Semi-supervised learning SSL)</h3>
-<p>小部分数据标注了，还有大部分没有标注</p>
+<p>再次说明调参的trick：在小数据集，减少模型的size，训练的时候减少epoch；</p>
+<p>这样可以很快的对参数的效果有一些比较和对比。</p>
+<p>总有几个模型几组参数在所有的数据集任务都表现得比较好，在论文和比赛中记录下比较好得参数组合，只用试试这些参数即可。</p>
+<h2 id="6-3-神经架构搜索（NAS）🍄">6.3 神经架构搜索（NAS）🍄</h2>
+<h3 id="6-3-1-概念">6.3.1 概念</h3>
+<p>模型架构的搜索Neural Architecture Search (NAS)</p>
 <ul>
-<li>Focus on the scenario where there is a small amount of labeled data, along with large amount of unlabeled data</li>
-<li>Make assumptions on data distribution to use unlabeled data 两者分布假设<br>
-• <strong>Continuity assumption</strong>（连续性假设）: examples with similar <strong>features</strong> are more likely to have the same <strong>label</strong><br>
-• <strong>Cluster assumption</strong>（聚类假设）: data have <strong>inherent cluster structure</strong>, examples in the same cluster tend to have the same label<br>
-• <strong>Manifold assumption</strong>（流型假设）: data lie on a manifold of <strong>much lower dimension</strong> than the input space 降维</li>
+<li>A neural network has different types of hyperparameters:</li>
 </ul>
-<h4 id="典型算法">典型算法</h4>
-<h5 id="自学习（self-training）">自学习（self-training）</h5>
-<p><img src="https://picture.mulindya.com/pML1.4-2.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>用现有标号的样本训练模型来预测未标号的样本，将所得标号进行筛选，选择置信度高的样本合并继续训练，直到筛掉的剩余样本获得较高的置信度或者某个阈值范围。这个模型可以不计成本同时模型融合。</p>
-<h3 id="2-label-through-crowdsourcing-众包">2. label through crowdsourcing 众包</h3>
-<p>简单来说就是花钱找人标注。😕</p>
-<h4 id="典型算法-2">典型算法</h4>
-<h5 id="主动学习-active-learning">主动学习 active learning</h5>
+<p>• Topological structure: resnet-ish, mobilenet-ish, #layers</p>
+<p>• Individual layers: kernel_size, #channels in convolutional layer, #hidden_outputs in dense/recurrent layers</p>
 <ul>
-<li>
-<p>Focus on same scenario as SSL but with human in the loop<br>
-• Self training: Model helps propagate labels to unlabeled data<br>
-• Active learning: Model select the most “interesting” data for labelers</p>
-</li>
-<li>
-<p><strong>Uncertainty sampling</strong><br>
-• Select examples whose predictions are most uncertain<br>
-• The highest class prediction score is close to random ( 1/n)</p>
-</li>
+<li>NAS automates the design of neural network</li>
 </ul>
-<p>模型选择置信度偏向于随机的样本让人来判断。然后放进模型区训练再预测再判断‘难’的数据。</p>
-<ul>
-<li><strong>Query-by-committee</strong><br>
-• Trains multiple models and select samples that models disagree with 1/n</li>
-</ul>
-<p>多个模型投票来确定哪些数据比较‘难’</p>
-<h3 id="3-Active-Learning-Self-training">3 Active Learning + Self-training</h3>
-<p>混合使用</p>
-<p><img src="https://picture.mulindya.com/pML1.4-3.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h3 id="质量控制">质量控制</h3>
-<p>可能出现误标或者出现标注并不精确的情况</p>
-<h4 id="Weak-Supervision-弱监督学习">Weak Supervision 弱监督学习</h4>
+<p>​	• How to specify the search space of NN</p>
+<p>​	• How to explore the search space</p>
+<p>​	• Performance estimation</p>
+<p><img src="https://picture.mulindya.com/ParacticeML6-8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>NAS的工作是尽量使得模型架构的选择自动化</p>
+<h3 id="6-3-2-使用强化学习来NAS">6.3.2 使用强化学习来NAS</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用RNN来生成模型的架构，得到的反馈是模型的精度，但是强化学习很贵，实际上不太适用。</p>
+<h3 id="6-3-3-One-shot方法（更实用）">6.3.3 One-shot方法（更实用）</h3>
 <ul>
 <li>
-<p>Semi-automatically generate labels<br>
-• Less accurate than manual ones, but good enough for training</p>
+<p>Combines the learning of architecture and model params</p>
 </li>
 <li>
-<p><strong>Data programming</strong>:</p>
+<p>Construct and train a single model presents a wide variety of architectures</p>
+</li>
+<li>
+<p>Evaluate candidate architectures</p>
+<p>• Only care about the candidate ranking</p>
+<p>• Use a proxy metric: the accuracy after a few epochs</p>
+</li>
+<li>
+<p>Re-train the most promising candidate from scratch</p>
 </li>
 </ul>
-<p>总结规律规则编程<br>
-• Domain specific heuristics to assign labels<br>
-• Keyword search, pattern matching, third-party models<br>
-• E.g. rules to check if YouTube comments are spam or ham</p>
-<blockquote>
-<p>什么是弱监督学习呢？弱监督学习可以分为三种典型的类型，不完全监督（Incomplete supervision），不确切监督（Inexact supervision），不精确监督（Inaccurate supervision）。</p>
+<p>同时学习网络架构的参数和其中的超参数，训练一个巨大的模型，每个子模型的架构和超参数也可以得到。实际上只需要得到模型对前面得模型有提升即可。</p>
+<h4 id="例子-Differentiable-Architecture-Search">例子 Differentiable Architecture Search</h4>
+<p><img src="https://picture.mulindya.com/ParacticeML6-10.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>使用softmax来判定子路，每一层有很多候选层，比如L层的第i个候选输出为$O_i<sup>l$然后通过对权重参数a通过softmax可以获得${\alpha}</sup>l$​​​加权求和得到​​值赋值m份给到L，通过训练之后得到的a可以来选择好的单元（单元对应的a越大越好）</p>
+<h3 id="6-3-4-Scaling-CNNs（更简单实用）">6.3.4 Scaling CNNs（更简单实用）</h3>
+<p><img src="https://picture.mulindya.com/ParacticeML6-11.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>EfficientNet就是这样的方法搜索出来的，但是Scaling CNNs这个方法有一定的局限性，只对于小部分的神经网络使用，具体是对于卷积神经网络。</p>
+<p>调节网络的三个方法：</p>
+<p>更多层，更多channel，更大的输入分辨率；</p>
+<p>Efficientnet建议组合调节这三个部分，当网络深度变深时通道数也可以相应变多，同样resolution也对应变多。通过4个参数来调节这三个部分。</p>
+<h3 id="6-3-5-研究方向">6.3.5 研究方向</h3>
 <ul>
 <li>
-<p>不完全监督是指，训练数据中只有一部分数据被给了标签，有一些数据是没有标签的。</p>
+<p>Explainability of NAS result</p>
 </li>
 <li>
-<p>不确切监督是指，训练数据只给出了粗粒度标签。我们可以把输入想象成一个包，这个包里面有一些示例，我们只知道这个包的标签，Y或N，但是我们不知道每个示例的标签。</p>
-</li>
-<li>
-<p>不精确监督是指，给出的标签不总是正确的，比如本来应该是Y的标签被错误标记成了N。</p>
+<p>Search architecture to fit into edge devices</p>
+<p>• Edge devices are more and more powerful, data privacy concerns</p>
+<p>• But they are very diverse (CPU/GPU/DSP, 100x performance difference) and have power constraints</p>
 </li>
 </ul>
-<h5 id="解决方案">解决方案</h5>
+<p>• Minimize both model loss and hardware latency</p>
+<p>​	•E.g. minimize $ loss×log(latency)^β $​</p>
 <ul>
-<li>为了解决不完全监督，我们可以考虑两种主要技术，主动学习和半监督学习。一种是有人类干预的，一种是没有人类干预的。</li>
-<li>为了解决不确切监督，我们可以考虑多示例学习。</li>
-<li>为了解决不精确监督，我们考虑带噪学习。</li>
+<li>To what extend can we automates the entire ML workflow?</li>
 </ul>
-</blockquote>
+<h3 id="6-3-6-总结">6.3.6 总结</h3>
+<ul>
+<li>NAS searches a NN architecture for a customizable goal</li>
+</ul>
+<p>​	 • Maximize accuracy or meet latency constraints on particular hardware</p>
+<ul>
+<li>NAS is practical to use now:</li>
+</ul>
+<p>​	• Compound depth, width, resolution scaling</p>
+<p>​	• Differentiable one-hot neural network</p>
 
             </div>
             <hr>
@@ -527,18 +526,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-1/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">PracticeML第二章房价实例笔记</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/30/leetcode/leetcode-offer57-2/">
-                        <span class="hidden-mobile">剑指offer57-2 和为s的连续正数序列</span>
+                      <a href="/2022/01/25/leetcode/leetcode-offer48/">
+                        <span class="hidden-mobile">剑指offer48 最长不含重复字符的子字符串</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -560,8 +553,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/12/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/praticalML1/';
-          this.page.identifier = '/2021/12/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/praticalML1/';
+          this.page.url = 'https://fanmeilin.github.io/2022/02/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML6/';
+          this.page.identifier = '/2022/02/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML6/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -584,7 +577,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -599,7 +592,7 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -658,6 +651,10 @@
           </span>
       
     
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
   </div>
 
 

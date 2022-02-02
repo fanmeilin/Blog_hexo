@@ -1,0 +1,807 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>praticalML第一章笔记 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>
+	<div id="banner_video_insert">
+	</div>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;">
+
+		<div class="full-bg-img" >
+			<div id="banner_video_insert">
+			</div>	
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="praticalML第一章笔记">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-12-30 15:35" pubdate>
+        2021年12月30日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      19
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">praticalML第一章笔记</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>斯坦福2021秋季的实用机器学习上线啦~ 😉 跟着沐神复习机器学习冲冲冲！ 记录一下笔记和重点，不一定很全哦~，只是记录自我感觉的重点。</p>
+</blockquote>
+<h1>第一章</h1>
+<h2 id="1-1-课程介绍">1.1 课程介绍</h2>
+<p>介绍机器学习balabala 工业界的机器学习哦</p>
+<h3 id="Role">Role</h3>
+<p>SDE , 领域专家 -&gt; 数据科学家 机器学习专家</p>
+<h3 id="Skill">Skill</h3>
+<p>数据科学家需要的技能：</p>
+<ul>
+<li><strong>数据</strong>： 收集处理数据，独立同分布</li>
+<li><strong>训练</strong>： 模型融合，微调，迁移学习，多模态</li>
+<li><strong>部署</strong>： 蒸馏，模型性能优化</li>
+<li><strong>监控</strong> ：模型公平性，可解释性</li>
+</ul>
+<h2 id="1-2-数据获取">1.2 数据获取</h2>
+<p>第一步是找数据，一般情况数据不够，问两个问题：</p>
+<ul>
+<li>
+<p>是否能到不同的数据源来融合</p>
+</li>
+<li>
+<p>是否可以数据生成</p>
+</li>
+</ul>
+<h3 id="Discover-what-data-is-available">Discover what data is available</h3>
+<ol>
+<li>判断公用数据集</li>
+<li>非常大的数据集</li>
+<li>采集新的数据</li>
+</ol>
+<h3 id="Source">Source</h3>
+<ul>
+<li>mnist</li>
+<li>imageNet</li>
+<li>AudioSet：youtube sound</li>
+<li>Kinetics：youtube video</li>
+<li>KIITI：traffic senarios 自动驾驶</li>
+<li>Amazon Rewiew：用户评论</li>
+<li>SQuAD：维基百科的问答</li>
+<li>LibriSpeech：有声读物 文字&lt;-&gt;语音</li>
+<li>更多数据获取：<a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research">https://en.wikipedia.org/wiki/List_of_datasets_for_machine-learning_research</a></li>
+</ul>
+<h3 id="Where-to-Find-Datasets">Where to Find Datasets</h3>
+<p>• <a target="_blank" rel="noopener" href="https://paperswithcode.com/datasets">Paperswithcodes Datasets</a>: academic datasets with leaderboard<br>
+• <a target="_blank" rel="noopener" href="https://www.kaggle.com/datasets">Kaggle Datasets</a>: ML datasets uploaded by data scientists<br>
+• <a target="_blank" rel="noopener" href="https://datasetsearch.research.google.com/">Google Dataset search</a>: search datasets in the Web<br>
+• Various toolkits datasets: <a target="_blank" rel="noopener" href="https://www.tensorflow.org/datasets">tensorflow</a>, <a target="_blank" rel="noopener" href="https://huggingface.co/docs/datasets/">huggingface</a>(专注于文本transformer的数据集)<br>
+• Various conference/company ML competitions<br>
+• <a target="_blank" rel="noopener" href="https://registry.opendata.aws/">Open Data on AWS</a>: 100+ large-scale raw data<br>
+• Data lakes in your own organization</p>
+<h3 id="数据集比较">数据集比较</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">数据集类别</th>
+<th style="text-align:center">优点</th>
+<th style="text-align:center">缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">学术</td>
+<td style="text-align:center">干净，难度适中</td>
+<td style="text-align:center">选择面小，小数据集</td>
+</tr>
+<tr>
+<td style="text-align:center">竞赛</td>
+<td style="text-align:center">接近应用</td>
+<td style="text-align:center">偏向于简单，专注于热门业务</td>
+</tr>
+<tr>
+<td style="text-align:center">原始</td>
+<td style="text-align:center">应用灵活</td>
+<td style="text-align:center">需要很多精力预处理</td>
+</tr>
+</tbody>
+</table>
+<h3 id="数据融合">数据融合</h3>
+<ul>
+<li>Combine data from multiple sources into a coherent dataset</li>
+<li>Product data is often stored in multiple tables<br>
+• E.g. a table for house information, a table for sales, a table for listing agents</li>
+<li>Join tables by keys, which are often entity IDs</li>
+<li>Key issues: identify IDs, missing rows, redundant columns, value conflicts</li>
+</ul>
+<h3 id="数据生成">数据生成</h3>
+<ul>
+<li>Use GANs</li>
+<li>数据增强
+<ul>
+<li>image augmentation</li>
+<li>Back Translation（中文-英文-中文）</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-3-网页数据抓取">1.3 网页数据抓取</h2>
+<h3 id="Web-Scraping">Web Scraping</h3>
+<p>•The goal is to extract data from website<br>
+• Noisy, weak labels, can be spammy<br>
+• Available at scale<br>
+• E.g. price comparison/tracking website<br>
+• Many ML datasets are obtained by web scraping<br>
+• E.g. ImageNet, Kinetics<br>
+• Web crawling VS scrapping<br>
+• Crawling: indexing whole pages on Internet  爬取所有信息<br>
+• Scraping: scraping particular data from web pages of a website 网页数据提取 ；特定的网站 ；特定数据</p>
+<h3 id="Web-Scraping-tools">Web Scraping tools</h3>
+<ul>
+<li>
+<p>“curl” often doesn’t work<br>
+• Website owners use various ways to stop bots</p>
+</li>
+<li>
+<p>Use headless browser: a web browser without a GUI</p>
+<p>python中可以使用selenium中的webdriver来模拟搜索，取消图形化界面使用命令行:happy:</p>
+  <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> selenium <span class="hljs-keyword">import</span> webdriver<br>chrome_options = webdriver.Chromeoptions()<br>chrome_options.headless = <span class="hljs-literal">True</span><br>chrome = webdriver.Chrome(chrome_options = chrome_options) <br><br>page = chrome.get(url)<br></code></pre></td></tr></tbody></table></figure>
+</li>
+<li>
+<p>You need a lot of new IPs, easy to get through public clouds<br>
+• In all IPv4 IPs, AWS owns 1.75%, Azure 0.55%, GCP 0.25%</p>
+</li>
+</ul>
+<p>最后一点，要注意版权问题哦~</p>
+<h2 id="1-4-数据标注">1.4 数据标注</h2>
+<h3 id="情况描述">情况描述</h3>
+<p><img src="https://picture.mulindya.com/pML1.4-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="三种方案">三种方案</h3>
+<h3 id="1-半监督学习-Semi-supervised-learning-SSL">1. 半监督学习(Semi-supervised learning SSL)</h3>
+<p>小部分数据标注了，还有大部分没有标注</p>
+<ul>
+<li>Focus on the scenario where there is a small amount of labeled data, along with large amount of unlabeled data</li>
+<li>Make assumptions on data distribution to use unlabeled data 两者分布假设<br>
+• <strong>Continuity assumption</strong>（连续性假设）: examples with similar <strong>features</strong> are more likely to have the same <strong>label</strong><br>
+• <strong>Cluster assumption</strong>（聚类假设）: data have <strong>inherent cluster structure</strong>, examples in the same cluster tend to have the same label<br>
+• <strong>Manifold assumption</strong>（流型假设）: data lie on a manifold of <strong>much lower dimension</strong> than the input space 降维</li>
+</ul>
+<h4 id="典型算法">典型算法</h4>
+<h5 id="自学习（self-training）">自学习（self-training）</h5>
+<p><img src="https://picture.mulindya.com/pML1.4-2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>用现有标号的样本训练模型来预测未标号的样本，将所得标号进行筛选，选择置信度高的样本合并继续训练，直到筛掉的剩余样本获得较高的置信度或者某个阈值范围。这个模型可以不计成本同时模型融合。</p>
+<h3 id="2-label-through-crowdsourcing-众包">2. label through crowdsourcing 众包</h3>
+<p>简单来说就是花钱找人标注。😕</p>
+<h4 id="典型算法-2">典型算法</h4>
+<h5 id="主动学习-active-learning">主动学习 active learning</h5>
+<ul>
+<li>
+<p>Focus on same scenario as SSL but with human in the loop<br>
+• Self training: Model helps propagate labels to unlabeled data<br>
+• Active learning: Model select the most “interesting” data for labelers</p>
+</li>
+<li>
+<p><strong>Uncertainty sampling</strong><br>
+• Select examples whose predictions are most uncertain<br>
+• The highest class prediction score is close to random ( 1/n)</p>
+</li>
+</ul>
+<p>模型选择置信度偏向于随机的样本让人来判断。然后放进模型区训练再预测再判断‘难’的数据。</p>
+<ul>
+<li><strong>Query-by-committee</strong><br>
+• Trains multiple models and select samples that models disagree with 1/n</li>
+</ul>
+<p>多个模型投票来确定哪些数据比较‘难’</p>
+<h3 id="3-Active-Learning-Self-training">3 Active Learning + Self-training</h3>
+<p>混合使用</p>
+<p><img src="https://picture.mulindya.com/pML1.4-3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="质量控制">质量控制</h3>
+<p>可能出现误标或者出现标注并不精确的情况</p>
+<h4 id="Weak-Supervision-弱监督学习">Weak Supervision 弱监督学习</h4>
+<ul>
+<li>
+<p>Semi-automatically generate labels<br>
+• Less accurate than manual ones, but good enough for training</p>
+</li>
+<li>
+<p><strong>Data programming</strong>:</p>
+</li>
+</ul>
+<p>总结规律规则编程<br>
+• Domain specific heuristics to assign labels<br>
+• Keyword search, pattern matching, third-party models<br>
+• E.g. rules to check if YouTube comments are spam or ham</p>
+<blockquote>
+<p>什么是弱监督学习呢？弱监督学习可以分为三种典型的类型，不完全监督（Incomplete supervision），不确切监督（Inexact supervision），不精确监督（Inaccurate supervision）。</p>
+<ul>
+<li>
+<p>不完全监督是指，训练数据中只有一部分数据被给了标签，有一些数据是没有标签的。</p>
+</li>
+<li>
+<p>不确切监督是指，训练数据只给出了粗粒度标签。我们可以把输入想象成一个包，这个包里面有一些示例，我们只知道这个包的标签，Y或N，但是我们不知道每个示例的标签。</p>
+</li>
+<li>
+<p>不精确监督是指，给出的标签不总是正确的，比如本来应该是Y的标签被错误标记成了N。</p>
+</li>
+</ul>
+<h5 id="解决方案">解决方案</h5>
+<ul>
+<li>为了解决不完全监督，我们可以考虑两种主要技术，主动学习和半监督学习。一种是有人类干预的，一种是没有人类干预的。</li>
+<li>为了解决不确切监督，我们可以考虑多示例学习。</li>
+<li>为了解决不精确监督，我们考虑带噪学习。</li>
+</ul>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9D%8E%E6%B2%90/">李沐</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/01/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML2-1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">PracticeML第二章房价实例笔记</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/12/30/leetcode/leetcode-offer57-2/">
+                        <span class="hidden-mobile">剑指offer57-2 和为s的连续正数序列</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2021/12/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML1/';
+          this.page.identifier = '/2021/12/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML1/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

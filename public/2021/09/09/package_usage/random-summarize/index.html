@@ -1,7 +1,8 @@
 
 
 <!DOCTYPE html>
-<html lang="zh-CN" data-default-color-scheme=&#34;auto&#34;>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
 <script type="text/javascript" src="/js/jquery.js"></script>
 
 
@@ -67,7 +68,16 @@
 
 
 <body>
-
+	<div id="banner_video_insert">
+	</div>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+    
   <header style="height: 70vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
@@ -161,72 +171,78 @@
   </div>
 </nav>
 
-		<div class="banner" id="banner" parallax=true
-			 style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
-			   background-size: cover;">
+	
+	<div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;">
 
-      <div class="full-bg-img" >
+		<div class="full-bg-img" >
+			<div id="banner_video_insert">
+			</div>	
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
 
-		
-		<div id="banner_video_insert">
-		</div>
-		<script>
-						
-			var ua = navigator.userAgent;
-			var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
-				isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
-				isAndroid = ua.match(/(Android)\s+([\d.]+)/),
-				isMobile = isIphone || isAndroid;
+					function set_video_attr(id){
 
-			function set_video_attr(id){
-				
-				var height = document.body.children[0].clientHeight
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
 
-				var width = document.body.children[0].clientWidth
-
-				var video_item = document.getElementById(id);
-
-				if (height / width < 0.56){
-					video_item.setAttribute('width', '100%');
-					video_item.setAttribute('height', 'auto');
-				} else {
-					video_item.setAttribute('height', '100%');
-					video_item.setAttribute('width', 'auto');
-				}
-			}
-
-			$.getJSON('/js/video_url.json', function(data){
-				if (!isMobile){
-					var video_list_length = data.length
-					var seed = Math.random()
-					index = Math.floor(seed * video_list_length)
-					
-					video_url = data[index]
-					video_html_res = "<video id='video_item' style='position: absolute;' muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
-
-					document.getElementById("banner_video_insert").innerHTML = video_html_res;
-					set_video_attr('video_item')
-				}
-
-			});
-
-			if (!isMobile){
-				window.onresize = function(){
-					set_video_attr('video_item')
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
 					}
-				}
-			</script>
 
-		
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
 
-        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
-          <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="随机数的总结">
-              
-            </span>
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
 
-            
-              <div class="mt-3">
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="随机数的总结">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
   
   
     <span class="post-meta">
@@ -262,12 +278,12 @@
   
 </div>
 
-            
-          </div>
+				
+			  </div>
 
-          
-        </div>
-      </div>
+			  
+			</div>
+		</div>
     </div>
   </header>
 
@@ -406,7 +422,7 @@
     
       <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
         <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
   <div class="toc-body" id="toc-body"></div>
 </div>
 
@@ -421,7 +437,7 @@
     
 
     
-      <a id="scroll-top-button" href="#" role="button">
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
         <i class="iconfont icon-arrowup" aria-hidden="true"></i>
       </a>
     
@@ -480,6 +496,10 @@
           </span>
       
     
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
   </div>
 
 
