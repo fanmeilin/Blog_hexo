@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>剑指offer54 二叉搜索树的第k大节点</title>
+    <link href="/2022/02/04/leetcode/leetcode-offer54/"/>
+    <url>/2022/02/04/leetcode/leetcode-offer54/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>二叉搜索树的第k大节点</p></blockquote><h2 id="题目">题目</h2><p>给定一棵二叉搜索树，请找出其中第 <code>k</code> 大的节点的值。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">输入: root = [<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">2</span>], k = <span class="hljs-number">1</span><br>   <span class="hljs-number">3</span><br>  / <span class="hljs-string">\</span><br> <span class="hljs-number">1</span>   <span class="hljs-number">4</span><br>  <span class="hljs-string">\</span><br>   <span class="hljs-number">2</span><br>输出: <span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs livescript">输入: root = [<span class="hljs-number">5</span>,<span class="hljs-number">3</span>,<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">1</span>], k = <span class="hljs-number">3</span><br>       <span class="hljs-number">5</span><br>      / <span class="hljs-string">\</span><br>     <span class="hljs-number">3</span>   <span class="hljs-number">6</span><br>    / <span class="hljs-string">\</span><br>   <span class="hljs-number">2</span>   <span class="hljs-number">4</span><br>  /<br> <span class="hljs-number">1</span><br>输出: <span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 ≤ k ≤ 二叉搜索树元素个数</li></ul><h2 id="题解">题解</h2><p>按照中序遍历可以得到二叉搜索树的顺序的序列，这里用全局遍历res来记录序号，因为这里是第K大因此是先遍历右子树再遍历左子树。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">kthLargest</span>(<span class="hljs-params">self, root: TreeNode, k: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        self.res = <span class="hljs-number">0</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">funcMid</span>(<span class="hljs-params">root</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root <span class="hljs-keyword">or</span> self.res&gt;=k :<span class="hljs-keyword">return</span><br>            funcMid(root.right)<br>            self.res += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> self.res==k:self.result = root.val<br>            funcMid(root.left)<br>        <span class="hljs-comment">#中序遍历 得到有顺序的序列</span><br>        <br>        self.result = <span class="hljs-number">0</span><br>        funcMid(root)<br>        <span class="hljs-keyword">return</span> self.result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>剑指</category>
+      
+      <category>树</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>剑指</tag>
+      
+      <tag>树</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>praticalML第六章笔记 Tuning</title>
     <link href="/2022/02/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML6/"/>
     <url>/2022/02/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML6/</url>
@@ -3179,9 +3208,9 @@
       
       <tag>剑指</tag>
       
-      <tag>数组</tag>
-      
       <tag>idea</tag>
+      
+      <tag>数组</tag>
       
     </tags>
     
@@ -3316,9 +3345,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组查找</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
@@ -3347,9 +3376,9 @@
       
       <tag>剑指</tag>
       
-      <tag>数组</tag>
-      
       <tag>idea</tag>
+      
+      <tag>数组</tag>
       
     </tags>
     
