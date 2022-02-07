@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>剑指offer68-1 二叉搜索树的最近公共祖先</title>
+      <link href="/2022/02/06/leetcode-offer68-1/"/>
+      <url>/2022/02/06/leetcode-offer68-1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>二叉搜索树的最近公共祖先</p></blockquote><h2 id="题目">题目</h2><p>给定一个二叉搜索树, 找到该树中两个指定节点的最近公共祖先。</p><p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个结点 p、q，最近公共祖先表示为一个结点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p><p>例如，给定如下二叉搜索树:  root = [6,2,8,0,4,7,9,null,null,3,5]</p><figure class="highlight livescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs livescript">    <span class="hljs-number">6</span><br>  /   <span class="hljs-string">\</span> <br> <span class="hljs-number">2</span>     <span class="hljs-number">8</span><br>/ <span class="hljs-string">\</span>   / <span class="hljs-string">\</span><br><span class="hljs-number">0</span>  <span class="hljs-number">4</span>  <span class="hljs-number">7</span>  <span class="hljs-number">9</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-1：">示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入: <span class="hljs-attr">root</span> = [<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">p</span> = <span class="hljs-number">2</span>, <span class="hljs-attr">q</span> = <span class="hljs-number">8</span><br>输出: <span class="hljs-number">6</span> <br>解释: 节点 <span class="hljs-number">2</span> 和节点 <span class="hljs-number">8</span> 的最近公共祖先是 <span class="hljs-number">6</span>。<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入: <span class="hljs-attr">root</span> = [<span class="hljs-number">6</span>,<span class="hljs-number">2</span>,<span class="hljs-number">8</span>,<span class="hljs-number">0</span>,<span class="hljs-number">4</span>,<span class="hljs-number">7</span>,<span class="hljs-number">9</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">3</span>,<span class="hljs-number">5</span>], <span class="hljs-attr">p</span> = <span class="hljs-number">2</span>, <span class="hljs-attr">q</span> = <span class="hljs-number">4</span><br>输出: <span class="hljs-number">2</span><br>解释: 节点 <span class="hljs-number">2</span> 和节点 <span class="hljs-number">4</span> 的最近公共祖先是 <span class="hljs-number">2</span>, 因为根据定义最近公共祖先节点可以为节点本身。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>所有节点的值都是唯一的。</li><li>p、q 为不同节点且均存在于给定的二叉搜索树中。</li></ul><h2 id="题解">题解</h2><p>这里是二叉搜索树，只需要这两个节点在左右即可，如果两个在左子树就搜索左子树，如果两个节点在右子树就搜索右子树。只用根据大小比较即可。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, x):</span><br><span class="hljs-comment">#         self.val = x</span><br><span class="hljs-comment">#         self.left = None</span><br><span class="hljs-comment">#         self.right = None</span><br></code></pre></td></tr></tbody></table></figure><ul><li>定义闭包函数来查找root。</li></ul><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lowestCommonAncestor</span>(<span class="hljs-params">self, root: <span class="hljs-string">'TreeNode'</span>, p: <span class="hljs-string">'TreeNode'</span>, q: <span class="hljs-string">'TreeNode'</span></span>) -&gt; 'TreeNode':</span><br>        x,y = p.val,q.val<br>        <span class="hljs-keyword">if</span> x&gt;y:<br>            x,y = y,x<br>        self.parent = <span class="hljs-number">0</span><br>        self.find = <span class="hljs-literal">False</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">func</span>(<span class="hljs-params">root</span>):</span><br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root <span class="hljs-keyword">or</span> self.find:<span class="hljs-keyword">return</span><br>            <span class="hljs-keyword">if</span> (root.val==x <span class="hljs-keyword">or</span> root.val==y) <span class="hljs-keyword">or</span> (x&lt;root.val <span class="hljs-keyword">and</span> y&gt;root.val):<br>                self.parent = root<br>                self.find = <span class="hljs-literal">True</span><br>                <span class="hljs-keyword">return</span> <br>            <span class="hljs-built_in">print</span>()<br>            <span class="hljs-keyword">if</span> x&gt;root.val:func(root.right)<br>            <span class="hljs-keyword">else</span>:func(root.left)<br>        func(root)<br>        <span class="hljs-keyword">return</span> self.parent<br></code></pre></td></tr></tbody></table></figure><ul><li>直接使用递归</li></ul><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lowestCommonAncestor</span>(<span class="hljs-params">self, root: <span class="hljs-string">'TreeNode'</span>, p: <span class="hljs-string">'TreeNode'</span>, q: <span class="hljs-string">'TreeNode'</span></span>) -&gt; 'TreeNode':</span><br>        <span class="hljs-keyword">if</span> root.val &lt; p.val <span class="hljs-keyword">and</span> root.val &lt; q.val:<br>            <span class="hljs-keyword">return</span> self.lowestCommonAncestor(root.right, p, q)<br>        <span class="hljs-keyword">if</span> root.val &gt; p.val <span class="hljs-keyword">and</span> root.val &gt; q.val:<br>            <span class="hljs-keyword">return</span> self.lowestCommonAncestor(root.left, p, q)<br>        <span class="hljs-keyword">return</span> root<br></code></pre></td></tr></tbody></table></figure><ul><li>使用循环函数</li></ul><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lowestCommonAncestor</span>(<span class="hljs-params">self, root: <span class="hljs-string">'TreeNode'</span>, p: <span class="hljs-string">'TreeNode'</span>, q: <span class="hljs-string">'TreeNode'</span></span>) -&gt; 'TreeNode':</span><br>        <span class="hljs-keyword">if</span> p.val &gt; q.val: p, q = q, p <span class="hljs-comment"># 保证 p.val &lt; q.val</span><br>        <span class="hljs-keyword">while</span> root:<br>            <span class="hljs-keyword">if</span> root.val &lt; p.val: <span class="hljs-comment"># p,q 都在 root 的右子树中</span><br>                root = root.right <span class="hljs-comment"># 遍历至右子节点</span><br>            <span class="hljs-keyword">elif</span> root.val &gt; q.val: <span class="hljs-comment"># p,q 都在 root 的左子树中</span><br>                root = root.left <span class="hljs-comment"># 遍历至左子节点</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> root<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> 剑指 </category>
+          
+          <category> 树 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指offer54 二叉搜索树的第k大节点</title>
       <link href="/2022/02/04/leetcode/leetcode-offer54/"/>
       <url>/2022/02/04/leetcode/leetcode-offer54/</url>
@@ -1197,9 +1226,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -2887,9 +2916,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -3208,9 +3237,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -3345,9 +3374,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组查找 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组查找 </tag>
             
         </tags>
       
@@ -3376,9 +3405,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 数组 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -3689,11 +3718,11 @@
       
         <tags>
             
+            <tag> 配置 </tag>
+            
             <tag> hexo </tag>
             
             <tag> fluid </tag>
-            
-            <tag> 配置 </tag>
             
         </tags>
       
