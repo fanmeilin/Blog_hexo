@@ -1,0 +1,665 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>如何读论文 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="如何读论文">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-10 11:50" pubdate>
+        2022年2月10日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      21
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">如何读论文</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>导师说希望我们可以发一篇质量很好的论文，以后不免会经常看文献，有的时候看论文抓不住重点，花费很久很久的时间可能都不能对这个问题有清晰的了解。或者最后发现这篇论文并不是我真正需要的；对于精读和略读的方法也会有所疑惑。来看看学术大佬沐神，他推荐是怎么去读论文叭~学习一下下嘿嘿。</p>
+</blockquote>
+<h2 id="如何查找文献">如何查找文献</h2>
+<h2 id="论文的构成">论文的构成</h2>
+<ul>
+<li>**TITLE ** 标题</li>
+<li><strong>ABSTRACT</strong> 摘要</li>
+<li><strong>INDEX TERMS</strong> 关键词</li>
+<li><strong>INTRODUCTION</strong> 导言</li>
+<li><strong>MATERIALS AND METHODS</strong>  提出的算法</li>
+<li><strong>EXPERIENCE</strong> 实验</li>
+<li><strong>CONCLUSION</strong> 结论</li>
+</ul>
+<p>绝大多数的文章都是这种格式，相当于是一个八股文的结构。</p>
+<h2 id="读文献的方法">读文献的方法</h2>
+<p>当然你是可以从头读到尾，但是这个世界上论文有这么多，如果都是从头读到尾的话，时间上是不值当的，并且你要找的文章可能就是一小部分，要快速的筛选出你自己需要的文章，然后对他进行精度。</p>
+<p>这里给大家介绍一个方法，如何花三遍来读一遍论文！</p>
+<h3 id="第一遍">第一遍</h3>
+<p><strong>重点：标题-&gt; 摘要 -&gt; 结论的顺序； 目的是大概了解文章，做出取舍；</strong></p>
+<p><strong>tips：可以大概看看图表，了解关键的方法。</strong></p>
+<p>这个时候只需要关注标题和摘要，读完摘要之后直接跳到结论部分；</p>
+<ul>
+<li>
+<p>首先了解这个文章的<strong>标题</strong>是什么，和我们要查找的内容是不是相关的。</p>
+</li>
+<li>
+<p>然后呢，再看一眼<strong>摘要</strong>，摘要就是比较精炼的介绍一下这篇文章。</p>
+</li>
+<li>
+<p>最后直接跳到<strong>结论</strong>，结论通常来说，是和摘要一样的，但是会把摘要里面提出的一两个问题用一些实际的结论，实际的数字来证明一下。</p>
+</li>
+</ul>
+<p>当你读完这三个部分，就可以大致知道这篇文章是在讲述什么内容了，看是否符合自己的诉求。再可以跳到实验部分，看一下一些关键的图和表；还可以跳到方法的图表看看这篇文章的关键方法。</p>
+<p>这一遍通常需要10分钟的时间可以<strong>大概了解这篇文章大概在讲什么</strong>，质量如何，结果怎么样，方法看上去怎么样。最重要的是，这篇文章是否适合自己，确定要不要继续读下去。或者这篇文章质量不高，和自己没有太多关系，内容不感兴趣，就可以放到一边。</p>
+<h3 id="第二遍">第二遍</h3>
+<p><strong>重点：从头到尾读，不用关注得太细节，主要目的是清晰了解图表含义。</strong></p>
+<p><strong>tips：圈出感兴趣的文献</strong></p>
+<p>对整个文章过一遍，可以沿着标题读到最后，这一遍不用注意太多细节，比如公式证明或者很细节的部分可以忽略，主要是搞清楚<strong>重要的图表</strong>，要清楚每个字，知道他到底是在干什么。比如方法中的流程图是什么样子，算法的图是什么结构，细致到实验中图的x轴，y轴是什么，每个点的含义是什么。作者提出的方法是如何和其他人方法对比的，它们之间的差距有多大。</p>
+<p>这一遍读完之后可能还是对文章很模糊，没有特别搞懂它在干什么，但是没有关系，因为已经对整个论文的各个部分有了大概的了解。同时，在这一遍阅读时，可以把相关的文献圈出来，比如说作者在阐述某个问题，这个问题是某某之前提出来的，作者又是在某某的方法上改进的，如果你发现这些引用的重要的文献你没有读过，不太了解，就把他圈出来。</p>
+<p>这时候你已经知道作者解决了什么问题，结果怎么样，大概用了什么方法，但是这个文章你觉得太难了，读不太懂得话，可以选择去读他引用的那些文章，之前的一些工作可能门槛更低一些，读完之后再回过来读这篇文章。</p>
+<p>另外，如果觉得自己不需要了解得那么深，做的方向跟这个不太一样，不需要完全搞懂论文，那么读到这里就可以了。如果这篇文章比较关键，想要充分阅读，就可以进行第三遍阅读。</p>
+<h3 id="第三遍">第三遍</h3>
+<p>重点：详细了解文章，并且拓展到自己，给自己设置问题，学会“脑补”</p>
+<p>最详细的一遍，对每一句话，每一段了解清楚，可以想象自己去实现这篇文章。比如说，作者说提出了什么问题，用什么方法来解决这个问题。你可以带入角色，如果是我来做这件事情应该怎么办，我可以用什么方法来实现这个目的，主动给自己设置问题。作者在阐述实验的过程，你也可以问自己，如果是自己我应该怎么做，能不能比他做得更好。在文章最后作者会提到文章有一些没有继续研究的地方，留到了以后，可以拓展到自己，有没有什么方法可以往前继续推进成果。</p>
+<p>最佳状态是：看完之后就好像是自己做过一遍一样，这样，对这篇文章的细节就了解的非常清楚啦！关上文章也可以回忆出很多细节的地方。</p>
+<p>再基于他做研究，或者之后再向大家提到这篇文章的时候，可以详细和别人复述一遍了</p>
+<h3 id="总结">总结</h3>
+<p>第一遍的花时最少，也就是进行海选；</p>
+<p>第二遍对论文做精选；</p>
+<p>第三步是重点研读论文；</p>
+<h2 id="如何寻找研究想法">如何寻找研究想法</h2>
+<h3 id="打补丁法">打补丁法</h3>
+<p>在读论文的时候，读的是一个完整的故事，在自己探索idea的时候，就需要把原文章的东西提炼，改进它的不足之处，再讲好一个故事，勇于尝试。可能会产生很多想法，关键在于验证，做实验去看哪一个效果最好，很多时候思考理论得出的直觉在做实验的时候发现并不是那么回事，但是通过观察实验结果，可以得到一些新的想法，然后再开始做实验，可以再实验中发现一些想法。很多时候，其实每个idea对自己最后都有一定的贡献，把这些东西糅合起来，也可以形成一篇文章。</p>
+<p>好处是比较好上手，门槛不太高。</p>
+<p>比如说何恺明21年11月份MAE这篇文章，就是糅合了两个东西，缺少一个效果都会大打折扣；这些补丁的作用就是让最后的效果有提升。</p>
+<p>MAE</p>
+<ul>
+<li>基于VIT+BERT
+<ul>
+<li>遮住更多的图片块
+<ul>
+<li>编码时只处理没有遮住的</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>用Transfomer来输出（解码）</li>
+</ul>
+<p>但是也要注意不要在一个问题上打上太多补丁，如果杂乱的填充会显得idea不够优雅。最好在打补丁的时候，可以有一个故事将自己的想法串起来。也就是要有逻辑，讲好故事，不要有太强的违和感。</p>
+<p>难点是：这种方法对写作是一个考验，有时可以把不太重要的补丁拿掉，在最后选择哪些论文打补丁也是很有讲究的，选择的论文要新，空间要大。如果一篇论文本身就是打了补丁，再去改进就很难有很好的成就，因为作者在进行自己的改进就可能试过很多方法了。最好是选一些脑洞比较打的论文，比如说VIT刚出来，马上就有很多人去跟进做实验，因为VIT的思想比较新，里面没有做过的想法很多，这种方法对硬件要求也比较高，对财力要求较高。</p>
+<p>反过来来讲，也可以去做一些比较新的模型，进行一些改进使得训练更快，转换思路让训练更快更便宜，而不是执着于精度。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML7/">
+                        <span class="hidden-mobile">praticalML第七章笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/02/10/read-paper/';
+          this.page.identifier = '/2022/02/10/read-paper/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
