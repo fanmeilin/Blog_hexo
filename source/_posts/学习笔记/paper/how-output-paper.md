@@ -3,6 +3,7 @@ title: 研究新意度和论文思路方法
 tags: [文献]
 categories: [文献]
 date: 2022-02-11 11:50:23
+math: true
 ---
 
 > 参考李沐的相关视频
