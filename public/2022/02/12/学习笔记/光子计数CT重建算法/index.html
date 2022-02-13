@@ -20,7 +20,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>研究新意度和论文思路方法 - 待时</title>
+  <title>光子计数CT重建算法 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -236,7 +236,7 @@
 			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
             <div class="mask flex-center">
 			  <div class="page-header text-center fade-in-up">
-				<span class="h2" id="subtitle" title="研究新意度和论文思路方法">
+				<span class="h2" id="subtitle" title="光子计数CT重建算法">
 				  
 				</span>
 
@@ -246,8 +246,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-11 11:50" pubdate>
-        2022年2月11日 中午
+      <time datetime="2022-02-12 15:22" pubdate>
+        2022年2月12日 下午
       </time>
     </span>
   
@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      3.9k 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      25
+      42
        分钟
     </span>
   
@@ -298,76 +298,191 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">研究新意度和论文思路方法</h1>
+            <h1 style="display: none">光子计数CT重建算法</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>参考李沐的相关视频</p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ea41127Bq?spm_id_from=333.999.0.0">研究新意度的五大误解</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1qq4y1z7F2?spm_id_from=333.999.0.0">如何找论文思路1–打补丁法</a></p>
+<p>查找相关论文，整理其思想。</p>
 </blockquote>
-<h2 id="文章的新意度​-🔎">文章的新意度​ 🔎</h2>
-<p>可能在发表文章的时候，经常会被吐槽文章的新意度不够。</p>
-<p>$研究价值=新意度 \times 有效性 \times 问题大小$</p>
-<p>有效性可以用实验结果的好坏衡量，问题大小可以在研究领域中有多少研究者，发表了多少篇论文来大致衡量。</p>
-<p>查阅一位学术大佬Michael Black的一篇博客 科学中的新意度 （<a target="_blank" rel="noopener" href="https://perceiving-systems.blog/en/news/novelty-in-science">Novelty in Science</a>）他的副标题是A guide for reviewers 给审稿人的指南。</p>
-<p><img src="https://picture.mulindya.com/read_paper-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<p>I see reviewers regularly mistake <strong>complexity</strong>, <strong>difficulty</strong>, and <strong>technicality</strong> for <strong>novelty</strong>. In science reviewing, novelty seems to imply these things. We might be better served by removing the word “novelty” from the review instructions and replacing it with <em><strong>beauty</strong></em>.</p>
-<p>审稿人经常会把复杂度，困难度和技术度与新意度搞混，他建议在评审时把新意度拿掉，换成<em>优美</em>。</p>
-<p>对于理论研究者而言，之前所说的判断价值的方法就失效了哦~，对理论研究的判断一般会使用两个词，深刻和优美，深刻就是说是否揭示了本质的东西，优美是指定理的本身和其相关的证明是否有美感，优美的好处是把技术性和复杂性剥除</p>
-<p>来看看审稿人对于novelty的误区</p>
-<h3 id="Novelty-as-complexity"><strong>Novelty as complexity</strong></h3>
-<p>The simplicity of an idea is often confused with a lack of novelty when exactly the opposite is often true.  A common review critique is</p>
-<p><em>The idea is very simple. It just changes one term in the loss and everything else is the same as prior work.</em></p>
-<p><strong>If nobody thought to change that one term, then it is <em>ipso facto</em> novel.</strong> The inventive insight is to realize that a small change could have a big effect and to formulate the new loss.</p>
-<p>Such reviews lead my students to say that we should make an idea appear more complex so that reviewers will find it of higher value.  <strong>I value simplicity over unnecessary complexity; the simpler the better.</strong> Taking an existing network and replacing one thing is better science than concocting a whole new network just to make it look more complex.</p>
-<p>误区一：用复杂度衡量新意度；应该是大道至简！</p>
-<h3 id="Novelty-as-difficulty"><strong>Novelty as difficulty</strong></h3>
-<p>It’s hard to get a paper into a top conference, therefore reviewers often feel that the ideas and technical details must be difficult.  The authors have to shed blood, sweat, and tears to deserve a paper. Inexperienced reviewers, in particular, like to see that the authors have really worked hard.</p>
-<p>Formulating a simple idea means stripping away the unnecessary to reveal the core of something. This is one of the most useful things that a scientist can do.</p>
-<p><strong>A simple idea can be important. But it can also be trivial</strong>（显然的）. This is where reviewers struggle. A trivial idea is an unimportant idea. If a paper has a simple idea that works better than the state of the art, then it is most likely not trivial.  The authors are onto something and the field will be interested.</p>
-<p>误区二：用困难度衡量新意度；简单有效证明最核心的东西。方法简单但非常有效</p>
-<h3 id="Novelty-as-surprise"><strong>Novelty as surprise</strong></h3>
-<p>Novelty and surprise are closely related. A novel idea is a surprising one by definition – it’s one that nobody in the field thought of.  But there is a flip side to this as surprise is a fleeting emotion. If you hear a good idea, there is a moment of surprise and then, the better it is, the more obvious it may seem. A common review:</p>
-<p><em>The idea is obvious because the authors just combined two well known ideas.</em></p>
-<p>Obvious is the opposite of novelty. So, if an idea is obvious <em>after</em> you’ve heard it, reviewers quickly assume it isn’t novel.  The novelty, however, must be evaluated <em>before</em> the idea existed. The inventive novelty was to have the idea in the first place.  If it is easy to explain and obvious in hindsight, this in no way diminishes the creativity (and novelty) of the idea.</p>
-<p>误区三：用惊讶程度衡量新意度；A，B被提出，不能说A+B有效果就不够创新了。</p>
-<h3 id="Novelty-as-technical-novelty"><strong>Novelty as technical novelty</strong></h3>
-<p>The most common misconception of reviewers is that novelty pertains to technical details. Novelty (and value) come in many forms in papers. A new dataset can be novel if it does something no other dataset has done, even if all the methods used to generate the dataset are well known. A new use of an old method can be novel if nobody ever thought to use it this way. Replacing a complex algorithm with a simple one provides insight.</p>
-<p>Novelty reveals itself in as many ways as beauty. Before critiquing a paper for a lack to technical novelty ask yourself if the true novelty lies elsewhere.</p>
-<p>误区四：技术新意代表新意度；老方法用在新领域就是有创新</p>
-<h3 id="Novelty-as-usefulness-or-value"><strong>Novelty as usefulness or value</strong></h3>
-<p>Not all novel ideas are useful. Just the property of being new does not connote value.  We want new ideas that lead us somewhere.  Here, reviewers need to be very careful.  It’s very hard to know where a new idea wi</p>
-<p>ll take the field because any predictions that we make are based on the field as it is today.</p>
-<p>A common review I get is</p>
-<p><em>The authors describe a new method but I don’t know why anyone needs this.</em></p>
-<p>Lack of utility is indeed an issue but it is very hard to assess with a new idea. Reviewers should be careful here and aware that we all have limited imagination.</p>
-<p>误区五：用有效性或价值来衡量新意度；</p>
-<h4 id="作者见解">作者见解</h4>
-<p>新意度不等于  复杂度，困难度，惊讶度，技术新意，有效性</p>
-<p>新意度 约等于 优美</p>
-<p>要懂得欣赏</p>
-<h2 id="如何寻找研究想法-💡">如何寻找研究想法 💡</h2>
-<h3 id="打补丁法">打补丁法</h3>
-<p>在读论文的时候，读的是一个完整的故事，在自己探索idea的时候，就需要把原文章的东西提炼，改进它的不足之处，再讲好一个故事，勇于尝试。可能会产生很多想法，关键在于验证，做实验去看哪一个效果最好，很多时候思考理论得出的直觉在做实验的时候发现并不是那么回事，但是通过观察实验结果，可以得到一些新的想法，然后再开始做实验，可以再实验中发现一些想法。很多时候，其实每个idea对自己最后都有一定的贡献，把这些东西糅合起来，也可以形成一篇文章。</p>
-<p>好处是比较好上手，门槛不太高。</p>
-<p>比如说何恺明21年11月份MAE这篇文章，就是糅合了两个东西，缺少一个效果都会大打折扣；这些补丁的作用就是让最后的效果有提升。</p>
-<p>MAE</p>
+<h1>光子计数CT重建算法</h1>
+<h2 id="一，光子计数CT与传统CT的区别">一，光子计数CT与传统CT的区别</h2>
+<p><strong>传统X线CT</strong>系统利用电荷积分探测器进行信号检测，<strong>光子权重与其能量成正比，较高能量的光子被赋予较大的权重</strong>。然而，重建图像的对比度主要取决于较低能量的光子，因此<strong>电荷积分探测方式将导致重建图像对比度下降</strong>。</p>
+<p>近期研发的<strong>光子计数探测器</strong>具有能量分辨能力，它由半导体探测器及快速专用集成电路组成，在医学诊断X线能量范围内具有较高的量子效率，<strong>可灵活设置能量阈值，并可消除低能电子学噪声的干扰，通过对被检物体的一次扫描可以同时获得多个能量段的光子计数</strong>。</p>
+<p><strong>传统CT</strong> 采用积分式探测器采集投影数据 ，反映的是<strong>物体的平均衰减特性</strong> ，会在一定程度上造成信息损失 ，无法对物体进行较好的定性定量测量。</p>
+<p><strong>基于光子计数探测器的能谱CT</strong> 通过设定多个能量响应阈值能够探测不同能量范围内的X射线光子 ，采集更多被测物体的物质组成信息 ，有助于识别不同物理特性的材料 ，基于此 ，<strong>能谱CT 被广泛的应用于小病灶、低对比度结构以及微细结构的成像。</strong></p>
+<p>PCD技术消除了电子噪声，提供了比传统CT探测器<strong>更高的信噪比</strong>。</p>
+<p>然而，PCD技术仍然存在两个主要的问题，首先，<strong>单个能量通道只包含总光子的一小部分</strong>；其次，<strong>大部分PCD 只能承受有限的计数率，<strong>所以从PCD 获得的多通道投影通常包含</strong>非常强的泊松噪声</strong>。</p>
+<h2 id="二，文献查找来源">二，文献查找来源</h2>
 <ul>
-<li>基于VIT+BERT
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.cttacn.org.cn/">CT理论与应用研究</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.diagnoschina.com/newest/zazhi_id-2">中国CT和MRI杂志</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://lcfsx.chinabidingnews.cn/">临床放射学杂志</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://ywlc.chinajournal.net.cn/WKB3/WebPublication/wkTextContent.aspx?colType=4&amp;tp=gklb">中国药物与临床</a></p>
+</li>
+<li>
+<p>东南大学学报</p>
+</li>
+<li>
+<p>光谱学与光谱分析</p>
+</li>
+<li>
+<p>光电工程</p>
+</li>
+<li>
+<p>中国医学物理学杂志</p>
+</li>
+</ul>
+<h2 id="三，针对光子计数CT重建算法">三，针对光子计数CT重建算法</h2>
+<p><img src="https://picture.mulindya.com/CT_paper6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-1-投影加权重建">3.1 投影加权重建</h3>
+<p>从投影正弦图中提取噪声信息，构造关于权重的对比噪声比（CNR）优化函数，求解最优权重，利用权重进行投影加权图像重建。</p>
 <ul>
-<li>遮住更多的图片块
+<li>基于<strong>投影加权</strong>的多能光子计数X线CT全能谱图像重建改进方法[1]</li>
+</ul>
+<p>针对包含不同对比材料的3种模体进行投影仿真–&gt;获得包含泊松和高斯噪声的投影正弦图–&gt;从投影正弦图中提取噪声信息–&gt;构造关于权重的<strong>对比噪声比</strong>优化函数–&gt;求解使对比噪声比最优的权重–&gt;利用该权重进行投影加权图像重建</p>
+<p>噪声来源：与 Ｘ线相关的噪声，包括Ｘ线光子数随机变化引起的噪声、Ｘ 线进行光电转换时产生的噪声等，这些噪声服从泊松随机分布，称为泊松噪声；此外，还存在与 Ｘ 线无关的噪声，如成像系统中探测器单元的电子噪声、探测器读出电路的读出噪声等，这部分噪声的幅度服从高斯概率密度分布，称为高斯噪声。</p>
+<h3 id="3-2-图像加权重建">3.2 图像加权重建</h3>
+<p>利用某一种重建算法将各能量段投影数据转换为图像，对图像进行加权求和。</p>
 <ul>
-<li>编码时只处理没有遮住的</li>
+<li>基于<strong>图像加权</strong>的多能光子计数X线CT全能谱图像重建改进方法[2]</li>
+</ul>
+<p>对每个能量段的投影数据采用<strong>最大后验概率（MAP）统计重建算法</strong>进行图像重建–&gt;对各能量段图像进行优化加权求和，获得全能谱图像。</p>
+<p>MAP统计重建算法可显著提高全能谱重建图像的对比噪声比（CNR）。</p>
+<p>根据每个能量段图像中对比材料和背景材料衰减系数差异构造权重，然后将权重赋予每个能量段图像进行加权求和，得到全能谱重建图像，这种方法被称为<strong>图像加权成像法</strong>。</p>
+<ul>
+<li>多能光子计数X-CT能量加权图像重建方法[3]</li>
+</ul>
+<p>对各能量段投影进行<strong>FBP</strong>重建，并将各FBP重建图像加权求和获得最终的重建图像。</p>
+<h3 id="3-3-正则化约束项的迭代类重建">3.3 正则化约束项的迭代类重建</h3>
+<ul>
+<li>多通道联合的广义总变分能谱CT重建[4]</li>
+</ul>
+<p>压缩感知理论的出现，使<strong>正则化约束项的迭代类重建算法</strong>发挥出巨大的潜力。能谱 CT 重建中，正则化约束项以<strong>先验图像引导和稀疏性条件</strong>为主。先验图像引导以 Yu 采用全光谱图像作为先验图像的压缩感知(prior image constrained compressed sensing，PICCS)算法为代表，稀疏性条件包括全变分、紧框架、小波和字典学习等已被应用于 CT 重建，并取得了不同程度的成功。受空间域信息相关性的启发，Zhang等将总变分与能谱均值相结合，提高重建图像的质量。Li 等提出一种能谱非局部均值的方法，利用图像相关性来抑制噪声和条纹伪影。Hu 等利用张量字典块的稀疏性表示来提高重建质量。陈佩君等提出一种总变分与传统张量字典学习结合的重建算法，可进一步恢复图像的微小结构，有效抑制噪声。为了更好地利用能谱 CT 在能量轴方向的信息相关性，Rigie等将总变分向矢量延伸，提出了总核变分(total nuclear variation，TNV)正则化方法，可以更好地保存图像特征。Niu 等提出了一种alpha 发散约束的广义总变分(total generalized variation，TGV)方法用于稀疏视角X 射线CT 图像重建，有效地消除总变分正则化中经常出现的阶梯状和斑片状伪影。</p>
+<p>在重建过程中，通道数的增加会造成单通道中光子数减少，从而导致重建图像质量下降，难以满足实际需求。</p>
+<p>本文从能谱 CT 重建的角度出发，将广义总变分向矢量延伸，利用奇异值的稀疏性，促进图像梯度的线性依赖，提出一种**基于核范数的多通道联合TGV（广义总变分）**的能谱 CT 重建算法。</p>
+<ul>
+<li>光子探测器CT低流速低剂量CTPA图像质量的客观评估[5]</li>
+</ul>
+<h3 id="3-4-基于深度学习的重建">3.4 基于深度学习的重建</h3>
+<p>神经网络直接提取图像中噪声的特征信息，通过与标准图像作对比抑制训练图像中的噪声。</p>
+<ul>
+<li>基于全卷积金字塔残差网络的能谱 CT 图像降噪研究[6]</li>
+</ul>
+<p>将全卷积网络和金字塔残差网络结合为全卷积金字塔残差网络（FCPRN）</p>
+<p>利用能谱CT 在不同的能量范围扫描小鼠样本 ，使用 FDK 算法和基于压缩感知的Split-Bregman算法进行重建并分别作为训练数据和标签数据训练全卷积金字塔残差网络。</p>
+<p>与DNCN、REDCNN进行对比。</p>
+<p>模型对FDK算法重建出的图像进行降噪，由此提高能谱CT图像降噪效率，保证能谱CT重建图像的质量。</p>
+<p>在能谱CT 图像降噪研究方面 ，现多采用迭代重建算法对投影数据进行重建以抑制噪声。例如 Clark等结合图像的稀疏特性和能谱CT 图像相关性以构建重建目标函数 ，提高了能谱CT 图像重建效果。 Rigie和 Riviere等提出了一种基于矢量全变分（TV）的能谱CT 重建算法。上述图像重建降噪算法可以较好的抑制能谱CT 重建图像中的噪声 ，但算法复杂度较高、计算时间较长。</p>
+<p>近年来 ，深度学习在 CT 图像降噪领域中得到了广泛应用。神经网络可以直接提取图像中噪声的特征信息 ，进而通过与标准图像作对比抑制训练图像中的噪声。例如 Chen等研究一种 CT 图像去噪的浅层卷积神经网络模型 ，基于该网络提出了残差编码器-解码器卷积神经网络 ，并使用反卷积网络和快捷连接以增强网络降噪性能。</p>
+<h2 id="四，光子计数CT重建与传统CT重建的区别">四，光子计数CT重建与传统CT重建的区别</h2>
+<h3 id="4-1-投影">4.1 投影</h3>
+<ul>
+<li>
+<p>传统CT：通过对投影数据进行预处理，包括自适应滤波、均方的滤波 ，基于图像 K-L 变换的加权最小均方和噪声分离滤波等。近来的研究重点在于学习型稀疏表示方法。</p>
+</li>
+<li>
+<p>光子计数CT：从投影正弦图中提取噪声信息，构造关于权重的对比噪声比（CNR）优化函数，求解最优权重，利用权重进行投影加权图像重建。</p>
+</li>
+</ul>
+<h3 id="4-2-图像">4.2 图像</h3>
+<ul>
+<li>
+<p>传统CT：</p>
+<ul>
+<li>传统：基于非局部均值（NLM）。从高质量CT图像中提取有效的特征信息，为低质量的CT图像处理提供先验指导。</li>
+<li>基于深度学习：网络框架改进（CNN、GAN、RNN），功能模块设计（注意力模块），训练策略改进（有监督、无监督）</li>
+</ul>
+</li>
+<li>
+<p>光子计数CT：</p>
+<ul>
+<li>利用某一种重建算法将各能量段投影数据转换为图像，对图像进行加权求和。</li>
+<li>神经网络直接提取图像中噪声的特征信息，通过与标准图像作对比抑制训练图像中的噪声。类似于传统CT中基于深度学习的方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-迭代重建">4.3 迭代重建</h3>
+<ul>
+<li>
+<p>传统CT：</p>
+<ul>
+<li>
+<p>传统：</p>
+<ul>
+<li>
+<p>解析重建：FBP、FDK</p>
+</li>
+<li>
+<p>迭代重建：</p>
+<ul>
+<li>
+<p>代数迭代</p>
+</li>
+<li>
+<p>统计迭代（SIR，重建效果最好）</p>
+<p>与稀疏学习表示约束结合，最常用的是TV（总变分）约束迭代重建和基于特征字典学习进行稀疏表示。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基于深度学习：学习FBP、学习正则项、学习迭代求解</p>
+</li>
+</ul>
+</li>
+<li>
+<p>光子计数CT:</p>
+<ul>
+<li>正则化约束项的迭代重建
+<ul>
+<li>先验图像引导</li>
+<li>稀疏性条件：总变分、紧框架、小波、字典学习</li>
 </ul>
 </li>
 </ul>
 </li>
-<li>用Transfomer来输出（解码）</li>
 </ul>
-<p>但是也要注意不要在一个问题上打上太多补丁，如果杂乱的填充会显得idea不够优雅。最好在打补丁的时候，可以有一个故事将自己的想法串起来。也就是要有逻辑，讲好故事，不要有太强的违和感。</p>
-<p>难点是：这种方法对写作是一个考验，有时可以把不太重要的补丁拿掉，在最后选择哪些论文打补丁也是很有讲究的，选择的论文要新，空间要大。如果一篇论文本身就是打了补丁，再去改进就很难有很好的成就，因为作者在进行自己的改进就可能试过很多方法了。最好是选一些脑洞比较打的论文，比如说VIT刚出来，马上就有很多人去跟进做实验，因为VIT的思想比较新，里面没有做过的想法很多，这种方法对硬件要求也比较高，对财力要求较高。</p>
-<p>反过来来讲，也可以去做一些比较新的模型，进行一些改进使得训练更快，转换思路让训练更快更便宜，而不是执着于精度。</p>
+<h2 id="五，光子计数CT临床应用">五，光子计数CT临床应用</h2>
+<h3 id="5-1-能谱纯化结合迭代重建算法">5.1  能谱纯化结合迭代重建算法</h3>
+<p>2022 年 2 月武汉市肺科医院放射科发表的一篇文章[7]</p>
+<ul>
+<li>
+<p>目的：探讨基于能谱纯化结合迭代重建算法在继发性肺结核患者低剂量CT检查中的应用。</p>
+</li>
+<li>
+<p>方法：选取2019年4月至6月武汉市肺科医院确诊的70例继发性肺结核患者作为研究对象。初检采用常规剂量组：管电压110 kV，参考管电流52 mAs，滤波反投影（FBP）重建图像；复检采用低剂量组（能谱纯化）：管电压Sn 110 kV，参考管电流73 mAs，正弦图迭代重建（SAFIRE）。比较两组图像主观评分、升主动脉CT值、图像噪声、SNR及辐射剂量差异。</p>
+</li>
+<li>
+<p>结果：两组图像主观评分相比无差异，满足临床诊断要求。两组升主动脉CT值无差异；低剂量组图像SNR低于常规剂量组。低剂量组ED（0.36±0.15）mSv与常规剂量组（2.35±0.73）mSv相比降低约84.7％。</p>
+</li>
+<li>
+<p><strong>结论：能谱纯化结合迭代重建算法在继发性肺结核患者检查中能够显著降低患者所受辐射剂量，同时图像质量也能满足临床诊断要求。</strong></p>
+</li>
+</ul>
+<h3 id="5-2-光子探测器CT低流速低剂量CTPA图像质量的客观评估">5.2 光子探测器CT低流速低剂量CTPA图像质量的客观评估</h3>
+<p>2021年中国医学科学院北京协和医学院北京协和医院放射科[5]</p>
+<ul>
+<li>目的：客观评估应用光子探测器CT行低流速低剂量对比剂CT肺动脉造影(CTPA)不同单能谱下的图像质量，探究CTPA的最佳单能谱图像。</li>
+<li>方法：纳入行CTPA检查的患者47例， 所有患者均用光子探测器CT进行CTPA扫描，扫描范围自胸廓入口至膈肌水平，以10 keV间距重建9个单能谱图像，分别为40、50、60、70、80、90、100、110、120 keV的图像。在肺动脉主干(PA)、右肺动脉主干(RP)、左肺动脉主干(LP)、右肺上叶动脉(URP)、右肺下叶动脉(LRP)、左肺上叶动脉(ULP)、左肺下叶动脉(LLP)勾画20 mm2感兴趣区，记录各个感兴趣区及右主气管、背阔肌组织的CT值和标准差，计算不同能谱等级下图像的信噪比(SNR)、对比噪声比(CNR)。采用Wilcoxon秩和检验对比不同单能谱等级的CT值、SNR和CNR。</li>
+<li>结果：单能谱40 keV时肺动脉主干CT值594. 17 HU(434.16～829.52) HU、SNR16.88(7.35 ～30.12)和CNR 15.63 (6.7 ～ 26.54)，均显著高于50 ～ 120 keV能级组，Z( PA、LA、RA)=5.968，P＜0.05差异具有统计学意义。单能谱40 keV时RP、LP、URP、LRP、ULP、LLP的CT值均显著高于50 ～ 120 keV组，Z(URP、LRP、ULP、LLP) =5.968，P＜0.05差异具有统计学意义。</li>
+<li><strong>结论：应用光子探测器CT行低流速低剂量对比剂CTPA，可获得高对比度、高信噪比的图像，最佳单能谱等级为40 keV。应用光子探测器CT可弥补肺动脉强化不佳导致无法诊断的难题，能进一步减少对比剂不良事件的发生，值得临床推广应用。</strong></li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<p>[1] 周正东,管绍林,余子丽,等. 基于投影加权的多能光子计数X线CT全能谱图像重建改进方法[J]. 东南大学学报（自然科学版）,2016,46(6):1126-1131. DOI:10.3969/j.issn.1001-0505.2016.06.003.</p>
+<p>[2] 周正东,管绍林,涂佳丽,等. 基于图像加权的多能光子计数X线CT全能谱图像重建改进方法[J]. 东南大学学报（自然科学版）,2017,47(5):892-896. DOI:10.3969/j.issn.1001-0505.2017.05.009.</p>
+<p>[3] 余子丽,周正东,张雯雯,等. 多能光子计数X-CT能量加权图像重建方法[J]. 中国医学物理学杂志,2016,33(2):141-145. DOI:10.3969/j.issn.1005-202X.2016.02.007.</p>
+<p>[4] 连祥媛,孔慧华,潘晋孝,等. 多通道联合的广义总变分能谱CT重建[J]. 光电工程,2021(9). DOI:10.12086/oee.2021.210211.</p>
+<p>[5] 杜华阳,宋伟,隋昕,等. 光子探测器CT低流速低剂量CTPA图像质量的客观评估[J]. 临床放射学杂志,2021,40(3):470-475.</p>
+<p>[6] 任学智,何鹏,龙邹荣,等. 基于全卷积金字塔残差网络的能谱CT图像降噪研究[J]. 光谱学与光谱分析,2021(9). DOI:10.3964/j.issn.1000-0593(2021)09-2950-06.</p>
+<p>[7] 姜一, 田葵, 沙晋璐, 等. 基于能谱纯化结合迭代重建算法在继发性肺结核患者低剂量CT检查中的应用[J]. CT理论与应用研究, 2022, 31(1): 95-101. DOI: 10.15953/j.1004-4140.2022.31.01.11</p>
 
             </div>
             <hr>
@@ -377,13 +492,17 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                      <a class="hover-with-bg" href="/categories/CT/">CT</a>
+                    
+                      <a class="hover-with-bg" href="/categories/CT/%E6%96%87%E7%8C%AE/">文献</a>
                     
                   </div>
                 
                 
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CT/">CT</a>
                     
                       <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
                     
@@ -402,9 +521,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/">
+                      <a href="/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">光子计数CT重建算法</span>
+                        <span class="hidden-mobile">精读Adaptive Consistency Prior based Deep Network for Image Denoising</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -412,8 +531,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/read-paper/">
-                        <span class="hidden-mobile">如何读论文</span>
+                      <a href="/2022/02/11/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/how-output-paper/">
+                        <span class="hidden-mobile">研究新意度和论文思路方法</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -435,8 +554,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/02/11/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/how-output-paper/';
-          this.page.identifier = '/2022/02/11/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/how-output-paper/';
+          this.page.url = 'https://fanmeilin.github.io/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/';
+          this.page.identifier = '/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -627,45 +746,6 @@
 
 
 
-
-  
-
-  
-    <!-- MathJax -->
-    <script>
-      MathJax = {
-        tex: {
-          inlineMath: [['$', '$'], ['\\(', '\\)']]
-        },
-        options: {
-          renderActions: {
-            findScript: [10, doc => {
-              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                const display = !!node.type.match(/; *mode=display/);
-                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                const text = document.createTextNode('');
-                node.parentNode.replaceChild(text, node);
-                math.start = { node: text, delim: '', n: 0 };
-                math.end = { node: text, delim: '', n: 0 };
-                doc.math.push(math);
-              });
-            }, '', false],
-            insertedScript: [200, () => {
-              document.querySelectorAll('mjx-container').forEach(node => {
-                let target = node.parentNode;
-                if (target.nodeName.toLowerCase() === 'li') {
-                  target.parentNode.classList.add('has-jax');
-                }
-              });
-            }, '', false]
-          }
-        }
-      };
-    </script>
-
-    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
-
-  
 
 
 

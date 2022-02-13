@@ -72,7 +72,7 @@ The most common misconception of reviewers is that novelty pertains to technical
 
 Novelty reveals itself in as many ways as beauty. Before critiquing a paper for a lack to technical novelty ask yourself if the true novelty lies elsewhere.
 
-误区四：技术新意代表新意度；老方法用在新领域就是有创新
+误区四：技术新意代表新意度；老方法用在新领域就是有创新;
 
 ### **Novelty as usefulness or value**
 
