@@ -1,0 +1,837 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>机器学习公式推导--Introduction - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="机器学习公式推导--Introduction">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-21 10:46" pubdate>
+        2022年2月21日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.8k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      43
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">机器学习公式推导--Introduction</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>记录机器学习公式推导的文档，好好学数学哦~<br>
+参考视频：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1aE411o7qd?p=2&amp;spm_id_from=pageDriver">https://www.bilibili.com/video/BV1aE411o7qd?p=2&amp;spm_id_from=pageDriver</a><br>
+语雀文档：<a target="_blank" rel="noopener" href="https://www.yuque.com/books/share/f4031f65-70c1-4909-ba01-c47c31398466/hu0291">https://www.yuque.com/books/share/f4031f65-70c1-4909-ba01-c47c31398466/hu0291</a></p>
+</blockquote>
+<h1>Introduction</h1>
+<p>对概率的诠释有两大学派，一种是频率派另一种是贝叶斯派。后面我们对观测集采用下面记号：<br>
+$$<br>
+X_{N\times p}=(x_{1},x_{2},\cdots,x_{N})<sup>{T},x_{i}=(x_{i1},x_{i2},\cdots,x_{ip})</sup>{T}<br>
+$$<br>
+这个记号表示有 $N$ 个样本，每个样本都是 $p$ 维向量。其中每个观测都是由 $p(x|\theta)$ 生成的。</p>
+<h2 id="频率派的观点">频率派的观点</h2>
+<p>$p(x|\theta)$中的 $\theta$ 是一个未知常量。对于 $N$ 个观测来说观测集的概率为 $p(X|\theta)\mathop{=}\limits _{iid}\prod\limits <em>{i=1}^{N}p(x</em>{i}|\theta))$ 。为了求 $\theta$ 的大小，我们采用最大对数似然MLE的方法：</p>
+<p>$$<br>
+\theta_{MLE}=\mathop{argmax}\limits _{\theta}\log p(X|\theta)\mathop{=}\limits _{iid}\mathop{argmax}\limits _{\theta}\sum\limits <em>{i=1}^{N}\log p(x</em>{i}|\theta)<br>
+$$</p>
+<p>假设每个样本$x_i$都是独立同分布(iid)于$p(x_i| \theta)$,那么有$P(X| \theta) = \prod_{i=1}^N p(x_i| \theta)$,对两边取对数连乘就变成连加。</p>
+<p>频率派模型演化为统计机器学习，关键是优化问题，如设计模型，loss function，algorithm。</p>
+<h2 id="贝叶斯派的观点">贝叶斯派的观点</h2>
+<p>贝叶斯派认为 $p(x|\theta)$ 中的 $\theta$ 不是一个常量**。这个 $\theta$ 满足一个预设的分布 $\theta\sim p(\theta)$** ，这个预设的分布就是先验，而这个先验是可以通过贝叶斯公式由后验得到。于是根据贝叶斯定理依赖观测集参数的后验可以写成：</p>
+<p>$$<br>
+p(\theta|X)=\frac{p(X|\theta)\cdot p(\theta)}{p(X)}=\frac{p(X|\theta)\cdot p(\theta)}{\int\limits _{\theta}p(X|\theta)\cdot p(\theta)d\theta}<br>
+$$<br>
+为了求 $\theta$ 的值，我们要最大化这个参数后验MAP（最大后验概率估计）：</p>
+<p>$$<br>
+\theta_{MAP}=\mathop{argmax}\limits _{\theta}p(\theta|X)=\mathop{argmax}\limits _{\theta}p(X|\theta)\cdot p(\theta)<br>
+$$<br>
+其中第二个等号是由于分母和 $\theta$ 没有关系。求解这个 $\theta$ 值后计算$\frac{p(X|\theta)\cdot p(\theta)}{\int\limits <em>{\theta}p(X|\theta)\cdot p(\theta)d\theta}$ ，就得到了参数的后验概率。其中 $p(X|\theta)$ 叫似然，是我们的模型分布。得到了参数的后验分布后，我们可以将这个分布用于预测贝叶斯预测：<br>
+$$<br>
+p(x</em>{new}|X)=\int\limits <em>{\theta}p(x</em>{new}|\theta)\cdot p(\theta|X)d\theta<br>
+$$<br>
+其中积分中的被乘数是模型，乘数是后验分布。</p>
+<p>贝叶斯模型进而发展为概率图模型，关键就是求积分（比如常用的MCMC，蒙特卡洛方法）。</p>
+<h2 id="小结">小结</h2>
+<p>频率派和贝叶斯派分别给出了一系列的机器学习算法。频率派的观点导出了一系列的统计机器学习算法而贝叶斯派导出了概率图理论。在应用频率派的 MLE 方法时最优化理论占有重要地位。而贝叶斯派的算法无论是后验概率的建模还是应用这个后验进行推断时积分占有重要地位。因此采样积分方法如 MCMC 有很多应用。</p>
+<h1>MathBasics</h1>
+<h2 id="高斯分布">高斯分布</h2>
+<h3 id="一维情况-MLE">一维情况 MLE</h3>
+<p>高斯分布在机器学习中占有举足轻重的作用。在 MLE 方法中：</p>
+<p>$$<br>
+\theta=(\mu,\Sigma)=(\mu,\sigma^{2}),\theta_{MLE}=\mathop{argmax}\limits _{\theta}\log p(X|\theta)\mathop{=}\limits _{iid}\mathop{argmax}\limits _{\theta}\sum\limits <em>{i=1}^{N}\log p(x</em>{i}|\theta)<br>
+$$<br>
+一般地，高斯分布的概率密度函数写为：</p>
+<p>$$<br>
+p(x|\mu,\Sigma)=\frac{1}{(2\pi)<sup>{p/2}|\Sigma|</sup>{1/2}}e<sup>{-\frac{1}{2}(x-\mu)</sup>{T}\Sigma^{-1}(x-\mu)}<br>
+$$<br>
+其中 $\Sigma$表示分布的协方差矩阵，在一维的情况其协方差矩阵即为该方差的1X1矩阵。</p>
+<p>带入 MLE 中我们考虑一维的情况<br>
+$$<br>
+\log p(X|\theta)=\sum\limits <em>{i=1}^{N}\log p(x</em>{i}|\theta)=\sum\limits <em>{i=1}<sup>{N}\log\frac{1}{\sqrt{2\pi}\sigma}\exp(-(x_{i}-\mu)</sup>{2}/2\sigma^{2})<br>
+$$<br>
+首先对 $\mu$ 的极值可以得到 ：<br>
+$$<br>
+\mu</em>{MLE}=\mathop{argmax}\limits _{\mu}\log p(X|\theta)=\mathop{argmax}\limits _{\mu}\sum\limits _{i=1}<sup>{N}(x_{i}-\mu)</sup>{2}<br>
+$$<br>
+于是：<br>
+$$<br>
+\frac{\partial}{\partial\mu}\sum\limits <em>{i=1}<sup>{N}(x_{i}-\mu)</sup>{2}=0\longrightarrow\mu</em>{MLE}=\frac{1}{N}\sum\limits <em>{i=1}^{N}x</em>{i}<br>
+$$<br>
+就可以得到$\mu$的估计值。</p>
+<p>其次对 $\theta$ 中的另一个参数 $\sigma$ ，有：<br>
+$$<br>
+\begin{align}<br>
+\sigma_{MLE}=\mathop{argmax}\limits <em>{\sigma}\log p(X|\theta)&amp;=\mathop{argmax}\limits <em>{\sigma}\sum\limits <em>{i=1}<sup>{N}[-\log\sigma-\frac{1}{2\sigma</sup>{2}}(x</em>{i}-\mu)^{2}]\nonumber\<br>
+&amp;=\mathop{argmin}\limits <em>{\sigma}\sum\limits <em>{i=1}<sup>{N}[\log\sigma+\frac{1}{2\sigma</sup>{2}}(x</em>{i}-\mu)^{2}]<br>
+\end{align}<br>
+$$<br>
+于是：<br>
+$$<br>
+\frac{\partial}{\partial\sigma}\sum\limits <em>{i=1}<sup>{N}[\log\sigma+\frac{1}{2\sigma</sup>{2}}(x</em>{i}-\mu)<sup>{2}]=0\longrightarrow\sigma_{MLE}</sup>{2}=\frac{1}{N}\sum\limits <em>{i=1}<sup>{N}(x_{i}-\mu)</sup>{2}<br>
+$$<br>
+值得注意的是，上面的推导中，首先对 $\mu$ 求 MLE， 然后利用这个结果求 $\sigma</em>{MLE}$ ，因此可以预期的是对数据集求期望时 $\mathbb{E}</em>{\mathcal{D}}[\mu</em>{MLE}]$ 是无偏差的：<br>
+$$<br>
+\mathbb{E}</em>{\mathcal{D}}[\mu_{MLE}]=\mathbb{E}<em>{\mathcal{D}}[\frac{1}{N}\sum\limits <em>{i=1}^{N}x</em>{i}]=\frac{1}{N}\sum\limits <em>{i=1}^{N}\mathbb{E}</em>{\mathcal{D}}[x</em>{i}]=\mu<br>
+$$<br>
+但是当对 $\sigma_{MLE}$ 求 期望的时候由于使用了<strong>单个数据集</strong>的 $\mu_{MLE}$,其方差会比真实的方差更小，因此对所有数据集求期望的时候我们会发现 $\sigma_{MLE}$ 是 有偏的：</p>
+
+$$
+\begin{align}
+\mathbb{E}_{\mathcal{D}}[\sigma_{MLE}^{2}]&amp;=\mathbb{E}_{\mathcal{D}}[\frac{1}{N}\sum\limits _{i=1}^{N}(x_{i}-\mu_{MLE})^{2}]=\mathbb{E}_{\mathcal{D}}[\frac{1}{N}\sum\limits _{i=1}^{N}(x_{i}^{2}-2x_{i}\mu_{MLE}+\mu_{MLE}^{2})\nonumber
+\\&amp;=\mathbb{E}_{\mathcal{D}}[\frac{1}{N}\sum\limits _{i=1}^{N}x_{i}^{2}-\mu_{MLE}^{2}]=\mathbb{E}_{\mathcal{D}}[\frac{1}{N}\sum\limits _{i=1}^{N}x_{i}^{2}-\mu^{2}+\mu^{2}-\mu_{MLE}^{2}]\nonumber\\
+&amp;= \mathbb{E}_{\mathcal{D}}[\frac{1}{N}\sum\limits _{i=1}^{N}x_{i}^{2}-\mu^{2}]-\mathbb{E}_{\mathcal{D}}[\mu_{MLE}^{2}-\mu^{2}]=\sigma^{2}-(\mathbb{E}_{\mathcal{D}}[\mu_{MLE}^{2}]-\mu^{2})\nonumber\\&amp;=\sigma^{2}-(\mathbb{E}_{\mathcal{D}}[\mu_{MLE}^{2}]-\mathbb{E}_{\mathcal{D}}^{2}[\mu_{MLE}])=\sigma^{2}-Var[\mu_{MLE}]\nonumber\\&amp;=\sigma^{2}-Var[\frac{1}{N}\sum\limits _{i=1}^{N}x_{i}]=\sigma^{2}-\frac{1}{N^{2}}\sum\limits _{i=1}^{N}Var[x_{i}]=\frac{N-1}{N}\sigma^{2}
+\end{align}
+$$
+
+<p>所以：<br>
+$$<br>
+\hat{\sigma}^{2}=\frac{1}{N-1}\sum\limits _{i=1}<sup>{N}(x_{i}-\mu)</sup>{2}<br>
+$$</p>
+<h3 id="多维情况">多维情况</h3>
+<p>多维高斯分布表达式为：<br>
+$$<br>
+p(x|\mu,\Sigma)=\frac{1}{(2\pi)<sup>{p/2}|\Sigma|</sup>{1/2}}e<sup>{-\frac{1}{2}(x-\mu)</sup>{T}\Sigma^{-1}(x-\mu)}<br>
+$$<br>
+其中 $x,\mu\in\mathbb{R}<sup>{p},\Sigma\in\mathbb{R}</sup>{p\times p}$ ，$\Sigma$ 为协方差矩阵，一般而言也是半正定矩阵。这里我们只考虑正定矩阵。首先我们处理指数上的数字，指数上的数字可以记为 $x$ 和 $\mu$ 之间的马氏距离。对于对称的协方差矩阵可进行特征值分解，$\Sigma=U\Lambda U<sup>{T}=(u_{1},u_{2},\cdots,u_{p})diag(\lambda_{i})(u_{1},u_{2},\cdots,u_{p})</sup>{T}=\sum\limits _{i=1}<sup>{p}u_{i}\lambda_{i}u_{i}</sup>{T}$ ，于是：</p>
+<p>$$<br>
+\Sigma^{-1}=\sum\limits _{i=1}<sup>{p}u_{i}\frac{1}{\lambda_{i}}u_{i}</sup>{T}<br>
+$$</p>
+<p>$$<br>
+\Delta=(x-\mu)<sup>{T}\Sigma</sup>{-1}(x-\mu)=\sum\limits <em>{i=1}<sup>{p}(x-\mu)</sup>{T}u</em>{i}\frac{1}{\lambda_{i}}u_{i}^{T}(x-\mu)=\sum\limits <em>{i=1}<sup>{p}\frac{y_{i}</sup>{2}}{\lambda</em>{i}}<br>
+$$</p>
+<p>我们注意到 $y_{i}$ 是 $x-\mu$ 在特征向量 $u_{i}$ 上的投影长度，因此上式子就是 $\Delta$ 取不同值时的同心椭圆。</p>
+<p>下面我们看多维高斯模型在实际应用时的两个问题</p>
+<ol>
+<li>
+<p>参数 $\Sigma,\mu$ 的自由度为 $O(p^{2})$ 对于维度很高的数据其自由度太高。解决方案：高自由度的来源是 $\Sigma$ 有 $\frac{p(p+1)}{2}$ 个自由参数，可以假设其是对角矩阵，甚至在各向同性假设中假设其对角线上的元素都相同。前一种的算法有 Factor Analysis，后一种有概率 PCA(p-PCA) 。</p>
+</li>
+<li>
+<p>第二个问题是单个高斯分布是单峰的，对有多个峰的数据分布不能得到好的结果。解决方案：高斯混合GMM 模型。</p>
+</li>
+</ol>
+<p>下面对多维高斯分布的常用定理进行介绍。</p>
+<p>我们记 $x=(x_1, x_2,\cdots,x_p)^T=(x_{a,m\times 1}, x_{b,n\times1})^T,\mu=(\mu_{a,m\times1}, \mu_{b,n\times1}),\Sigma=\begin{pmatrix}\Sigma_{aa}&amp;\Sigma_{ab}\\Sigma_{ba}&amp;\Sigma_{bb}\end{pmatrix}$，已知 $x\sim\mathcal{N}(\mu,\Sigma)$。</p>
+<p>首先是一个高斯分布的定理：</p>
+<blockquote>
+<p>定理：已知 $x\sim\mathcal{N}(\mu,\Sigma), y\sim Ax+b$，那么 $y\sim\mathcal{N}(A\mu+b, A\Sigma A^T)$。</p>
+<p>证明：$\mathbb{E}[y]=\mathbb{E}[Ax+b]=A\mathbb{E}[x]+b=A\mu+b$，$Var[y]=Var[Ax+b]=Var[Ax]=A\cdot Var[x]\cdot A^T$。</p>
+</blockquote>
+<p>下面利用这个定理得到 $p(x_a),p(x_b),p(x_a|x_b),p(x_b|x_a)$ 这四个量。</p>
+<ol>
+<li>
+<p>$x_a=\begin{pmatrix}\mathbb{I}<em>{m\times m}&amp;\mathbb{O}</em>{m\times n})\end{pmatrix}\begin{pmatrix}x_a\x_b\end{pmatrix}$，代入定理中得到：<br>
+$$<br>
+\mathbb{E}[x_a]=\begin{pmatrix}\mathbb{I}&amp;\mathbb{O}\end{pmatrix}\begin{pmatrix}\mu_a\\mu_b\end{pmatrix}=\mu_a\<br>
+Var[x_a]=\begin{pmatrix}\mathbb{I}&amp;\mathbb{O}\end{pmatrix}\begin{pmatrix}\Sigma_{aa}&amp;\Sigma_{ab}\\Sigma_{ba}&amp;\Sigma_{bb}\end{pmatrix}\begin{pmatrix}\mathbb{I}\\mathbb{O}\end{pmatrix}=\Sigma_{aa}<br>
+$$<br>
+所以 $x_a\sim\mathcal{N}(\mu_a,\Sigma_{aa})$。</p>
+</li>
+<li>
+<p>同样的，$x_b\sim\mathcal{N}(\mu_b,\Sigma_{bb})$。</p>
+</li>
+<li>
+<p>对于两个条件概率，我们引入三个量：</p>
+
+    $$
+    x_{b\cdot a}=x_b-\Sigma_{ba}\Sigma_{aa}^{-1}x_a\\
+    \mu_{b\cdot a}=\mu_b-\Sigma_{ba}\Sigma_{aa}^{-1}\mu_a\\
+    \Sigma_{bb\cdot a}=\Sigma_{bb}-\Sigma_{ba}\Sigma_{aa}^{-1}\Sigma_{ab}
+    $$
+    
+<p>特别的，最后一个式子叫做 $\Sigma_{bb}$ 的 Schur Complementary。可以看到：<br>
+$$<br>
+x_{b\cdot a}=\begin{pmatrix}-\Sigma_{ba}\Sigma_{aa}^{-1}&amp;\mathbb{I}<em>{n\times n}\end{pmatrix}\begin{pmatrix}x_a\x_b\end{pmatrix}<br>
+$$<br>
+所以：<br>
+$$<br>
+\mathbb{E}[x</em>{b\cdot a}]=\begin{pmatrix}-\Sigma_{ba}\Sigma_{aa}^{-1}&amp;\mathbb{I}<em>{n\times n}\end{pmatrix}\begin{pmatrix}\mu_a\\mu_b\end{pmatrix}=\mu</em>{b\cdot a}\<br>
+Var[x_{b\cdot a}]=\begin{pmatrix}-\Sigma_{ba}\Sigma_{aa}^{-1}&amp;\mathbb{I}<em>{n\times n}\end{pmatrix}\begin{pmatrix}\Sigma</em>{aa}&amp;\Sigma_{ab}\\Sigma_{ba}&amp;\Sigma_{bb}\end{pmatrix}\begin{pmatrix}-\Sigma_{aa}<sup>{-1}\Sigma_{ba}</sup>T\\mathbb{I}<em>{n\times n}\end{pmatrix}=\Sigma</em>{bb\cdot a}<br>
+$$<br>
+利用这三个量可以得到 $x_b=x_{b\cdot a}+\Sigma_{ba}\Sigma_{aa}^{-1}x_a$。因此：<br>
+$$<br>
+\mathbb{E}[x_b|x_a]=\mu_{b\cdot a}+\Sigma_{ba}\Sigma_{aa}^{-1}x_a<br>
+$$</p>
+<p>$$<br>
+Var[x_b|x_a]=\Sigma_{bb\cdot a}<br>
+$$</p>
+<p>这里同样用到了定理。</p>
+</li>
+<li>
+<p>同样：<br>
+$$<br>
+x_{a\cdot b}=x_a-\Sigma_{ab}\Sigma_{bb}^{-1}x_b\<br>
+\mu_{a\cdot b}=\mu_a-\Sigma_{ab}\Sigma_{bb}^{-1}\mu_b\<br>
+\Sigma_{aa\cdot b}=\Sigma_{aa}-\Sigma_{ab}\Sigma_{bb}^{-1}\Sigma_{ba}<br>
+$$<br>
+所以：<br>
+$$<br>
+\mathbb{E}[x_a|x_b]=\mu_{a\cdot b}+\Sigma_{ab}\Sigma_{bb}^{-1}x_b<br>
+$$</p>
+<p>$$<br>
+Var[x_a|x_b]=\Sigma_{aa\cdot b}<br>
+$$</p>
+</li>
+</ol>
+<p>下面利用上边四个量，求解线性模型：</p>
+<blockquote>
+<p>已知：$p(x)=\mathcal{N}(\mu,\Lambda<sup>{-1}),p(y|x)=\mathcal{N}(Ax+b,L</sup>{-1})$，求解：$p(y),p(x|y)$。</p>
+<p>解：令 $y=Ax+b+\epsilon,\epsilon\sim\mathcal{N}(0,L^{-1})$，所以 $\mathbb{E}[y]=\mathbb{E}[Ax+b+\epsilon]=A\mu+b$，$Var[y]=A \Lambda<sup>{-1}A</sup>T+L^{-1}$，因此：<br>
+$$<br>
+p(y)=\mathcal{N}(A\mu+b,L<sup>{-1}+A\Lambda</sup>{-1}A^T)<br>
+$$<br>
+引入 $z=\begin{pmatrix}x\y\end{pmatrix}$，我们可以得到 $Cov[x,y]=\mathbb{E}[(x-\mathbb{E}[x])(y-\mathbb{E}[y])^T]$。对于这个协方差可以直接计算：<br>
+$$<br>
+\begin{align}<br>
+Cov(x,y)&amp;=\mathbb{E}[(x-\mu)(Ax-A\mu+\epsilon)<sup>T]=\mathbb{E}[(x-\mu)(x-\mu)</sup>TA<sup>T]=Var[x]A</sup>T=\Lambda<sup>{-1}A</sup>T<br>
+\end{align}<br>
+$$<br>
+注意到协方差矩阵的对称性，所以 $p(z)=\mathcal{N}\begin{pmatrix}\mu\A\mu+b\end{pmatrix},\begin{pmatrix}\Lambda<sup>{-1}&amp;\Lambda</sup>{-1}A<sup>T\A\Lambda</sup>{-1}&amp;L<sup>{-1}+A\Lambda</sup>{-1}A^T\end{pmatrix})$。根据之前的公式，我们可以得到：<br>
+$$<br>
+\mathbb{E}[x|y]=\mu+\Lambda<sup>{-1}A</sup>T(L<sup>{-1}+A\Lambda</sup>{-1}A<sup>T)</sup>{-1}(y-A\mu-b)<br>
+$$</p>
+<p>$$<br>
+Var[x|y]=\Lambda<sup>{-1}-\Lambda</sup>{-1}A<sup>T(L</sup>{-1}+A\Lambda<sup>{-1}A</sup>T)<sup>{-1}A\Lambda</sup>{-1}<br>
+$$</p>
+</blockquote>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">学习笔记</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/">公式推导</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/">公式推导</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/21/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML8/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">praticalML第章笔记PracticeML8</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-noise/">
+                        <span class="hidden-mobile">论文中的各种加噪方式</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/02/21/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%99%BD%E6%9D%BF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/1.Intro_Math/';
+          this.page.identifier = '/2022/02/21/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%99%BD%E6%9D%BF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/1.Intro_Math/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

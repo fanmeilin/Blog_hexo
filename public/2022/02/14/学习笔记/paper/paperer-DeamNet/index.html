@@ -1,0 +1,812 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>精读Adaptive Consistency Prior based Deep Network for Image Denoising - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="精读Adaptive Consistency Prior based Deep Network for Image Denoising">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-14 18:22" pubdate>
+        2022年2月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      32
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">精读Adaptive Consistency Prior based Deep Network for Image Denoising</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>这是一篇2021年发表在cvpr期刊上的文章，老师说可以多关注他的加噪方式和文章的实验对比方法，正好以此为例，来精读此文章以作讲解。</p>
+<p>灰常nice！ 阅读pdf文章的网站https://readpaper.com/</p>
+</blockquote>
+<h3 id="第一遍">第一遍</h3>
+<p><strong>重点：标题-&gt; 摘要 -&gt; 结论的顺序； 目的是大概了解文章，做出取舍；</strong></p>
+<p><strong>tips：可以大概看看图表，了解关键的方法。</strong></p>
+<h4 id="预览">预览</h4>
+<ol>
+<li>
+<p>标题：Adaptive Consistency Prior based Deep Network for Image Denoising</p>
+<p>​			基于自适应一致性先验的深度网络图像去噪</p>
+</li>
+<li>
+<p>摘要：</p>
+<p><strong>总结</strong> :作者提出了ACP+Deam 可以在合成噪声和真实噪声的图片降噪上取得好的结果。</p>
+<p><strong>问题现状</strong>：如何将传统方法融入到网络设计中同时提高可解释性，仍然是一个悬而未决的问题。</p>
+<p><strong>方法</strong> :提出了一种新的基于模型的去噪方法来指导去噪网络的设计，首先，通过在传统的一致性先验中引入非线性滤波算子、可靠性矩阵和高维特征变换函数，提出了一种新的自适应一致性先验(ACP)。其次，通过将ACP项引入最大后验框架，提出了一种基于模型的去噪方法，并将该方法用于指导网络设计，得到了一种新的端到端可训练、可解释的深度去噪网络。</p>
+</li>
+<li>
+<p>结论：</p>
+<p><strong>总结</strong> :提出了Deamnet深度网络来图像去噪。</p>
+<p><strong>创新点</strong> :与现有的大多数深度网络去噪方法不同，我们将新的ACP项（传统方法）引入到优化问题中，然后利用unfolding策略利用优化过程来指导深度网络的设计。</p>
+<p><strong>成果</strong> :在一定程度上提高了可解释性。实验结果表明，该网络具有领先的去噪性能。</p>
+</li>
+<li>
+<p>其他</p>
+<p>查看他的图表可以发现他的工作非常的详细，对各种网络，各种数据集进行了各种效果的对比，从图像，数据集，噪声强度，PSNR，SSIM，运行时间，参数大小各个方面进行对比，值得学习。</p>
+</li>
+</ol>
+<h4 id="思路">思路</h4>
+<p>文章的思路：<strong>将传统的降噪方法和深度学习网络结合</strong></p>
+<ul>
+<li>在传统的一致性先验中引入非线性滤波算子、可靠性矩阵和高维特征变换函数，提出了一种新的自适应一致性先验(ACP)</li>
+<li>通过将ACP项引入最大后验框架，提出了一种基于模型的去噪方法，并将该方法用于指导网络设计，得到去噪网络。</li>
+</ul>
+<h4 id="思考">思考</h4>
+<p>关注点：思考噪声是怎么加的，用了哪几种噪声？</p>
+<h3 id="第二遍">第二遍</h3>
+<p><strong>重点：从头到尾读，不用关注得太细节，主要目的是清晰了解图表含义。</strong></p>
+<p><strong>tips：圈出感兴趣的文献。</strong></p>
+<h4 id="Introduce">Introduce</h4>
+<p>如果对这个领域不是非常了解，就可以好好看看Introduce中的内容，一般会对该领域研究问题进行总结和梳理。可以标记出感兴趣的文献。</p>
+<p>在Introduce中提出的几种去噪方法，对这三种方法的含义和相关算法简要介绍：</p>
+<ul>
+<li>
+<p>filtering-based methods</p>
+<ul>
+<li>
+<p>原理：由于图像中有很多相似物，可以使用非局部相似块来去除噪声，比如NLM和BM3D，各种非局部滤波方法应运而生。</p>
+</li>
+<li>
+<p>问题：输出模糊，去噪方法中的超参数难以调整。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>model-based methods</p>
+<ul>
+<li>
+<p>原理：基于模型的方法通常将去噪任务描述为基于后验I(MAP)的最大优化问题，其性能主要取决于图像先验。</p>
+</li>
+<li>
+<p>前提：在假设图像块可以用适当的基函数稀疏表示的前提下。</p>
+</li>
+<li>
+<p>方法：提出稀疏先验，最近，提出了一种基于三边加权稀疏编码的真实图像去噪方法。根据自然图像中非局部相似块构成的矩阵具有低秩的特点，提出了很多基于低秩先验的图像去噪方法，还有IR的加权核范数最小化(WNNM)方法。此外还有图的正则化方法。</p>
+</li>
+<li>
+<p>好处：基于模型的方法具有很强的数学推导能力。</p>
+</li>
+<li>
+<p>问题：1，在恢复强噪声下的纹理结构时，性能会明显下降。2，由于迭代优化的高度复杂性，它们通常很耗时。</p>
+</li>
+</ul>
+</li>
+<li>
+<p>learning-based methods</p>
+<ul>
+<li>定义：基于学习的方法侧重于从噪声图像到干净图像的潜在映射学习，可分为传统的基于学习的方法和基于深度网络的方法。</li>
+<li>评价：由于基于深度网络的去噪方法比基于滤波、基于模型和基于传统学习的方法取得了更好的去噪效果，它们已成为<strong>主流</strong>的去噪方法。</li>
+<li>问题：大多数深度网络方法的体系结构都是经验性设计的，没有充分考虑传统算法的成果，在一定程度上面临着可解释性较弱的问题。</li>
+</ul>
+</li>
+<li>
+<p>最近，也有人提出了用深度网络展开来实现一些传统的方法。</p>
+</li>
+</ul>
+<p>作者主要工作是提出一种新的基于模型的去噪方法，并深入研究该方法的推理过程，为其去噪CNN(DeamNet)的设计提供参考。</p>
+<blockquote>
+<p>这里我对作者提出的方法有一些疑问，基于模型和基于学习的去噪方法的本质区别在哪里，作者的工作”去噪的CNN设计提供参考“涉及到卷积神经网络，为什么还是基于模型的去噪方法呢？</p>
+<p>在 Proposed Method部分作者阐述了自己的设计思想，这一部分涉及的公式很多，其实对作者所提出的方法和我自身的研究内容不是非常的契合，所以这部分可以简要看看，我主要的目的还是对它的实验中噪声和数据部分更加感兴趣。</p>
+</blockquote>
+<h4 id="设计思想">设计思想</h4>
+<ul>
+<li>
+<p>Adaptive Consistency Prior for Denoising</p>
+<ul>
+<li>自适应一致性先验算法在去噪中的应用,本文提出了一种端到端的可训练展开网络，该网络能够自适应地学习这些算子。</li>
+</ul>
+</li>
+<li>
+<p>Deep Unfolding Denoising Network</p>
+<ul>
+<li>DeamNet的体系结构。它由特征域(FD)模块、重构模块、基于非线性运算(NLO)子网络的K个迭代阶段和双元素注意机制(DEAM)模块组成.</li>
+<li>在高维FD中进行去噪具有以下优点：1)可以将原始的噪声空间潜在地变换到FD空间，在FD空间中可以更容易地降低噪声，从而获得比像素域更精细的图像细节。“补充材料”中的实验详细说明了这一点；2）使用高维FD模块还可以增加特征通道数并且增强神经网络中的信息流传输来得到更高的性能。相比之下，传统的深度展开网络在低维图像空间进行迭代去噪；3)通过将地面真实图像与退化图像之间的残差视为待降噪的部分，该策略还可以使网络更适用于其他红外应用。</li>
+<li>在传统的注意机制中，低频分支的重要性在很大程度上被忽视了。相反，如果低频分支对潜在特征的描述不理想，则DEAM可以自适应地增加残留分支的特征权重，反之亦然。此外，DEAM中的初始特征信息可用性和跨层特征交互可以进一步增强网络的表达能力。</li>
+</ul>
+</li>
+</ul>
+<h4 id="实验部分">实验部分</h4>
+<p>分为对合成噪声数据集和真实数据集上去噪两个模块。</p>
+<p><strong>噪声类型</strong>： 加性高斯白噪声AWGN(Additive White Gaussian Noise)  （在论文中提到的强度对比 15, 25 and 50.）</p>
+<ul>
+<li>训练部分</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">25</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level'</span>)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">epoch</span>):</span><br>    epoch_loss = <span class="hljs-number">0</span><br>    model.train()<br>    <span class="hljs-keyword">for</span> iteration, batch <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(training_data_loader, <span class="hljs-number">1</span>):<br>        target = Variable(batch)<br>        noise = torch.FloatTensor(target.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.val_noiseL / <span class="hljs-number">255.</span>)<br>        <span class="hljs-built_in">input</span> = target + noise<br>        .....<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>测试部分（合成）</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--test_noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">15</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level used on test set'</span>) <span class="hljs-comment">#噪声强度</span><br>opt = parser.parse_args()<br><br>ISource = torch.Tensor(Img)    <br><span class="hljs-comment"># noise</span><br>noise = torch.FloatTensor(ISource.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.test_noiseL / <span class="hljs-number">255.</span>) <span class="hljs-comment">#高斯噪声</span><br><span class="hljs-comment"># noisy image</span><br>INoisy = ISource + noise <span class="hljs-comment">#加性</span><br>ISource, INoisy = Variable(ISource.cuda()), Variable(INoisy.cuda())<br></code></pre></td></tr></tbody></table></figure>
+<p>真实数据集</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span>(<span class="hljs-params">self, index</span>):</span><br>    clean = Image.<span class="hljs-built_in">open</span>(self.path[index])<br><br>    <span class="hljs-keyword">if</span> self.transform:<br>        clean = self.transform(clean)<br><br>    noise = torch.randn(clean.size()).mul_(self.sigma/<span class="hljs-number">255.0</span>) <span class="hljs-comment">#噪声？</span><br>    noisy = clean + noise<br>    noisy = torch.clamp(noisy, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>)<br>    <span class="hljs-keyword">return</span> noisy, clean<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>这里加噪代码存疑</p>
+<p>论文中对真实数据集的去噪细节中写道：</p>
+<p>由于真实噪声通常是信号相关的，并且随着摄像机内管线的不同，真实图像去噪通常是一项极具挑战性的任务，为了进一步展示DeamNet对真实噪声的泛化能力，选择DND基准、SIDD基准和RNI15数据集作为测试数据集。请注意，对于DND和SIDD基准，几乎无噪音的图像不是公开的，但PSNR/SSIM结果可以通过他们的在线服务器获得。而对于RNI15，只有噪声图像可用。</p>
+</blockquote>
+<h4 id="合成噪声数据集（重点关注）">合成噪声数据集（重点关注）</h4>
+<p><strong>训练数据集</strong>包括：</p>
+<ol>
+<li>
+<p>the Berke-ley Segmentation Dataset (BSD)  是为图像分割和边界检测的研究提供经验基础的数据集，包含来自 30 个人类受试者的 1000 个手工标记的 1000 个 Corel 数据集图像的分割，其中一半的分割是通过向主体呈现彩色图像而获得的; 另一半来自呈现灰度图像。</p>
+</li>
+<li>
+<p>Div2K：数据集有1000张高清图(2K分辨率)，其中800张作为训练，100张作为验证，100 张作为测试。</p>
+</li>
+</ol>
+<p>三个标准<strong>基线数据集</strong>进行了评估 （指标：PSNR and SSIM）</p>
+<ol>
+<li>
+<p>Set12：数字图像处理常用数据集Set12，12张灰度图（含lena，cameraman，house，pepper，fishstar，monarch，airplane，parrot，barbara，ship，man，couple），01-07是256*256,08-12是512*512.</p>
+</li>
+<li>
+<p>BSD68  数字图像处理常用数据集BSD68，68张灰度图，大小不一。</p>
+</li>
+<li>
+<p>Urban100  ：一个用于超分辨率和图像重建的数据集 Urban100，总计100张建筑高清图片，同时对应了100张降低分辨率的图片。</p>
+</li>
+</ol>
+<h4 id="真实噪声数据集">真实噪声数据集</h4>
+<h5 id="训练数据集">训练数据集</h5>
+<ol>
+<li>SIDD：智能手机图像去噪数据集（SIDD）使用5个具有代表性的智能手机摄像头，从10个场景中提取约30000个噪声图像，并生成它们真实的场景图像。</li>
+<li>RENOIR：一个真实的图像降噪数据集，包含了3个子数据集，分别是Xiaomi Mi3，Canon S90，Canon T3i拍摄，拥有低噪和高噪对比图。</li>
+</ol>
+<h5 id="测试数据集">测试数据集</h5>
+<ul>
+<li>
+<p>DND：是由50幅真实世界的噪声图像组成的，但没有几乎没有噪声的对应图像。通常，可以通过将去噪图像上传到DND网站来获得PSNR/SSIM结果。</p>
+</li>
+<li>
+<p>SIDD：提供320对噪声图像和近无噪声图像用于训练，1280个图像patch用于验证。PSNR/SSIM结果可以通过将去噪图像提交到SIDD网站获得。</p>
+</li>
+<li>
+<p>RNI15：提供了15幅真实噪声图像。不幸的是，地面真实的干净图像不可用，因此我们只展示RNI15的视觉结果。</p>
+</li>
+</ul>
+<h4 id="数据增强">数据增强</h4>
+<p>我们将这些训练图像对随机裁剪成大小为128×128的小块。为了增加训练样本，采用了180度的旋转和水平翻转。</p>
+<h4 id="对比网络">对比网络</h4>
+<ul>
+<li>
+<p>TNRD</p>
+</li>
+<li>
+<p>DnCNN</p>
+</li>
+<li>
+<p>FFDNet</p>
+</li>
+<li>
+<p>RED</p>
+</li>
+<li>
+<p>MemNet</p>
+</li>
+<li>
+<p>UNLNet</p>
+</li>
+<li>
+<p>CFSNet</p>
+</li>
+<li>
+<p>N3Net</p>
+</li>
+<li>
+<p>ADNet</p>
+</li>
+<li>
+<p>BRDNet</p>
+</li>
+<li>
+<p>RIDNet</p>
+</li>
+</ul>
+<h5 id="合成数据集效果">合成数据集效果</h5>
+<p><img src="https://picture.mulindya.com/deamnet1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="真实数据集效果">真实数据集效果</h5>
+<p><img src="https://picture.mulindya.com/deamnet2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="第三遍">第三遍</h3>
+<p><strong>重点：详细了解文章，并且拓展到自己，给自己设置问题，学会“脑补”</strong>。</p>
+<p><strong>tips: 在文章最后作者会提到文章有一些没有继续研究的地方，可以记录自己的思考。</strong></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-noise/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文中的各种加噪方式</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/">
+                        <span class="hidden-mobile">光子计数CT重建算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/';
+          this.page.identifier = '/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

@@ -1,0 +1,756 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>论文中的各种加噪方式 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="论文中的各种加噪方式">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-14 23:30" pubdate>
+        2022年2月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      29
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文中的各种加噪方式</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>整理论文中的加噪方式</p>
+<p>参考论文具体如下：</p>
+<p><strong>Adaptive Consistency Prior based Deep Network for Image Denoising</strong><br>
+Paper：<a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?noteId=652422328685277184&amp;pdfId=630634874308022272">https://readpaper.com/pdf-annotate/note?noteId=652422328685277184&amp;pdfId=630634874308022272</a> (笔记)<br>
+Code：<a target="_blank" rel="noopener" href="https://github.com/chaoren88/DeamNet/tree/827c736dec2fe675e7bf4de06c3f026d9aaf4dbf">https://github.com/chaoren88/DeamNet/tree/827c736dec2fe675e7bf4de06c3f026d9aaf4dbf</a></p>
+<p><strong>Unpaired Learning of Deep Image Denoising</strong><br>
+Paper：<a target="_blank" rel="noopener" href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123610732.pdf">https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123610732.pdf</a><br>
+Code：<a target="_blank" rel="noopener" href="https://github.com/majedelhelou/SFM">https://github.com/majedelhelou/SFM</a></p>
+<p><strong>Learning Graph-Convolutional Representations for Point Cloud Denoising</strong><br>
+Paper：<a target="_blank" rel="noopener" href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650103.pdf">https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123650103.pdf</a><br>
+Code：<a target="_blank" rel="noopener" href="https://github.com/diegovalsesia/GPDNet">https://github.com/diegovalsesia/GPDNet</a></p>
+<p><strong>Spatial-Adaptive Network for Single Image Denoising</strong><br>
+Paper：<a target="_blank" rel="noopener" href="https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123750171.pdf">https://www.ecva.net/papers/eccv_2020/papers_ECCV/papers/123750171.pdf</a><br>
+Code:<a target="_blank" rel="noopener" href="https://github.com/JimmyChame/SADNet">https://github.com/JimmyChame/SADNet</a></p>
+</blockquote>
+<h2 id="1，Adaptive-Consistency-Prior-based-Deep-Network-for-Image-Denoising">1，Adaptive Consistency Prior based Deep Network for Image Denoising</h2>
+<h4 id="实验部分">实验部分</h4>
+<p>分为对合成噪声数据集和真实数据集上去噪两个模块。</p>
+<p><strong>噪声类型</strong>： 加性高斯白噪声AWGN(Additive White Gaussian Noise)  （在论文中提到的强度对比 15, 25 and 50.）</p>
+<ul>
+<li>训练部分</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">25</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level'</span>)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">epoch</span>):</span><br>    epoch_loss = <span class="hljs-number">0</span><br>    model.train()<br>    <span class="hljs-keyword">for</span> iteration, batch <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(training_data_loader, <span class="hljs-number">1</span>):<br>        target = Variable(batch)<br>        noise = torch.FloatTensor(target.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.val_noiseL / <span class="hljs-number">255.</span>)<br>        <span class="hljs-built_in">input</span> = target + noise<br>        .....<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>测试部分（合成）</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--test_noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">15</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level used on test set'</span>) <span class="hljs-comment">#噪声强度</span><br>opt = parser.parse_args()<br><br>ISource = torch.Tensor(Img)    <br><span class="hljs-comment"># noise</span><br>noise = torch.FloatTensor(ISource.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.test_noiseL / <span class="hljs-number">255.</span>) <span class="hljs-comment">#高斯噪声</span><br><span class="hljs-comment"># noisy image</span><br>INoisy = ISource + noise <span class="hljs-comment">#加性</span><br>ISource, INoisy = Variable(ISource.cuda()), Variable(INoisy.cuda())<br></code></pre></td></tr></tbody></table></figure>
+<p>真实数据集</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span>(<span class="hljs-params">self, index</span>):</span><br>    clean = Image.<span class="hljs-built_in">open</span>(self.path[index])<br><br>    <span class="hljs-keyword">if</span> self.transform:<br>        clean = self.transform(clean)<br><br>    noise = torch.randn(clean.size()).mul_(self.sigma/<span class="hljs-number">255.0</span>) <span class="hljs-comment">#噪声？</span><br>    noisy = clean + noise<br>    noisy = torch.clamp(noisy, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>)<br>    <span class="hljs-keyword">return</span> noisy, clean<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>这里加噪代码存疑</p>
+<p>论文中对真实数据集的去噪细节中写道：</p>
+<p>由于真实噪声通常是信号相关的，并且随着摄像机内管线的不同，真实图像去噪通常是一项极具挑战性的任务，为了进一步展示DeamNet对真实噪声的泛化能力，选择DND基准、SIDD基准和RNI15数据集作为测试数据集。请注意，对于DND和SIDD基准，几乎无噪音的图像不是公开的，但PSNR/SSIM结果可以通过他们的在线服务器获得。而对于RNI15，只有噪声图像可用。</p>
+</blockquote>
+<h4 id="合成噪声数据集（重点关注）">合成噪声数据集（重点关注）</h4>
+<p><strong>训练数据集</strong>包括：</p>
+<ol>
+<li>
+<p>the Berke-ley Segmentation Dataset (BSD)  是为图像分割和边界检测的研究提供经验基础的数据集，包含来自 30 个人类受试者的 1000 个手工标记的 1000 个 Corel 数据集图像的分割，其中一半的分割是通过向主体呈现彩色图像而获得的; 另一半来自呈现灰度图像。</p>
+</li>
+<li>
+<p>Div2K：数据集有1000张高清图(2K分辨率)，其中800张作为训练，100张作为验证，100 张作为测试。</p>
+</li>
+</ol>
+<p>三个标准<strong>基线数据集</strong>进行了评估 （指标：PSNR and SSIM）</p>
+<ol>
+<li>
+<p>Set12：数字图像处理常用数据集Set12，12张灰度图（含lena，cameraman，house，pepper，fishstar，monarch，airplane，parrot，barbara，ship，man，couple），01-07是256*256,08-12是512*512.</p>
+</li>
+<li>
+<p>BSD68  数字图像处理常用数据集BSD68，68张灰度图，大小不一。</p>
+</li>
+<li>
+<p>Urban100  ：一个用于超分辨率和图像重建的数据集 Urban100，总计100张建筑高清图片，同时对应了100张降低分辨率的图片。</p>
+</li>
+</ol>
+<h4 id="真实噪声数据集">真实噪声数据集</h4>
+<h5 id="训练数据集">训练数据集</h5>
+<ol>
+<li>SIDD：智能手机图像去噪数据集（SIDD）使用5个具有代表性的智能手机摄像头，从10个场景中提取约30000个噪声图像，并生成它们真实的场景图像。</li>
+<li>RENOIR：一个真实的图像降噪数据集，包含了3个子数据集，分别是Xiaomi Mi3，Canon S90，Canon T3i拍摄，拥有低噪和高噪对比图。</li>
+</ol>
+<h5 id="测试数据集">测试数据集</h5>
+<ul>
+<li>
+<p>DND：是由50幅真实世界的噪声图像组成的，但没有几乎没有噪声的对应图像。通常，可以通过将去噪图像上传到DND网站来获得PSNR/SSIM结果。</p>
+</li>
+<li>
+<p>SIDD：提供320对噪声图像和近无噪声图像用于训练，1280个图像patch用于验证。PSNR/SSIM结果可以通过将去噪图像提交到SIDD网站获得。</p>
+</li>
+<li>
+<p>RNI15：提供了15幅真实噪声图像。不幸的是，地面真实的干净图像不可用，因此我们只展示RNI15的视觉结果。</p>
+</li>
+</ul>
+<h4 id="数据增强">数据增强</h4>
+<p>我们将这些训练图像对随机裁剪成大小为128×128的小块。为了增加训练样本，采用了180度的旋转和水平翻转。</p>
+<h4 id="对比网络">对比网络</h4>
+<ul>
+<li>
+<p>TNRD</p>
+</li>
+<li>
+<p>DnCNN</p>
+</li>
+<li>
+<p>FFDNet</p>
+</li>
+<li>
+<p>RED</p>
+</li>
+<li>
+<p>MemNet</p>
+</li>
+<li>
+<p>UNLNet</p>
+</li>
+<li>
+<p>CFSNet</p>
+</li>
+<li>
+<p>N3Net</p>
+</li>
+<li>
+<p>ADNet</p>
+</li>
+<li>
+<p>BRDNet</p>
+</li>
+<li>
+<p>RIDNet</p>
+</li>
+</ul>
+<h5 id="合成数据集效果">合成数据集效果</h5>
+<p><img src="https://picture.mulindya.com/deamnet1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="真实数据集效果">真实数据集效果</h5>
+<p><img src="https://picture.mulindya.com/deamnet2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="2，Unpaired-Learning-of-Deep-Image-Denoising">2，Unpaired Learning of Deep Image Denoising</h2>
+<ul>
+<li>
+<p>AWGN                                       (代码中为gaussian)</p>
+</li>
+<li>
+<p>heteroscedastic Gaussian  （代码中为poisson_gaussian）</p>
+</li>
+</ul>
+<p><img src="C:%5CUsers%5C86137%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20220216152531550.png" srcset="/img/loading.gif" lazyload alt="image-20220216152531550"></p>
+<ul>
+<li>参数 $\alpha$  和$\sigma$  分别表示混合噪声中Poisson分量和Gaussian分量的强度。</li>
+<li>multivariate Gaussian        （代码中为multivariate_gaussian）多元高斯分布</li>
+</ul>
+<h3 id="代码">代码</h3>
+<p>路径：DBSN/dbsn_cocor/data/dn_dataset.py</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DnDataset</span>(<span class="hljs-params">BaseDataset</span>):</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, opt, split, dataset_name, noiseL</span>):</span><br>        <span class="hljs-built_in">super</span>(DnDataset, self).__init__(opt, split, dataset_name)        <br>    	<span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(noiseL) == <span class="hljs-number">1</span>:<br>            self.noiseL = noiseL[<span class="hljs-number">0</span>]<br>            self.get_noiseL = self._get_noiseL_1<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(noiseL) == <span class="hljs-number">2</span>:<br>            <span class="hljs-keyword">if</span> self.noise_type.lower==<span class="hljs-string">'gaussian'</span>:<br>                self.noiseL = noiseL<br>                self.get_noiseL = self._get_noiseL_2<br>            <span class="hljs-keyword">else</span>:<br>                self.noiseL = noiseL<br>                self.get_noiseL = self._get_noiseL_1<br>        <span class="hljs-keyword">elif</span> <span class="hljs-built_in">len</span>(noiseL) == <span class="hljs-number">3</span>:<br>            self.noiseL_p = [noiseL[<span class="hljs-number">0</span>], noiseL[<span class="hljs-number">1</span>]]<br>            self.noiseL_g = [noiseL[<span class="hljs-number">0</span>], noiseL[<span class="hljs-number">2</span>]]<br>            self.get_noiseL_p = self._get_noiseL_p<br>            self.get_noiseL_g = self._get_noiseL_g<br>        <span class="hljs-keyword">else</span>:<br>            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">'noiseL should have one or two or three values'</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="AWGN">AWGN</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_noise_gaussian</span>(<span class="hljs-params">self, img</span>):</span><br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(seed=<span class="hljs-number">0</span>)<br>    noise = np.random.normal(<span class="hljs-number">0</span>, self.get_noiseL()/<span class="hljs-number">255.</span>,<br>                            img.shape).astype(np.float32) <br>    <span class="hljs-keyword">return</span> img + noise <br></code></pre></td></tr></tbody></table></figure>
+<h4 id="heteroscedastic-Gaussian">heteroscedastic Gaussian</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_noise_poisson_gaussian</span>(<span class="hljs-params">self, img</span>):</span><br>    <span class="hljs-comment"># implemented in paper</span><br>    noiseLevel = [v/<span class="hljs-number">255.</span> <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> self.get_noiseL()]<br>    sigma_s = noiseLevel[<span class="hljs-number">0</span>]<br>    sigma_c = noiseLevel[<span class="hljs-number">1</span>]<br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(seed=<span class="hljs-number">0</span>)<br>    n1 = np.random.randn(*img.shape)*sigma_s*img<br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(seed=<span class="hljs-number">0</span>)<br>    n2 = np.random.randn(*img.shape)*sigma_c<br>    noise = (n1 + n2).astype(np.float32)<br>    <span class="hljs-keyword">return</span> img + noise <br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_noise_poisson_gaussian_blind</span>(<span class="hljs-params">self, img</span>):</span><br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(seed=<span class="hljs-number">0</span>)<br>    sigma_s = [v/<span class="hljs-number">255.</span> <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> self.get_noiseL_p()]<br>    sigma_c = [v/<span class="hljs-number">255.</span> <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> self.get_noiseL_g()]<br>    noiseL = np.sqrt((sigma_s**<span class="hljs-number">2</span>)*img+(sigma_c**<span class="hljs-number">2</span>))<br>    noise = (np.random.randn(*img.shape)*noiseL).astype(np.float32)<br>    <span class="hljs-keyword">return</span> img + noise <br></code></pre></td></tr></tbody></table></figure>
+<h4 id="multivariate-Gaussian">multivariate Gaussian</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">_add_noise_multivariate_gaussian</span>(<span class="hljs-params">self, img</span>):</span><br>    _,H,W=img.shape<br>    L=<span class="hljs-number">75</span>/<span class="hljs-number">255</span><br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(seed=<span class="hljs-number">0</span>)<br>        D=np.diag(np.random.rand(<span class="hljs-number">3</span>))<br>        np.random.seed(<span class="hljs-number">0</span>)<br>        U=orth(np.random.rand(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>))<br>    <span class="hljs-keyword">else</span>:<br>        D=np.diag(np.random.rand(<span class="hljs-number">3</span>))<br>        U=orth(np.random.rand(<span class="hljs-number">3</span>,<span class="hljs-number">3</span>))<br>    tmp = np.matmul(D, U)<br>    tmp = np.matmul(U.T,np.matmul(D, U))<br>    tmp = (L**<span class="hljs-number">2</span>)*tmp<br>    noiseSigma=np.<span class="hljs-built_in">abs</span>(tmp)<br>    <span class="hljs-keyword">if</span> self.split == <span class="hljs-string">'val'</span>:<br>        np.random.seed(<span class="hljs-number">0</span>)<br>    noise = np.random.multivariate_normal([<span class="hljs-number">0</span>,<span class="hljs-number">0</span>,<span class="hljs-number">0</span>], noiseSigma, (H,W)).astype(np.float32)<br>    noise = noise.transpose(<span class="hljs-number">2</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">return</span> img + noise    <br></code></pre></td></tr></tbody></table></figure>
+<h2 id="3，Stochastic-Frequency-Masking-to-Improve-Super-Resolution-and-Denoising-Networks">3，Stochastic Frequency Masking to Improve Super-Resolution and Denoising Networks</h2>
+<h3 id="噪声类型">噪声类型</h3>
+<p>论文中的提到的两种噪声**AWGN(强度 10 20 30 40 50 60 70 80 90 100 )Poisson-Gaussian **</p>
+<h3 id="训练代码中加噪">训练代码中加噪</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># ADD Noise</span><br>img_train = data<br>            <br>noise = torch.zeros(img_train.size())<br>noise_level_train = torch.zeros(img_train.size())<br>stdN = np.random.uniform(noiseL_B[<span class="hljs-number">0</span>], noiseL_B[<span class="hljs-number">1</span>], size=noise.size()[<span class="hljs-number">0</span>])<br>sizeN = noise[<span class="hljs-number">0</span>,:,:,:].size()<br>            <br><span class="hljs-comment"># Noise Level map preparation (each step)</span><br><span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(noise.size()[<span class="hljs-number">0</span>]):<br>    noise[n,:,:,:] = torch.FloatTensor(sizeN).normal_(mean=<span class="hljs-number">0</span>, std=stdN[n]/<span class="hljs-number">255.</span>)<br>    noise_level_value = stdN[n] / noiseL_B[<span class="hljs-number">1</span>]<br>    noise_level_train[n,:,:,:] = torch.FloatTensor( np.ones(sizeN) )<br>    noise_level_train[n,:,:,:] = noise_level_train[n,:,:,:] * noise_level_value<br>noise_level_train = Variable(noise_level_train.cuda())<br><br><span class="hljs-comment"># Modifying the frequency content of the added noise (Low or High only)</span><br><span class="hljs-keyword">if</span> opt.mask_train_noise <span class="hljs-keyword">in</span>([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>]):<br>    noise_mask = get_mask_low_high(w=sizeN[<span class="hljs-number">1</span>], h=sizeN[<span class="hljs-number">2</span>], radius_perc=<span class="hljs-number">0.5</span>, mask_mode=opt.mask_train_noise)<br>    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(noise.size()[<span class="hljs-number">0</span>]):<br>        noise_dct = dct(dct(noise[n,<span class="hljs-number">0</span>,:,:].data.numpy(), axis=<span class="hljs-number">0</span>, norm=<span class="hljs-string">'ortho'</span>), axis=<span class="hljs-number">1</span>, norm=<span class="hljs-string">'ortho'</span>)<br>        noise_dct = noise_dct * noise_mask<br>        noise_numpy = idct(idct(noise_dct, axis=<span class="hljs-number">0</span>, norm=<span class="hljs-string">'ortho'</span>), axis=<span class="hljs-number">1</span>, norm=<span class="hljs-string">'ortho'</span>)<br>        noise[n,<span class="hljs-number">0</span>,:,:] = torch.from_numpy(noise_numpy)<br><span class="hljs-keyword">elif</span> opt.mask_train_noise == <span class="hljs-number">3</span>: <span class="hljs-comment">#Brownian noise</span><br>    <span class="hljs-keyword">for</span> n <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(noise.size()[<span class="hljs-number">0</span>]):<br>        noise_numpy = gaussian_filter(noise[n,<span class="hljs-number">0</span>,:,:].data.numpy(), sigma=<span class="hljs-number">3</span>)<br>        noise[n,<span class="hljs-number">0</span>,:,:] = torch.from_numpy(noise_numpy)<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="test代码中加噪">test代码中加噪</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_varying_noise</span>(<span class="hljs-params">image_size, noise_std_min, noise_std_max</span>):</span><br>    <span class="hljs-string">''' outputs a noise image of size image_size, with varying noise levels, ranging from noise_std_min to noise_std_max</span><br><span class="hljs-string">    the noise level increases linearly with the number of rows in the image '''</span><br>    noise = torch.FloatTensor(image_size).normal_(mean=<span class="hljs-number">0</span>, std=<span class="hljs-number">0</span>).cuda()<br><br>    row_size = torch.Size([image_size[<span class="hljs-number">0</span>], image_size[<span class="hljs-number">1</span>], image_size[<span class="hljs-number">2</span>]])<br>    <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(image_size[<span class="hljs-number">3</span>]):<br>        std_value = noise_std_min + (noise_std_max-noise_std_min) * (row/(image_size[<span class="hljs-number">3</span>]*<span class="hljs-number">1.0</span>-<span class="hljs-number">1</span>))<br>        noise[:,:,:,row] = torch.FloatTensor(row_size).normal_(mean=<span class="hljs-number">0</span>, std=std_value/<span class="hljs-number">255.</span>).cuda()<br><br>    <span class="hljs-keyword">return</span> noise<br>后续图片加上噪声<br></code></pre></td></tr></tbody></table></figure>
+<h2 id="4，Spatial-Adaptive-Network-for-Single-Image-Denoising">4，Spatial-Adaptive Network for Single Image Denoising</h2>
+<h3 id="合成噪声">合成噪声</h3>
+<p>测试数据集：BSD68，KODAK24</p>
+<p><strong>噪声：在间隙中加入不同噪声水平的AWGN 噪声强度取值30 50 70</strong></p>
+<p>方法：</p>
+<p>​	传统：BM3D和CBM3D</p>
+<p>​	cnn：DnCNN[35]、MemNet[27]、FFDNet[36]、RNaN[37]和RIDNet[4]， SADNet（论文提出的方法）</p>
+<h3 id="真实噪声">真实噪声</h3>
+<p>测试数据集：DND[25]、SIDD[1]和NAM[22]</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/21/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E7%99%BD%E6%9D%BF%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%85%AC%E5%BC%8F%E6%8E%A8%E5%AF%BC/1.Intro_Math/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">机器学习公式推导--Introduction</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/">
+                        <span class="hidden-mobile">精读Adaptive Consistency Prior based Deep Network for Image Denoising</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-noise/';
+          this.page.identifier = '/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-noise/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

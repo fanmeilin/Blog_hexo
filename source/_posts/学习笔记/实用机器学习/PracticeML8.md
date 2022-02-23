@@ -1,5 +1,5 @@
 ---
-title: praticalML第章笔记PracticeML8
+title: praticalML第八章笔记--迁移学习
 tags: [李沐,机器学习]
 categories: [学习笔记,机器学习]
 date: 2022-02-21 16:51:52
