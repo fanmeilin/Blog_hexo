@@ -316,7 +316,13 @@ $$
  
 <p>这个记号表示有 $N$ 个样本，每个样本都是 $p$ 维向量。其中每个观测都是由 $p(x|\theta)$ 生成的。</p>
 <h2 id="频率派的观点">频率派的观点</h2>
-<p>$p(x|\theta)$ 中的 $\theta$ 是一个未知常量。对于 $N$ 个观测来说观测集的概率为 $p(X|\theta)\mathop{=}\limits _{iid}\prod\limits <em>{i=1}^{N}p(x</em>{i}|\theta))$ 。为了求 $\theta$ 的大小，我们采用最大对数似然MLE的方法：</p>
+<p>$p(x|\theta)$ 中的 $\theta$ 是一个未知常量。对于 $N$ 个观测来说观测集的概率为</p>
+
+$$
+p(X|\theta)\mathop{=}\limits _{iid}\prod\limits _{i=1}^{N}p(x_{i}|\theta))
+$$
+
+<p>为了求 $\theta$ 的大小，我们采用最大对数似然MLE的方法：</p>
 
 $$
 \theta_{MLE}=\mathop{argmax}\limits _{\theta}\log p(X|\theta)\mathop{=}\limits _{iid}\mathop{argmax}\limits _{\theta}\sum\limits _{i=1}^{N}\log p(x_{i}|\theta)

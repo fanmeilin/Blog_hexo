@@ -2,7 +2,8 @@
 title: praticalML第八章笔记--迁移学习
 tags: [李沐,机器学习]
 categories: [学习笔记,机器学习]
-date: 2022-02-21 16:51:52
+date: 2022-02-23 16:51:52
+math: true
 ---
 
 > 斯坦福2021秋季的实用机器学习上线啦~ :wink: 跟着沐神复习机器学习冲冲冲！ 记录一下笔记和重点，不一定很全哦~，只是记录自我感觉的重点。本章的内容包括迁移学习，对视觉，NLP两个方面的微调。
@@ -138,3 +139,118 @@ model.fc = nn.Linear(model.fc.in_features,n_classes) #修改最后一层 个人�
 accuracy
 
 在大型数据集上预训练模型，引入到自身的任务中，再进行微调。计算机视觉中对此有较好的应用性。
+
+## 8.3 NLP中的微调 :golf:
+
+### 8.3.1 自监督预训练
+
+• No large-scale labeled NLP dataset 
+• Large quantities of unlabeled documents  
+	• Wikipedia, ebooks, crawled webpages 
+• Self-supervised pre-training 
+	• Generate “pseudo label” and use supervised learning task 
+	• Common tasks for NLP 
+		• Language model (LM): predict next word. e.g. I like your hat  预测下一个词
+		• Masked language model (MLM): random masked word prediction. e.g. I like your hat 类似完型填空（更容易）
+
+在NLP中不存在大型数据集预训练模型，存在大量的无标注的文档。在NLP一般会使用自监督来产生伪标号。
+
+可以使用LM（语言模型）和MLM（带掩码的语言模型）来生成标号。
+
+### 8.3.2 预训练模型
+
+![](https://picture.mulindya.com/Blog_PracticeML/pML8-5.png)
+
+- 词嵌入（比较旧），在一个文档中挑一个y，用左右的词来预测y，窗口大小为n，y用u来表示，上下文用v表示。得到y和上下文的关系。在预测时使用词典中的y取最大化CBOW；也可以使用中心词来预测周围词。向量空间可以一定程度上反映词的相似度。可以使用某个词周围的词放入公式得到该词作为中心词的特征向量表示。
+- 基于Transformer的预训练模型（最近火热）
+  - **BERT：Transformer的编码器，训练时使用带掩码的词预测。编码器时双向的模型，所以需要带掩码；**
+  - **GPT：解码器时一个从左对右的模型，可以用于预测下一个词；**
+  - **T5：基于编码器和解码器的架构。**
+
+### 8.3.3 BERT
+
+![](https://picture.mulindya.com/Blog_PracticeML/pML8-6.png)
+
+使用两个训练任务：
+
+- 使用masked token盖住部分词来预测；
+- 一次处理两个句子，可以相连为正例，无相连关系为负例。
+
+每个词会得到向量表示，还有一个分类cls来分类两个句子是否相连
+
+### 8.3.4 BERT微调
+
+![](https://picture.mulindya.com/Blog_PracticeML/pML8-7.png)
+
+得到预训练模型之后可以进行微调了，微调的方法和CV比较相似。把BERT的最后一层来微调，他是根据任务的不同而不同。将最后一层随机初始化，再使用小的学习率微调。
+
+### 8.3.5 实践
+
+• BERT fine-tuning on small datasets can be unstable 
+	• BERT removed bias correction steps in Adam 
+	• Too few (=3) epochs 
+• Randomly initializing some top transformer layers help 
+	• Features learned by top layers are too specific to the pre-training tasks 
+	• The cutoff depends on downstream tasks
+
+BERT微调结果很不稳定，是由于Adam在模型前期的系数估计不准确，这个参数对BERT无伤大雅，因为数据量庞大，但是在自己的小数据集上使用时使用完整版的Adam，BERT默认对任务时训练3次，但是在实际没有收敛，微调时建议多训练几轮。
+
+对于Transformer和CNN没有本质区别，对于底层时语义层次信息，越向上和标注空间会更相似。所以同样将下面的层冻结，训练上面的层。
+
+### 8.3.6 寻找NLP预训练模型
+
+• HuggingFace: a collection of pre-trained transformer models on 
+both PyTorch and TensorFlow
+
+```python
+from transformers import AutoTokenizer 
+from transformers import AutoModelForSequenceClassification 
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased") 
+inputs = tokenizer(sentences, padding="max_length", truncation=True) 
+model = AutoModelForSequenceClassification.from_pretrained( 
+“bert-base-cased", num_labels=2) 
+# Train model on inputs as a normal training job 
+
+```
+
+目前常见的NLP模型比较主流的是HuggingFace的transformers包。
+
+NLP**关键点**：如何把文档表示为一个个的词/词元/token.这一步取决于模型。不同的模型有不同的表示方法，需要把对应的字典用相同的方式表示，否则无法对应，并且任务不同也对应的不同。
+
+### 8.3.7 应用
+
+• “(BERT) obtains new state-of-the-art results on eleven natural language processing tasks”, including 
+	• If a sequence of words is a grammatical English sentence 
+	• Sentiment of sentences from movie reviews 
+	• Sentences/questions in a pair are semantically equivalent, or similar 
+	• If the premise entails the hypothesis 
+	• Find the span of the answer for a question 
+• “(T5) achieve state-of-the-art results on many benchmarks covering 
+summarization, question answering, text classification, and more”
+
+BERT是编码器的架构，所以有一定的局限性，比如input为一段话生成一段新的句子就比较难实现。
+
+适合于：
+
+- 判断句子句法是否正确；
+
+- 电影的评论为正面还是负面；
+
+- 两句话或是两个问题是否语义等价；
+
+- 假设和结论之间是否存在加强关系；
+
+- 在问题中是否可以找到答案的范围；
+
+### 8.3.8 总结
+
+• Self-supervised pre-training for NLP models 
+	• A common task is (masked) language model 
+• BERT is a giant transformer encoder 
+• Downstream tasks fine-tune BERT with a consistent manner
+
+NLP的预训练使用自监督来完成。
+
+- **BERT：Transformer的编码器，训练时使用带掩码的词预测。编码器时双向的模型，所以需要带掩码；**
+- **GPT：解码器时一个从左对右的模型，可以用于预测下一个词；**
+- **T5：基于编码器和解码器的架构。**
