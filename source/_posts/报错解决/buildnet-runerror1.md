@@ -1,5 +1,5 @@
 ---
-title: RuntimeError: expected dtype Double but got dtype Float
+title: RuntimeError--expected dtype Double but got dtype Float
 tags: [报错解决]
 categories: [报错解决]
 date: 2022-02-25 19:57:16
@@ -7,7 +7,7 @@ date: 2022-02-25 19:57:16
 
 >在搭建去噪网络训练的时候出现RuntimeError: expected dtype Double but got dtype Float
 
-## 问题描述
+## 问题描述 :partly_sunny:
 
 利用[Pytorch](https://so.csdn.net/so/search?q=Pytorch&spm=1001.2101.3001.7020)框架自己构建网络结构，在程序运行到“loss.backward()”的时候报错：
 
@@ -17,7 +17,7 @@ RuntimeError: expected dtype Double but got dtype Float
 
 通过查询资料得知，该错误来自于输入数据的[类型](https://so.csdn.net/so/search?q=类型&spm=1001.2101.3001.7020)和模型参数类型不一致。因此最好在程序开始统一数据类型。
 
-## 解决方案
+## 解决方案 :low_brightness:
 
 ### 统一为DoubleTensor
 
