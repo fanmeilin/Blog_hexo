@@ -4,6 +4,31 @@
   
   
   <entry>
+    <title>RuntimeError--expected dtype Double but got dtype Float</title>
+    <link href="/2022/02/25/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/buildnet-runerror1/"/>
+    <url>/2022/02/25/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/buildnet-runerror1/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>在搭建去噪网络训练的时候出现RuntimeError: expected dtype Double but got dtype Float</p></blockquote><h2 id="问题描述-⛅️">问题描述 ⛅️</h2><p>利用<a href="https://so.csdn.net/so/search?q=Pytorch&amp;spm=1001.2101.3001.7020">Pytorch</a>框架自己构建网络结构，在程序运行到“loss.backward()”的时候报错：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">RuntimeError: expected dtype Double but got dtype Float<br></code></pre></td></tr></tbody></table></figure><p>通过查询资料得知，该错误来自于输入数据的<a href="https://so.csdn.net/so/search?q=%E7%B1%BB%E5%9E%8B&amp;spm=1001.2101.3001.7020">类型</a>和模型参数类型不一致。因此最好在程序开始统一数据类型。</p><h2 id="解决方案-🔅">解决方案 🔅</h2><h3 id="统一为DoubleTensor">统一为DoubleTensor</h3><p>Pytorch里的<a href="https://so.csdn.net/so/search?q=tensor&amp;spm=1001.2101.3001.7020">tensor</a>创建时默认是Torch.FloatTensor类型（torch.float32),</p><p>可通过在import语句后增加语句</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.set_default_tensor_type(torch.DoubleTensor)<br></code></pre></td></tr></tbody></table></figure><p>这样之后创建的变量类型都是<a href="https://so.csdn.net/so/search?q=Double&amp;spm=1001.2101.3001.7020">Double</a>类型(torch.float64)。不过这样也有些占用内存开销。</p><h3 id="统一为FloatTensor">统一为FloatTensor</h3><p>如果想要创建变量类型都是<a href="https://so.csdn.net/so/search?q=Float&amp;spm=1001.2101.3001.7020">Float</a>类型，在import后增加语句</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">torch.set_default_tensor_type(torch.FloatTensor)<br></code></pre></td></tr></tbody></table></figure><p>但是这样卷积操作也会报错，这是因为numpy的默认数据类型为float64，这样创建的tensor还是为double类型，还是会导致类型不一致的情况。</p><p>因此如果想要项目中<a href="https://so.csdn.net/so/search?q=%E5%8F%82%E6%95%B0&amp;spm=1001.2101.3001.7020">参数</a>类型都为Float类型，不仅要加</p><figure class="highlight elm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">torch</span>.set_default_tensor_<span class="hljs-keyword">type</span>(torch.<span class="hljs-type">FloatTensor</span>)<br></code></pre></td></tr></tbody></table></figure><p>还要将数据转化为float32的格式：</p><p>转化为tensor类型时：</p><figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">images = torch.<span class="hljs-constructor">Tensor(<span class="hljs-params">images</span>)</span>.<span class="hljs-built_in">float</span><span class="hljs-literal">()</span> #增加.<span class="hljs-built_in">float</span><span class="hljs-literal">()</span><br></code></pre></td></tr></tbody></table></figure><p>在训练数据时：</p><figure class="highlight sqf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sqf">inputs, <span class="hljs-built_in">targets</span> = inputs.<span class="hljs-keyword">to</span>(device).<span class="hljs-keyword">to</span>(torch.float32), <span class="hljs-built_in">targets</span>.<span class="hljs-keyword">to</span>(device, non_blocking=<span class="hljs-literal">True</span>).<span class="hljs-keyword">to</span>(torch.float32)<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>报错解决</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>报错解决</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>机器学习中的相关概念</title>
     <link href="/2022/02/24/machine_learning/%E7%9B%91%E7%9D%A3%E6%A6%82%E5%BF%B5/"/>
     <url>/2022/02/24/machine_learning/%E7%9B%91%E7%9D%A3%E6%A6%82%E5%BF%B5/</url>

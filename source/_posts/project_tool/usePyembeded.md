@@ -26,7 +26,25 @@ date: 2021-12-29 09:58:14
   E:\python_embeded\python.exe  get-pip.py
   ```
   
+
+## 修改文件
+
+找到自己python-embedded文件夹下的**python37.pth**（如果你下载的是27版本那当然就是python27._pth啦）
+
+把# import site前面的注释符号“#”删除——保存
+
+```
+python37.zip
+.
+
+# Uncomment to run site.main() automatically
+import site
+```
+
+这里如果不修改，直接install，就会报错`ModuleNotFoundError: No module named 'pip'`
+
 ## 配置相关环境
+
 常规配置pytorch时，使用以下代码
 ```python
 #cpu 版本
