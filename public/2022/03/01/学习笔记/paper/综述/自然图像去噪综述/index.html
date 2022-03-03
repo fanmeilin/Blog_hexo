@@ -1,0 +1,817 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>Deep learning on image denoising--An overview - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="Deep learning on image denoising--An overview">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-01 11:21" pubdate>
+        2022年3月1日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Deep learning on image denoising--An overview</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>有关自然图像去噪的一篇综述Deep learning on image denoising–An overview.在此记录和总结此篇论文的要点；聚焦于图像去噪的方法，成果，区别，动机和展望。</p>
+</blockquote>
+<h1>Deep learning on image denoising</h1>
+<p>2020发表 156被引用</p>
+<h2 id="摘要">摘要</h2>
+<h4 id="深度学习去噪">深度学习去噪</h4>
+<p>基于深度学习的判别学习可以很好地解决高斯噪声问题。基于深度学习的优化模型对真实噪声的估计是有效的。</p>
+<h4 id="分类方法">分类方法</h4>
+<p>1，对加性白噪声图像的深层卷积神经网络(CNN)</p>
+<p>2，真实噪声图像的深层卷积神经网络(CNN)</p>
+<p>3，盲去噪图像的深层卷积神经网络(CNN)</p>
+<p>4，混合噪声图像的深层卷积神经网络(CNN)。</p>
+<p>它们分别<strong>代表</strong>了噪声图像、模糊图像和低分辨率图像的组合。然后，我们分析了不同类型深度学习方法的<strong>动机和原理</strong>。从定量和定性分析两个方面对公开数据集去噪的最新方法进行了<strong>比较</strong>。</p>
+<h4 id="关注点">关注点</h4>
+<ul>
+<li>定性定量的依据是什么？</li>
+<li>如何表示？对应关系如何？</li>
+</ul>
+<h2 id="结论">结论</h2>
+<h3 id="文章总结">文章总结</h3>
+<p>本文对用于图像去噪的深度网络进行了比较、研究和总结。</p>
+<ul>
+<li>深度学习用于图像去噪的<strong>基本框架</strong>。</li>
+<li>分析<strong>噪声任务</strong>的深度学习技术，包括加性白噪声图像、盲去噪、真实噪声图像和混合噪声图像；</li>
+<li>针对每一类噪声任务，分析了网络去噪的<strong>动因和原理</strong>。</li>
+<li>比较不同网络在基准数据集上的去噪效果、效率和视觉<strong>效果</strong>；</li>
+<li>不同类型的噪声下，对不同类型的图像去噪方法进行了<strong>交叉比较</strong>。</li>
+<li>有待进一步研究的领域，讨论图像去噪面临的<strong>挑战</strong>。</li>
+</ul>
+<h3 id="挑战与展望">挑战与展望</h3>
+<p>在过去的几年里，高斯噪声图像去噪技术已经取得了很大的成功，特别是在高斯噪声是规则的情况下。</p>
+<h4 id="现实条件">现实条件</h4>
+<ul>
+<li>
+<p>噪声是复杂和不规则的。（改进硬件设备，以便更好地抑制噪声，以获取高质量的图像非常重要）</p>
+</li>
+<li>
+<p>获取的图像可能会出现模糊、低分辨率和损坏的情况。</p>
+</li>
+</ul>
+<h4 id="挑战">挑战</h4>
+<ul>
+<li>如何有效地从叠加的噪声图像中恢复出潜在的干净图像是至关重要的。</li>
+<li>使用深度学习技术来学习特征需要ground-truth，但获得的真实噪声图像没有ground-truth。</li>
+</ul>
+<h2 id="引入">引入</h2>
+<h3 id="近50年的发展">近50年的发展</h3>
+<p><strong>探索阶段</strong>（传统）：非线性和非自适应滤波器被用于图像应用。与线性滤波器不同，非线性滤波器可以保留边缘信息以抑制噪声。自适应非线性滤波器依赖于局部信噪比来导出适当的加权因子，用于从被加性随机、信号相关、脉冲噪声和加性随机噪声的组合所污染的图像中去除噪声。非自适应滤波器可以同时使用边缘信息和信噪比信息来估计噪声。</p>
+<p><strong>机器学习</strong>：机器学习方法，如基于稀疏的方法，被成功地应用于图像去噪。一种非局部集中式稀疏表示方法利用非局部自相似性对稀疏方法进行优化，获得了较高的图像去噪性能；降低成本：采用字典学习方法快速过滤去噪。恢复潜在clean图像细节信息：先验知识(即总变异正则化)可以平滑噪声图像，以处理受污染的图像。</p>
+<p><strong>更多补充</strong>：马尔可夫随机场（MRF），加权核范数最小化（WNNM），学习同时稀疏编码（LSSC），收缩场级联（CSF），可训练非线性反应扩散（TNRD）和梯度直方图估计和保存（GHEP)</p>
+<h5 id="缺点">缺点</h5>
+<p>上述大多数方法在图像去噪方面都取得了相当好的性能，但它们也存在一些缺点，包括需要测试阶段的优化方法、手动设置参数以及针对单个去噪任务的特定模型。</p>
+<h3 id="深度学习">深度学习</h3>
+<p>提出的去噪工作首先使用具有已知<strong>移位不变模糊函数和加性噪声</strong>的神经网络来恢复潜在的干净图像。</p>
+<p>后续使用加权因子去除复杂噪声，为了降低计算代价，使用<em><strong>前馈网络</strong></em>折中去噪效果和性能。前馈神经网络利用Kuwahara filters对图像进行平滑处理（类似卷积），还证明均方误差(MSE)是ALOS函数，并不是神经网络所特有的。</p>
+<h4 id="优化算法">优化算法</h4>
+<p>随后，使用更多的优化算法来加速训练网络的收敛，提高去噪性能</p>
+<ul>
+<li>最大熵和原对偶La-grangian乘性因子相结合来<strong>增强神经网络的表达能力</strong>；</li>
+<li>将贪婪算法和异步算法应用到神经网络中，设计了一种新的网络结构，通过增加深度或改变激活函数来消除噪声来<strong>权衡速度和效果</strong>；</li>
+<li>CENNs主要利用带有模板的节点来求取平均函数，有效地抑制噪声。但需要手动设置模板参数。为了解决这个问题，发展了<strong>梯度下降法</strong>。</li>
+</ul>
+<h5 id="缺点-2">缺点</h5>
+<p>网络不允许添加新的插件，这限制了它们在现实世界中的应用</p>
+<h4 id="卷积神经网络">卷积神经网络</h4>
+<h5 id="瓶颈">瓶颈</h5>
+<ol>
+<li>深层CNN会产生消失的梯度。</li>
+<li>激活函数如Sigmoid和tanh导致较高的计算成本。</li>
+<li>硬件平台不支持复杂网络。</li>
+</ol>
+<h5 id="转折">转折</h5>
+<p>在2012年发生了变化，AlexNet在当年的ImageNet大规模视觉识别挑战(ILSVRC)。此后，深度网络结构(如VGG和GoogLeNet)被广泛应用于图像、视频、自然语言处理和语音处理等领域，尤其是低级计算机视觉。</p>
+<h5 id="引入图像去噪">引入图像去噪</h5>
+<p>深度网络在2015年首次应用于图像去噪。所提出的网络不需要手动设置用于消除噪声的参数。此后，深度网络被广泛应用于语音、视频和图像恢复。</p>
+<p>采用多次卷积和反卷积的方法抑制噪声，恢复高分辨率图像。为了通过模型处理多个低层任务，提出了一种由卷积、批归一化(BN)、校正线性单元(RELU)和残差学习(RL)组成的去噪CNN(DnCNN)来处理图像去噪、超分辨率和JPEG图像去块。考虑到去噪性能和速度的折衷。</p>
+<h6 id="彩色图像噪声">彩色图像噪声</h6>
+<p>彩色非局部网络(CNLNet)将非局部自相似性(NLSS)和CNN相结合，有效地去除了彩色图像噪声。</p>
+<p>DnCNN：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2508457857">https://readpaper.com/paper/2508457857</a> （2017年发表，3793被引用）</p>
+<p>CNLNet：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2550616896%EF%BC%882016%E5%B9%B4%E5%8F%91%E8%A1%A8%EF%BC%8C9%E8%A2%AB%E5%BC%95%E7%94%A8%EF%BC%89">https://readpaper.com/paper/2550616896（2016年发表，9被引用）</a></p>
+<h5 id="blind-denoising">blind denoising</h5>
+<p>一种快速灵活的去噪CNN(FFDNet)提出了不同的噪声水平，并将含噪图像块作为去噪网络的输入，以提高去噪速度，<strong>进行blind去噪</strong>。</p>
+<h6 id="不成对的噪声图像">不成对的噪声图像</h6>
+<ul>
+<li>
+<p>为了处理不成对的噪声图像，生成对抗网络(GAN)CNN盲去噪器(GCBD)解决了这一问题，它首先生成ground-truth，然后将获得的ground-truth输入到GAN中训练去噪器。</p>
+</li>
+<li>
+<p>卷积盲去噪网络(CBDNet)通过两个子网络来去除给定的真实噪声图像中的噪声，其中一个子网络负责估计真实含噪图像的噪声，另一个子网络负责获取潜在的干净图像。</p>
+</li>
+<li>
+<p>对于更复杂的受污染图像，发展了一种深度即插即用超分辨率(DPSR)方法来估计模糊kenel和噪声，并恢复高分辨率图像。</p>
+</li>
+</ul>
+<p>FFDNet：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2764207251">https://readpaper.com/paper/2764207251</a> （2018年发表 899被引用）</p>
+<p>GCBD：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2798278116">https://readpaper.com/paper/2798278116</a> （2018年发表 294被引用）</p>
+<p>CBDNet：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2832157980">https://readpaper.com/paper/2832157980</a> （2018年发表 9被引用）</p>
+<p>DPSR：<a target="_blank" rel="noopener" href="https://readpaper.com/paper/2929525177">https://readpaper.com/paper/2929525177</a> （2019年发表 0被引用）</p>
+<h4 id="论文组织">论文组织</h4>
+<ul>
+<li>
+<p>第二部分讨论了流行的图像应用的深度学习框架;(<a href="#%E5%8E%BB%E5%99%AA%E5%9F%BA%E7%A1%80%E6%A1%86%E6%9E%B6">Fundamental frameworks of deep learning methods for image denoising</a>)</p>
+</li>
+<li>
+<p>第三部分介绍了深度学习在图像去噪中的主要分类，并对这些方法进行了比较分析;(<a href="#%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E6%8A%80%E6%9C%AF%E5%9C%A8%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8">Deep learning techniques in image denoising</a>)</p>
+</li>
+<li>
+<p>第四节提供了这些去噪方法的性能比较;(Experimental results)</p>
+</li>
+<li>
+<p>第五节讨论了仍然存在的挑战和潜在的研究方向;(Discussion)</p>
+</li>
+<li>
+<p>第六节给出了作者的结论;(<a href="#%E7%BB%93%E8%AE%BA">Conclusion</a>)</p>
+</li>
+</ul>
+<h2 id="去噪基础框架">去噪基础框架</h2>
+<p>这一部分讨论深度学习，包括它背后的思想、主要的网络框架(技术)以及硬件和软件，这是本调查涵盖的深入学习图像去噪技术的基础。</p>
+<h3 id="机器学习">机器学习</h3>
+<p>机器学习方法分为监督学习方法、半监督学习方法和非监督学习方法。</p>
+<ul>
+<li>
+<p>有监督学习方法使用给定的标签使获得的特征更接近目标，以便学习参数和训练去噪模型。</p>
+</li>
+<li>
+<p>无监督学习方法使用给定的训练样本，寻找pattern（而不是标签匹配），并完成特定任务，诸如对真实的低分辨率图像进行解配对。最近提出的循环内循环GaN(CinCGAN)算法首先估计高分辨率图像作为标签，然后利用获得的标签和损失函数训练超分辨率模型。</p>
+</li>
+<li>
+<p>半监督学习方法将给定数据分布中的模型应用于构建学习器来标记未标记的样本。<strong>这种机制在小样本任务(如医学诊断)中更受青睐</strong>。半监督学习<strong>正弦图</strong>恢复网络(SLSR-NET)可以通过监督网络从成对的正弦图中学习特征分布，然后通过无监督网络将所获得的特征分布从未标记的低剂量正弦图转换为高保真正弦图。</p>
+</li>
+</ul>
+<p>有监督学习方法：</p>
+<p><strong><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2592929672">A survey on deep learning in medical image analysis</a></strong>（2017发表 6840被引用）</p>
+<p>A Local Consensus Index Scheme for Random-Valued Impulse Noise Detection Systems （2021发表 13被引用 ）</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2946875605">Shared Linear Encoder-Based Multikernel Gaussian Process Latent Variable Model for Visual Classification</a> （2021发表 10被引用 ）</p>
+<p>无监督学习方法：</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2605205826">Unsupervised holistic image generation from key local patches</a> （2018发表 8被引用）</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2962903125">Unsupervised Image Super-Resolution Using Cycle-in-Cycle Generative Adversarial Networks</a>（2018发表 210被引用）</p>
+<p>半监督学习方法：</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2979557921">Semi-Supervised Learning for Low-Dose CT Image Restoration with Hierarchical Deep Generative Adversarial Network</a> (HD-GAN) （2019发表 6被引用）</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3011790227">Semi-supervised learned sinogram restoration network for low-dose CT image reconstruction</a>（2020发表 4被引用）</p>
+<h3 id="神经网络">神经网络</h3>
+<p>如果一个神经网络的层数超过三层，它也被称为深度神经网络，堆叠自动编码器(SARS)和深度信念网络(DBN)是典型的深度神经网络。他们在无监督的情况下使用叠加层对模型进行训练，取得了良好的性能。然而，这些网络的实现并不简单，需要大量的人工设置才能实现最佳模型。正因为如此，提出了端到端的连接网络（特别是CNN）。CNNs在图像处理，特别是图像去噪领域有着广泛的应用。</p>
+<h4 id="卷积神经网络-2">卷积神经网络</h4>
+<h5 id="AlexNet">AlexNet</h5>
+<p>提出的AlexNet是深度学习的里程碑。它的成功有几个原因。</p>
+<ol>
+<li>图形处理单元(GPU)提供了强大的计算能力。</li>
+<li>随机裁剪(即丢弃)解决了过拟合问题；</li>
+<li>Relu提高了随机梯度下降(SGD)的速度，而不是Sigmoid。</li>
+<li>数据增强方法进一步解决了过拟合问题。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<p>虽然AlexNet取得了很好的性能，但由于其庞大的卷积内核，它需要大量的内存。这限制了它在现实世界中的应用，比如在智能相机中。在此之后，在2014-2016年间，为了提高性能和降低计算成本，更倾向于采用具有小过滤器的更深层次的网络体系结构。</p>
+<h5 id="GoogLeNet">GoogLeNet</h5>
+<p>随着更深层次网络的成功，研究转向增加它们的<strong>宽度</strong>。GoogLeNet增加了宽度以提高图像应用程序的性能。此外，GoogLeNet还将一个较大的卷积核变换为两个较小的卷积核，以减少参数数量和计算量。GoogLeNet还使用了Inistation模块和Inception模块。</p>
+<h5 id="ResNet">ResNet</h5>
+<p>VGG和GoogLeNet方法对于图像应用是有效的，但它们有两个缺点：如果网络很深，可能会导致梯度消失或爆炸；以及如果网络很深，可能会导致梯度消失或爆炸；如果网络过宽，可能会出现过度拟合的现象。</p>
+<p>为了克服这些问题，2016年提出Resnet。每个block通过在ResNet中加入残差学习操作来提高图像识别性能。</p>
+<h4 id="总结">总结</h4>
+<p>自2014年以来，深度网络已广泛应用于真实世界的图像应用，例如面部识别和医疗诊断。</p>
+<p>然而，在许多应用中，捕获的图像(例如真实的噪声图像)是不够的，并且深层CNN在图像应用中的性能往往很差。为此，Gans应运而生。GANS由两个网络组成：生成性网络和鉴别性网络。产生式网络(也称为生成器)用于根据输入样本生成样本。判别网络(也称为鉴别器)用于判断输入样本和生成样本的真实性。这两个网络是对抗性的。请注意，如果鉴别器能够准确区分真实样本并从生成器生成样本，则认为训练的模型已完成。图6中可以看到GaN的网络结构。由于其构建补充训练样本的能力，GaN对于小样本任务非常有效，例如面部识别和复杂噪声图像去噪。这些CNN是图像去噪的基本网络。</p>
+<h3 id="软硬件使用">软硬件使用</h3>
+<h4 id="硬件">硬件</h4>
+<p>深度学习成功的一个原因是GPU。GPU采用CUDA、OpenCL和cuDNN平台，增强了并行计算能力，速度比CPU快10~30倍。GPU由NVIDIA显卡(即GTX 680、GTX 980、GTX 1070、GTX 1070Ti、GTX1080、GTX 1080Ti、RTX2070、RTX 2080、RTX 2080Ti、Tesla K40c、Tesla K80、Quadro M6000、Quadro GP100、QuadroP6000和Tesla V100)和AMD(即Radeon Vega 64)组成。</p>
+<h4 id="软件">软件</h4>
+<p>深度学习软件可以提供调用GPU的接口。目前流行的软件包有：</p>
+<p>(1) 基于C<ins>的Caffe，提供C</ins>、Python和Matlab接口，既可以在CPU上运行，也可以在GPU上运行。它被广泛用于目标检测任务。然而，它要求开发人员掌握C++。</p>
+<p>(2) Theano是一个用于处理大规模神经网络的数学表达式编译器。Theano提供了Python接口，用于图像的超分辨率、去噪和分类。</p>
+<p>(3) MatConvernet提供了Matlab接口。它可用于图像分类、去噪和超分辨率，以及视频跟踪。但这需要掌握Matlab。</p>
+<p>(4) TensorFlow是一个相对高阶的机器学习库。它比Theanofor编译速度更快。TensorFlow提供C++和Python接口，用于目标检测、图像分类、去噪和超分辨率。</p>
+<p>(5) 基于TensorFlow和Theano的KERAS在Python中实现，并提供Python接口。它可以用于图像分类、目标检测、图像分辨率、图像去噪和动作识别。</p>
+<p>(6) PyTorch是用Python实现的，并提供了Python接口。它应用于图像分类、目标检测、图像分割、动作识别、图像超分辨率、图像去噪和视频跟踪。</p>
+<h3 id="深度学习技术在图像去噪中的应用">深度学习技术在图像去噪中的应用</h3>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/%E7%BB%BC%E8%BF%B0/">综述</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E7%BB%BC%E8%BF%B0/">综述</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/03/02/leetcode/leetcode-offer55-2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">剑指offer55-2 平衡二叉树</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/25/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/buildnet-runerror1/">
+                        <span class="hidden-mobile">RuntimeError--expected dtype Double but got dtype Float</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/03/01/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%BC%E8%BF%B0/%E8%87%AA%E7%84%B6%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%BB%BC%E8%BF%B0/';
+          this.page.identifier = '/2022/03/01/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%BC%E8%BF%B0/%E8%87%AA%E7%84%B6%E5%9B%BE%E5%83%8F%E5%8E%BB%E5%99%AA%E7%BB%BC%E8%BF%B0/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

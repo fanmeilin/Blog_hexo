@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      903 字
+      978 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      12
+      13
        分钟
     </span>
   
@@ -323,6 +323,11 @@
 <figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apl">#打开cmd,cd到相应的目录下（E:\python_embeded\），运行下载的文件<br>E:\python_embeded\python.exe  get-pip.py<br></code></pre></td></tr></tbody></table></figure>
 </li>
 </ul>
+<h2 id="修改文件">修改文件</h2>
+<p>找到自己python-embedded文件夹下的<strong>python37.pth</strong>（如果你下载的是27版本那当然就是python27._pth啦）</p>
+<p>把# import site前面的注释符号“#”删除——保存</p>
+<figure class="highlight haskell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs haskell"><span class="hljs-title">python37</span>.zip<br>.<br><br><span class="hljs-meta"># Uncomment to run site.main() automatically</span><br><span class="hljs-keyword">import</span> site<br></code></pre></td></tr></tbody></table></figure>
+<p>这里如果不修改，直接install，就会报错<code>ModuleNotFoundError: No module named 'pip'</code></p>
 <h2 id="配置相关环境">配置相关环境</h2>
 <p>常规配置pytorch时，使用以下代码</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#cpu 版本</span><br>pip install torch==<span class="hljs-number">1.8</span><span class="hljs-number">.1</span> torchvision==<span class="hljs-number">0.9</span><span class="hljs-number">.1</span> torchaudio==<span class="hljs-number">0.8</span><span class="hljs-number">.1</span><br><br><span class="hljs-comment"># CUDA 10.2</span><br>conda install pytorch==<span class="hljs-number">1.8</span><span class="hljs-number">.1</span> torchvision==<span class="hljs-number">0.9</span><span class="hljs-number">.1</span> torchaudio==<span class="hljs-number">0.8</span><span class="hljs-number">.1</span> cudatoolkit=<span class="hljs-number">10.2</span> -c pytorch<br><br><span class="hljs-comment"># CUDA 10.2</span><br>pip install torch==<span class="hljs-number">1.8</span><span class="hljs-number">.1</span>+cu102 torchvision==<span class="hljs-number">0.9</span><span class="hljs-number">.1</span>+cu102 torchaudio==<span class="hljs-number">0.8</span><span class="hljs-number">.1</span> -f https://download.pytorch.org/whl/torch_stable.html<br></code></pre></td></tr></tbody></table></figure>
