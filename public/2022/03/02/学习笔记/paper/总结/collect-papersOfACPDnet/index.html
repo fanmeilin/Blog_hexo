@@ -1,0 +1,801 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>收集今年去噪资料 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="收集今年去噪资料">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-02 17:24" pubdate>
+        2022年3月2日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      10k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      107
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">收集今年去噪资料</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>基于<a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?noteId=652422328685277184&amp;pdfId=630634874308022272"><strong>Adaptive Consistency Prior based Deep Network for Image Denoising</strong></a>论文出发，从引用文献查找2020，2021年份发表的论文，以及被引用的论文。整理其摘要，结论，和其他重要图表。</p>
+</blockquote>
+<h2 id="引用-🎵">引用 🎵</h2>
+<p>[5] Meng Chang, Qi Li, Huajun Feng, and Zhihai Xu. Spatial-adaptive network for single image denoising. In EuropeanConference on Computer Vision (ECCV), pages 171–187,Sep. 2020.</p>
+<p>[24] Yoonsik Kim, Jae Woong Soh, Gu Yong Park, and Nam IkCho. Transfer learning from synthetic to real-noise denoisingwith adaptive instance normalization. In IEEE Conferenceon Computer Vision and Pattern Recognition (CVPR), pages3482–3492, Jun. 2020. 1, 2, 8</p>
+<p>[29] Xiaoyao Li, Yicong Zhou, Jing Zhang, and Lianhong Wang.Multipatch unbiased distance non-local adaptive means withwavelet shrinkage. IEEE Transactions on Image Processing,29:157–169, 2020. 1</p>
+<p>[49] Chunwei Tian, Yong Xu, Zuoyong Li, Wangmeng Zuo,Lunke Fei, and Hong Liu. Attention-guided cnn for imagedenoising. Neural Networks, 124:117–129, 2020. 7, 8</p>
+<p>[50] Chunwei Tian, Yong Xu, and Wangmeng Zuo. Image de-noising using deep cnn with batch renormalization. NeuralNetworks, 121:461–473, 2020. 7, 8</p>
+<p>[54] Ting Xie, Shutao Li, and Bin Sun. Hyperspectral images de-noising via nonconvex regularized low-rank and sparse ma-trix decomposition. IEEE Transactions on Image Process-ing, 29:44–56, 2020. 1</p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3090412929">Spatial-Adaptive Network for Single Image Denoising</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3008207168">Transfer Learning from Synthetic to Real-Noise Denoising with Adaptive Instance Normalization</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2963279247">Multipatch Unbiased Distance Non-Local Adaptive Means With Wavelet Shrinkage</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2999653953">Attention-guided CNN for image denoising.</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2971719842">Image denoising using deep CNN with batch renormalization.</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/2959148625">Hyperspectral Images Denoising via Nonconvex Regularized Low-Rank and Sparse Matrix Decomposition</a></p>
+<h2 id="被引用-🍃">被引用 🍃</h2>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3213415572">CAR - Cityscapes Attributes Recognition A Multi-category Attributes Dataset for Autonomous Vehicles.</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3212228063">Restormer: Efficient Transformer for High-Resolution Image Restoration.</a></p>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/paper/3199857585">Dynamic Attentive Graph Learning for Image Restoration</a></p>
+<h2 id="总结-🐾">总结 🐾</h2>
+<h3 id="问题">问题</h3>
+<ol>
+<li>卷积神经网络去噪方法会产生过平滑伪影。更深层次的网络结构可以缓解这些问题，但代价是额外的计算开销。</li>
+<li>真实噪声的统计量不服从正态分布，并且在空间和时间上都是变化的，因此真实噪声的去噪是一项具有挑战性的任务。</li>
+<li>深卷积神经网络研究通常致力于通过极深的CNN来提高去噪性能，但随着深度的增加，浅层对深层的影响会减弱。</li>
+<li>深卷积神经网络(CNNs)在图像去噪领域存在两个缺点：(1)用于去噪任务的深层CNN训练非常困难；(2)大部分深层CNN存在性能饱和问题。</li>
+<li>虽然Transformer模型缓解了CNN的缺点(即接收范围有限，对输入内容不适应)，但其计算复杂度随空间分辨率呈二次曲线增长，<strong>因此不适用于大多数涉及高分辨率图像的图像恢复任务。</strong></li>
+<li>自然图像的非局部自相似性已被证明是图像恢复的有效先验。然而，大多数现有的深度非局部方法为每个查询项分配固定数量的邻居，忽略了非局部相关性的动态性。而且，非局部相关通常是基于像素的，容易受到图像退化的影响而产生偏差。</li>
+</ol>
+<h3 id="解决方案">解决方案</h3>
+<p>对应的解决方案如下：</p>
+<ol>
+<li>空间自适应去噪网络，设计了一种残差空间自适应块，并引入可变形卷积对空间相关特征进行采样加权。采用上下文块的编解码器结构来捕获多尺度信息。通过从粗到细进行去噪处理。</li>
+<li>一种泛化良好的去噪结构和一种迁移学习方案；采用自适应实例归一化方法构建去噪器，对特征图进行规则化，防止网络过度拟合到训练集。我们还介绍了一种迁移学习方案，它将从合成噪声数据中学习到的知识转移到真实噪声去噪器上。</li>
+<li>一种注意力引导的去噪卷积神经网络(AD-Net)，主要包括稀疏block(SB)、特征增强block(FEB)、关注度block(AB)和重构block(RB)。</li>
+<li>提出了一种被称为批处理-重整化去噪网络(BRDNet)的新型网络的设计。具体地说，我们结合两个网络来增加网络的宽度，从而获得更多的特征。由于批量重整化被融合到BRDNet中，可以解决内部协变量移位和小批量问题。为了便于网络训练，还采用了整体剩余学习的方式。利用膨胀卷积来提取更多的信息用于去噪任务。</li>
+<li>在这项工作中，我们提出了一种有效的Transformer模型，它在构建模块(多头处理和前馈网络)中进行了几个关键设计，以便在捕获远距离像素交互的同时，仍然适用于大图像。我们的模型名为Restoration Transformer(Restormer)；</li>
+<li>本文提出了一种动态注意力图学习模型(DAGL)来探索图像恢复中斑块级的动态非局部性。</li>
+</ol>
+<h2 id="文献具体分析-📢">文献具体分析 📢</h2>
+<h3 id="Spatial-Adaptive-Network-for-Single-ImageDenoising">Spatial-Adaptive Network for Single ImageDenoising</h3>
+<h4 id="摘要">摘要</h4>
+<p>卷积神经网络在图像去噪任务中可以取得较好的效果。但是，由于受局部刚性卷积运算的限制，这些方法会产生过平滑伪影。更深层次的网络结构可以缓解这些问题，但代价是额外的计算开销。本文提出了一种新的空间自适应去噪网络(SAD-NET)，用于有效地去除单幅图像的盲噪。为了适应空间纹理和边缘的变化，设计了一种残差空间自适应块，并引入可变形卷积对空间相关特征进行采样加权。采用上下文块的编解码器结构来捕获多尺度信息。通过从粗到细进行去噪处理，得到了高质量的无噪声图像，并将该方法应用于合成图像和真实含噪图像数据，实验结果表明，该方法在定量和视觉上都优于目前最先进的去噪方法。</p>
+<h4 id="结论">结论</h4>
+<p>在本文中，我们提出了一种空间自适应去噪网络来进行有效的去噪。该网络由多尺度残差空间自适应块构成，根据图像的内容和纹理特征抽取相关特征进行加权。在此基础上，引入上下文block来捕捉多尺度信息，并实现偏移量传递，以更准确地估计采样位置。我们发现，空间自适应能力的引入可以在强噪声下的复杂场景中存储更丰富的细节。所提出的SADNet在合成和真实噪声图像上都实现了最先进的性能，并且具有适中的运行时间。</p>
+<h4 id="提炼">提炼</h4>
+<h5 id="问题-2">问题</h5>
+<p>由于受局部刚性卷积运算的限制，卷积神经网络去噪方法会产生过平滑伪影。更深层次的网络结构可以缓解这些问题，但代价是额外的计算开销。</p>
+<h5 id="方法">方法</h5>
+<p>提出了一种新的<strong>空间自适应去噪网络</strong>(SAD-NET)，用于有效地去除单幅图像的盲噪。为了适应空间纹理和边缘的变化，设计了一种残差空间自适应块，并引入可变形卷积对空间相关特征进行采样加权。采用上下文块的编解码器结构来捕获多尺度信息。通过从粗到细进行去噪处理，得到了高质量的无噪声图像。</p>
+<h5 id="细节">细节</h5>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect1_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect1_2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="成果">成果</h5>
+<p>该方法应用于合成图像和真实含噪图像数据，实验结果表明，该方法在定量和视觉上都优于目前最先进的去噪方法。我们发现，空间自适应能力的引入可以在强噪声下的复杂场景中存储更丰富的细节。SADNet在合成和真实噪声图像上都实现了最先进的性能，并且具有适中的运行时间。</p>
+<h3 id="Transfer-Learning-from-Synthetic-to-Real-Noise-Denoising-with-Adaptive-Instance-Normalization-⭐️">Transfer Learning from Synthetic to Real-Noise Denoising with Adaptive Instance Normalization  ⭐️</h3>
+<h4 id="摘要-2">摘要</h4>
+<p>由于真实噪声的统计量不服从正态分布，并且在空间和时间上都是变化的，因此真实噪声的去噪是一项具有挑战性的任务。为了应对各种复杂的真实噪声，我们提出了一种泛化良好的去噪结构和一种迁移学习方案。具体地说，我们采用自适应实例归一化方法构建去噪器，对特征图进行规则化，防止网络过度拟合到训练集。我们还介绍了一种迁移学习方案，它将从合成噪声数据中学习到的知识转移到真实噪声去噪器上。从所提出的转移学习中，合成噪声去噪器可以从各种合成噪声数据中学习一般特征，而真实噪声去噪器可以从真实数据中学习真实噪声特征。实验结果表明，本文提出的去噪方法具有很强的泛化能力，在已发表的Darmstadt噪声数据集(DND)去噪方法中，用合成噪声训练的网络取得了最好的去噪效果。我们还可以看到，所提出的转移学习方案通过使用很少的标记数据进行学习，对真实噪声图像具有很强的鲁棒性。</p>
+<h4 id="结论-2">结论</h4>
+<p>在本文中，我们提出了一种新的RN去噪的消噪器和迁移学习方案。该去噪器采用AIN对网络进行正则化处理，同时防止网络过拟合到SN。迁移学习主要是利用RN数据更新AIN模块，调整数据分布。从实验结果可以看出，提出的去噪方案即使用SN训练，也能很好地推广到RN上。并且，该传递学习方案可以有效地使SN消噪器适应RN消噪器，并且几乎不需要用实数噪声对进行额外的训练。我们将在https://github.com/terryoo/AINDNet上公开我们的代码，以供进一步研究和比较。</p>
+<h4 id="提炼-2">提炼</h4>
+<h5 id="问题-3">问题</h5>
+<p>由于真实噪声的统计量不服从正态分布，并且在空间和时间上都是变化的，因此真实噪声的去噪是一项具有挑战性的任务。</p>
+<h5 id="方法-2">方法</h5>
+<p>为了应对各种复杂的真实噪声，我们提出了一种泛化良好的去噪结构和一种迁移学习方案。具体地说，我们采用自适应实例归一化方法构建去噪器，对特征图进行规则化，防止网络过度拟合到训练集。我们还介绍了一种迁移学习方案，它将从合成噪声数据中学习到的知识转移到真实噪声去噪器上。从所提出的转移学习中，合成噪声去噪器可以从各种合成噪声数据中学习一般特征，而真实噪声去噪器可以从真实数据中学习真实噪声特征。</p>
+<h5 id="细节-2">细节</h5>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect2_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>去噪器的图示。噪声水平估计器和重构网络都是基于U网的结构，因此特征图通过平均池/转置卷积进行降/升采样。我们将每个尺度温度图表示为1/s，其中s可以是1、2和4。重建网络中表示的所有卷积都是3×3核，除最后一次卷积外具有64S个特征图。噪声电平估计器的特征表示也由32个通道的3×3卷积组成，噪声电平映射由3个通道输出的3×3卷积得到。总参数为1370万。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect2_2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>所建议的具有相应核大小(K)、特征尺度(S)和特征数目(N)的AIN-ResBlock的图示。注意，n根据s线性增加。Leaky RELU用于激活函数。规范(红色)block表示信道方式的空间归一化block。Average-Pool将σ(Y)的大小调整为与h的大小相同。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect2_3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>迁移学习模式图示，AIN模块、噪声电平估计器和上次卷积仅在学习RN数据时更新。为了更好地可视化，我们在此图中省略了噪声级估计器。</p>
+<h5 id="成果-2">成果</h5>
+<p>实验结果表明，本文提出的去噪方法具有很强的泛化能力，在已发表的Darmstadt噪声数据集(DND)去噪方法中，用合成噪声训练的网络取得了最好的去噪效果。我们还可以看到，所提出的转移学习方案通过使用很少的标记数据进行学习，对真实噪声图像具有很强的鲁棒性。从实验结果可以看出，提出的去噪方案即使用SN训练，也能很好地推广到RN上。并且，该传递学习方案可以有效地使SN消噪器适应RN消噪器，并且几乎不需要用实数噪声对进行额外的训练。</p>
+<h2 id="Multipatch-Unbiased-Distance-Non-Local-Adaptive-Means-With-Wavelet-Shrinkage">Multipatch Unbiased Distance Non-Local Adaptive Means With Wavelet Shrinkage</h2>
+<h4 id="摘要-3">摘要</h4>
+<p>现有的许多非局部均值方法或者使用欧氏距离来度量面片之间的相似性，或者只计算权$ω_{ij}$一次并在随后的去噪迭代中保持不变，或者只利用去噪图像的结构信息来更新权$ω_{ij}$。这可能导致去噪性能有限。针对这些问题，本文提出了一种非局部自适应神经网络(NLAM)图像去噪方法。NLAM将权重$ω_{ij}$作为优化变量，迭代更新其值，引入像素-像素、面片-面片和耦合无偏距离三种无偏距离。与欧几里德距离相比，这些无偏距离在度量图像像素/块相似性方面更为稳健。利用耦合无偏距离，提出了无偏距离非局部自适应神经网络(UD-NLAM)。由于UD-NLAM只使用单个块大小来计算权重$ω_{ij}$，因此我们引入了多块UD-NLAM(MUD-NLAM)来适应不同的噪声水平。为了进一步提高去噪性能，提出了一种新的小波收缩去噪方法MUD-NLAM(MUD-NLAM-WS)，实验结果表明，MUD-NLAM、UD-NLAM和MUD-NLAM的去噪性能均优于现有的NLM方法，其中MUD-NLAM-WS的去噪效果优于现有的去噪方法。</p>
+<h4 id="结论-3">结论</h4>
+<p>本文介绍了非局部自适应方法(NLAM)在图像去噪中的应用。该算法将权重$ω_{ij}$作为一个自适应于图像内容的优化变量，通过测量图像块的相似度，在每次去噪迭代中更新权重ωij。然后定义了三种无偏距离，即像素-像素无偏距离、块-块无偏距离和耦合无偏距离。由于这些距离包含了噪声图像和去噪图像在每次迭代中的结构信息，因此比传统的欧几里德距离具有更强的鲁棒性来度量图像像素/块的相似性。利用耦合的无偏距离，提出了无偏距离非局部自适应均值(UD-NLAM)，并将UD-NLAM扩展到其多面体版本，以适应不同的噪声水平，提出了多面体UD-NLAM(MUD-NLAM)。在综合小波收缩的基础上，进一步提出了一种新的去噪方法–MUD-NLAM加小波收缩去噪方法(MUD-NLAM-WS)。我们与现有的几种去噪方法进行了大量的对比实验，定量评价和视觉比较表明，NLAM方法优于现有的一些基于NLM的去噪方法。UD-NLAM和MUD-NLAM进一步提高了NLAM的去噪性能，MUD-NLAM-WS在去噪和细节保护两个方面都优于与之竞争的最先进的去噪方法。由于所提出的方法侧重于灰度图像去噪，因此我们的下一步工作将研究如何将所提出的方法扩展到彩色图像去噪。例如，我们将引入一种新的距离准则来度量两个彩色图像像素/块之间的相似性。此外，将外地方法融入深度学习框架也是值得探索的。</p>
+<h4 id="提炼-3">提炼</h4>
+<h5 id="问题-4">问题</h5>
+<p>现有的许多非局部均值方法或者使用欧氏距离来度量面片之间的相似性，或者只计算权$ω_{ij}$一次并在随后的去噪迭代中保持不变，或者只利用去噪图像的结构信息来更新权$ω_{ij}$。这可能导致去噪性能有限。</p>
+<h5 id="方法-3">方法</h5>
+<p>本文提出了一种非局部自适应神经网络(NLAM)图像去噪方法。NLAM将权重$ω_{ij}$作为优化变量，迭代更新其值，引入像素-像素、面片-面片和耦合无偏距离三种无偏距离。与欧几里德距离相比，这些无偏距离在度量图像像素/块相似性方面更为稳健。利用耦合无偏距离，提出了无偏距离非局部自适应神经网络(UD-NLAM)。由于UD-NLAM只使用单个块大小来计算权重$ω_{ij}$，因此我们引入了多块UD-NLAM(MUD-NLAM)来适应不同的噪声水平。为了进一步提高去噪性能，提出了一种新的小波收缩去噪方法MUD-NLAM(MUD-NLAM-WS)</p>
+<h5 id="成果-3">成果</h5>
+<p>实验结果表明，MUD-NLAM、UD-NLAM和MUD-NLAM的去噪性能均优于现有的NLM方法，其中MUD-NLAM-WS的去噪效果优于现有的去噪方法。</p>
+<h3 id="Attention-guided-CNN-for-image-denoising-⭐️">Attention-guided CNN for image denoising. ⭐️</h3>
+<h4 id="摘要-4">摘要</h4>
+<p>深卷积神经网络(CNNs)在低级计算机视觉领域引起了人们极大的兴趣。研究通常致力于通过极深的CNN来提高去噪性能，但随着深度的增加，浅层对深层的影响会减弱。受此启发，我们提出了一种注意力引导的去噪卷积神经网络(AD-Net)，主要包括稀疏block(SB)、特征增强block(FEB)、关注度block(AB)和重构block(RB)。具体地说，SB通过使用膨胀卷积和普通卷积来消除噪声，从而在性能和效率之间进行折衷。FEB通过长路径综合全局和局部特征信息，增强了去噪模型的表达能力。AB用于精细提取隐藏在复杂背景中的噪声信息，对于复杂的噪声图像，特别是真实的噪声图像，结合去噪是非常有效的。此外，FEB与AB相结合，提高了训练去噪模型的效率，降低了训练的复杂度。最后，RB的目标是通过得到的噪声映射和给定的噪声图像来构造干净的图像。此外，综合实验表明，所提出的Adnet在三个任务(即合成和真实噪声图像以及盲去噪)中都有很好的性能，无论是定量评估还是定性评估都是如此。Adnet的代码可以在http://www.yongxu.org/lunwen.html.上访问</p>
+<h4 id="结论-4">结论</h4>
+<p>在本文中，我们提出了一种注意力引导的CNN去噪方法和ADNET图像去噪方法。Adnet的主要组件扮演以下角色。SB基于膨胀卷积和普通卷积，可以在去噪性能和效率之间进行折衷；FEB通过全局信息和局部信息的协同作用来增强模型对含噪图像的表示能力。AB算法能够提取隐藏在复杂背景中的潜在噪声信息，对复杂噪声图像，如含盲噪声图像和真实噪声图像都是非常有效的。在执行完上述组件后，执行RB以获得所得到的干净图像。由于采用AB对FEB进行合并，因此可以提高训练去噪模型的效率和复杂度。实验结果表明，本文提出的Adnet算法在图像去噪方面具有很好的定性和定量评价效果。</p>
+<h4 id="提炼-4">提炼</h4>
+<h5 id="问题-5">问题</h5>
+<p>深卷积神经网络(CNNs)在低级计算机视觉领域引起了人们极大的兴趣。研究通常致力于通过极深的CNN来提高去噪性能，但随着深度的增加，浅层对深层的影响会减弱。</p>
+<h5 id="方法-4">方法</h5>
+<p>我们提出了一种注意力引导的去噪卷积神经网络(AD-Net)，主要包括稀疏block(SB)、特征增强block(FEB)、关注度block(AB)和重构block(RB)。具体地说，SB通过使用膨胀卷积和普通卷积来消除噪声，从而在性能和效率之间进行折衷。FEB通过长路径综合全局和局部特征信息，增强了去噪模型的表达能力。AB用于精细提取隐藏在复杂背景中的噪声信息，对于复杂的噪声图像，特别是真实的噪声图像，结合去噪是非常有效的。此外，FEB与AB相结合，提高了训练去噪模型的效率，降低了训练的复杂度。最后，RB的目标是通过得到的噪声映射和给定的噪声图像来构造干净的图像。</p>
+<h5 id="细节-3">细节</h5>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect4_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>Adnet的主要组件扮演以下角色。SB基于膨胀卷积和普通卷积，可以在去噪性能和效率之间进行折衷；FEB通过全局信息和局部信息的协同作用来增强模型对含噪图像的表示能力。AB算法能够提取隐藏在复杂背景中的潜在噪声信息，对复杂噪声图像，如含盲噪声图像和真实噪声图像都是非常有效的。在执行完上述组件后，执行RB以获得所得到的干净图像。由于采用AB对FEB进行合并，因此可以提高训练去噪模型的效率和复杂度。</p>
+<h5 id="成果-4">成果</h5>
+<p>综合实验表明，所提出的Adnet在三个任务(即合成和真实噪声图像以及盲去噪)中都有很好的性能，无论是定量评估还是定性评估都是如此。</p>
+<h3 id="Image-denoising-using-deep-CNN-with-batch-renormalization">Image denoising using deep CNN with batch renormalization.</h3>
+<h4 id="摘要-5">摘要</h4>
+<p>深卷积神经网络(CNNs)在图像去噪领域引起了极大的关注。然而，存在两个缺点：(1)用于去噪任务的深层CNN训练非常困难；(2)大部分深层CNN存在性能饱和问题。在这篇论文中，我们提出了一种被称为批处理-重整化去噪网络(BRDNet)的新型网络的设计。具体地说，我们结合两个网络来增加网络的宽度，从而获得更多的特征。由于批量重整化被融合到BRDNet中，我们可以解决内部协变量移位和小批量问题。为了便于网络训练，还采用了整体剩余学习的方式。利用膨胀卷积来提取更多的信息用于去噪任务。大量的实验结果表明，BRD-Net的去噪效果优于目前最先进的图像去噪方法。BRDnet的代码可以在http://www.yongxu.org/lunwen.html.上访问</p>
+<h4 id="结论-5">结论</h4>
+<p>在本文中，我们提出了一种新的基于模型的CNN去噪器BRDNet，它结合了两种不同的网络来提高图像去噪性能。此外，BRDNet使用BRN、RL和膨胀卷积来提高去噪性能，使模型更容易训练。BRN不仅用于加速BRDNet的收敛，而且用于解决小批量问题。在BRDNet中，RL被用来分离噪声和有噪图像，并获得潜在的干净图像。扩张的卷积可以扩大接受范围以获得更多的上下文信息。实验结果表明，该方法与其它图像去噪方法相比，具有很好的性能。在未来，我们计划使用具有先验知识的CNN来处理更复杂的真实噪声图像去噪，例如微光图像和模糊图像。</p>
+<h4 id="提炼-5">提炼</h4>
+<h5 id="问题-6">问题</h5>
+<p>深卷积神经网络(CNNs)在图像去噪领域引起了极大的关注。然而，存在两个缺点：(1)用于去噪任务的深层CNN训练非常困难；(2)大部分深层CNN存在性能饱和问题。</p>
+<h5 id="方法-5">方法</h5>
+<p>提出了一种被称为批处理-重整化去噪网络(BRDNet)的新型网络的设计。具体地说，我们结合两个网络来增加网络的宽度，从而获得更多的特征。由于批量重整化被融合到BRDNet中，我们可以解决内部协变量移位和小批量问题。为了便于网络训练，还采用了整体剩余学习的方式。利用膨胀卷积来提取更多的信息用于去噪任务。</p>
+<h5 id="细节-4">细节</h5>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect5_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>提出了一种新的基于模型的CNN去噪器BRDNet，它结合了两种不同的网络来提高图像去噪性能。此外，BRDNet使用BRN、RL和膨胀卷积来提高去噪性能，使模型更容易训练。BRN不仅用于加速BRDNet的收敛，而且用于解决小批量问题。在BRDNet中，RL被用来分离噪声和有噪图像，并获得潜在的干净图像。扩张的卷积可以扩大接受范围以获得更多的上下文信息。</p>
+<h5 id="成果-5">成果</h5>
+<p>大量的实验结果表明，BRD-Net的去噪效果优于目前最先进的图像去噪方法。</p>
+<h5 id="展望">展望</h5>
+<p>在未来，我们计划使用具有先验知识的CNN来处理更复杂的真实噪声图像去噪，例如微光图像和模糊图像。</p>
+<h3 id="Hyperspectral-Images-Denoising-via-Nonconvex-Regularized-Low-Rank-and-Sparse-Matrix-Decomposition">Hyperspectral Images Denoising via Nonconvex Regularized Low-Rank and Sparse Matrix Decomposition</h3>
+<h4 id="摘要-6">摘要</h4>
+<p>高光谱图像在成像过程中经常受到各种噪声的影响，包括高斯噪声、脉冲噪声、条纹噪声等，这些复杂的噪声会困扰后续的高光谱图像处理。通常，大多数HSI去噪方法都是用凸范数约束来描述稀疏优化问题，这会过度惩罚较大的向量输入，并可能导致有偏解。本文提出了一种非凸正则低秩稀疏矩阵分解(NonRLRS)方法用于HSIS去噪，它能同时去除高斯噪声、脉冲噪声、死线和条纹。非RLRS的目的是将退化的HSI分解成具有鲁棒性的低秩稀疏成分，并以矩阵的形式表示。为了增强固有低阶结构和稀疏破坏的稀疏性，提出了一种新的非凸正则化子–归一化罚函数，它可以自适应地收缩每个条目。此外，还提出了一种基于优化最小化(MM)的有效算法来求解由此产生的非凸优化问题。具体地说，MM算法在每次迭代中首先用代理上界替换非凸目标函数，然后将构造的代理函数最小化，从而使非凸问题能够在重加权技术的框架下求解。仿真数据和实际数据的实验结果表明了该方法的有效性。</p>
+<h4 id="结论-6">结论</h4>
+<p>本文提出了一种新的非RLRS算法，用于在HSI去噪应用中同时检测干净的HSI低阶结构和稀疏腐蚀。在非ε中引入了自适应收缩每个条目的非归一化RLRS惩罚，使其能够更准确地从受多种类型噪声污染的退化HSI中提取低秩稀疏成分。此外，采用基于MM的算法有效地解决了所提出的非RLRS问题。MM算法是迭代实现的，它首先用目标函数的非凸分量的上界替换目标函数的非凸分量，然后最小化构造的代理。实验结果表明，该方法可以同时去除高斯噪声、脉冲噪声、死线和条带，</p>
+<h5 id="展望-2">展望</h5>
+<p>在未来的工作中，我们将把该方法扩展到其他类型的应用，如背景提取、目标检测、压缩感知等。此外，施加在HSI像素上的空间谱约束将被用于HSI去噪</p>
+<h4 id="提炼-6">提炼</h4>
+<h5 id="问题-7">问题</h5>
+<p>高光谱图像在成像过程中经常受到各种噪声的影响，包括高斯噪声、脉冲噪声、条纹噪声等，这些复杂的噪声会困扰后续的高光谱图像处理。通常，大多数HSI去噪方法都是用凸范数约束来描述稀疏优化问题，这会过度惩罚较大的向量输入，并可能导致有偏解。</p>
+<h5 id="方法-6">方法</h5>
+<p>本文提出了一种非凸正则低秩稀疏矩阵分解(NonRLRS)方法用于HSIS去噪，它能同时去除高斯噪声、脉冲噪声、死线和条纹。非RLRS的目的是将退化的HSI分解成具有鲁棒性的低秩稀疏成分，并以矩阵的形式表示。为了增强固有低阶结构和稀疏破坏的稀疏性，提出了一种新的非凸正则化子–归一化罚函数，它可以自适应地收缩每个条目。此外，还提出了一种基于优化最小化(MM)的有效算法来求解由此产生的非凸优化问题。具体地说，MM算法在每次迭代中首先用代理上界替换非凸目标函数，然后将构造的代理函数最小化，从而使非凸问题能够在重加权技术的框架下求解。</p>
+<h5 id="成果-6">成果</h5>
+<p>仿真数据和实际数据的实验结果表明了该方法的有效性。</p>
+<h3 id="CAR-Cityscapes-Attributes-Recognition-A-Multi-category-Attributes-Dataset-for-Autonomous-Vehicles">CAR - Cityscapes Attributes Recognition A Multi-category Attributes Dataset for Autonomous Vehicles.</h3>
+<h4 id="摘要-7">摘要</h4>
+<p>自动驾驶汽车是交通运输的未来。随着这一领域的进步，世界越来越接近安全道路，几乎没有发生事故的可能性，并消除了人为错误。然而，要达到健壮性水平，还需要进行大量的研究和开发。一个重要的方面是充分理解一个场景，包括所有细节。因为场景中物体的某些特征(属性)(例如驾驶员的行为)对于正确的决策是必不可少的。然而，目前的算法存在属性丰富、质量不高的问题。因此，本文提出了一种新的属性识别数据集–城市景观属性识别(CAR)。新数据集通过在每个图像中添加对象属性的附加但重要的注释层来扩展众所周知的数据集CiteScenes。目前，我们已经注释了超过32000个不同类别的实例(车辆、Pedes-Trians等)。该数据集具有结构化和定制的税收经济，其中每个类别都有其自己的一组可能的属性。量身定做的分类集中在最有利于开发更好的自动驾驶算法的属性上，这些算法依赖于准确的计算机视觉和场景理解。我们还为数据集创建了API，以方便CAR的使用。该接口可通过以下方式访问https://github.com/kareem-metwaly/CAR-API</p>
+<h4 id="结论-7">结论</h4>
+<p>在本文中，我们讨论了一个新的数据集，称为Cityscapes Attributes Recognition(CAR)。CAR通过向数据集的每个图像中的每个对象添加属性来补充已经存在的城市景观数据集。这导致了对场景的完整理解，这在自动驾驶汽车的某些情况下是至关重要的。例如，无人驾驶车辆需要了解附近行人的预期行为。数据集包含32,729个实例。数据集被划分为拥有更大的属性预测数据集，这些数据集只关注与驾驶相关的类别，这对于自动驾驶汽车领域是必不可少的。此外，它还将为计算机视觉带来更可持续、更可靠的算法。</p>
+<h4 id="提炼-7">提炼</h4>
+<h5 id="问题-8">问题</h5>
+<p>自动驾驶汽车是交通运输的未来。随着这一领域的进步，世界越来越接近安全道路，几乎没有发生事故的可能性，并消除了人为错误。然而，要达到健壮性水平，还需要进行大量的研究和开发。一个重要的方面是充分理解一个场景，包括所有细节。因为场景中物体的某些特征(属性)(例如驾驶员的行为)对于正确的决策是必不可少的。然而，目前的算法存在属性丰富、质量不高的问题。</p>
+<h3 id="Restormer-Efficient-Transformer-for-High-Resolution-Image-Restoration-⭐️">Restormer: Efficient Transformer for High-Resolution Image Restoration ⭐️</h3>
+<h4 id="摘要-8">摘要</h4>
+<p>由于卷积神经网络(CNNs)在从大规模数据中学习可推广的图像先验知识方面表现出色，这些模型已被广泛应用于图像恢复和相关任务。最近，另一类神经结构，Transformer，在自然语言和高级视觉任务上表现出显著的性能提升。虽然Transformer模型缓解了CNN的缺点(即接收范围有限，对输入内容不适应)，但其计算复杂度随空间分辨率呈二次曲线增长，因此不适用于大多数涉及高分辨率图像的图像恢复任务。在这项工作中，我们提出了一种有效的Transformer模型，它在构建模块(多头处理和前馈网络)中进行了几个关键设计，以便在捕获远距离像素交互的同时，仍然适用于大图像。我们的模型名为(Restormer)，实现了图像去噪、单图像运动去模糊、散焦去模糊(单像素和双像素数据)和图像去噪(高斯灰度/彩色去噪和真实图像去噪)等几个图像恢复任务的最新成果。源代码和预先培训的模型可在https://github.com/swz30/Restormer获得。</p>
+<h4 id="结论-8">结论</h4>
+<p>我们提出了一种图像恢复Transformer模型Restormer，该模型在处理高分辨率图像时计算效率很高。我们对Transformer block的核心部件进行了关键设计，以改进功能聚合和转换。具体地说，我们的多Dconv头部转置注意(MDTA)模块通过应用跨频道的自我注意而不是空间维度来隐含地建模全局上下文，因此具有线性复杂度而不是二次复杂度。此外，提出的门控DConv前馈网络(GDFN)引入了一种门控机制来实现受控的特征变换。为了将CNN的强度融入到Transformer模型中，MDTA和GDFN模型都包括用于编码空间局部上下文的深度卷积。在16个基准数据集上的广泛实验表明，Restormer在众多图像恢复任务中实现了最先进的性能。</p>
+<h4 id="提炼-8">提炼</h4>
+<h5 id="问题-9">问题</h5>
+<p>由于卷积神经网络(CNNs)在从大规模数据中学习可推广的图像先验知识方面表现出色，这些模型已被广泛应用于图像恢复和相关任务。最近，另一类神经结构，Transformer，在自然语言和高级视觉任务上表现出显著的性能提升。虽然Transformer模型缓解了CNN的缺点(即接收范围有限，对输入内容不适应)，但其计算复杂度随空间分辨率呈二次曲线增长，<strong>因此不适用于大多数涉及高分辨率图像的图像恢复任务。</strong></p>
+<h5 id="方法-7">方法</h5>
+<p>在这项工作中，我们提出了一种有效的Transformer模型，它在构建模块(多头处理和前馈网络)中进行了几个关键设计，以便在捕获远距离像素交互的同时，仍然适用于大图像。我们的模型名为Restoration Transformer(Restormer)；</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect8_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>用于高分辨率图像恢复的Restormer架构。我们的恢复器由多尺度分层设计组成，增加了高效的Transformer模块。Transformer block的核心模块是：(A)多DConv头部转置注意力，其执行(空间丰富的)跨通道的查询-关键特征交互，而不是在空间维度上；以及(B)门控-DConv前馈网络，其执行受控的特征变换，即允许有用信息进一步传播。</p>
+<h5 id="成果-7">成果</h5>
+<p>实现了图像去噪、单图像运动去模糊、散焦去模糊(单像素和双像素数据)和图像去噪(高斯灰度/彩色去噪和真实图像去噪)等几个图像恢复任务的最新成果。源代码和预先培训的模型可在https://github.com/swz30/Restormer获得。在16个基准数据集上的广泛实验表明，Restormer在众多图像恢复任务中实现了最先进的性能。</p>
+<h3 id="Dynamic-Attentive-Graph-Learning-for-Image-Restoration">Dynamic Attentive Graph Learning for Image Restoration</h3>
+<h4 id="摘要-9">摘要</h4>
+<p>自然图像的非局部自相似性已被证明是图像恢复的有效先验。然而，大多数现有的深度非局部方法为每个查询项分配固定数量的邻居，忽略了非局部相关性的动态性。而且，非局部相关通常是基于像素的，容易受到图像退化的影响而产生偏差。针对这些不足，本文提出了一种动态注意力图学习模型(DAGL)来探索图像恢复中斑块级的动态非局部性。具体地说，我们提出了一种改进的图模型来执行逐块图卷积，每个节点的邻域数目是动态的和自适应的。这样，图像内容可以通过其连通邻域的数目自适应地平衡过光滑和过尖锐的伪影，而逐块的非局部相关性可以增强消息的传递过程。在合成图像去噪、真实图像去噪、图像去马赛克和压缩伪影减少等各种图像恢复任务上的实验结果表明，我们的DAGL可以产生最先进的结果，具有较高的精度和视觉质量。源代码可以在https://github.com/jianzhangcs/DAGL.上找到。</p>
+<h4 id="结论-9">结论</h4>
+<p>本文提出了一种改进的用于图像恢复的图注意模型。与以往的非局部图像恢复方法不同，该模型可以为每个查询项分配一定数量的邻域，并基于特征块构造远程相关关系。此外，我们提出的动态注意图学习可以很容易地扩展到其他计算机视觉任务。扩展实验表明，该模型在合成图像去噪、真实图像去噪、图像去马赛克和压缩伪影减少等广泛的图像恢复任务中取得了最好的性能。</p>
+<h4 id="提炼-9">提炼</h4>
+<h5 id="问题-10">问题</h5>
+<p>自然图像的非局部自相似性已被证明是图像恢复的有效先验。然而，大多数现有的深度非局部方法为每个查询项分配固定数量的邻居，忽略了非局部相关性的动态性。而且，非局部相关通常是基于像素的，容易受到图像退化的影响而产生偏差。</p>
+<h5 id="方法-8">方法</h5>
+<p>本文提出了一种动态注意力图学习模型(DAGL)来探索图像恢复中斑块级的动态非局部性。具体地说，我们提出了一种改进的图模型来执行逐块图卷积，每个节点的邻域数目是动态的和自适应的。这样，图像内容可以通过其连通邻域的数目自适应地平衡过光滑和过尖锐的伪影，而逐块的非局部相关性可以增强消息的传递过程。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/paper-collect10_1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>提出了动态注意力图学习模型(DAGL)。特征提取模块(FEM)利用残差分块来提取深层特征。基于图的特征聚集模块(GFAM)构建具有动态连接的图，并进行面片状的图卷积。具有多个头的广义FAM(M-GFAM)联合聚集来自不同表示子空间的信息。</p>
+<h5 id="成果-8">成果</h5>
+<p>在合成图像去噪、真实图像去噪、图像去马赛克和压缩伪影减少等各种图像恢复任务上的实验结果表明，我们的DAGL可以产生最先进的结果，具有较高的精度和视觉质量。源代码可以在https://github.com/jianzhangcs/DAGL.上找到。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/02/leetcode/leetcode-offer55-2/">
+                        <span class="hidden-mobile">剑指offer55-2 平衡二叉树</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/03/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E6%80%BB%E7%BB%93/collect-papersOfACPDnet/';
+          this.page.identifier = '/2022/03/02/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E6%80%BB%E7%BB%93/collect-papersOfACPDnet/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

@@ -1,7 +1,7 @@
 ---
 title: 光子计数CT重建算法
-tags: [CT,文献]
-categories: [CT,文献]
+tags: [文献,CT]
+categories: [文献,CT]
 date: 2022-02-12 15:22:39
 ---
 

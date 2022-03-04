@@ -1,8 +1,8 @@
 ---
 title: 子模块为空的解决方案
 date: 2021-08-06 02:09:00
-tags: git
-categories: git
+tags: [配置,git]
+categories: [配置,git]
 ---
 
 > 针对子模块文件夹为空的情况，采取下列解决方案。

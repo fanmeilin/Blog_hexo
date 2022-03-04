@@ -1,8 +1,8 @@
 ---
-title: 收集今年去噪资料
+title: 收集近年去噪资料
 tags: 文献
 categories: 文献
-date: 2022-03-02 17:24:56
+date: 2022-03-03 17:24:56
 math: true
 ---
 
