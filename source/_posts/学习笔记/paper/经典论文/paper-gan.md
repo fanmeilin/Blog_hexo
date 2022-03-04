@@ -1,6 +1,6 @@
 ---
 title: NIPS-2014-generative-adversarial-nets-Paper
-tags: [学习笔记,paper]
+tags: [学习笔记,经典论文]
 categories: [学习笔记,paper]
 date: 2022-01-04 15:48:20
 ---

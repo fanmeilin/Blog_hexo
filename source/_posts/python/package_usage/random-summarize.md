@@ -1,7 +1,7 @@
 ---
 title: 随机数的总结
 tags: numpy
-categories: 包的使用
+categories: [python,package]
 date: 2021-09-09 20:48:15
 ---
 

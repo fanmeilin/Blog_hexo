@@ -1,7 +1,7 @@
 ---
 title: Knowledge Distillation笔记
 tags: [李宏毅,知识蒸馏]
-categories: [学习笔记,深度学习]
+categories: [深度学习]
 date: 2022-01-05 16:38:33
 math: true
 ---
