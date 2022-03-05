@@ -6,6 +6,8 @@ date: 2021-12-29 09:58:14
 ---
 > 使用pyinstaller打包的文件太大了！！所以！所以！学到了另一招，将所需的环境配置到python-embeded中，然后使用c来调用py的启动文件，再gcc生成exe文件，酱紫工程文件就会小很多；实践证明，pyinstaller打包5.2G，采用这种方式后降低到1.5G哦~ 这种方式主要就是使用python-embeded来配置环境。
 
+参考https://zhuanlan.zhihu.com/p/77028265
+
 ## 下载embeded版本
 
 - python37的[embedded版本](https://link.zhihu.com/?target=https%3A//www.python.org/downloads/release/python-373/)
@@ -102,8 +104,10 @@ if "%1" == "h" goto begin
 mshta vbscript:createobject("wscript.shell").run("%~nx0 h",0)(window.close)&&exit 
 :begin 
 
-%CD%\python_embeded\python.exe footprint.py 
+"%CD%\python_embeded\python.exe" footprint.py 
 ```
+
+**注意：**路径带引号可以识别空格和括号
 
 #### 新建.c文件
 
@@ -159,8 +163,8 @@ int main()
 上面命令会生成demo.o目标文件，链接的时候加上这个目标文件编译出来的exe文件就有图标了呀！okk！结束啦~真是艰辛......
 
 ```apl
-windres -i "demo.rc" -o "demo.o"
-gcc main.c demo.o -o demo.exe
+windres -i "footprint.rc" -o "footprint.o"
+gcc footprint.c footprint.o -o footprint.exe
 ```
 #### 安装gcc
 
