@@ -1,0 +1,15 @@
+---
+title: Toward Convolutional Blind Denoising of Real Photographs
+tags: [文献]
+categories: [文献]
+date: 2022-03-08 11:35:28
+---
+
+>  - [Toward Convolutional Blind Denoising of Real Photographs](https://readpaper.com/pdf-annotate/note?noteId=660745234966142976&pdfId=4544599851060060161)
+
+## 关于真实照片卷积盲去噪的研究
+
+### Abstract
+
+虽然深度卷积神经网络在加性高斯白噪声的图像去噪上取得了显著成就，但是在真实噪声图像上的效果仍有局限。主要的原因在于在AWGN的图像上模型容易过拟合，导致模型严重偏离了复杂噪声模型。为了提高深度卷积去噪器的泛化能力，我们采用更具真实噪声的模型卷积盲去噪网络--使用真实噪声和干净图像对。一方面，信号相关噪声和相机内的信号处理过程是合成真实噪声图像的来源，另一方面，真实噪声的图像和无噪声图像用于训练CBD网络。为了进一步提供交互式策略来方便矫正去噪结果，我们在CBD网络中嵌入了一个非对称学习的噪声估计子网络用来抑制对噪声水平的低估。在三个真实噪声照片数据集上的广泛实验结果清楚地表明，CBDNet在定量方法和视觉质量方面都优于目前最先进的方法。该代码已在https://github.com/GuoShi28/CBDNet上提供。
+

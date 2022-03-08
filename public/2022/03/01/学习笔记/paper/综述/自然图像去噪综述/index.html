@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      8k 字
+      10.4k 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      84
+      110
        分钟
     </span>
   
@@ -424,7 +424,14 @@
 <p>机器学习方法分为监督学习方法、半监督学习方法和非监督学习方法。</p>
 <ul>
 <li>
-<p>有监督学习方法使用给定的标签使获得的特征更接近目标，以便学习参数和训练去噪模型。</p>
+<p>有监督学习方法使用给定的标签使获得的特征更接近目标，以便学习参数和训练去噪模型。<br>
+$$<br>
+y=x+\mu \<br>
+x:干净图像，y:噪声图像，\mu：标准差为\sigma的AWGN<br>
+$$</p>
+<ul>
+<li>通过上述公式和贝叶斯知识，学习降噪模型的参数依赖于配对${x_k,y_k}^N_{k=1}$，$x_k$和$y_k$分别代表第k个干净图像和噪声图像，N是总数。处理可以表示为$x_k=f(y_k,\theta,m)，其中\theta是参数，m是给定的噪声等级$。</li>
+</ul>
 </li>
 <li>
 <p>无监督学习方法使用给定的训练样本，寻找pattern（而不是标签匹配），并完成特定任务，诸如对真实的低分辨率图像进行解配对。最近提出的循环内循环GaN(CinCGAN)算法首先估计高分辨率图像作为标签，然后利用获得的标签和损失函数训练超分辨率模型。</p>
@@ -480,12 +487,40 @@
 <p>由于真实噪声图像的不足，加性白噪声图像(AWNI)被广泛用于训练去噪模型。AWNI包括高斯、泊松、椒盐、胡椒和乘性噪声图像。用于AWNI去噪的深度学习技术有几种，包括CNN/NN、CNN/NN与普通特征提取方法的结合以及优化方法与CNN/NN的结合。</p>
 <h4 id="CNN-NN-在AWNI去噪中的应用">CNN/NN 在AWNI去噪中的应用</h4>
 <p>自动特征提取方法可以在降低图像应用的计算成本方面发挥重要作用。为此，已开发出用于图像去噪的CNN，Zhang提出DnCNN来解决多个低级视觉任务，即通过CNN的图像去噪、超分辨率和去块、批归一化和残差学习技术。Wang等人还提出了用于图像去噪的更深层CNN的残差学习。然而，更深层的CNN技术依赖于更深的层，而不是浅层，这导致了长期的依赖问题。为了解决这个问题，人们提出了几种基于信号的方法。Tai 提出利用递归和门单元自适应地挖掘更精确的特征并恢复清晰的图像。受低阶Hankel矩阵的启发，Ye et al提供了卷积框架，通过卷积局部基和非局部基来解释信号处理和深度学习之间的联系。为了解决不充分的噪声图像(即高光谱图像和医学图像)，最近的一些工作试图通过使用改进的CNN来提取更多有用的信息。例如，袁等人将深度CNN、残差学习和多尺度知识相结合，对高光谱噪声图像进行去噪处理。然而，这些建议的CNN导致了计算成本和内存消耗的增加，这不利于现实世界的应用。为了解决这一现象，Gholizadeh等人在不增加CT图像去噪成本的情况下，利用膨胀卷积来扩大接收范围和减小网络深度。Lian等人提出了一种基于多尺度交叉路径级联的残差网络来抑制噪声。上述方法大多依赖于改进的CNN来处理噪声。因此，设计网络架构对于图像去噪非常重要。</p>
-<p>改变网络结构涉及到以下几种方法：</p>
+<p>改变网络架构包含下列方法：</p>
 <ul>
-<li>融合CNN的多个输入特征；</li>
-<li>改变损失函数；增加CNN的深度或宽度；</li>
-<li>在CNN中添加一些辅助插件；</li>
-<li>在CNN中引入跳接或级联操作。</li>
+<li>从一个CNN的多个输入融合特征
+<ul>
+<li>同一个样本的不同部分作为输入</li>
+<li>同一个样本的不同视角作为输入</li>
+<li>同一个样本的不同通道作为输入</li>
+</ul>
+</li>
+<li>改变损失函数——根据自然图像的特征设计不同的损失函数提取更鲁棒的特征
+<ul>
+<li>Chen et al. [34]结合欧式和感知损失函数挖掘更多边缘信息</li>
+</ul>
+</li>
+<li>提升CNN的深度或宽度
+<ul>
+<li>增加网络深度</li>
+<li>增加网络宽度</li>
+</ul>
+</li>
+<li>增加一些辅助插件
+<ul>
+<li>激活函数</li>
+<li>扩张卷积</li>
+<li>全连接层</li>
+<li>池化</li>
+</ul>
+</li>
+<li>引入跳连或者级联操作
+<ul>
+<li>skip connection</li>
+<li>cascade operation</li>
+</ul>
+</li>
 </ul>
 <p>具体地说，</p>
 <ol>
@@ -532,7 +567,7 @@
 <p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_3.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <h3 id="真实噪声图像去噪中的深度学习技术">真实噪声图像去噪中的深度学习技术</h3>
 <p>用于图像去噪的深度学习技术主要有两种：单一的端到端CNN和先验知识与CNN的结合。</p>
-<p>对于第一种方法，改变网络结构是从给定的真实损坏图像中去除噪声的有效方法。多尺度知识是图像去噪的有效方法。例如，由卷积、REU和RL组成的CNN采用不同的相位特征来增强微光图像去噪模型的表达能力。为了克服模糊和虚假的图像伪影，提出了一种具有跳跃连接的双U网用于CT图像重建。为了解决资源约束问题，等人提出了解决方案使用具有批量重整化、RL和膨胀卷积的双重CNN来处理真实的噪声图像。基于光图像的性质，两个CNN利用各向异性视差分析来生成真实噪声图像的结构视差信息。在弱光条件下使用CNN解析遥感和医学图像被证明是有效的。为了提取更详细的信息，循环连接被用来增强对真实世界中的损坏图像的表示能力。为了处理未知的噪声图像，利用残差结构来促进低频特征，然后可以应用注意机制从通道中提取更多潜在的特征。为了产生含噪图像，有一种技术使用模拟摄像管道来构建退化模型，以便过滤(Alipay)获得真实的含噪图像。为了解决含噪图像无配对的无噪声图像的问题，一种嵌入无监督学习方法到cnn中的方法在图像去噪上是有效的。自洽的GaN首先使用一个CNN来估计给定噪声图像的噪声作为一个标签，然后应用另一个CNN和所得到的标签来去除其他噪声图像的噪声。这一概念也已扩展到一般的CNN。Noise2InversemMethod使用CNN根据周围的噪音像素预测噪音像素的值。<strong>合并到3D自监督网络中的注意机制可以提高从医学噪声图像中去除噪声的效</strong>率。有关上述研究的更详细资料参见表4。</p>
+<p>对于第一种方法，改变网络结构是从给定的真实损坏图像中去除噪声的有效方法。多尺度知识是图像去噪的有效方法。例如，由卷积、REU和RL组成的CNN采用不同的相位特征来增强微光图像去噪模型的表达能力。为了克服模糊和虚假的图像伪影，提出了一种具有跳跃连接的双U网用于CT图像重建。为了解决资源约束问题，等人提出了解决方案使用具有批量重整化、RL和膨胀卷积的双重CNN来处理真实的噪声图像。基于光图像的性质，两个CNN利用各向异性视差分析来生成真实噪声图像的结构视差信息。在弱光条件下使用CNN解析遥感和医学图像被证明是有效的。为了提取更详细的信息，循环连接被用来增强对真实世界中的损坏图像的表示能力。为了处理未知的噪声图像，利用残差结构来促进低频特征，然后可以应用注意机制从通道中提取更多潜在的特征。为了产生含噪图像，有一种技术使用模拟摄像管道来构建退化模型，以便过滤(Alipay)获得真实的含噪图像。为了解决含噪图像无配对的无噪声图像的问题，一种嵌入无监督学习方法到cnn中的方法在图像去噪上是有效的。自洽的GaN首先使用一个CNN来估计给定噪声图像的噪声作为一个标签，然后应用另一个CNN和所得到的标签来去除其他噪声图像的噪声。这一概念也已扩展到一般的CNN。Noise2InversemMethod使用CNN根据周围的噪音像素预测噪音像素的值。**合并到3D自监督网络中的注意机制可以提高从医学噪声图像中去除噪声的效率。**有关上述研究的更详细资料参见表4。</p>
 <p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_4.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p>将CNN和先验知识相结合的方法可以更好地处理真实噪声图像中的速度和复杂噪声任务。张等人提出了利用半二次分裂(HQS)和细胞神经网络(CNN)对给定的真实含噪图像进行噪声估计的方法。Guo等人提出了一种三阶段去噪方法。</p>
 <ol>
@@ -549,10 +584,79 @@
 <h3 id="混合噪声图像去噪的深度学习技术">混合噪声图像去噪的深度学习技术</h3>
 <p>在现实世界中，捕获的图像会受到复杂环境的影响。受此启发，几位研究人员提出了混合噪声图像去噪技术。Li等人提出将CNN与翘曲导引相结合来解决噪声、模糊和JPEG压缩问题。张等人使用一种模型来处理噪声、模糊核和低分辨率图像等多种退化问题。为了增强原始传感器数据，Kokkinos等人提出了一种基于残差细胞神经网络的图像去马赛克和去噪迭代算法。为了处理任意模糊核，张等人提出采用级联去模糊和单幅图像超分辨率(SISR)网络来恢复即插即用超分辨率图像。表7给出了这些混合噪声图像去噪方法。</p>
 <p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_7.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="突发噪声">突发噪声</h4>
 <p>值得注意的是，图像携带的信息是有限的，这在实际应用中是不利的。为了解决这个问题，突发技术被开发出来。然而，爆裂受到噪声和相机抖动的影响，增加了实施实际任务的难度。最近，用于突发图像去噪的深度学习技术引起了人们的极大兴趣，即逐帧去除噪声。递归全卷积深度神经网络可以对任意长度序列中所有帧的噪声进行过滤去噪，将细胞神经网络与核方法相结合可以提高突发噪声图像的去噪性能。针对复杂背景噪声图像，提出了一种结合核和CNN的注意力机制来增强关键特征对突发图像去噪的效果，加快了训练速度。对于微光条件，使用CNN将给定的突发噪声图像映射到sRGB输出可以获得多帧去噪图像序列。为了降低网络复杂性，具有残差学习的CNN直接训练去噪模型，而不是显式的对齐过程。表8列出了这些突发去噪方法。</p>
 <p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="视频噪声">视频噪声</h4>
 <p>类似于突发图像，视频检测被分解到每一帧中。因此，加性白噪声图像去噪、实噪声图像去噪、盲去噪、混合噪声图像去噪等深入研究技术也适用于视频去噪。重现的神经网络利用端到端的CNN从被破坏的视频中去除噪声。为了提高视频去噪效果，降低视频冗余度是一种有效的方法。一种非局部拼接融合的CNN可以有效地抑制视频和图像去噪的噪声。在视频去噪中，CNN结合时间信息在性能和训练效率之间进行权衡。对于盲视频去噪，两级CNN被证明是一个很好的选择。第一阶段通过微调预先训练的AWGN去噪网络来训练视频去噪模型。第二阶段利用得到的视频去噪模型得到潜在的干净视频。这些视频去噪方法如表9所示。</p>
 <p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_9.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="实验结果">实验结果</h2>
+<h3 id="数据集">数据集</h3>
+<h4 id="训练集">训练集</h4>
+<p>训练集划分为两类：灰度噪声和彩色噪声图像。</p>
+<p>灰度噪声图像数据集可用于训练高斯去噪器和盲去噪器。包括BSD400和Waterloo Exploration Database。BSD400由400张.png格式的图像组成，并裁剪到180*180用于训练一个去噪模型。Waterloo Exploration Database由4744个.png格式的自然图像组成。</p>
+<p>彩色噪声图像包括BSD432，Waterloo Exploration Database和polyU-Real-World-Noisy-Images数据集。polyU-Real-World-Noisy-Images由100个真实噪声图像组成，尺寸2784*1856，由5个摄影机获得：Nikon D800，Canon 5D Mark Ⅱ，Sony A7 Ⅱ， Canon 80D和Canon 600D。</p>
+<h4 id="测试集">测试集</h4>
+<p>测试集包含灰度噪声和彩色噪声图像数据集。</p>
+<p>灰度噪声数据集由Set12和BSD68组成。Set12包含12个场景。BSD68包含68个自然图像。它们用于测试高斯去噪器和盲噪声去噪器。</p>
+<p>彩色噪声数据集包含CBSD68，Kodak24，McMaster，cc，DND，NC12，SIDD和Nam。Kodak24和McMaster分别包含24和18个彩色噪声图像。cc包含15个不同ISO（1600，3200，6400）的真实噪声图像。DND包含50个真实噪声图像，干净图像由低ISO捕获图像。NC12包含12个噪声图像并且没有groud-truth干净图像。SIDD包含来自智能手机的真实噪声图像，由320个噪声、ground-truch图像对构成。Nam包含11个场景，以JPEG格式保存。</p>
+<h3 id="实验结果-2">实验结果</h3>
+<p>为了验证一些方法的去噪表现，在Set12, BSD68, CBSD68, Kodak24, McMaster, DND, SIDD, Nam, cc和NC12数据集上进行了定量定性评估。定量评估主要使用不同去噪器的PSNR值来测试去噪效果。此外，我们利用去噪一张图像的时间来支持PSNR的定量评估。定性评估采用直观的图形表示恢复后的干净图像。</p>
+<h4 id="加性白噪声图像去噪的深度学习技巧">加性白噪声图像去噪的深度学习技巧</h4>
+<p>去噪方法的对比应该考虑加性白噪声，包括：高斯、泊松、微光噪声和盐、胡椒噪声，所有这些的噪声水平都有很大的不同。另外，很多方法使用不同的工具，对去噪结果影响很大。基于这些原因，选择<strong>典型高斯噪声</strong>来测试去噪表现。此外，大多数方法使用PSNR作为定量指标。所以，使用 BSD68, Set12, CBSD68, Kodak24和McMaster数据集来测试对于加性白噪声深度学习技巧的去噪表现。</p>
+<p>【具有不同噪声水平的不同网络用于灰度加法白噪声图像去噪的PSNR值。ELDRN[165]表现最好】</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_17_Table_10.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>【为理解不同方法的去噪表现，使用FSIM（feature similarity index，特征相似性指数）作为视觉质量指标来进行在BSD68上不同噪声水平的实验】</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_17_Table_11.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>【为测试不同网络处理单个灰度加性白噪声图像的能力，在Set12上进行实验】</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_19_Table_12.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>【不同去噪方法对彩色加性白噪声图像的去噪表现】</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_20_Table_13.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>【不同方法图像去噪的效率】</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_20_Table_14.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>对于定性分析，对不同方法放大潜在干净图像的一个区域。观察得越清晰，说明去噪效果越好。</p>
+<h4 id="真实噪声图像去噪的深度学习技巧">真实噪声图像去噪的深度学习技巧</h4>
+<p>基于DND,SIDD,Nam,CC数据集。不使用NC12数据集的原因是NC12的ground-truth干净图像不可获得。</p>
+<p>为了帮助更好理解这些方法，增加了一些传统去噪方法，比如BM3D作为比较方法。</p>
+<p>从表15、16可看出，<strong>DRDN在DND和SSID上对真实噪声去噪获得了最好结果。</strong></p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_23_Table_15.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_24_Table_16.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从表17看出，<strong>对于压缩噪声图像，AGAN获得了很好的表现。</strong></p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_24_Table_17.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从表18看出，<strong>对于不同ISO值的真实噪声图像，SDNet和BRDNet获得了最佳和此佳去噪表现。</strong></p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/review_denoise_18.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="盲去噪的深度学习技巧">盲去噪的深度学习技巧</h4>
+<p>众所周知，噪声在现实世界中是复杂的，不受规则的约束。这就是为什么盲去噪技术，特别是深度学习技术被开发出来的原因。比较不同深度学习技术的去噪性能是非常有用的。</p>
+<p>实验采用DnCNN、FFDNet、Adnet、SCNN和G2G1等先进的去噪方法在BSD68和Set12上进行实验设计。</p>
+<p><strong>FFDNet和Adnet在盲去噪方面优于其他方法</strong>，分别如表19和表20所示。</p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_24_Table_19.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_25_Table_20.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h4 id="混合噪声去噪的深度学习技巧">混合噪声去噪的深度学习技巧</h4>
+<p>在现实世界中，损坏的图像可能包含不同种类的噪声，这使得恢复潜在的干净图像非常困难。为了解决这个问题，人们提出了基于深度学习技术的多退化思想。如表21所示，<strong>WarpNet与其他流行方法对比（如DnCNN和MemNet），有很强的竞争力。</strong></p>
+<p><img src="https://pdf.cdn.readpaper.com/parsed/fetch_target/64bef38470b7fc1bb5a95a95938c2ac5_25_Table_21.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h2 id="Discussion">Discussion</h2>
+<p>指出未来研究的潜在区域和一些目前未解决的问题。</p>
+<p>基于深度学习技术的图像去噪主要是为了<strong>提高去噪性能和效率，完成复杂的去噪任务</strong>。</p>
+<p>改善去噪<strong>性能</strong>的解决方案包括以下几个方面：</p>
+<ol>
+<li><strong>增大感受野</strong>可以捕获更多上下文信息。增大感受野可以通过扩大网络深度和宽度完成。但这会导致高计算代价和更多内存消耗。一个解决方法是<strong>膨胀卷积</strong>，不仅可以获得更好的表现和效率，还可以有效地挖掘更多边缘信息。</li>
+<li>使用CNN的同时还<strong>使用额外信息（也称先验知识）<strong>是便于获取更精确特征的有效方法。通过</strong>设计损失函数</strong>实现。</li>
+<li><strong>结合局部和全局信息</strong>可以增强深层对浅层的记忆能力，从而更好地对抗噪声。两个解决方法是<strong>残差操作和递归操作</strong>。</li>
+<li>可以使用<strong>单一的处理方法</strong>来抑制噪声。将单一的加工技术融合到深度CNN中，可以获得优异的性能。<strong>例如，小波技术</strong>被聚集到U-Net中来处理图像恢复[137]。</li>
+<li><strong>数据增强</strong>，如水平翻转、垂直翻转和颜色抖动，可以帮助去噪方法学习更多类型的噪声，从而增强去噪模型的表达能力。另外，利用GAN构造虚拟噪声图像也有利于图像去噪。</li>
+<li><strong>迁移学习、图搜索和神经结构搜索</strong>等方法可以获得较好的去噪效果。</li>
+<li><strong>改进硬件或摄像机制</strong>可以降低噪声对采集图像的影响。</li>
+</ol>
+<p><strong>压缩深度神经网络</strong>在提高去噪<strong>效率</strong>方面取得了很大的成功。<strong>减小深层神经网络的深度或宽度</strong>可以降低这些网络在图像去噪中的复杂度。此外，使用<strong>小卷积核和分组卷积</strong>可以减少参数的数量，从而加快训练速度。<strong>与降维方法的融合</strong>，比如CNN与PCA的结合，也可以提高去噪效率。</p>
+<p>对于<strong>复杂的含噪图像</strong>，<strong>分步处理</strong>是一种非常流行的方法。例如，使用两步机制是处理低分辨率噪声图像的一种方式，第一步涉及由CNN恢复高分辨率图像。第二步，用另一个新的CNN过滤来消除高分辨率图像的噪声。在上面的示例中，两个CNN通过级联操作实现。这种两步机制是<strong>无监督噪声任务</strong>的理想选择，例如真实噪声图像和盲去噪。也就是说，第一步依赖于具有优化算法的CNN，即最大后验，以估计噪声为地面事实(称为标签)。第二步，利用另一种CNN，获得地面真实情况，训练去噪模型，用于真噪声图像去噪或盲去噪；第二步，利用另一种CNN，训练去噪模型，用于真噪声图像去噪或盲去噪。<strong>融合到CNN中的自监督学习</strong>是<strong>真实噪声图像去噪或盲去噪</strong>的一个很好的选择。</p>
+<p>虽然深度学习技术在这三种场景中都取得了很大的成功，但在图像去噪领域仍然存在<strong>挑战</strong>。这些措施包括：</p>
+<ol>
+<li>更深的网络需要<strong>更多的内存</strong>资源</li>
+<li><strong>训练更深的去噪网络</strong>对于真实噪声图像、无配对的噪声图像、多降质任务<strong>不是一个稳定的解决方法</strong></li>
+<li>真实噪声图像不是容易捕捉的，<strong>训练样本不足</strong></li>
+<li>深度CNNs<strong>很难解决无监督</strong>去噪任务</li>
+<li>需要<strong>更精确的</strong>去噪任务<strong>指标</strong>，PSNR、SSIM是流行的图像恢复指标。<strong>峰值信噪比(PSNR)存在过度平滑的问题，很难识别难以区分的图像。SSIM依赖于亮度、对比度和结构，因此不能准确地评价图像的感知质量。</strong></li>
+</ol>
 
             </div>
             <hr>
@@ -591,7 +695,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/02/leetcode/leetcode-offer55-2/">
+                      <a href="/2022/03/02/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/leetcode/leetcode-offer55-2/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">剑指offer55-2 平衡二叉树</span>
                         <span class="visible-mobile">上一篇</span>
