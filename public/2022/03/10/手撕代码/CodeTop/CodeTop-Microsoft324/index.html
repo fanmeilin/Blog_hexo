@@ -20,7 +20,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>CodeTop_Microsoft56 合并区间 - 待时</title>
+  <title>CodeTop_Microsoft324 摆动排序Ⅱ - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -236,7 +236,7 @@
 			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
             <div class="mask flex-center">
 			  <div class="page-header text-center fade-in-up">
-				<span class="h2" id="subtitle" title="CodeTop_Microsoft56 合并区间">
+				<span class="h2" id="subtitle" title="CodeTop_Microsoft324 摆动排序Ⅱ">
 				  
 				</span>
 
@@ -246,8 +246,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-08 16:04" pubdate>
-        2022年3月8日 下午
+      <time datetime="2022-03-10 10:20" pubdate>
+        2022年3月10日 上午
       </time>
     </span>
   
@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      287 字
+      1.1k 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      15
        分钟
     </span>
   
@@ -298,27 +298,49 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">CodeTop_Microsoft56 合并区间</h1>
+            <h1 style="display: none">CodeTop_Microsoft324 摆动排序Ⅱ</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>合并区间</p>
+<p>摆动排序Ⅱ</p>
 </blockquote>
 <h2 id="题目">题目</h2>
-<p>以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回 一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间 。</p>
+<p>给你一个整数数组 nums，将它重新排列成 nums[0] &lt; nums[1] &gt; nums[2] &lt; nums[3]… 的顺序。</p>
+<p>你可以假设所有输入数组都可以得到满足题目要求的结果。</p>
+<p>奇数index的数字大于左右的偶数index数字</p>
 <h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight prolog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs prolog">输入：intervals = [[<span class="hljs-number">1</span>,<span class="hljs-number">3</span>],[<span class="hljs-number">2</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">8</span>,<span class="hljs-number">10</span>],[<span class="hljs-number">15</span>,<span class="hljs-number">18</span>]]<br>输出：[[<span class="hljs-number">1</span>,<span class="hljs-number">6</span>],[<span class="hljs-number">8</span>,<span class="hljs-number">10</span>],[<span class="hljs-number">15</span>,<span class="hljs-number">18</span>]]<br>解释：区间 [<span class="hljs-number">1</span>,<span class="hljs-number">3</span>] 和 [<span class="hljs-number">2</span>,<span class="hljs-number">6</span>] 重叠, 将它们合并为 [<span class="hljs-number">1</span>,<span class="hljs-number">6</span>].<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[1,5,1,1,6,4]</span><br>输出：<span class="hljs-string">[1,6,1,5,1,4]</span><br>解释：<span class="hljs-string">[1,4,1,5,1,6]</span> 同样是符合题目要求的结果，可以被判题程序接受。<br></code></pre></td></tr></tbody></table></figure>
 <h3 id="示例-2：">示例 2：</h3>
-<figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：intervals = <span class="hljs-string">[[1,4],[4,5]]</span><br>输出：<span class="hljs-string">[[1,5]]</span><br>解释：区间 [<span class="hljs-number">1</span>,<span class="hljs-number">4</span>] 和 [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>] 可被视为重叠区间。<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[1,3,2,2,3,1]</span><br>输出：<span class="hljs-string">[2,3,1,3,1,2]</span><br></code></pre></td></tr></tbody></table></figure>
 <h3 id="提示：">提示：</h3>
 <ul>
-<li>1 &lt;= intervals.length &lt;= 104</li>
-<li>intervals[i].length == 2</li>
-<li>0 &lt;= starti &lt;= endi &lt;= 104</li>
+<li>1 &lt;= nums.length &lt;= 5 * 104</li>
+<li>0 &lt;= nums[i] &lt;= 5000</li>
+<li>题目数据保证，对于给定的输入 nums ，总能产生满足题目要求的结果</li>
 </ul>
+<p>**进阶：**你能用 O(n) 时间复杂度和 / 或原地 O(1) 额外空间来实现吗？</p>
 <h2 id="题解">题解</h2>
-<p>首先对list排序（根据每个间隔的start）然后使用双指针判断是否合并区间即可。使用<code>key=lambda x:x[0]</code>来指定排序的根据。</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">merge</span>(<span class="hljs-params">self, intervals: <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        intervals = <span class="hljs-built_in">sorted</span>(intervals,key=<span class="hljs-keyword">lambda</span> x:x[<span class="hljs-number">0</span>])<br>        result = []<br>        start,end = intervals[<span class="hljs-number">0</span>] <span class="hljs-comment">#可以直接赋值到两个变量</span><br>        <span class="hljs-keyword">for</span> item <span class="hljs-keyword">in</span> intervals:<br>            <span class="hljs-keyword">if</span> item[<span class="hljs-number">0</span>]&lt;=end <span class="hljs-keyword">and</span> item[<span class="hljs-number">1</span>]&gt;end:<br>                end = item[<span class="hljs-number">1</span>]<br>            <span class="hljs-keyword">elif</span> item[<span class="hljs-number">0</span>]&gt;end:<br>                result.append([start,end])<br>                start,end = item[<span class="hljs-number">0</span>],item[<span class="hljs-number">1</span>]<br>        result.append([start,end])<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>
+<p>首先排序数组，对于排序后的数组的前部分是必然小于等于数组的后部分，中间可能有相等的情况，只需要将数组后半部分插入奇数，前半部分插入偶数位置即可；但是要注意中间相等的部分，使用逆序穿插把中间位置的数字穿插放到两边。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wiggleSort</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        Do not return anything, modify nums in-place instead.</span><br><span class="hljs-string">        """</span><br>        Cnums = <span class="hljs-built_in">sorted</span>(nums)<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(nums),<span class="hljs-number">2</span>): <span class="hljs-comment">#奇数大于偶数位置 先放置奇数</span><br>            n -= <span class="hljs-number">1</span><br>            nums[i] = Cnums[n]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums),<span class="hljs-number">2</span>): <span class="hljs-comment">#后放置偶数 因为中间的数据一部分在数组头，一部分在数组尾部，所以中间出现相等的情况就不会影响</span><br>            n -= <span class="hljs-number">1</span><br>            nums[i] = Cnums[n] <br>        <span class="hljs-keyword">return</span> nums<br></code></pre></td></tr></tbody></table></figure>
+<p>但是实际上不需要排序，因为只需要找到中位数即可，无需保证中位数的左右部分是顺序的。</p>
+<ul>
+<li>首先找到中位数，准确说是第k个数（使用快速排序法）</li>
+<li>使用三分法将数组分成三个部分小于中位数，等于中位数，大于中位数的部分</li>
+<li>逆序穿插</li>
+</ul>
+<p>这样时间复杂度为O(logn)+O(n),即为O(N)</p>
+<h4 id="总体函数">总体函数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wiggleSort</span>(<span class="hljs-params">nums</span>):</span><br>    n = <span class="hljs-built_in">len</span>(nums)<br>    <span class="hljs-keyword">if</span> n&lt;=<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> nums<br>    k = (n+<span class="hljs-number">1</span>)//<span class="hljs-number">2</span>-<span class="hljs-number">1</span><br>    mid_value = partition(nums, k, <span class="hljs-number">0</span>, n-<span class="hljs-number">1</span>)<br>    three_way_partition(nums, mid_value)<br>    nums0 = nums.copy()<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>        nums[k] = nums0[(n+<span class="hljs-number">1</span>)//<span class="hljs-number">2</span>-<span class="hljs-number">1</span>-k//<span class="hljs-number">2</span>] <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> k%<span class="hljs-number">2</span>) <span class="hljs-keyword">else</span> nums0[(n-<span class="hljs-number">1</span>)-k//<span class="hljs-number">2</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="寻找中位数">寻找中位数</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span>(<span class="hljs-params">nums, k, start, end</span>):</span><br>    key = nums[start]<br>    left, right = start, end<br>    <span class="hljs-comment"># print('nums={}, start={}, end={}'.format(nums,start,end))</span><br>    <span class="hljs-comment"># 循环中的不变量: left&lt;right and nums[right]&gt;=key and nums[left]&lt;=key</span><br>    <span class="hljs-keyword">while</span> left &lt; right:<br>        <span class="hljs-keyword">while</span> left &lt; right <span class="hljs-keyword">and</span> nums[right] &gt;= key:<br>            right = right - <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> left &lt; right: nums[left],nums[right] = nums[right],nums[left]<br>        <span class="hljs-keyword">while</span> left &lt; right <span class="hljs-keyword">and</span> nums[left] &lt;= key:<br>            left = left + <span class="hljs-number">1</span><br>        <span class="hljs-keyword">if</span> left &lt; right: nums[left],nums[right] = nums[right],nums[left]<br><br>    <span class="hljs-keyword">if</span> left == k:<br>        <span class="hljs-keyword">return</span> nums[left]<br>    <span class="hljs-keyword">elif</span> left &gt; k:<br>        <span class="hljs-keyword">return</span> partition(nums, k, start, left-<span class="hljs-number">1</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-keyword">return</span> partition(nums, k, left+<span class="hljs-number">1</span>, end)<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="三分法">三分法</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#三分法实现 {左侧}&lt;=value&lt;={右侧} 为使得左右两侧长度近似</span><br><span class="hljs-comment">#我们取 value = nums的第(n+1)//2 个数 同排序方法中前半段的最后一个数字</span><br><span class="hljs-comment">#参数l, r是小于/大于value的左右下标边界, 即nums[k]&lt;=value for k&lt;=l,nums[k]&gt;=value for k&gt;=r</span><br><span class="hljs-comment">#参数 i 是当前遍历到的数字的下标 根据它和value的关系 我们确定 nums[i]是和 l 还是和 r 交换</span><br><span class="hljs-comment">#两个细节 【1】 while i&lt;=r【2】 只有nums[i]&lt;=value 交换之后i+=1</span><br>nums = [<span class="hljs-number">2</span>,<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-number">2</span>,<span class="hljs-number">2</span>,<span class="hljs-number">4</span>] <span class="hljs-comment"># mid=2</span><br>value = <span class="hljs-number">2</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">three_way_partition</span>(<span class="hljs-params">nums, value</span>):</span><br>    n=<span class="hljs-built_in">len</span>(nums)<br>    l, r = <span class="hljs-number">0</span>, n-<span class="hljs-number">1</span><br>    i = <span class="hljs-number">0</span><br>    <span class="hljs-comment">#不能让i越过r 否则如果nums[l]&lt;=nums[r]&lt;nums[i] 会在下一次中让右侧更大的数字被换到左侧</span><br>    <span class="hljs-keyword">while</span> i&lt;=r: <br>        <span class="hljs-keyword">if</span> nums[i]&lt;value:<br>            nums[l],nums[i]=nums[i],nums[l]<br>            l+=<span class="hljs-number">1</span><br>            i+=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">elif</span> nums[i]&gt;value: <span class="hljs-comment">#在这种情况下i不要移动 因为交换过来的数字nums[r]可能仍是&gt;value</span><br>            nums[r],nums[i]=nums[i],nums[r]<br>            r-=<span class="hljs-number">1</span><br>        <span class="hljs-keyword">else</span>:<br>            i+=<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="逆序穿插">逆序穿插</h4>
+<p>逆序之后的顺序: (n+1)//2-1 …1 || (n-1)…(n+1)//2<br>
+穿插之后的顺序: (n+1)//2-1, (n-1), (n+1)//2-1, (n-2),…, 1, (n+1)//2<br>
+(最后两个元素也可能是(n+1)//2，1）<br>
+k偶数：ind[0] - ind[k] = k//2 所以 ind[k] = ind[0]-k//2 = (n+1)//2-1-k//2<br>
+k奇数: ind[1] - ind[k] = k//2 所以 ind[k] = ind[1]-k//2 = (n-1)-k//2</p>
 
             </div>
             <hr>
@@ -357,18 +379,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft324/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CodeTop_Microsoft324 摆动排序Ⅱ</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/08/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/CBDnet/">
-                        <span class="hidden-mobile">Toward Convolutional Blind Denoising of Real Photographs</span>
+                      <a href="/2022/03/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft56/">
+                        <span class="hidden-mobile">CodeTop_Microsoft56 合并区间</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -390,8 +406,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/03/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft56/';
-          this.page.identifier = '/2022/03/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft56/';
+          this.page.url = 'https://fanmeilin.github.io/2022/03/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft324/';
+          this.page.identifier = '/2022/03/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft324/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
