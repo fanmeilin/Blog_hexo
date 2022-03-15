@@ -1,0 +1,818 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>Toward Convolutional Blind Denoising of Real Photographs - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="Toward Convolutional Blind Denoising of Real Photographs">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-03-12 11:35" pubdate>
+        2022年3月12日 中午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      7.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      81
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Toward Convolutional Blind Denoising of Real Photographs</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://readpaper.com/pdf-annotate/note?noteId=660745234966142976&amp;pdfId=4544599851060060161">Toward Convolutional Blind Denoising of Real Photographs</a></p>
+<p>主要关注其实验部分：</p>
+<p>数据集的选用，评估和对比的方式，评估噪声水平的标准和引入。</p>
+<p>在噪声数据训练这块，是采用的合成噪声和真实噪声图片混合进行训练</p>
+<p>因此需要明确加噪方法，对不同数据集采取不同的加噪方式。</p>
+</li>
+</ul>
+</blockquote>
+<h1>关于真实照片卷积盲去噪的研究</h1>
+<h2 id="0-Abstract">0. Abstract</h2>
+<p>虽然深度卷积神经网络在加性高斯白噪声的图像去噪上取得了显著成就，但是在真实噪声图像上的效果仍有局限。主要的原因在于在AWGN的图像上模型容易过拟合，导致模型严重偏离了复杂噪声模型。为了提高深度卷积去噪器的泛化能力，我们采用更具真实噪声的模型卷积盲去噪网络–使用真实噪声和干净图像对。一方面，信号相关噪声和相机内的信号处理过程是合成真实噪声图像的来源，另一方面，真实噪声的图像和无噪声图像用于训练CBD网络。为了进一步提供交互式策略来方便矫正去噪结果，我们在CBD网络中嵌入了一个非对称学习的噪声估计子网络用来抑制对噪声水平的低估。在三个真实噪声照片数据集上的广泛实验结果清楚地表明，CBDNet在定量方法和视觉质量方面都优于目前最先进的方法。该代码已在https://github.com/GuoShi28/CBDNet上提供。</p>
+<h2 id="5-Conclusion">5. Conclusion</h2>
+<p>我们提出了一种CBDnet用于真实世界噪声照片的盲去噪。这项工作的主要发现有两个方面：第一，真实噪声模型(包括异源高斯和ISP pipeline ?)是使从合成图像中学习的模型适用于真实世界噪声照片的关键。其次，网络的去噪性能可以通过将合成的和真实的噪声图像结合到训练中来提高。此外，通过在CBDNet中引入噪声估计子网络，我们能够利用非对称损失来提高其对真实世界噪声的生成能力，并且可以方便地进行交互去噪。</p>
+<h2 id="1-Introduction">1. Introduction</h2>
+<h3 id="真实噪声">真实噪声</h3>
+<p>真实噪声的来源：</p>
+<ol>
+<li>
+<p>信号噪声</p>
+<ul>
+<li>暗电流噪声</li>
+<li>短噪声</li>
+<li>热噪声</li>
+</ul>
+</li>
+<li>
+<p>ISP流水线</p>
+<ul>
+<li>去马赛克</li>
+<li>伽马矫正和压缩</li>
+</ul>
+</li>
+</ol>
+<p>这些真实噪声于AWGN大相径庭，并且在现实世界中噪声照片的盲去噪仍然是一个具有挑战性的问题。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从图一当中可以发现，对于AWGN盲去噪的去噪器在应用到真实照片时会显著退化，另一方面，用于非盲AWGN去噪器将在去除真实噪声的同时平滑细节。造成这种现象的原因是过拟合，导致过度适应高斯噪声，对复杂的真实噪声泛化能力较差。</p>
+<h3 id="噪声模型">噪声模型</h3>
+<p>CNN去噪器的成功在很大程度上取决于合成噪声和真实噪声的分布是否匹配。因此，真实感噪声模型是真实照片盲去噪的首要问题。根据文献[14，45]，<strong>泊松-高斯分布可以近似为信号相关噪声分量和站噪声分量的异方差高斯分布，被认为是一种比AWGN更合适的真实原始噪声建模方法</strong>，而且相机内处理会进一步使噪声在空间和色相关，从而增加了噪声的复杂性。因此，<strong>我们在噪声模型中同时考虑了泊松-高斯模型和相机内处理流水线(如去马赛克、伽玛校正和JPEG压缩)</strong>。实验表明，相机内处理流水线在真实噪声建模中起着举足轻重的作用，在DND上比AWGN获得了显著的性能增益</p>
+<blockquote>
+<p>DND。它由 50 对真实噪声图像和相应的ground-truth图像组成，这些图像是用不同传感器尺寸的消费级相机捕获的。对于每一对，使用基本 ISO 级别拍摄参考图像，而使用较高 ISO 和适当调整的曝光时间拍摄嘈杂图像。参考图像经过仔细的后处理，需要进行小的相机移位调整、线性强度缩放和去除低频偏差。后处理的图像作为我们去噪基准的ground-truth。</p>
+</blockquote>
+<h3 id="网络模型">网络模型</h3>
+<p>CBDNet由两个子网络组成，即噪声估计和非盲去噪。由于引入了噪声估计子网络，我们采用了非对称损失，<strong>对噪声水平的低估误差施加更多的惩罚</strong>，使我们的CBDNet在噪声模型与实际噪声不能很好匹配的情况下表现得很好。在NC12[29]、DND[45]和NAM[43]三个真实噪声图像数据集上进行了大量的实验。无论是量化指标还是感知质量，我们的CBDNet与最先进的相比都表现得很好。如图1所示，针对非盲BM3D[12]和盲AWGN的DnCNN[61]都不能对真实世界的噪声照片进行去噪。相比之下，我们的CBDNet通过保留大部分结构和细节，同时去除复杂的现实世界噪声，取得了非常令人满意的去噪效果。</p>
+<h3 id="总结">总结</h3>
+<p>综上所述，本工作的贡献有四个方面：</p>
+<ol>
+<li>通过同时考虑异方差高斯噪声和摄像机内处理流水线，提出了一种逼真的噪声模型，显著提升去噪性能。</li>
+<li>为了更好地刻画真实世界的图像噪声，提高去噪性能，将合成噪声图像和真实噪声照片相结合。</li>
+<li>得益于噪声估计子网，提出了非对称损失来提高对真实噪声的泛化能力，<strong>并通过调整噪声水平图来实现交互去噪</strong>。</li>
+<li>在三个真实世界噪声图像数据集上的实验表明，我们的CBDNet在量化度量和视觉质量方面都达到了最先进的结果。</li>
+</ol>
+<h2 id="2-Related-Work">2. Related Work</h2>
+<h3 id="2-1-Deep-CNN-Denoisers">2.1 Deep CNN Denoisers</h3>
+<p>深度神经网络(DNNs)的出现给高斯去噪带来了很大的改进。直到Burgeret等人。[6]，大多数早期的深度模型不能达到最先进的去噪性能[22，49，57]。随后，CSF[53]和TNRD[11]探索了特有模型领域的优化算法来学习分阶段推理过程。通过结合残差学习[19]和批次归一化[21]，Zhang et al.[61]提出一种去噪CNN(DnCNN)，其性能优于传统的非CNN方法。Noise2Noise[30]在不使用CleanData的情况下也达到了最先进的水平。近年来，RED30[38]、MemNet[55]、BM3D-Net[60]、MWCNN[33]和FFDNet[62]等其他CNN方法也得到了较好的去噪效果。</p>
+<p>研究结果[61，38，55]表明，利用CNNs的建模能力，学习单一模型进行高斯去噪是可行的。</p>
+<h4 id="局限性">局限性</h4>
+<p>这些盲模型可能对AWGN过度拟合，并且不能处理真实噪声。相反，非盲CNN去噪器，例如FFD-NET[62]，通过手动设置适当的或相对较高的噪声水平，可以在大多数真实的噪声图像上获得令人满意的结果。为了利用这一特点，我们的CBDNet包括噪声估计子网络和非对称损失函数，以抑制噪声水平的低估误差。</p>
+<h3 id="2-2-Image-Noise-Modeling">2.2 Image Noise Modeling</h3>
+<p>大多数去噪方法都是针对非盲高斯去噪的。然而，真实图像中的噪声来源繁多(暗电流噪声、短噪声、热噪声等)，而且更为复杂[44]，通过用泊松对光子传感进行建模，并用高斯对静止扰动进行建模，成像传感器的原始数据采用泊松-高斯噪声模型 [14]，对成像传感器的原始数据采用泊松-高斯噪声模型(Poisson-Gaussian Noise Model，简称Poisson-Gaussian Noise Model)。在[14，32]中，还考虑了相机响应函数(CRF)和量化噪声以进行更实际的噪声建模。除了泊松-高斯噪声， Hwang 等[20]提出了一种用于泊松光噪声建模的Skellam分布。此外，当考虑相机内图像处理流水线时，与通道无关的噪声假设可能不成立，并提出了几种跨通道噪声建模方法[25，43]，本文证明了真实噪声模型在基于CNN的真实照片去噪中起着重要作用，泊松-高斯噪声和相机内图像处理流水线都有利于去噪性能。</p>
+<h3 id="2-3-Blind-Denoising-of-Real-Images">2.3 Blind Denoising of Real Images</h3>
+<p>真实含噪图像的盲去噪通常比较有挑战性，可以分为两个阶段，即<strong>噪声估计和非盲去噪</strong>。对于AWGN，已经发展了几种基于PCA的噪声标准差(SD)估计方法[48，34，9]。Rabie[49]将噪声像素建模为异常值，并利用洛伦兹鲁棒估计器进行AWGN估计。对于Poisson-Gauss模型，FOI等人提出了一种两阶段方案，即多个期望/标准差对的局部估计，全局参数模型拟合。</p>
+<p>在大多数盲去噪方法中，将噪声估计与非盲去噪结合使用。Portilla[46，47]采用<strong>高斯混合尺度对每个尺度的小波块进行建模</strong>，并利用<strong>贝叶斯最小二乘估计干净的小波块</strong>。在分段平滑图像模型的基础上，Liu et al.[32]提出了一种统一的色噪声估计和去除框架。Gong et al.[15]将数据拟合项建模为L1和L2范数的加权和，并利用小波域中的稀疏正则化算子处理混合或未知噪声。Lebrun等人[28，29]通过将每个patch组的噪声建模为零均值相关高斯分布，提出了<strong>非局部贝叶斯方法</strong>的扩展[27]。朱等人[63]提出了一种<strong>贝叶斯非参数技术通过低秩混合高斯模型</strong>来去除噪声的方法。Nam等人。[43]将跨信道噪声建模为多元高斯模型，并采用<strong>贝叶斯非局部均值过滤</strong>[24]进行去噪[24].[59]提出了一种利用通道冗余的多通道加权核范数最小化(MCWNNM)模型。他们进一步提出了一种三边加权稀疏编码(TWSC)方法，用于更好地对噪声和图像先验进行建模[58]。除Noise Clinic(NC)[28，29]、MCWNNM[59]和TWSC[58]外，大多数去噪器的代码均不可用。我们的实验表明，它们在去除真实图像中的噪声方面仍然是有限的。</p>
+<h2 id="3-Proposed-Method">3. Proposed Method</h2>
+<p>这一部分介绍了我们的CBDNet，它由一个噪声估计子网和一个非盲去噪子网组成。首先，我们将噪声模型引入合成含噪图像的生成。然后，介绍了网络体系结构和非对称损失。最后，我们解释了如何结合合成图像和真实噪声图像来训练CBDNet。</p>
+<h3 id="3-1-真实噪声模型">3.1.真实噪声模型</h3>
+<p>正如在[39]中所指出的，CNN的推广在很大程度上取决于记忆训练数据的能力。现有的CNN去噪器，例如DnCNN[61]，通常不能很好地处理真实的噪声图像，这主要是因为它们可能对AWGN<strong>过度拟合</strong>，而实际的噪声分布与高斯分布有很大的不同。另一方面，当与真实的噪声模型一起训练时，CNN的记忆能力将有助于使所学习的模型很好地生成真实的照片。因此，噪声模型对保证CNN去噪器的性能起着至关重要的作用。？</p>
+<p>与AWGN不同，实图像噪声通常更复杂且依赖于信号[35，14]。实际上，光子传感产生的噪声可以建模为泊松噪声，剩余的静止扰动可以表示为高斯噪声。因此，泊松-高斯为成像传感器[14]的原始数据提供了一个合理的噪声模型，并且可以进一步用定义为如下的异方差高斯$n(L)∼N(0，σ^2(L))$来近似，<br>
+$$<br>
+\sigma^2(L) = L\cdot  \sigma^2_s + \sigma^2_c  \quad \quad (1)<br>
+$$<br>
+其中L是原始像素的辐照度图像。$n(L)=n_s(L)+n_c$涉及两个分量:</p>
+<ul>
+<li>
+<p>具有噪声方差$σ^2_c$的平稳噪声分量$n_c$</p>
+</li>
+<li>
+<p>具有空间变异噪声方差$L·σ^2_s$的依赖于信号的噪声分量$n_s$。</p>
+</li>
+</ul>
+<p>然而，实际照片通常是经过相机内处理后获得的，这进一步增加了噪声的复杂性，使其在空间和色度上具有相关性。因此，我们考虑了ISP流水线的两个主要步骤，即去马赛克和伽马校正，得到了真实的噪声模型:<br>
+$$<br>
+y=f(DM(L+n(L))) \quad \quad (2) 有噪声的未压缩图像<br>
+$$<br>
+其中y表示合成噪声图像，$f(·)$表示从文献[16]提供的201个相机响应函数(CRF)中均匀采样，得到的相机响应函数(CRF)。采用$L=Mf^{-1}(X)$由干净图像生成辐照度图像，$M(·)$表示将sRGB图像转换为Bayer图像的函数，$DM(·)$表示去马赛克函数[37]。请注意，$DM(·)$中的插值涉及不同通道和空间位置的像素。方程中的合成噪声。公式(2)因此是信道和空间相关的。</p>
+<p>此外，为了扩展CBDNet用于处理压缩图像，我们可以在生成合成噪声图像时包括JPEG压缩，<br>
+$$<br>
+y = JPEG(f(DM(L + n(L)))) \quad \quad (3) 有噪声的压缩图像<br>
+$$<br>
+对于含有噪声的未压缩图像，我们采用公式（2）中的模型生成合成噪声图像。对于有噪声的压缩图像，我们在公式（3）中定义了该模型。(3)。具体地，$σ_s$和$σ_c$分别从[0，0.16]和[0，0.06]范围内均匀采样。在JPEG压缩中，品质因数从范围[60,100]中采样。我们指出，没有考虑量化噪声，因为量化噪声很小，可以忽略，对去噪效果没有任何明显的影响[62]。</p>
+<h3 id="3-2-Network-Architecture">3.2. Network Architecture</h3>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>从图中可以看到，CBD网络包含两个部分，一个是噪声估计子网络$CNN_E$，和非盲去噪子网络$CNN_D$；</p>
+<p>$ CNN_E $使用噪声观测y来产生估计噪声电平图$\hat{\sigma}(y) = F_E(y,W_E) $，其中$W_E$表示$CNN_E$的网络参数，我们使$CNN_E$的输出为噪声水平图，因为$CNN_E$的大小与输入y相同，并且可以用完全卷积网络估计。</p>
+<p>$CNND$将y和$\hat{\sigma} (y)$作为输入，得到最终的去噪结果$\hat{x} = F_D(y,\hat{\sigma} (y);W_D)$。$W_D$表示$CNN_D$子网络的网络参数。</p>
+<p>$CNN_E$的引入允许我们在估计噪声水平图$\hat{\sigma} (y)$中放入非盲去噪子网络之前对其调整，在此项工作中，我们提出了简单的交互式去噪策略；即$\hat{\varrho} (y) = \gamma \cdot \hat{\sigma} (y) $</p>
+<h4 id="具体网络结构">具体网络结构</h4>
+<p>我们进一步解释了$CNN_E$和$CNN_D$的网络结构。$CNN_E$采用平坦的五层全卷积网络，不需要合并和批归一化操作。在每一卷积(Conv)层中，设置频率通道数为32个，过滤大小为3×3。在每个卷积(Conv)层之后展开RELU非线性[42]。对于$CNN_D$，我们采用了同时以y和$\hat σ(Y)$作为输入的U-Net[51]结构来预测无噪声干净图像的$\hat x$。在[61]之后，采用残差学习，首先学习残差映射$R(y，\hat σ(Y)；W_D)$，然后预测$\hat x=y+R(y，\hat σ(Y)；W_D)$。图还给出了CNNE的16层U网结构，其中引入了<strong>对称跳跃连接、跨步卷积和转置卷积</strong>，以利用多尺度信息并扩大接收范围。所有过滤的大小都是3×3。除了最后一个之外，每个转换层之后都会应用RELU非线性[42]。此外，我们通过实验发现，批<strong>量归一化对真实感照片的噪声去除几乎没有帮助，部分原因是真实噪声分布与高斯分布有根本的不同</strong>。</p>
+<p>最后，我们注意到，通过学习从噪声观测到干净图像的直接映射来训练单盲CNN去噪器也是可能的。然而，正如文献[62，41]中指出的那样，<strong>同时采用噪声图像和噪声水平图作为输入，有助于将所学习的模型推广到噪声模型之外的图像，从而有利于盲去噪</strong>。实验发现，对于低噪声图像，单盲CNN去噪器的性能与CBDNet相当，而对于高噪声图像，单盲CNN去噪器的性能不如CBDNet。此外，噪声估计子网络的引入也使得交互式去噪和非对称学习成为可能。因此，我们建议在CBDNet中加入噪声估计子网络。（单盲CNN去噪器是指单一噪声形式嘛）</p>
+<h3 id="3-3-Asymmetric-Loss-and-Model-Objective">3.3. Asymmetric Loss and Model Objective</h3>
+<p>当输入噪声为SD时高于ground-truth误差(即高估误差)，CNN和传统的非盲去噪器都表现出很好的去噪性能（当合成的噪声比真实数据的噪声水平更高，则训练的模型都可以很好）。这促使我们采用非对称损失来提高CBDNet的泛化能力。如FFDNet[62]中所述，当输入噪声为SD时和ground-truth是匹配的，BM3D/FFDNet获得最佳结果。当输入噪声SD时低于ground-truth，BM3D/FFDNet的结果包含可察觉的噪声。当输入噪声为SD时高于ground-truth误差(即高估误差)，随着输入噪声SD的增加BM3D/FFDNet通过渐变消除一些低对比度的结构，仍然可以达到令人满意的结果，因此，非盲去噪器对噪声SD的低估误差很敏感，但对高估计误差有较强的鲁棒性。有了这样的特性，BM3D/FFDNnet可以通过设置相对较高的输入噪声SD来用于对真实照片进行去噪，这可能解释了BM3D在非盲设置下在DND基准[45]上的合理性能。</p>
+<p>为了充分利用盲去噪的非对称敏感性，我们提出了一种非对称噪声估计损失，以避免噪声水平图上出现低估误差。给定像素<code>i</code>处的估计噪声水平$\hat σ(Y_i)$和<code>ground-truth</code>$σ(Y_i)$，当$\hat σ(Y_i) &lt; σ(Y_i) $时，<strong>应对它们的MSE施加更多惩罚</strong>。(防止低估噪声水平)因此，我们将噪声估计子网络上的不对称损失定义为</p>
+
+$$
+\mathcal{L_{asymm}} = \sum_i | \alpha- I_{\hat{\sigma}(y_i)-\sigma(y_i)}| \cdot (\hat{\sigma}(y_i)-\sigma(y_i))^2  \quad \quad (4)
+$$
+
+<p><strong>i表示每个像素</strong>，这里当e小于0时$I_e=1$，e大于等于0时$I_e=0$，设置$0 &lt; \alpha &lt; 0.5$,如果低估了噪声水平，则判别式是为真也就是为1，则系数大于0.5，如果是高估了噪声水平，则判别式为0，系数小于0.5，这样求出的损失函数对低估噪声水平的情况会施加更大的处罚。使得模型在真实噪声上泛化能力更强。</p>
+<p>另外，我们引入了总方差（TV）正则项来约束$\sigma(y)$的平滑性</p>
+
+$$
+\mathcal{L_{TV}} = \Vert\nabla_h \hat{\sigma}(y)\Vert_2^2+ \Vert\nabla_v \hat{\sigma}(y)\Vert_2^2  \quad \quad (5)
+$$
+
+<p>这里的$\nabla_h(\nabla_v)$表示水平（垂直）方向的梯度运算符（？这样可以使得噪声估计的曲线偏差不太大，避免过度高估造成过度平滑？还是使得噪声估计曲线更平滑？）</p>
+<p>对于非盲去噪器的输出$\hat{x}$，我们定义重建损失函数为：</p>
+
+$$
+\mathcal{L_{rec}} = \Vert\hat{x} - x\Vert_2^2 \quad \quad (6)
+$$
+
+<p><strong>因此CBDnet总体的目标函数为：</strong></p>
+
+$$
+\mathcal{L} = \mathcal{L_{rec}}+\mathcal{\lambda_{asymm}}\mathcal{L_{asymm}}+\mathcal{\lambda_{TV}}\mathcal{L_{TV}} \quad \quad (7)
+$$
+
+<p><strong>这里的$\mathcal{\lambda_{asymm}},\mathcal{\lambda_{TV}}$分别表示非对称损失函数和TV正则化的折中参数。在我们的实验中，通过最小化上述目标函数，给出了CBDNet的PSNR/SSIM结果。对于视觉质量的定性评价，我们对CBDnet网络进行训练，同时将VGG-6的Relu3_3进一步加入到目标函数公式7中。</strong></p>
+<h3 id="3-4-Training-with-Synthetic-and-Real-Noisy-Images">3.4 Training with Synthetic and Real Noisy Images</h3>
+<p>在3.1节定义的噪声模型可以用于合成任意数量的噪声图像，同时，可以保证干净图像的高质量。尽管如此，噪声模型并不能完全描述真实照片中的噪声，幸运的式，根据文献，通过对同一场景的数百幅噪声图像进行平均，可以得到几乎无噪声的图像，在文献中已经建立了几个数据集。</p>
+<p><strong>缺点</strong></p>
+<p>在这种情况下场景是固定的，获取大量的噪声图像也是昂贵的；</p>
+<p>由于平均效应，干净图像会过度平滑</p>
+<p><strong>因此可以将合成的图像和真实的噪声图像结合起来，一提高对真实照片的泛化能力。</strong></p>
+<p>在这项工作中，我们使用3.1节中的噪声模型生成合成噪声图像，并使用BSD500[40]中的400幅图像、Waterloo[36]中的1600幅图像和MIT-Adobe FiveK数据集[7]中的1600幅图像作为训练数据。具体地说，我们使用rgb图像<code>x</code>来合成干净的原始图像$L=mf^{-1}(X)$作为反向isp过程，并且使用与方程(2)或(3)相同的<code>f</code>来生成噪声图像。其中f是从[16]中随机抽样的CRF，对于真实的噪声图像，我们利用RENOIR数据集中的120幅图像[4]。特别地，我们在训练过程中交替使用了一批合成图像和真实噪声图像，对于一批合成图像，Eqn(7)所有的损失最小化以更新CBDNet。对于一批真实图像，由于无法获得ground-truth噪声水平map，训练时只考虑了$\mathcal{L_{rec}}和\mathcal{L_{TV}}$。实验证明，这种训练方案能有效地提高去噪真实照片的视觉质量。</p>
+<h2 id="4-实验结果">4 实验结果</h2>
+<h3 id="4-1-测试数据集">4.1 测试数据集</h3>
+<p>采用NC12[29]、DND[45]和NAM[43]三个真实噪声图像数据集：</p>
+<ol>
+<li>NC12包括12个噪声图像。无法得到对应的干净图像，我们只报告去噪结果用于定性评估。</li>
+<li>DND包含50对真实的有噪图像和对应的几乎无噪声的图像，DND包含50对真实的有噪图像和对应的几乎无噪声的图像。类似于[4]，通过对低ISO图像进行仔细的后处理，可以获得几乎无噪声的图像。PSNR/SSIM结果是通过在线提交系统获得的。</li>
+<li>NAME包含11个静止场景，对于每个场景，早期的无噪声图像是500JPEG有噪图像的平均值。我们将这些图像裁剪成512×512个patch，并随机选择25个斑块进行评估测试。</li>
+</ol>
+<h3 id="4-2-实现细节">4.2 实现细节</h3>
+
+$$
+\mathcal{L} = \mathcal{L_{rec}}+\mathcal{\lambda_{asymm}}\mathcal{L_{asymm}}+\mathcal{\lambda_{TV}}\mathcal{L_{TV}} \quad \quad (7)
+$$
+
+<p>在公式7中的参数我们设置$\alpha = 0.3,\lambda_1=0.5,\lambda_2=0.05$，注意到来自NAM的噪声图像时JPEG压缩的，而DND的噪声图像时解压缩的，因此，我们使用公式（2）的噪声模型对DND和NC12处理，使用公式（3）对NAM进行处理。</p>
+<p>在训练CBDNet时，采用ADAM，β1=0.9，模型初始化采用[18]中的方法。小批量的大小为32个，每个patch的大小为128×128。对所有模型进行40个周期的训练，其中前20个周期的学习率为$10<sup>{−3}$，然后用$5×10</sup>{−4}$的学习率对模型进行进一步微调。使用MatConvNet包[56]在Nvidia GeForce GTX 1080 Ti GPU上训练我们的CBDNet大约需要三天时间。</p>
+<h3 id="4-3-Comparison-with-State-of-the-arts">4.3 Comparison with State-of-the-arts</h3>
+<p>我们考虑了4个盲去噪方法：NC，NI，MCWNNM，TWSC。NI是一个商业的软件，已经包含在Photoshop和Corel Paintshop中，此外，我们还对比了高斯盲去噪方法（CDnCNN-B），非盲去噪方法（CBM3D，WNNM，FFDNet）。当将非盲去噪器应用于真实照片时，我们利用[9]来估计噪声SD。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>NC12</strong>：图3示出了NC12图像的结果。所有竞争的方法在去除黑暗区域的噪声方面都是有限的。相比之下，CBDNet在去除噪声的同时保留了显著的图像结构。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_tab1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>DND</strong>：表1列出了在DND基准网站上发布的PSNR/SSIM结果。毫无疑问，CDnCNN-B[61]不能推广到真实的噪声照片，并且表现得非常差。虽然提供了合成噪声，非盲高斯去噪器比如WNNM[17]、BM3D[12]和FOE[52]等因为真实噪声与AWGN有很大的不同，因此只能获得有效性能。MCWNNM[59]和TWSC[58]是专门为真实照片的盲去噪而设计的，得益于真实噪声模型和与真实噪声图像的结合，也取得了令人满意的结果。我们的CBDNet获得了最高的PSNR/SSIM结果，并且略好于MCWNNM[59]和TWSC[58]。CBDnet的性能明显优于另一个基于CNN的去噪器，即CIMM。对于一幅512×512的图像，CBDNet的运行时间约为0.4s。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig4.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>图4提供了DND图像的去噪结果。BM3D和CDnCNN-B不能去除真实图像中的大部分噪声，NC、NI、MCWNNM和TWNC仍然不能去除所有噪声，NI也存在过平滑效应。相比之下，我们的CBDNet在平衡去噪和结构保护方面表现出良好性能。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_tab2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig5.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>Nam</strong>：定量和定性结果如表2和图5所示。CBDNet(JPEG)的性能远远优于CBDNet(即峰值信噪比为1.3dB)，并且与最先进的网络相比取得了最好的性能。</p>
+<h3 id="4-4-消融研究">4.4 消融研究</h3>
+<h4 id="噪声模型的影响">噪声模型的影响</h4>
+<p>我们考虑了非均匀高斯(HG)和相机内处理(ISP)流水线代替AWGN来建模图像噪声。在DND和NAM上，我们实现了四种噪声模型：(I)高斯噪声(CBDNet(G))，(Ii)异质高斯(CBDNet(HG))，(Iii)高斯噪声和ISP(CBD-Net(G+ISP))，以及(Iv)异质高斯和ISP(CBDNet(HG+ISP)，即完整的CBDNet。对于NAM，还包括CBD-NET(JPEG)。表3显示了不同噪声模型的PSNR/SSIM结果。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_tab3.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="G与HG">G与HG</h5>
+<p>在没有ISP的情况下，CBDNet(HG)比CBDNet(G)获得了约0.8∼的1dB增益。当包含ISP时，HG的增益适中，即CBDNet(HG+ISP)的性能仅比CBDNet(G+ISP)高0.15dB。</p>
+<h5 id="w-o-ISP">w/o ISP</h5>
+<p>与之相比，<strong>ISP对于真实图像噪声的建模更为关键</strong>。特别地，CBD-Net(G+ISP)的性能比CBDNet(G)高4.88dB，而CBDNet(HG+ISP)的性能比CBDNet(HG)高3.87dbon DND。对于NAM，ISP中包含JPEG压缩进一步带来了1.31dB的增益。</p>
+<h5 id="合成图像和真实图像的结合">合成图像和真实图像的结合</h5>
+<p>(I)CBDNet(Syn)只训练在合成图像上；</p>
+<p>(II)CBDNet(Real)只训练在真实图像上</p>
+<p>并将我们的完整CBDNet重命名为CBDNet(ALL)。</p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig7.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_tab1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>图7示出了这三种方法在NC12图像上的去噪结果。即使在大规模合成图像数据集上训练，CBDNet(Syn)仍然不能去除所有的真实噪声，部分原因是噪声模型不能完全刻画真实噪声。CBDNet(Real)可能会过度平滑图像，这部分是由于不够精确的干净噪声影响。比较而言，CBDNet(ALL)在去除真实噪声的同时保持了锐化的边缘，三种模型在DND上的定量结果如表1所示。CBDNet(ALL)获得了比CBDNet(Syn)和CBDNet(Real)更好的PSNR/SSIM结果。</p>
+<h5 id="非对称损失函数">非对称损失函数</h5>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig8.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>图8比较了具有不同α值的CBDNet的去噪结果，即α=0.5、0.4和0.3。当α=0.5时，CBDNet对低估误差和高估误差施加同等的惩罚，当α&lt;0.5时，对低估误差施加更大的惩罚。由此可见，<strong>较小的α(即0.30)有助于提高CBDNet对未知真实噪声的泛化能力</strong>。</p>
+<h3 id="4-5-交互式图像去噪">4.5 交互式图像去噪</h3>
+<p><img src="https://picture.mulindya.com/Apaper_collect/CBDnet_fig6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p>给定估计的噪声水平图$\hatσ(Y)$，我们引入系数$γ(&gt;0)$来交互地将$\hatσ(Y)$修正为$\hat{\varrho} = \gamma \cdot \hat{\sigma} (y) $。非盲去噪子网络通过允许用户调整$\gamma $，将$\hat{\varrho} $和有噪图像作为输入，得到去噪结果。图6示出了两个真实的DND噪声图像以及使用不同$\gamma$值获得的结果。</p>
+<p>设置第一张图的$\gamma =0.7$，第二张图的$\gamma = 1.3$，CBDNet分别在<strong>保留细节纹理和去除复杂噪声方面</strong>取得了较好的视觉效果。因此，这种交互方案可以为在实际场景中调整去噪结果提供一种方便的手段。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft324/">
+                        <span class="hidden-mobile">CodeTop_Microsoft324 摆动排序Ⅱ</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/03/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/CBDnet/';
+          this.page.identifier = '/2022/03/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/CBDnet/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
