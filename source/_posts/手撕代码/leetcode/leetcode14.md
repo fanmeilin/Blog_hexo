@@ -1,7 +1,7 @@
 ---
 title: 剑指leetcode14 最长公共前缀
-tags: 剑指
-categories: 剑指
+tags: [剑指,方法]
+categories: [剑指,方法]
 date: 2021-12-26 14:19:08
 ---
 

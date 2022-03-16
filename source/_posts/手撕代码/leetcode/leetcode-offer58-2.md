@@ -1,7 +1,7 @@
 ---
 title: 剑指offer58-2 左旋转字符串
-tags: 剑指
-categories: 剑指
+tags: [剑指,方法]
+categories: [剑指,方法]
 date: 2022-01-23 14:49:37
 ---
 

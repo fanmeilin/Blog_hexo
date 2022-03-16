@@ -1,7 +1,7 @@
 ---
 title: 剑指offer35 复杂链表的复制
-tags: 剑指
-categories: 剑指
+tags: [剑指,链表]
+categories: [剑指,链表]
 date: 2021-09-16 16:50:09
 ---
 
