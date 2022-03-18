@@ -320,6 +320,8 @@
 </ul>
 <p>**进阶：**你能用 O(n) 时间复杂度和 / 或原地 O(1) 额外空间来实现吗？</p>
 <h2 id="题解">题解</h2>
+<h3 id="解法一">解法一</h3>
+<h4 id="排序-逆序穿插">排序+逆序穿插</h4>
 <p>首先排序数组，对于排序后的数组的前部分是必然小于等于数组的后部分，中间可能有相等的情况，只需要将数组后半部分插入奇数，前半部分插入偶数位置即可；但是要注意中间相等的部分，使用逆序穿插把中间位置的数字穿插放到两边。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wiggleSort</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-literal">None</span>:</span><br>        <span class="hljs-string">"""</span><br><span class="hljs-string">        Do not return anything, modify nums in-place instead.</span><br><span class="hljs-string">        """</span><br>        Cnums = <span class="hljs-built_in">sorted</span>(nums)<br>        n = <span class="hljs-built_in">len</span>(nums)<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>,<span class="hljs-built_in">len</span>(nums),<span class="hljs-number">2</span>): <span class="hljs-comment">#奇数大于偶数位置 先放置奇数</span><br>            n -= <span class="hljs-number">1</span><br>            nums[i] = Cnums[n]<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums),<span class="hljs-number">2</span>): <span class="hljs-comment">#后放置偶数 因为中间的数据一部分在数组头，一部分在数组尾部，所以中间出现相等的情况就不会影响</span><br>            n -= <span class="hljs-number">1</span><br>            nums[i] = Cnums[n] <br>        <span class="hljs-keyword">return</span> nums<br></code></pre></td></tr></tbody></table></figure>
 <p>但是实际上不需要排序，因为只需要找到中位数即可，无需保证中位数的左右部分是顺序的。</p>
@@ -329,6 +331,7 @@
 <li>逆序穿插</li>
 </ul>
 <p>这样时间复杂度为O(logn)+O(n),即为O(N)</p>
+<h3 id="解法二">解法二</h3>
 <h4 id="总体函数">总体函数</h4>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wiggleSort</span>(<span class="hljs-params">nums</span>):</span><br>    n = <span class="hljs-built_in">len</span>(nums)<br>    <span class="hljs-keyword">if</span> n&lt;=<span class="hljs-number">1</span>: <span class="hljs-keyword">return</span> nums<br>    k = (n+<span class="hljs-number">1</span>)//<span class="hljs-number">2</span>-<span class="hljs-number">1</span><br>    mid_value = partition(nums, k, <span class="hljs-number">0</span>, n-<span class="hljs-number">1</span>)<br>    three_way_partition(nums, mid_value)<br>    nums0 = nums.copy()<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>        nums[k] = nums0[(n+<span class="hljs-number">1</span>)//<span class="hljs-number">2</span>-<span class="hljs-number">1</span>-k//<span class="hljs-number">2</span>] <span class="hljs-keyword">if</span> (<span class="hljs-keyword">not</span> k%<span class="hljs-number">2</span>) <span class="hljs-keyword">else</span> nums0[(n-<span class="hljs-number">1</span>)-k//<span class="hljs-number">2</span>]<br></code></pre></td></tr></tbody></table></figure>
 <h4 id="寻找中位数">寻找中位数</h4>
@@ -354,6 +357,8 @@ k奇数: ind[1] - ind[k] = k//2 所以 ind[k] = ind[1]-k//2 = (n-1)-k//2</p>
                     
                       <a class="hover-with-bg" href="/categories/CodeTop/%E5%BE%AE%E8%BD%AF/">微软</a>
                     
+                      <a class="hover-with-bg" href="/categories/CodeTop/%E5%BE%AE%E8%BD%AF/%E4%B8%AD%E4%BD%8D%E6%95%B0/">中位数</a>
+                    
                   </div>
                 
                 
@@ -363,6 +368,8 @@ k奇数: ind[1] - ind[k] = k//2 所以 ind[k] = ind[1]-k//2 = (n-1)-k//2</p>
                       <a class="hover-with-bg" href="/tags/CodeTop/">CodeTop</a>
                     
                       <a class="hover-with-bg" href="/tags/%E5%BE%AE%E8%BD%AF/">微软</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E4%B8%AD%E4%BD%8D%E6%95%B0/">中位数</a>
                     
                   </div>
                 
@@ -379,7 +386,7 @@ k奇数: ind[1] - ind[k] = k//2 所以 ind[k] = ind[1]-k//2 = (n-1)-k//2</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/CBDnet/">
+                      <a href="/2022/03/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E5%8E%BB%E5%99%AA/CBDnet/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile">Toward Convolutional Blind Denoising of Real Photographs</span>
                         <span class="visible-mobile">上一篇</span>

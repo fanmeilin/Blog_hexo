@@ -20,7 +20,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>精读Adaptive Consistency Prior based Deep Network for Image Denoising - 待时</title>
+  <title>如何读论文 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -236,7 +236,7 @@
 			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
             <div class="mask flex-center">
 			  <div class="page-header text-center fade-in-up">
-				<span class="h2" id="subtitle" title="精读Adaptive Consistency Prior based Deep Network for Image Denoising">
+				<span class="h2" id="subtitle" title="如何读论文">
 				  
 				</span>
 
@@ -246,8 +246,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-02-14 18:22" pubdate>
-        2022年2月14日 晚上
+      <time datetime="2022-02-10 11:50" pubdate>
+        2022年2月10日 中午
       </time>
     </span>
   
@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3k 字
+      3.3k 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      32
+      33
        分钟
     </span>
   
@@ -298,222 +298,173 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">精读Adaptive Consistency Prior based Deep Network for Image Denoising</h1>
+            <h1 style="display: none">如何读论文</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>这是一篇2021年发表在cvpr期刊上的文章，老师说可以多关注他的加噪方式和文章的实验对比方法，正好以此为例，来精读此文章以作讲解。</p>
-<p>灰常nice！ 阅读pdf文章的网站https://readpaper.com/</p>
+<p>导师说希望我们可以发一篇质量很好的论文，以后不免会经常看文献，有的时候看论文抓不住重点，花费很久很久的时间可能都不能对这个问题有清晰的了解。或者最后发现这篇论文并不是我真正需要的；对于精读和略读的方法也会有所疑惑。来看看学术大佬沐神，他推荐是怎么去读论文叭~学习一下下嘿嘿。</p>
 </blockquote>
+<blockquote>
+<p>参考吴恩达，李沐的相关视频</p>
+<p>cs230 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV195411Y7ms/?spm_id_from=333.788.recommend_more_video.11">如何读论文</a></p>
+<p>沐神：</p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1H44y1t75x?spm_id_from=333.999.0.0">如何读论文</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1oL411c7Us?spm_id_from=333.999.0.0">如何判断研究工作的价值</a></p>
+</blockquote>
+<h2 id="如何查找文献🔍">如何查找文献🔍</h2>
+<p>谷歌学术，顶刊，arXiv，Medium posts，Github post</p>
+<h2 id="读论文的步骤-📮">读论文的步骤 📮</h2>
+<p>编制论文清单 （arXiv，Medium posts，Github post）</p>
+<p>随机开始阅读</p>
+<p>随机几篇论文开始，快速浏览并理解每篇论文的10%，然后挑选到值得阅读的文章花时间继续阅读并理解整篇文章，在此基础上，可能在参考文献中找到继续研究的论文继续阅读。阅读的同时，回顾充实前面的文章。再随机挑选论文，…,以此循环。</p>
+<p>这样就可以慢慢掌握想要学习的研究主题。</p>
+<p>5-20 papers      对该研究领域有基本的了解，可以做一些工作，应用一些算法。</p>
+<p>50-100 papers  足以对该领域有很好的理解，足以进行研究或是处于前沿。</p>
+<h2 id="论文的构成-📙">论文的构成 📙</h2>
+<ul>
+<li><strong>TITLE</strong>  标题</li>
+<li><strong>ABSTRACT</strong> 摘要</li>
+<li><strong>INDEX TERMS</strong> 关键词</li>
+<li><strong>INTRODUCTION</strong> 导言</li>
+<li><strong>MATERIALS AND METHODS</strong>  提出的算法</li>
+<li><strong>EXPERIENCE</strong> 实验</li>
+<li><strong>CONCLUSION</strong> 结论</li>
+</ul>
+<p>绝大多数的文章都是这种格式，相当于是一个八股文的结构。</p>
+<h2 id="读文献的方法-✏️">读文献的方法 ✏️</h2>
+<p>当然你是可以从头读到尾，但是这个世界上论文有这么多，如果都是从头读到尾的话，时间上是不值当的，并且你要找的文章可能就是一小部分，要快速的筛选出你自己需要的文章，然后对他进行精度。</p>
+<p>这里给大家介绍一个方法，如何花三遍来读一遍论文！</p>
+<p><strong>原则：从高效信息内容出发，然后再去延申。</strong></p>
 <h3 id="第一遍">第一遍</h3>
 <p><strong>重点：标题-&gt; 摘要 -&gt; 结论的顺序； 目的是大概了解文章，做出取舍；</strong></p>
 <p><strong>tips：可以大概看看图表，了解关键的方法。</strong></p>
-<h4 id="预览">预览</h4>
-<ol>
-<li>
-<p>标题：Adaptive Consistency Prior based Deep Network for Image Denoising</p>
-<p>​			基于自适应一致性先验的深度网络图像去噪</p>
-</li>
-<li>
-<p>摘要：</p>
-<p><strong>总结</strong> :作者提出了ACP+Deam 可以在合成噪声和真实噪声的图片降噪上取得好的结果。</p>
-<p><strong>问题现状</strong>：如何将传统方法融入到网络设计中同时提高可解释性，仍然是一个悬而未决的问题。</p>
-<p><strong>方法</strong> :提出了一种新的基于模型的去噪方法来指导去噪网络的设计，首先，通过在传统的一致性先验中引入非线性滤波算子、可靠性矩阵和高维特征变换函数，提出了一种新的自适应一致性先验(ACP)。其次，通过将ACP项引入最大后验框架，提出了一种基于模型的去噪方法，并将该方法用于指导网络设计，得到了一种新的端到端可训练、可解释的深度去噪网络。</p>
-</li>
-<li>
-<p>结论：</p>
-<p><strong>总结</strong> :提出了Deamnet深度网络来图像去噪。</p>
-<p><strong>创新点</strong> :与现有的大多数深度网络去噪方法不同，我们将新的ACP项（传统方法）引入到优化问题中，然后利用unfolding策略利用优化过程来指导深度网络的设计。</p>
-<p><strong>成果</strong> :在一定程度上提高了可解释性。实验结果表明，该网络具有领先的去噪性能。</p>
-</li>
-<li>
-<p>其他</p>
-<p>查看他的图表可以发现他的工作非常的详细，对各种网络，各种数据集进行了各种效果的对比，从图像，数据集，噪声强度，PSNR，SSIM，运行时间，参数大小各个方面进行对比，值得学习。</p>
-</li>
-</ol>
-<h4 id="思路">思路</h4>
-<p>文章的思路：<strong>将传统的降噪方法和深度学习网络结合</strong></p>
+<p>这个时候只需要关注标题和摘要，读完摘要之后直接跳到结论部分；</p>
 <ul>
-<li>在传统的一致性先验中引入非线性滤波算子、可靠性矩阵和高维特征变换函数，提出了一种新的自适应一致性先验(ACP)</li>
-<li>通过将ACP项引入最大后验框架，提出了一种基于模型的去噪方法，并将该方法用于指导网络设计，得到去噪网络。</li>
+<li>
+<p>首先了解这个文章的<strong>标题</strong>是什么，和我们要查找的内容是不是相关的。</p>
+</li>
+<li>
+<p>然后呢，再看一眼<strong>摘要</strong>，摘要就是比较精炼的介绍一下这篇文章。</p>
+</li>
+<li>
+<p>最后直接跳到<strong>结论</strong>，结论通常来说，是和摘要一样的，但是会把摘要里面提出的一两个问题用一些实际的结论，实际的数字来证明一下。</p>
+</li>
 </ul>
-<h4 id="思考">思考</h4>
-<p>关注点：思考噪声是怎么加的，用了哪几种噪声？</p>
+<p>当你读完这三个部分，就可以大致知道这篇文章是在讲述什么内容了，看是否符合自己的诉求。再可以跳到实验部分，看一下一些关键的图和表；还可以跳到方法的图表看看这篇文章的关键方法。</p>
+<p>这一遍通常需要10分钟的时间可以<strong>大概了解这篇文章大概在讲什么</strong>，质量如何，结果怎么样，方法看上去怎么样。最重要的是，这篇文章是否适合自己，确定要不要继续读下去。或者这篇文章质量不高，和自己没有太多关系，内容不感兴趣，就可以放到一边。</p>
+<p>试着回答：（前两项即可）</p>
+<p>作者试图完成什么？</p>
+<p>关键要素是什么？</p>
+<p>你可以用到什么？</p>
+<p>有哪些参考文献可以继续学习？</p>
 <h3 id="第二遍">第二遍</h3>
 <p><strong>重点：从头到尾读，不用关注得太细节，主要目的是清晰了解图表含义。</strong></p>
-<p><strong>tips：圈出感兴趣的文献。</strong></p>
-<h4 id="Introduce">Introduce</h4>
-<p>如果对这个领域不是非常了解，就可以好好看看Introduce中的内容，一般会对该领域研究问题进行总结和梳理。可以标记出感兴趣的文献。</p>
-<p>在Introduce中提出的几种去噪方法，对这三种方法的含义和相关算法简要介绍：</p>
-<ul>
-<li>
-<p>filtering-based methods</p>
-<ul>
-<li>
-<p>原理：由于图像中有很多相似物，可以使用非局部相似块来去除噪声，比如NLM和BM3D，各种非局部滤波方法应运而生。</p>
-</li>
-<li>
-<p>问题：输出模糊，去噪方法中的超参数难以调整。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>model-based methods</p>
-<ul>
-<li>
-<p>原理：基于模型的方法通常将去噪任务描述为基于后验I(MAP)的最大优化问题，其性能主要取决于图像先验。</p>
-</li>
-<li>
-<p>前提：在假设图像块可以用适当的基函数稀疏表示的前提下。</p>
-</li>
-<li>
-<p>方法：提出稀疏先验，最近，提出了一种基于三边加权稀疏编码的真实图像去噪方法。根据自然图像中非局部相似块构成的矩阵具有低秩的特点，提出了很多基于低秩先验的图像去噪方法，还有IR的加权核范数最小化(WNNM)方法。此外还有图的正则化方法。</p>
-</li>
-<li>
-<p>好处：基于模型的方法具有很强的数学推导能力。</p>
-</li>
-<li>
-<p>问题：1，在恢复强噪声下的纹理结构时，性能会明显下降。2，由于迭代优化的高度复杂性，它们通常很耗时。</p>
-</li>
-</ul>
-</li>
-<li>
-<p>learning-based methods</p>
-<ul>
-<li>定义：基于学习的方法侧重于从噪声图像到干净图像的潜在映射学习，可分为传统的基于学习的方法和基于深度网络的方法。</li>
-<li>评价：由于基于深度网络的去噪方法比基于滤波、基于模型和基于传统学习的方法取得了更好的去噪效果，它们已成为<strong>主流</strong>的去噪方法。</li>
-<li>问题：大多数深度网络方法的体系结构都是经验性设计的，没有充分考虑传统算法的成果，在一定程度上面临着可解释性较弱的问题。</li>
-</ul>
-</li>
-<li>
-<p>最近，也有人提出了用深度网络展开来实现一些传统的方法。</p>
-</li>
-</ul>
-<p>作者主要工作是提出一种新的基于模型的去噪方法，并深入研究该方法的推理过程，为其去噪CNN(DeamNet)的设计提供参考。</p>
-<blockquote>
-<p>这里我对作者提出的方法有一些疑问，基于模型和基于学习的去噪方法的本质区别在哪里，作者的工作”去噪的CNN设计提供参考“涉及到卷积神经网络，为什么还是基于模型的去噪方法呢？</p>
-<p>在 Proposed Method部分作者阐述了自己的设计思想，这一部分涉及的公式很多，其实对作者所提出的方法和我自身的研究内容不是非常的契合，所以这部分可以简要看看，我主要的目的还是对它的实验中噪声和数据部分更加感兴趣。</p>
-</blockquote>
-<h4 id="设计思想">设计思想</h4>
-<ul>
-<li>
-<p>Adaptive Consistency Prior for Denoising</p>
-<ul>
-<li>自适应一致性先验算法在去噪中的应用,本文提出了一种端到端的可训练展开网络，该网络能够自适应地学习这些算子。</li>
-</ul>
-</li>
-<li>
-<p>Deep Unfolding Denoising Network</p>
-<ul>
-<li>DeamNet的体系结构。它由特征域(FD)模块、重构模块、基于非线性运算(NLO)子网络的K个迭代阶段和双元素注意机制(DEAM)模块组成.</li>
-<li>在高维FD中进行去噪具有以下优点：1)可以将原始的噪声空间潜在地变换到FD空间，在FD空间中可以更容易地降低噪声，从而获得比像素域更精细的图像细节。“补充材料”中的实验详细说明了这一点；2）使用高维FD模块还可以增加特征通道数并且增强神经网络中的信息流传输来得到更高的性能。相比之下，传统的深度展开网络在低维图像空间进行迭代去噪；3)通过将地面真实图像与退化图像之间的残差视为待降噪的部分，该策略还可以使网络更适用于其他红外应用。</li>
-<li>在传统的注意机制中，低频分支的重要性在很大程度上被忽视了。相反，如果低频分支对潜在特征的描述不理想，则DEAM可以自适应地增加残留分支的特征权重，反之亦然。此外，DEAM中的初始特征信息可用性和跨层特征交互可以进一步增强网络的表达能力。</li>
-</ul>
-</li>
-</ul>
-<h4 id="实验部分">实验部分</h4>
-<p>分为对合成噪声数据集和真实数据集上去噪两个模块。</p>
-<p><strong>噪声类型</strong>： 加性高斯白噪声AWGN(Additive White Gaussian Noise)  （在论文中提到的强度对比 15, 25 and 50.）</p>
-<ul>
-<li>训练部分</li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">25</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level'</span>)<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">train</span>(<span class="hljs-params">epoch</span>):</span><br>    epoch_loss = <span class="hljs-number">0</span><br>    model.train()<br>    <span class="hljs-keyword">for</span> iteration, batch <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(training_data_loader, <span class="hljs-number">1</span>):<br>        target = Variable(batch)<br>        noise = torch.FloatTensor(target.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.val_noiseL / <span class="hljs-number">255.</span>)<br>        <span class="hljs-built_in">input</span> = target + noise<br>        .....<br></code></pre></td></tr></tbody></table></figure>
-<ul>
-<li>测试部分（合成）</li>
-</ul>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">parser.add_argument(<span class="hljs-string">"--test_noiseL"</span>, <span class="hljs-built_in">type</span>=<span class="hljs-built_in">float</span>, default=<span class="hljs-number">15</span>, <span class="hljs-built_in">help</span>=<span class="hljs-string">'noise level used on test set'</span>) <span class="hljs-comment">#噪声强度</span><br>opt = parser.parse_args()<br><br>ISource = torch.Tensor(Img)    <br><span class="hljs-comment"># noise</span><br>noise = torch.FloatTensor(ISource.size()).normal_(mean=<span class="hljs-number">0</span>, std=opt.test_noiseL / <span class="hljs-number">255.</span>) <span class="hljs-comment">#高斯噪声</span><br><span class="hljs-comment"># noisy image</span><br>INoisy = ISource + noise <span class="hljs-comment">#加性</span><br>ISource, INoisy = Variable(ISource.cuda()), Variable(INoisy.cuda())<br></code></pre></td></tr></tbody></table></figure>
-<p>真实数据集</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__getitem__</span>(<span class="hljs-params">self, index</span>):</span><br>    clean = Image.<span class="hljs-built_in">open</span>(self.path[index])<br><br>    <span class="hljs-keyword">if</span> self.transform:<br>        clean = self.transform(clean)<br><br>    noise = torch.randn(clean.size()).mul_(self.sigma/<span class="hljs-number">255.0</span>) <span class="hljs-comment">#噪声？</span><br>    noisy = clean + noise<br>    noisy = torch.clamp(noisy, <span class="hljs-number">0.0</span>, <span class="hljs-number">1.0</span>)<br>    <span class="hljs-keyword">return</span> noisy, clean<br></code></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>这里加噪代码存疑</p>
-<p>论文中对真实数据集的去噪细节中写道：</p>
-<p>由于真实噪声通常是信号相关的，并且随着摄像机内管线的不同，真实图像去噪通常是一项极具挑战性的任务，为了进一步展示DeamNet对真实噪声的泛化能力，选择DND基准、SIDD基准和RNI15数据集作为测试数据集。请注意，对于DND和SIDD基准，几乎无噪音的图像不是公开的，但PSNR/SSIM结果可以通过他们的在线服务器获得。而对于RNI15，只有噪声图像可用。</p>
-</blockquote>
-<h4 id="合成噪声数据集（重点关注）">合成噪声数据集（重点关注）</h4>
-<p><strong>训练数据集</strong>包括：</p>
-<ol>
-<li>
-<p>the Berke-ley Segmentation Dataset (BSD)  是为图像分割和边界检测的研究提供经验基础的数据集，包含来自 30 个人类受试者的 1000 个手工标记的 1000 个 Corel 数据集图像的分割，其中一半的分割是通过向主体呈现彩色图像而获得的; 另一半来自呈现灰度图像。</p>
-</li>
-<li>
-<p>Div2K：数据集有1000张高清图(2K分辨率)，其中800张作为训练，100张作为验证，100 张作为测试。</p>
-</li>
-</ol>
-<p>三个标准<strong>基线数据集</strong>进行了评估 （指标：PSNR and SSIM）</p>
-<ol>
-<li>
-<p>Set12：数字图像处理常用数据集Set12，12张灰度图（含lena，cameraman，house，pepper，fishstar，monarch，airplane，parrot，barbara，ship，man，couple），01-07是256*256,08-12是512*512.</p>
-</li>
-<li>
-<p>BSD68  数字图像处理常用数据集BSD68，68张灰度图，大小不一。</p>
-</li>
-<li>
-<p>Urban100  ：一个用于超分辨率和图像重建的数据集 Urban100，总计100张建筑高清图片，同时对应了100张降低分辨率的图片。</p>
-</li>
-</ol>
-<h4 id="真实噪声数据集">真实噪声数据集</h4>
-<h5 id="训练数据集">训练数据集</h5>
-<ol>
-<li>SIDD：智能手机图像去噪数据集（SIDD）使用5个具有代表性的智能手机摄像头，从10个场景中提取约30000个噪声图像，并生成它们真实的场景图像。</li>
-<li>RENOIR：一个真实的图像降噪数据集，包含了3个子数据集，分别是Xiaomi Mi3，Canon S90，Canon T3i拍摄，拥有低噪和高噪对比图。</li>
-</ol>
-<h5 id="测试数据集">测试数据集</h5>
-<ul>
-<li>
-<p>DND：是由50幅真实世界的噪声图像组成的，但没有几乎没有噪声的对应图像。通常，可以通过将去噪图像上传到DND网站来获得PSNR/SSIM结果。</p>
-</li>
-<li>
-<p>SIDD：提供320对噪声图像和近无噪声图像用于训练，1280个图像patch用于验证。PSNR/SSIM结果可以通过将去噪图像提交到SIDD网站获得。</p>
-</li>
-<li>
-<p>RNI15：提供了15幅真实噪声图像。不幸的是，地面真实的干净图像不可用，因此我们只展示RNI15的视觉结果。</p>
-</li>
-</ul>
-<h4 id="数据增强">数据增强</h4>
-<p>我们将这些训练图像对随机裁剪成大小为128×128的小块。为了增加训练样本，采用了180度的旋转和水平翻转。</p>
-<h4 id="对比网络">对比网络</h4>
-<ul>
-<li>
-<p>TNRD</p>
-</li>
-<li>
-<p>DnCNN</p>
-</li>
-<li>
-<p>FFDNet</p>
-</li>
-<li>
-<p>RED</p>
-</li>
-<li>
-<p>MemNet</p>
-</li>
-<li>
-<p>UNLNet</p>
-</li>
-<li>
-<p>CFSNet</p>
-</li>
-<li>
-<p>N3Net</p>
-</li>
-<li>
-<p>ADNet</p>
-</li>
-<li>
-<p>BRDNet</p>
-</li>
-<li>
-<p>RIDNet</p>
-</li>
-</ul>
-<h5 id="合成数据集效果">合成数据集效果</h5>
-<p><img src="https://picture.mulindya.com/deamnet1.png" srcset="/img/loading.gif" lazyload alt=""></p>
-<h5 id="真实数据集效果">真实数据集效果</h5>
-<p><img src="https://picture.mulindya.com/deamnet2.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<p><strong>tips：不要停留在数学上，只需继续阅读，略读数学，圈出感兴趣的文献</strong></p>
+<p>对整个文章过一遍，可以沿着标题读到最后，这一遍不用注意太多细节，比如公式证明或者很细节的部分可以忽略，主要是搞清楚<strong>重要的图表</strong>，要清楚每个字，知道他到底是在干什么。比如方法中的流程图是什么样子，算法的图是什么结构，细致到实验中图的x轴，y轴是什么，每个点的含义是什么。作者提出的方法是如何和其他人方法对比的，它们之间的差距有多大。</p>
+<p>这一遍读完之后可能还是对文章很模糊，没有特别搞懂它在干什么，但是没有关系，因为已经对整个论文的各个部分有了大概的了解。同时，在这一遍阅读时，可以把相关的文献圈出来，比如说作者在阐述某个问题，这个问题是某某之前提出来的，作者又是在某某的方法上改进的，如果你发现这些引用的重要的文献你没有读过，不太了解，就把他圈出来。</p>
+<p>这时候你已经知道作者解决了什么问题，结果怎么样，大概用了什么方法，但是这个文章你觉得太难了，读不太懂得话，可以选择去读他引用的那些文章，之前的一些工作可能门槛更低一些，读完之后再回过来读这篇文章。</p>
+<p>另外，如果觉得自己不需要了解得那么深，做的方向跟这个不太一样，不需要完全搞懂论文，那么读到这里就可以了。如果这篇文章比较关键，想要充分阅读，就可以进行第三遍阅读。</p>
+<p>再次试着回答：</p>
+<p>作者试图完成什么？</p>
+<p>关键要素是什么？</p>
+<p>你可以用到什么？</p>
+<p>有哪些参考文献可以继续学习？</p>
 <h3 id="第三遍">第三遍</h3>
-<p><strong>重点：详细了解文章，并且拓展到自己，给自己设置问题，学会“脑补”</strong>。</p>
-<p><strong>tips: 在文章最后作者会提到文章有一些没有继续研究的地方，可以记录自己的思考。</strong></p>
+<p><strong>重点：详细了解文章，并且拓展到自己，给自己设置问题，学会“脑补”</strong></p>
+<p><strong>tips: 在文章最后作者会提到文章有一些没有继续研究的地方，可以记录自己的思考</strong></p>
+<p>最详细的一遍，对每一句话，每一段了解清楚，可以想象自己去实现这篇文章。比如说，作者说提出了什么问题，用什么方法来解决这个问题。你可以带入角色，如果是我来做这件事情应该怎么办，我可以用什么方法来实现这个目的，主动给自己设置问题。作者在阐述实验的过程，你也可以问自己，如果是自己我应该怎么做，能不能比他做得更好。在文章最后作者会提到文章有一些没有继续研究的地方，留到了以后，可以拓展到自己，有没有什么方法可以往前继续推进成果。</p>
+<p>最佳状态是：看完之后就好像是自己做过一遍一样，这样，对这篇文章的细节就了解的非常清楚啦！关上文章也可以回忆出很多细节的地方。</p>
+<p>再基于他做研究，或者之后再向大家提到这篇文章的时候，可以详细和别人复述一遍了</p>
+<h3 id="总结">总结</h3>
+<p>第一遍的花时最少，也就是进行海选；</p>
+<p>第二遍对论文做精选；</p>
+<p>第三步是重点研读论文；</p>
+<h2 id="什么是好的研究工作-🏆">什么是好的研究工作 🏆</h2>
+<p>我们自己在做研究的时候，会思考现在的结果是否足够发表一篇论文，能够投什么级别的期刊或者会议，在写论文的时候，也会思考应该怎么样去讲述自己的故事使得读者更容易看到研究工作的意义。</p>
+<p>所以如何去判断一个工作的意义呢？又如何写好一个故事呢？</p>
+<p>核心：</p>
+<p>用有<strong>新意</strong>的方法</p>
+<p><strong>有效</strong>的解决一个</p>
+<p><strong>研究</strong>问题</p>
+<ul>
+<li><strong>研究</strong></li>
+</ul>
+<p>这里关注技术类问题，可以分为两大类 研究类和工程类问题。</p>
+<p>绝大部分问题属于工程问题，什么是工程问题？</p>
+<p>比如说</p>
+<p>算法很占内存，在计算资源上无法满足。</p>
+<p>想法：那么第一个解决方案是 能不能买内存，第二是能不能优化算法，使得在不改变关键算法的同时节省内存。</p>
+<p>模型的精度不够。</p>
+<p>想法：是否可以多标一些数据来解决问题，或者在采样数据的时候用更好的传感器。</p>
+<p>在遇到问题时，如果可以提出几个方案，而且这些方案在没有尝试的时候，就可以确定这些方案是可以一定程度上可以解决问题。那么这种问题是工程类问题</p>
+<p>对于研究问题而言，是更加困难的问题，你是完全不知道怎么样解决它，或者是你有一些想法和方案，但是在真正尝试之前，你不知道这个想法是否可行。而一般的研究问题，前面所说的那些想法通常是不可行的。</p>
+<ul>
+<li><strong>有效</strong></li>
+</ul>
+<p>有效是一个相对的概念，不是一个绝对的概念；有效性是指的相比之前的工作，解决某个问题的有效性有所提升。</p>
+<ul>
+<li><strong>新意</strong></li>
+</ul>
+<p>这个也是一个相对的概念，因为就算是一个很有新意的东西，提出被大家熟知之后就不再有新意了。所以新意指的是在研究社区里面，对大多数研究者而言，你的想法是有新意的。这里并不要求所提出的方法，之前都没有人提到过，很有可能在很多年前别人已经用过的，只是目前大家没有关注了；另外在别的领域研究者提出的方法，但是在你所在的研究领域大家对这个方法并不是非常了解。这也可以作为论文的新意。</p>
+<p>这三个方面可以衡量一篇文章的意义。</p>
+<p>在写文章的时候，研究工作应该总结成这么一句话：使用了…方法，…有效的解决了…研究问题。</p>
+<p>具体来说，在摘要部分，要引出 解决什么研究问题 ； 方法的新意在哪里；结果如何；</p>
+<h3 id="价值">价值</h3>
+<p>一个研究工作的$研究价值=新意度 \times 有效性 \times 问题大小$</p>
+<p>不过反过来而言，价值是仁者见仁智者见智，很难准确定义一项研究成果的价值有多少。</p>
+<h4 id="问题大小档次">问题大小档次</h4>
+<ul>
+<li>
+<p>1        小      比如在前面工作的某一个点上进行改进</p>
+</li>
+<li>
+<p>10      中等  比如在计算机视觉领域某一个视觉的子任务做出成果</p>
+</li>
+<li>
+<p>100    大      比如提升机器对图片的理解，机器随文字的理解</p>
+</li>
+<li>
+<p>…</p>
+</li>
+<li>
+<p>10000  更大  比如解决通用的人共智能</p>
+</li>
+</ul>
+<h4 id="有效性档次">有效性档次</h4>
+<ul>
+<li>
+<p>1     小        比如模型精度比之前的研究好一点点</p>
+</li>
+<li>
+<p>10   中等    比如一项长期的工作在一年之内在某一数据集上的精度向前推进了10个点，本篇论文的工作向前推进了1个点</p>
+</li>
+<li>
+<p>100  高       比如一项工作就像研究将精度提升了5个点或者10个点</p>
+</li>
+</ul>
+<p>对于问题的不同，有效性的定义也不同，但对于技术问题而言，通常指关心三个问题</p>
+<ol>
+<li>精度高，效果好</li>
+<li>规模大，成本降低</li>
+<li>安全， 比如数据隐私，模型隐私，联邦学习就是追求安全提出来的</li>
+</ol>
+<h4 id="新意度档次">新意度档次</h4>
+<ul>
+<li>
+<p>1       表示大家对此方法没有很意外 比如提出的方法大家都了解，也可以预料到使用到它的结果如何</p>
+</li>
+<li>
+<p>10    有一定的新意度，比如用某个技术解决了还不错的问题</p>
+</li>
+<li>
+<p>100  使用的技术其他研究者不太熟悉，大家会觉得打开了新世界的大门</p>
+</li>
+</ul>
+<p>对技术类工作来讲，很难有一个技术之前从来没有出现过，新意度只是对于该领域的读者而言，文章的新意度有多高。</p>
+<h4 id="实际现实">实际现实</h4>
+<p>在人工智能这个方面，</p>
+<p>$研究价值=新意度 \times 有效性 \times 问题大小$</p>
+<p>很多时候，一篇文章很难把三个方面都做得特别好，甚至把两个方面做到高水平都是很难的事情；所以通常情况下，在一两个指标上，做到差不多的水平也很好了。如果要发表在一流的会议或杂志上，研究价值需要达到1000；如果有两个10，也值得写文章发表，也可以练习写作。</p>
 
             </div>
             <hr>
@@ -525,6 +476,8 @@
                     
                       <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
                     
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/">阅读方法</a>
+                    
                   </div>
                 
                 
@@ -532,6 +485,8 @@
                     <i class="iconfont icon-tags"></i>
                     
                       <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/">阅读方法</a>
                     
                   </div>
                 
@@ -548,9 +503,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/02/16/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paper-noise/">
+                      <a href="/2022/02/11/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/how-output-paper/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">论文中的各种加噪方式</span>
+                        <span class="hidden-mobile">研究新意度和论文思路方法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -558,8 +513,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/">
-                        <span class="hidden-mobile">光子计数CT重建算法</span>
+                      <a href="/2022/02/09/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%AE%9E%E7%94%A8%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/PracticeML7/">
+                        <span class="hidden-mobile">praticalML第七章笔记</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -581,8 +536,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/';
-          this.page.identifier = '/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/paperer-DeamNet/';
+          this.page.url = 'https://fanmeilin.github.io/2022/02/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/read-paper/';
+          this.page.identifier = '/2022/02/10/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/read-paper/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
@@ -773,6 +728,45 @@
 
 
 
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.4/es5/tex-svg.js" ></script>
+
+  
 
 
 
