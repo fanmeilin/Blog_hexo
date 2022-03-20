@@ -1,7 +1,7 @@
 ---
 title: CodeTop_Microsoft53最大子数组和
-tags: [CodeTop,Microsoft]
-categories: [CodeTop,Microsoft]
+tags: [CodeTop,微软,贪心法]
+categories: [CodeTop,微软,贪心法]
 date: 2022-03-19 14:34:57
 math: true
 ---
