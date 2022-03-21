@@ -1,7 +1,7 @@
 ---
 title: 收集近年去噪资料
-tags: 文献
-categories: 文献
+tags: [文献,总结]
+categories: [文献,总结]
 date: 2022-03-03 17:24:56
 math: true
 ---

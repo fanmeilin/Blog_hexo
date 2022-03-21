@@ -15,7 +15,9 @@
           
           <category> CodeTop </category>
           
-          <category> Microsoft </category>
+          <category> 微软 </category>
+          
+          <category> 贪心法 </category>
           
       </categories>
       
@@ -24,7 +26,9 @@
             
             <tag> CodeTop </tag>
             
-            <tag> Microsoft </tag>
+            <tag> 微软 </tag>
+            
+            <tag> 贪心法 </tag>
             
         </tags>
       
