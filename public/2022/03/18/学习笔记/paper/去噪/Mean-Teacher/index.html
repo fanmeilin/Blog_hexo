@@ -533,7 +533,29 @@ $$
 
 <p>我们执行消融研究实验来评估所提议的多任务监督损失(见公式(5))和多任务一致性损失(参见公式(7)我们的MTMT-Net。这里，我们考虑七个基线网络。</p>
 <p>前四个基线网络是通过重新移除教师模型来构建的。这意味着只有标签数据的监督丢失才能用于MT-CNN的训练。具体地说，第一基线网络(表示为“BASIC”)仅考虑阴影区域检测监督损失($\mathcal L^s_r$ inEq.(5))。第二种(表示为“basic+SE”)是添加阴影边缘检测监督损失($\mathcal L^s_e$ of Eq.(5))，而第三个(表示为“basic+SC”)是添加阴影计数检测监督损失($\mathcal L^s_c$of Eq.(5))。四是将三项任务的监督损失融合在一起。</p>
-<p>另外三个基线网络是建立用于检验在未标注多任务一致性损失。第一种方法(记为“basic-MT”)只考虑阴影区域任务的Mean teacher模型。,通过融合等式的监督损失($\mathcal L^s_R$of 公式(5))和一致性损失($\mathcal L^c_r $  of 公式(7))。第二种方法(记为“basic-MT+SE-MT”)是将mean teacher模型应用于阴影区域检测和阴影边缘检测，即等式(5)中的$\mathcal{L}<sup>s_r,\mathcal{L}</sup>s_e$以及方程(7)中的$\mathcal{L}<sup>c_r,\mathcal{L}</sup>c_e$用于训练网络。最后一种方法(记为“basic-MT+SC-MT”)采用平均教师模型进行阴影区域检测和阴影计数检测。换言之，监督损失(等式（5）中的$\mathcal{L}<sup>s_r,\mathcal{L}</sup>s_c$）和一致性损失(等式(7)中的$\mathcal{L}<sup>c_r,\mathcal{L}</sup>c_c$)用于网络训练。</p>
+<p>另外三个基线网络是建立用于检验在未标注多任务一致性损失。</p>
+<ul>
+<li>
+<p>第一种方法(记为“basic-MT”)只考虑阴影区域任务的Mean teacher模型。,通过融合等式的监督损失($\mathcal L^s_R$of 公式(5))和一致性损失($\mathcal L^c_r $  of 公式(7))。</p>
+</li>
+<li>
+<p>第二种方法(记为“basic-MT+SE-MT”)是将mean teacher模型应用于阴影区域检测和阴影边缘检测，</p>
+
+  $$
+  公式5中的 \mathcal{L}^s_r,\mathcal{L}^s_e，和公式7中的 \mathcal{L}^c_r,\mathcal{L}^c_e
+  $$
+  
+<p>用于训练网络。</p>
+</li>
+<li>
+<p>最后一种方法(记为“basic-MT+SC-MT”)采用平均教师模型进行阴影区域检测和阴影计数检测。换言之，监督损失和和一致性损失用于网络训练。</p>
+
+  $$
+  公式5中的 \mathcal{L}^s_r,\mathcal{L}^s_c 和公式7中的\mathcal{L}^c_r,\mathcal{L}^c_c
+  $$
+  
+</li>
+</ul>
 <p>我们使用SBU训练集和我们的未标记数据对所有七个基线网络进行训练，以获得SBU和UCF的结果。对于ISTD，我们使用ISTD训练集和我们的未标记数据来训练所有四个网络，并使用ISTD测试集对它们进行测试。</p>
 <h4 id="质量对比-2">质量对比</h4>
 <p><img src="https://picture.mulindya.com/Apaper_collect/Mean_Teacher_tab2.png" srcset="/img/loading.gif" lazyload alt=""></p>

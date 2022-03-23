@@ -1,0 +1,785 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>光子计数CT重建算法 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="光子计数CT重建算法">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-02-12 15:22" pubdate>
+        2022年2月12日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">光子计数CT重建算法</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>查找相关论文，整理其思想。</p>
+</blockquote>
+<h1>光子计数CT重建算法</h1>
+<h2 id="一，光子计数CT与传统CT的区别">一，光子计数CT与传统CT的区别</h2>
+<p><strong>传统X线CT</strong>系统利用电荷积分探测器进行信号检测，<strong>光子权重与其能量成正比，较高能量的光子被赋予较大的权重</strong>。然而，重建图像的对比度主要取决于较低能量的光子，因此<strong>电荷积分探测方式将导致重建图像对比度下降</strong>。</p>
+<p>近期研发的<strong>光子计数探测器</strong>具有能量分辨能力，它由半导体探测器及快速专用集成电路组成，在医学诊断X线能量范围内具有较高的量子效率，<strong>可灵活设置能量阈值，并可消除低能电子学噪声的干扰，通过对被检物体的一次扫描可以同时获得多个能量段的光子计数</strong>。</p>
+<p><strong>传统CT</strong> 采用积分式探测器采集投影数据 ，反映的是<strong>物体的平均衰减特性</strong> ，会在一定程度上造成信息损失 ，无法对物体进行较好的定性定量测量。</p>
+<p><strong>基于光子计数探测器的能谱CT</strong> 通过设定多个能量响应阈值能够探测不同能量范围内的X射线光子 ，采集更多被测物体的物质组成信息 ，有助于识别不同物理特性的材料 ，基于此 ，<strong>能谱CT 被广泛的应用于小病灶、低对比度结构以及微细结构的成像。</strong></p>
+<p>PCD技术消除了电子噪声，提供了比传统CT探测器<strong>更高的信噪比</strong>。</p>
+<p>然而，PCD技术仍然存在两个主要的问题，首先，<strong>单个能量通道只包含总光子的一小部分</strong>；其次，<strong>大部分PCD 只能承受有限的计数率，<strong>所以从PCD 获得的多通道投影通常包含</strong>非常强的泊松噪声</strong>。</p>
+<h2 id="二，文献查找来源">二，文献查找来源</h2>
+<ul>
+<li>
+<p><a target="_blank" rel="noopener" href="https://www.cttacn.org.cn/">CT理论与应用研究</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://www.diagnoschina.com/newest/zazhi_id-2">中国CT和MRI杂志</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://lcfsx.chinabidingnews.cn/">临床放射学杂志</a></p>
+</li>
+<li>
+<p><a target="_blank" rel="noopener" href="http://ywlc.chinajournal.net.cn/WKB3/WebPublication/wkTextContent.aspx?colType=4&amp;tp=gklb">中国药物与临床</a></p>
+</li>
+<li>
+<p>东南大学学报</p>
+</li>
+<li>
+<p>光谱学与光谱分析</p>
+</li>
+<li>
+<p>光电工程</p>
+</li>
+<li>
+<p>中国医学物理学杂志</p>
+</li>
+</ul>
+<h2 id="三，针对光子计数CT重建算法">三，针对光子计数CT重建算法</h2>
+<p><img src="https://picture.mulindya.com/CT_paper6.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h3 id="3-1-投影加权重建">3.1 投影加权重建</h3>
+<p>从投影正弦图中提取噪声信息，构造关于权重的对比噪声比（CNR）优化函数，求解最优权重，利用权重进行投影加权图像重建。</p>
+<ul>
+<li>基于<strong>投影加权</strong>的多能光子计数X线CT全能谱图像重建改进方法[1]</li>
+</ul>
+<p>针对包含不同对比材料的3种模体进行投影仿真–&gt;获得包含泊松和高斯噪声的投影正弦图–&gt;从投影正弦图中提取噪声信息–&gt;构造关于权重的<strong>对比噪声比</strong>优化函数–&gt;求解使对比噪声比最优的权重–&gt;利用该权重进行投影加权图像重建</p>
+<p>噪声来源：与 Ｘ线相关的噪声，包括Ｘ线光子数随机变化引起的噪声、Ｘ 线进行光电转换时产生的噪声等，这些噪声服从泊松随机分布，称为泊松噪声；此外，还存在与 Ｘ 线无关的噪声，如成像系统中探测器单元的电子噪声、探测器读出电路的读出噪声等，这部分噪声的幅度服从高斯概率密度分布，称为高斯噪声。</p>
+<h3 id="3-2-图像加权重建">3.2 图像加权重建</h3>
+<p>利用某一种重建算法将各能量段投影数据转换为图像，对图像进行加权求和。</p>
+<ul>
+<li>基于<strong>图像加权</strong>的多能光子计数X线CT全能谱图像重建改进方法[2]</li>
+</ul>
+<p>对每个能量段的投影数据采用<strong>最大后验概率（MAP）统计重建算法</strong>进行图像重建–&gt;对各能量段图像进行优化加权求和，获得全能谱图像。</p>
+<p>MAP统计重建算法可显著提高全能谱重建图像的对比噪声比（CNR）。</p>
+<p>根据每个能量段图像中对比材料和背景材料衰减系数差异构造权重，然后将权重赋予每个能量段图像进行加权求和，得到全能谱重建图像，这种方法被称为<strong>图像加权成像法</strong>。</p>
+<ul>
+<li>多能光子计数X-CT能量加权图像重建方法[3]</li>
+</ul>
+<p>对各能量段投影进行<strong>FBP</strong>重建，并将各FBP重建图像加权求和获得最终的重建图像。</p>
+<h3 id="3-3-正则化约束项的迭代类重建">3.3 正则化约束项的迭代类重建</h3>
+<ul>
+<li>多通道联合的广义总变分能谱CT重建[4]</li>
+</ul>
+<p>压缩感知理论的出现，使<strong>正则化约束项的迭代类重建算法</strong>发挥出巨大的潜力。能谱 CT 重建中，正则化约束项以<strong>先验图像引导和稀疏性条件</strong>为主。先验图像引导以 Yu 采用全光谱图像作为先验图像的压缩感知(prior image constrained compressed sensing，PICCS)算法为代表，稀疏性条件包括全变分、紧框架、小波和字典学习等已被应用于 CT 重建，并取得了不同程度的成功。受空间域信息相关性的启发，Zhang等将总变分与能谱均值相结合，提高重建图像的质量。Li 等提出一种能谱非局部均值的方法，利用图像相关性来抑制噪声和条纹伪影。Hu 等利用张量字典块的稀疏性表示来提高重建质量。陈佩君等提出一种总变分与传统张量字典学习结合的重建算法，可进一步恢复图像的微小结构，有效抑制噪声。为了更好地利用能谱 CT 在能量轴方向的信息相关性，Rigie等将总变分向矢量延伸，提出了总核变分(total nuclear variation，TNV)正则化方法，可以更好地保存图像特征。Niu 等提出了一种alpha 发散约束的广义总变分(total generalized variation，TGV)方法用于稀疏视角X 射线CT 图像重建，有效地消除总变分正则化中经常出现的阶梯状和斑片状伪影。</p>
+<p>在重建过程中，通道数的增加会造成单通道中光子数减少，从而导致重建图像质量下降，难以满足实际需求。</p>
+<p>本文从能谱 CT 重建的角度出发，将广义总变分向矢量延伸，利用奇异值的稀疏性，促进图像梯度的线性依赖，提出一种**基于核范数的多通道联合TGV（广义总变分）**的能谱 CT 重建算法。</p>
+<ul>
+<li>光子探测器CT低流速低剂量CTPA图像质量的客观评估[5]</li>
+</ul>
+<h3 id="3-4-基于深度学习的重建">3.4 基于深度学习的重建</h3>
+<p>神经网络直接提取图像中噪声的特征信息，通过与标准图像作对比抑制训练图像中的噪声。</p>
+<ul>
+<li>基于全卷积金字塔残差网络的能谱 CT 图像降噪研究[6]</li>
+</ul>
+<p>将全卷积网络和金字塔残差网络结合为全卷积金字塔残差网络（FCPRN）</p>
+<p>利用能谱CT 在不同的能量范围扫描小鼠样本 ，使用 FDK 算法和基于压缩感知的Split-Bregman算法进行重建并分别作为训练数据和标签数据训练全卷积金字塔残差网络。</p>
+<p>与DNCN、REDCNN进行对比。</p>
+<p>模型对FDK算法重建出的图像进行降噪，由此提高能谱CT图像降噪效率，保证能谱CT重建图像的质量。</p>
+<p>在能谱CT 图像降噪研究方面 ，现多采用迭代重建算法对投影数据进行重建以抑制噪声。例如 Clark等结合图像的稀疏特性和能谱CT 图像相关性以构建重建目标函数 ，提高了能谱CT 图像重建效果。 Rigie和 Riviere等提出了一种基于矢量全变分（TV）的能谱CT 重建算法。上述图像重建降噪算法可以较好的抑制能谱CT 重建图像中的噪声 ，但算法复杂度较高、计算时间较长。</p>
+<p>近年来 ，深度学习在 CT 图像降噪领域中得到了广泛应用。神经网络可以直接提取图像中噪声的特征信息 ，进而通过与标准图像作对比抑制训练图像中的噪声。例如 Chen等研究一种 CT 图像去噪的浅层卷积神经网络模型 ，基于该网络提出了残差编码器-解码器卷积神经网络 ，并使用反卷积网络和快捷连接以增强网络降噪性能。</p>
+<h2 id="四，光子计数CT重建与传统CT重建的区别">四，光子计数CT重建与传统CT重建的区别</h2>
+<h3 id="4-1-投影">4.1 投影</h3>
+<ul>
+<li>
+<p>传统CT：通过对投影数据进行预处理，包括自适应滤波、均方的滤波 ，基于图像 K-L 变换的加权最小均方和噪声分离滤波等。近来的研究重点在于学习型稀疏表示方法。</p>
+</li>
+<li>
+<p>光子计数CT：从投影正弦图中提取噪声信息，构造关于权重的对比噪声比（CNR）优化函数，求解最优权重，利用权重进行投影加权图像重建。</p>
+</li>
+</ul>
+<h3 id="4-2-图像">4.2 图像</h3>
+<ul>
+<li>
+<p>传统CT：</p>
+<ul>
+<li>传统：基于非局部均值（NLM）。从高质量CT图像中提取有效的特征信息，为低质量的CT图像处理提供先验指导。</li>
+<li>基于深度学习：网络框架改进（CNN、GAN、RNN），功能模块设计（注意力模块），训练策略改进（有监督、无监督）</li>
+</ul>
+</li>
+<li>
+<p>光子计数CT：</p>
+<ul>
+<li>利用某一种重建算法将各能量段投影数据转换为图像，对图像进行加权求和。</li>
+<li>神经网络直接提取图像中噪声的特征信息，通过与标准图像作对比抑制训练图像中的噪声。类似于传统CT中基于深度学习的方法。</li>
+</ul>
+</li>
+</ul>
+<h3 id="4-3-迭代重建">4.3 迭代重建</h3>
+<ul>
+<li>
+<p>传统CT：</p>
+<ul>
+<li>
+<p>传统：</p>
+<ul>
+<li>
+<p>解析重建：FBP、FDK</p>
+</li>
+<li>
+<p>迭代重建：</p>
+<ul>
+<li>
+<p>代数迭代</p>
+</li>
+<li>
+<p>统计迭代（SIR，重建效果最好）</p>
+<p>与稀疏学习表示约束结合，最常用的是TV（总变分）约束迭代重建和基于特征字典学习进行稀疏表示。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>基于深度学习：学习FBP、学习正则项、学习迭代求解</p>
+</li>
+</ul>
+</li>
+<li>
+<p>光子计数CT:</p>
+<ul>
+<li>正则化约束项的迭代重建
+<ul>
+<li>先验图像引导</li>
+<li>稀疏性条件：总变分、紧框架、小波、字典学习</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="五，光子计数CT临床应用">五，光子计数CT临床应用</h2>
+<h3 id="5-1-能谱纯化结合迭代重建算法">5.1  能谱纯化结合迭代重建算法</h3>
+<p>2022 年 2 月武汉市肺科医院放射科发表的一篇文章[7]</p>
+<ul>
+<li>
+<p>目的：探讨基于能谱纯化结合迭代重建算法在继发性肺结核患者低剂量CT检查中的应用。</p>
+</li>
+<li>
+<p>方法：选取2019年4月至6月武汉市肺科医院确诊的70例继发性肺结核患者作为研究对象。初检采用常规剂量组：管电压110 kV，参考管电流52 mAs，滤波反投影（FBP）重建图像；复检采用低剂量组（能谱纯化）：管电压Sn 110 kV，参考管电流73 mAs，正弦图迭代重建（SAFIRE）。比较两组图像主观评分、升主动脉CT值、图像噪声、SNR及辐射剂量差异。</p>
+</li>
+<li>
+<p>结果：两组图像主观评分相比无差异，满足临床诊断要求。两组升主动脉CT值无差异；低剂量组图像SNR低于常规剂量组。低剂量组ED（0.36±0.15）mSv与常规剂量组（2.35±0.73）mSv相比降低约84.7％。</p>
+</li>
+<li>
+<p><strong>结论：能谱纯化结合迭代重建算法在继发性肺结核患者检查中能够显著降低患者所受辐射剂量，同时图像质量也能满足临床诊断要求。</strong></p>
+</li>
+</ul>
+<h3 id="5-2-光子探测器CT低流速低剂量CTPA图像质量的客观评估">5.2 光子探测器CT低流速低剂量CTPA图像质量的客观评估</h3>
+<p>2021年中国医学科学院北京协和医学院北京协和医院放射科[5]</p>
+<ul>
+<li>目的：客观评估应用光子探测器CT行低流速低剂量对比剂CT肺动脉造影(CTPA)不同单能谱下的图像质量，探究CTPA的最佳单能谱图像。</li>
+<li>方法：纳入行CTPA检查的患者47例， 所有患者均用光子探测器CT进行CTPA扫描，扫描范围自胸廓入口至膈肌水平，以10 keV间距重建9个单能谱图像，分别为40、50、60、70、80、90、100、110、120 keV的图像。在肺动脉主干(PA)、右肺动脉主干(RP)、左肺动脉主干(LP)、右肺上叶动脉(URP)、右肺下叶动脉(LRP)、左肺上叶动脉(ULP)、左肺下叶动脉(LLP)勾画20 mm2感兴趣区，记录各个感兴趣区及右主气管、背阔肌组织的CT值和标准差，计算不同能谱等级下图像的信噪比(SNR)、对比噪声比(CNR)。采用Wilcoxon秩和检验对比不同单能谱等级的CT值、SNR和CNR。</li>
+<li>结果：单能谱40 keV时肺动脉主干CT值594. 17 HU(434.16～829.52) HU、SNR16.88(7.35 ～30.12)和CNR 15.63 (6.7 ～ 26.54)，均显著高于50 ～ 120 keV能级组，Z( PA、LA、RA)=5.968，P＜0.05差异具有统计学意义。单能谱40 keV时RP、LP、URP、LRP、ULP、LLP的CT值均显著高于50 ～ 120 keV组，Z(URP、LRP、ULP、LLP) =5.968，P＜0.05差异具有统计学意义。</li>
+<li><strong>结论：应用光子探测器CT行低流速低剂量对比剂CTPA，可获得高对比度、高信噪比的图像，最佳单能谱等级为40 keV。应用光子探测器CT可弥补肺动脉强化不佳导致无法诊断的难题，能进一步减少对比剂不良事件的发生，值得临床推广应用。</strong></li>
+</ul>
+<h2 id="参考文献">参考文献</h2>
+<p>[1] 周正东,管绍林,余子丽,等. 基于投影加权的多能光子计数X线CT全能谱图像重建改进方法[J]. 东南大学学报（自然科学版）,2016,46(6):1126-1131. DOI:10.3969/j.issn.1001-0505.2016.06.003.</p>
+<p>[2] 周正东,管绍林,涂佳丽,等. 基于图像加权的多能光子计数X线CT全能谱图像重建改进方法[J]. 东南大学学报（自然科学版）,2017,47(5):892-896. DOI:10.3969/j.issn.1001-0505.2017.05.009.</p>
+<p>[3] 余子丽,周正东,张雯雯,等. 多能光子计数X-CT能量加权图像重建方法[J]. 中国医学物理学杂志,2016,33(2):141-145. DOI:10.3969/j.issn.1005-202X.2016.02.007.</p>
+<p>[4] 连祥媛,孔慧华,潘晋孝,等. 多通道联合的广义总变分能谱CT重建[J]. 光电工程,2021(9). DOI:10.12086/oee.2021.210211.</p>
+<p>[5] 杜华阳,宋伟,隋昕,等. 光子探测器CT低流速低剂量CTPA图像质量的客观评估[J]. 临床放射学杂志,2021,40(3):470-475.</p>
+<p>[6] 任学智,何鹏,龙邹荣,等. 基于全卷积金字塔残差网络的能谱CT图像降噪研究[J]. 光谱学与光谱分析,2021(9). DOI:10.3964/j.issn.1000-0593(2021)09-2950-06.</p>
+<p>[7] 姜一, 田葵, 沙晋璐, 等. 基于能谱纯化结合迭代重建算法在继发性肺结核患者低剂量CT检查中的应用[J]. CT理论与应用研究, 2022, 31(1): 95-101. DOI: 10.15953/j.1004-4140.2022.31.01.11</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%96%87%E7%8C%AE/CT/">CT</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%96%87%E7%8C%AE/">文献</a>
+                    
+                      <a class="hover-with-bg" href="/tags/CT/">CT</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/02/14/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/paperer-DeamNet/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">精读Adaptive Consistency Prior based Deep Network for Image Denoising</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/02/11/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E9%98%85%E8%AF%BB%E6%96%B9%E6%B3%95/how-output-paper/">
+                        <span class="hidden-mobile">研究新意度和论文思路方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/CT/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/';
+          this.page.identifier = '/2022/02/12/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/CT/%E5%85%89%E5%AD%90%E8%AE%A1%E6%95%B0CT%E9%87%8D%E5%BB%BA%E7%AE%97%E6%B3%95/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
