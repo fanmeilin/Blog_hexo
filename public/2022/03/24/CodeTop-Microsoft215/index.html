@@ -20,7 +20,7 @@
   <meta name="author" content="Meilin Fan">
   <meta name="keywords" content="个人博客,学习,生活">
   
-  <title>剑指offer45 把数组排成最小的数 - 待时</title>
+  <title>CodeTop_Microsoft215 数组中的第K个最大元素 - 待时</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -236,7 +236,7 @@
 			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
             <div class="mask flex-center">
 			  <div class="page-header text-center fade-in-up">
-				<span class="h2" id="subtitle" title="剑指offer45 把数组排成最小的数">
+				<span class="h2" id="subtitle" title="CodeTop_Microsoft215 数组中的第K个最大元素">
 				  
 				</span>
 
@@ -246,8 +246,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-12-28 14:07" pubdate>
-        2021年12月28日 下午
+      <time datetime="2022-03-24 15:27" pubdate>
+        2022年3月24日 下午
       </time>
     </span>
   
@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      522 字
+      1.3k 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      7
+      17
        分钟
     </span>
   
@@ -298,36 +298,68 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">剑指offer45 把数组排成最小的数</h1>
+            <h1 style="display: none">CodeTop_Microsoft215 数组中的第K个最大元素</h1>
             
             <div class="markdown-body">
               <blockquote>
-<p>把数组排成最小的数</p>
+<p>数组中的第K个最大元素</p>
 </blockquote>
 <h2 id="题目">题目</h2>
-<p>输入一个非负整数数组，把数组里所有数字拼接起来排成一个数，打印能拼接出的所有数字中最小的一个。</p>
+<p>给定整数数组 nums 和整数 k，请返回数组中第 k 个最大的元素。</p>
+<p>请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素。</p>
 <h3 id="示例-1：">示例 1：</h3>
-<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: [10,2]</span><br><span class="hljs-section">输出: "102"</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight makefile"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><span class="hljs-section">输入: [3,2,1,5,6,4] 和 k = 2</span><br><span class="hljs-section">输出: 5</span><br></code></pre></td></tr></tbody></table></figure>
 <h3 id="示例-2：">示例 2：</h3>
-<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: [<span class="hljs-number">3,30,34,5</span>,<span class="hljs-number">9</span>]<br>输出: "<span class="hljs-number">3033459</span>"<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入: [<span class="hljs-number">3,2,3,1</span>,<span class="hljs-number">2,4,5,5</span>,<span class="hljs-number">6</span>] 和 k = <span class="hljs-number">4</span><br>输出: <span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure>
 <h3 id="提示：">提示：</h3>
 <ul>
-<li>0 &lt; nums.length &lt;= 100</li>
-<li>输出结果可能非常大，所以你需要返回一个字符串而不是整数</li>
-<li>拼接起来的数字可能会有前导 0，最后结果不需要去掉前导 0</li>
+<li>1 &lt;= k &lt;= nums.length &lt;= 104</li>
+<li>-104 &lt;= nums[i] &lt;= 104</li>
 </ul>
 <h2 id="题解">题解</h2>
-<p>方法主要是用到自定义排序；<br>
-在<code>python3</code>中的自定义排序要重载<code>functools.cmp_to_key</code>函数，但是这里的规则是<strong>默认小的在前面</strong>；所以在比较的时候重载<code>mycmp</code>方法，a,b顺序满足条件时返回-1(num&lt;0)</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">cmp_to_key</span>(<span class="hljs-params">mycmp</span>):</span><br>    <span class="hljs-string">"""Convert a cmp= function into a key= function"""</span><br>    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">K</span>(<span class="hljs-params"><span class="hljs-built_in">object</span></span>):</span><br>        __slots__ = [<span class="hljs-string">'obj'</span>]<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self, obj</span>):</span><br>            self.obj = obj<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__lt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__gt__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt; <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__eq__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) == <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__le__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &lt;= <span class="hljs-number">0</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__ge__</span>(<span class="hljs-params">self, other</span>):</span><br>            <span class="hljs-keyword">return</span> mycmp(self.obj, other.obj) &gt;= <span class="hljs-number">0</span><br>        __hash__ = <span class="hljs-literal">None</span><br>    <span class="hljs-keyword">return</span> K<br></code></pre></td></tr></tbody></table></figure>
-<p>另外，直接将ab拼接进行比较大小，这里直接使用字符串比较大小更快哦~</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">minNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">str</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">funccmp</span>(<span class="hljs-params">a,b</span>):</span><br>            x,y = a+b,b+a<br>            <span class="hljs-keyword">if</span> <span class="hljs-built_in">int</span>(x)&lt;<span class="hljs-built_in">int</span>(y): <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sort_rule</span>(<span class="hljs-params">x, y</span>):</span><br>            a, b = x + y, y + x <span class="hljs-comment">#可以直接对字符串比较，更快</span><br>            <span class="hljs-keyword">if</span> a &gt; b: <span class="hljs-keyword">return</span> <span class="hljs-number">1</span><br>            <span class="hljs-keyword">elif</span> a &lt; b: <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>: <span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br><br>        s = [<span class="hljs-built_in">str</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums]<br>        t = <span class="hljs-built_in">sorted</span>(s,key = functools.cmp_to_key(sort_rule))    <br>        <span class="hljs-comment">#重载比较函数，在python的重载cmp_to_key时默认是小的元素排在前面，所以在满足条件时返回-1，其他情况大于-1即可</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-string">''</span>.join(t)<br></code></pre></td></tr></tbody></table></figure>
-<p>还有两个函数需要掌握</p>
+<p>该题有三种解法：</p>
 <ul>
-<li><code>''.join(t)</code>可以使用指定的字符串连接数组</li>
-<li>对列表循环操作创建可以使用<code>[func(x) for x in nums]</code></li>
-<li>也可以使用map函数 <code>list(map(func,nums))</code>或者lambda函数<code>list(map(lambda x:...,nums))</code></li>
+<li>排序</li>
+<li>分而治之（使用快排的pivot）</li>
+<li>优先队列</li>
 </ul>
+<p>重点应该理解第二种方法，还有要注意这里题目的意思是<strong>第K大</strong>。</p>
+<h3 id="排序">排序</h3>
+<p>使用排序是效率最低的方法，其空间复杂度为O(N),时间复杂度为O(NlogN)</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findKthLargest</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], k: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        nums = <span class="hljs-built_in">sorted</span>(nums)<br>        <span class="hljs-keyword">return</span> nums[<span class="hljs-built_in">len</span>(nums)-k]<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="分治法">分治法</h3>
+<p>主要就是对快速排序中的<code>partition</code>的理解，将pivot放到其正确的位置，使其左右的元素要么大于pivot，要么小于pivot(等于的情况在任意一边即可)。</p>
+<p>对于归位好的pivot可以得到它的下标，根据其下标和k进行比较，判断继续对pivot的左半部分还是右半部分继续查找。</p>
+<blockquote>
+<p>这里又分为递归的方法，循环的方法。递归时空间复杂度为O(logN),时间复杂度为O(N)【O(2N-1)】,每次将pivot位的时间复杂度位O(N)</p>
+</blockquote>
+<h4 id="partition">partition</h4>
+<p>先总结以下pivot的partition的方法：</p>
+<h5 id="exchange">exchange</h5>
+<p>注意首元素作为<code>pivot</code>，**先移动<code>j</code>指针到需要交换的元素，再移动<code>i</code>指针到需要交换的元素。**用于约束<code>i</code>的范围，最后交换首元素和停止的位置。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params">Istart, Iend, nums</span>):</span>     <br>    <span class="hljs-keyword">if</span> Istart&gt;Iend: <span class="hljs-keyword">return</span><br>    pivot = nums[Istart]<br>    i,j = Istart,Iend<br>    <span class="hljs-keyword">while</span> i&lt;j: <br>        <span class="hljs-keyword">while</span> i&lt;j <span class="hljs-keyword">and</span> nums[j]&gt;pivot: j-=<span class="hljs-number">1</span>  <span class="hljs-comment">#先j后i，约束i</span><br>        <span class="hljs-keyword">while</span> i&lt;j <span class="hljs-keyword">and</span> nums[i]&lt;=pivot:i+=<span class="hljs-number">1</span><br>        nums[i],nums[j] = nums[j],nums[i]<br>    nums[j],nums[Istart] = pivot,nums[j] <span class="hljs-comment">#最后ij都会指向同一元素</span><br>	<span class="hljs-keyword">return</span> j<br></code></pre></td></tr></tbody></table></figure>
+<p>也可以不采用交换的方法，将pivot移到对应的位置</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params">Istart, Iend, nums</span>):</span>     <br>    <span class="hljs-keyword">if</span> Istart&gt;Iend: <span class="hljs-keyword">return</span><br>    pivot = nums[Istart]<br>    i,j = Istart,Iend<br>    <span class="hljs-keyword">while</span> i&lt;j: <br>        <span class="hljs-keyword">while</span> i&lt;j <span class="hljs-keyword">and</span> nums[j]&gt;pivot: j-=<span class="hljs-number">1</span>  <span class="hljs-comment">#先j后i，约束i</span><br>        nums[i] = nums[j] <br>        <span class="hljs-keyword">while</span> i&lt;j <span class="hljs-keyword">and</span> nums[i]&lt;=pivot:i+=<span class="hljs-number">1</span><br>        nums[j] = nums[i]<br>    nums[j] = pivot <span class="hljs-comment">#最后ij都会指向同一元素</span><br>	<span class="hljs-keyword">return</span> j<br></code></pre></td></tr></tbody></table></figure>
+<h5 id="荷兰国旗的变种">荷兰国旗的变种</h5>
+<p>不采用交换的方法，遍历数组，将小于等于pivot的元素都放置到数组的前方就好了，这样之后的元素自然是大于pivot的数字，代码更加简洁易懂。这里将最后的元素作为pivot，使用j来遍历数组。它在最后被赋值时，这里要注意不包含最后的元素。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params">Istart,Iend</span>):</span> <span class="hljs-comment">#快排partition的变形</span><br>    <span class="hljs-keyword">if</span> Istart &gt; Iend: <span class="hljs-keyword">return</span><br>    pivot,i = nums[Iend],Istart <span class="hljs-comment">#末尾元素作为pivot</span><br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Istart,Iend): <span class="hljs-comment">#j遍历 注意不包括最后的数字pivot </span><br>        <span class="hljs-keyword">if</span> nums[j]&lt;=pivot: <br>            nums[i],nums[j] = nums[j],nums[i]<br>            i += <span class="hljs-number">1</span><br>    nums[i],nums[Iend] = nums[Iend],nums[i]<br>    <span class="hljs-keyword">return</span> i <br></code></pre></td></tr></tbody></table></figure>
+<p>也可以在循环遍历的过程中将pivot归位。此时将<code>i</code>初始化为<code>Istart-1</code>，每次指向待交换的下标。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params">Istart,Iend</span>):</span> <span class="hljs-comment">#快排partition的变形</span><br>    <span class="hljs-keyword">if</span> Istart &gt; Iend: <span class="hljs-keyword">return</span><br>    pivot,i = nums[Iend],Istart-<span class="hljs-number">1</span> <span class="hljs-comment">#末尾元素作为pivot</span><br>    <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Istart,Iend+<span class="hljs-number">1</span>): <br>        <span class="hljs-keyword">if</span> nums[j]&lt;=pivot: <br>            i += <span class="hljs-number">1</span><br>            nums[i],nums[j] = nums[j],nums[i] <span class="hljs-comment">#交换i和j的元素</span><br>    <span class="hljs-keyword">return</span> i <br></code></pre></td></tr></tbody></table></figure>
+<h4 id="完整代码">完整代码</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findKthLargest</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], k: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">getIndex</span>(<span class="hljs-params">Istart,Iend</span>):</span> <span class="hljs-comment">#快排partition的变形</span><br>            <span class="hljs-keyword">if</span> Istart &gt; Iend: <span class="hljs-keyword">return</span><br>            pivot,i = nums[Iend],Istart-<span class="hljs-number">1</span> <span class="hljs-comment">#末尾元素作为pivot</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(Istart,Iend+<span class="hljs-number">1</span>): <br>                <span class="hljs-keyword">if</span> nums[j]&lt;=pivot: <br>                    i += <span class="hljs-number">1</span><br>                    nums[i],nums[j] = nums[j],nums[i] <span class="hljs-comment">#交换i和j的元素</span><br>            <span class="hljs-keyword">return</span> i    <br>        left,right = <span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:<br>            index = getIndex(left,right) <span class="hljs-comment">#使用循环比使用递归的内存消耗要少 这样空间复杂度为O(1)</span><br>            <span class="hljs-keyword">if</span> index==<span class="hljs-built_in">len</span>(nums)-k:<span class="hljs-keyword">return</span> nums[index]<br>            <span class="hljs-keyword">elif</span> index&gt;<span class="hljs-built_in">len</span>(nums)-k:  right = index-<span class="hljs-number">1</span>  <span class="hljs-comment">#j表示第j-1大的数字</span><br>            <span class="hljs-keyword">else</span>: left = index+<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure>
+<p>此时的时间复杂度为O(N)【每一次查找的时间复杂度为N，但是不需要logn次,O(2N-1)】空间复杂度为O(1)。如果使用递归那么空间复杂度为O(logN)。</p>
+<h3 id="优先队列">优先队列</h3>
+<p>使用java的PriorityQueue，默认是小根堆，选出第k大的元素，如果说大于k元素就弹出堆顶元素，最后只剩下k个元素返回堆顶。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">findKthLargest</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] nums, <span class="hljs-keyword">int</span> k)</span> </span>{<br>        PriorityQueue&lt;Integer&gt; heap = <span class="hljs-keyword">new</span> PriorityQueue&lt;&gt;();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> num : nums) {<br>            heap.add(num);<br>            <span class="hljs-keyword">if</span> (heap.size() &gt; k) {<br>                heap.poll();<br>            }<br>        }<br>        <span class="hljs-keyword">return</span> heap.peek();<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>peek()	//返回队首元素</p>
+<p>poll()	//返回队首元素，队首元素出队列</p>
+<p>add()	//添加元素</p>
+<p>size()	//返回队列元素个数</p>
+<p>isEmpty()	//判断队列是否为空，为空返回true,不空返回false</p>
+</blockquote>
+<p>时间复杂度：O(NlogK)，遍历数据 O(N)，堆内元素调整 O(logK)；<br>
+空间复杂度：O(K)。</p>
 
             </div>
             <hr>
@@ -337,9 +369,11 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/">剑指</a>
+                      <a class="hover-with-bg" href="/categories/CodeTop/">CodeTop</a>
                     
-                      <a class="hover-with-bg" href="/categories/%E5%89%91%E6%8C%87/%E6%8E%92%E5%BA%8F/">排序</a>
+                      <a class="hover-with-bg" href="/categories/CodeTop/%E5%BE%AE%E8%BD%AF/">微软</a>
+                    
+                      <a class="hover-with-bg" href="/categories/CodeTop/%E5%BE%AE%E8%BD%AF/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -347,9 +381,11 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
+                      <a class="hover-with-bg" href="/tags/CodeTop/">CodeTop</a>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%89%91%E6%8C%87/">剑指</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BE%AE%E8%BD%AF/">微软</a>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8E%92%E5%BA%8F/">排序</a>
                     
                   </div>
                 
@@ -366,18 +402,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/12/29/project_tool/usePyembeded/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">python-embeded打包文件生成exe</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/12/26/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/leetcode/leetcode14/">
-                        <span class="hidden-mobile">剑指leetcode14 最长公共前缀</span>
+                      <a href="/2022/03/23/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop_Microsoft206/">
+                        <span class="hidden-mobile">CodeTop_Microsoft53 反转链表</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -399,8 +429,8 @@
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2021/12/28/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/leetcode/leetcode-offer45/';
-          this.page.identifier = '/2021/12/28/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/leetcode/leetcode-offer45/';
+          this.page.url = 'https://fanmeilin.github.io/2022/03/24/CodeTop-Microsoft215/';
+          this.page.identifier = '/2022/03/24/CodeTop-Microsoft215/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
