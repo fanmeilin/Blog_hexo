@@ -402,7 +402,13 @@ $$<br>
 这里的$N_{adtual}$表示阴影区域的实际数目，$N_{max}$经验取值为8。也就是最大的区域数目限制在8以下。</p>
 <h3 id="3-2-标签数据的多任务监督损失">3.2 标签数据的多任务监督损失</h3>
 <p>对于带标签的数据，我们可以有一对数据（输入的图像和对应的掩膜）；因此我们将带标签掩膜数据作为阴影检测（$G_r$）的ground-truth。同时，我们将Canny算子（边缘检测算子）应用于标签掩膜生成对应的边缘图作为阴影边缘检测的ground-true（$G_e$）。我们进一步观察每一个标注图像，手动计算阴影区域的数目。这个是阴影计数的基础（$G_c$）。</p>
-<p>在得到ground-truth之后，多任务监督损失（表示为$\mathcal{L}<sup>s$）是将阴影区域检测损失（$\mathcal{L}</sup>s_r$）阴影边缘检测损失（$\mathcal{L}<sup>s_e$）和阴影计数损失（$\mathcal{L}</sup>s_c$）三者相加得到:</p>
+<p>在得到ground-truth之后<br>
+多任务监督损失(表示为$\mathcal{L}^s$）是将以下三者相加得到:</p>
+<ol>
+<li>阴影区域检测损失（$\mathcal{L}^s_r$）</li>
+<li>阴影边缘检测损失（$\mathcal{L}^s_e$）</li>
+<li>阴影计数损失（$\mathcal{L}^s_c$）</li>
+</ol>
 
 $$
 \mathcal{L}^s(x) = \mathcal{L}^s_r+\alpha \mathcal{L}^s_e + \beta \mathcal{L}^s_c \quad \quad (5)
@@ -611,7 +617,7 @@ $$
                     
                       <a href="/2022/03/19/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft53/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CodeTop_Microsoft53最大子数组和</span>
+                        <span class="hidden-mobile">CodeTop_Microsoft53 最大子数组和</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
