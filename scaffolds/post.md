@@ -1,8 +1,8 @@
 ---
-title: 剑指offer{{ title }}
+title: {{ title }}
 date: {{ date }}
-tags: 剑指
-categories: 剑指
+tags: [CodeTop,微软,]
+categories: [CodeTop,微软,]
 ---
 
 >

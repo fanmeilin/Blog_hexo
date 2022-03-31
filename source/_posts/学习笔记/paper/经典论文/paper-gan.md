@@ -1,12 +1,11 @@
 ---
-title: NIPS-2014-generative-adversarial-nets-Paper
+title: generative adversarial nets
 tags: [学习笔记,经典论文]
 categories: [学习笔记,paper]
 date: 2022-01-04 15:48:20
 ---
 
-> 笔记记录再pdf中，所以就直接放pdf在此处叭~ :wink:
-
+> 笔记记录于pdf中，所以就直接放pdf在此处~ :wink:
 ### 学习视频链接
 
 https://www.bilibili.com/video/BV1rb4y187vD?spm_id_from=333.999.0.0
