@@ -21,4 +21,4 @@ https://paper.mulindya.com/moco.pdf
 
 ### 论文pdf
 
-<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/moco.pdff' width=100% height=600></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/moco.pdf' width=100% height=700></iframe>

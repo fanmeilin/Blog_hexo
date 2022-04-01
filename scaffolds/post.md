@@ -1,8 +1,8 @@
 ---
 title: {{ title }}
 date: {{ date }}
-tags: [CodeTop,微软,]
-categories: [CodeTop,微软,]
+tags: CodeTop,微软,
+categories: CodeTop,微软,
 ---
 
 >

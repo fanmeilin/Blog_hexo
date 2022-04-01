@@ -20,4 +20,4 @@ https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf
 
 ### 论文pdf
 
-<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf' width=100% height=600></iframe>
+<iframe src='/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf' width=100% height=700></iframe>

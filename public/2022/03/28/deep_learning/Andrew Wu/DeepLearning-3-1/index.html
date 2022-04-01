@@ -246,8 +246,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-03-24 21:01" pubdate>
-        2022年3月24日 晚上
+      <time datetime="2022-03-28 21:01" pubdate>
+        2022年3月28日 晚上
       </time>
     </span>
   
@@ -258,7 +258,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      457 字
+      910 字
     </span>
   
 
@@ -268,7 +268,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      4
+      9
        分钟
     </span>
   
@@ -353,6 +353,25 @@ $$<br>
 所以需要一个单实数评估指标可以提高优化算法的效率，或是提高团队做出决策的效率。</p>
 <h2 id="满足和优化指标">满足和优化指标</h2>
 <p>如何设置优化和满足指标</p>
+<p>在满足某个指标的情况下（比如运行时间），优化某个指标（比如准确率）。</p>
+<p>对于N个指标 可能是1个优化，N-1个满足指标。需要明确满足指标和优化指标。</p>
+<h2 id="train-dev-test-dataset">train dev test dataset</h2>
+<p>dev也是验证集</p>
+<p>在选择验证集和测试集要能够翻译未来会得到的数据，认为很重要的数据。dev数据集和test数据集可能来自相同分布，未来得到的新的数据要随机分配到dev和test数据集中。</p>
+<h3 id="数据集划分">数据集划分</h3>
+<p>机器学习早期 数据量比较小的时候（100，1000，10000）</p>
+<p>train：test 分为7：3</p>
+<p>train：dev：test分为6：2：2</p>
+<p>现代机器学习 拥有海量数据</p>
+<p>如果有一百万数据的话，应该98%作为训练集 1%为开发集 1%为测试集</p>
+<p>test数据集的作用是完成系统开发之后，评估投产系统的性能，所以要令test数据集的数目能够以高置信度评估系统的整体性能即可。这个数目远小于总数据集的30%。</p>
+<p>有时，人们只把数据集分成训练集和开发集，但是不建议。</p>
+<h3 id="改变开发-测试集和指标">改变开发-测试集和指标</h3>
+<p>根据需求和效果改变评估指标，修改惩罚因子的大小</p>
+<p>两个独立步骤：设立目标，如何精准瞄准目标；</p>
+<p>如果开发中得到的结果和用户使用时得到的结果相差很大时，说明开发集不够好，要使用在实际使用中真正需要，且够完备。</p>
+<h4 id="模型表现">模型表现</h4>
+<p>机器学习任务在学习过程中开始会很快达到人类水平，之后会缓慢增加性能逼近只贝叶斯最优错误率</p>
 
             </div>
             <hr>
@@ -391,9 +410,9 @@ $$<br>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/03/25/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft124/">
+                      <a href="/2022/03/29/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft236/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">CodeTop_Microsoft124 二叉树的最大路径和</span>
+                        <span class="hidden-mobile">CodeTop_Microsoft236 二叉树的最近公共祖先</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -401,8 +420,8 @@ $$<br>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/03/24/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft215/">
-                        <span class="hidden-mobile">CodeTop_Microsoft215数组中的第K个最大元素</span>
+                      <a href="/2022/03/25/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft124/">
+                        <span class="hidden-mobile">CodeTop_Microsoft124 二叉树的最大路径和</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -424,8 +443,8 @@ $$<br>
     
       <script type="text/javascript">
         var disqus_config = function() {
-          this.page.url = 'https://fanmeilin.github.io/2022/03/24/deep_learning/Andrew%20Wu/DeepLearning-3-1/';
-          this.page.identifier = '/2022/03/24/deep_learning/Andrew%20Wu/DeepLearning-3-1/';
+          this.page.url = 'https://fanmeilin.github.io/2022/03/28/deep_learning/Andrew%20Wu/DeepLearning-3-1/';
+          this.page.identifier = '/2022/03/28/deep_learning/Andrew%20Wu/DeepLearning-3-1/';
         };
         Fluid.utils.loadComments('#disqus_thread', function() {
           var d = document, s = d.createElement('script');
