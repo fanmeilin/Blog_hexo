@@ -4,6 +4,39 @@
   
     
     <entry>
+      <title>CodeTop_Microsoft106 从中序与后序遍历序列构造二叉树</title>
+      <link href="/2022/04/01/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft106/"/>
+      <url>/2022/04/01/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft106/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p><a href="https://leetcode-cn.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">从中序与后序遍历序列构造二叉树</a></p></blockquote><h2 id="题目">题目</h2><p>给定两个整数数组 inorder 和 postorder ，其中 inorder 是二叉树的中序遍历， postorder 是同一棵树的后序遍历，请你构造并返回这颗 二叉树 。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">inorder</span> = [<span class="hljs-number">9</span>,<span class="hljs-number">3</span>,<span class="hljs-number">15</span>,<span class="hljs-number">20</span>,<span class="hljs-number">7</span>], <span class="hljs-attr">postorder</span> = [<span class="hljs-number">9</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>,<span class="hljs-number">20</span>,<span class="hljs-number">3</span>]<br>输出：[<span class="hljs-number">3</span>,<span class="hljs-number">9</span>,<span class="hljs-number">20</span>,<span class="hljs-literal">null</span>,<span class="hljs-literal">null</span>,<span class="hljs-number">15</span>,<span class="hljs-number">7</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：inorder = <span class="hljs-comment">[-1]</span>, postorder = <span class="hljs-comment">[-1]</span><br>输出：<span class="hljs-comment">[-1]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= inorder.length &lt;= 3000</li><li>postorder.length == inorder.length</li><li>-3000 &lt;= inorder[i], postorder[i] &lt;= 3000</li><li>inorder 和 postorder 都由 不同 的值组成</li><li>postorder 中每一个值都在 inorder 中</li><li>inorder 保证是树的中序遍历</li><li>postorder 保证是树的后序遍历</li></ul><h2 id="题解">题解</h2><p>根据后序遍历中的节点定位根节点，在中序遍历序列查找该节点，以此可知左右子树的个数。从而确定后序序列中相应的左右子树的区间来递归左右子树根节点。</p><p>建立根节点，递归左子树和右子树返回左右子树根节点，返回根节点。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, val=0, left=None, right=None):</span><br><span class="hljs-comment">#         self.val = val</span><br><span class="hljs-comment">#         self.left = left</span><br><span class="hljs-comment">#         self.right = right</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buildTree</span>(<span class="hljs-params">self, inorder: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], postorder: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; TreeNode:</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">buildfunc</span>(<span class="hljs-params">posindex,start,end</span>):</span><br>            <span class="hljs-keyword">if</span> start&gt;end: <span class="hljs-keyword">return</span> <span class="hljs-literal">None</span><br>            root = TreeNode(postorder[posindex])<br>            index = inorder.index(postorder[posindex],start,end+<span class="hljs-number">1</span>)<br>            root.left = buildfunc(posindex-(end-index+<span class="hljs-number">1</span>),start,index-<span class="hljs-number">1</span>)<br>            root.right =  buildfunc(posindex-<span class="hljs-number">1</span>,index+<span class="hljs-number">1</span>,end)<br>            <span class="hljs-keyword">return</span> root<br>        <span class="hljs-keyword">return</span> buildfunc(<span class="hljs-built_in">len</span>(postorder)-<span class="hljs-number">1</span>,<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(inorder)-<span class="hljs-number">1</span>)<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CodeTop </category>
+          
+          <category> 微软 </category>
+          
+          <category> 树 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 树 </tag>
+            
+            <tag> CodeTop </tag>
+            
+            <tag> 微软 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>CodeTop_Microsoft146 LRU缓存</title>
       <link href="/2022/03/31/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft146/"/>
       <url>/2022/03/31/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop-Microsoft146/</url>
@@ -41,7 +74,7 @@
       <link href="/2022/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/moco/"/>
       <url>/2022/03/30/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/moco/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>笔记记录于pdf中，所以就直接放pdf在此处~ 😉</p></blockquote><h3 id="学习视频链接">学习视频链接</h3><p><a href="https://www.bilibili.com/video/BV1C3411s7t9?spm_id_from=333.880.my_history.page.click">https://www.bilibili.com/video/BV1C3411s7t9?spm_id_from=333.880.my_history.page.click</a></p><h3 id="pdf链接">pdf链接</h3><p><a href="https://paper.mulindya.com/moco.pdf">https://paper.mulindya.com/moco.pdf</a></p><h3 id="论文学习链接">论文学习链接</h3><p>更多论文请见：<a href="https://github.com/mli/paper-reading">https://github.com/mli/paper-reading</a></p><h3 id="论文pdf">论文pdf</h3><iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/moco.pdff" width="100%" height="600"></iframe>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>笔记记录于pdf中，所以就直接放pdf在此处~ 😉</p></blockquote><h3 id="学习视频链接">学习视频链接</h3><p><a href="https://www.bilibili.com/video/BV1C3411s7t9?spm_id_from=333.880.my_history.page.click">https://www.bilibili.com/video/BV1C3411s7t9?spm_id_from=333.880.my_history.page.click</a></p><h3 id="pdf链接">pdf链接</h3><p><a href="https://paper.mulindya.com/moco.pdf">https://paper.mulindya.com/moco.pdf</a></p><h3 id="论文学习链接">论文学习链接</h3><p>更多论文请见：<a href="https://github.com/mli/paper-reading">https://github.com/mli/paper-reading</a></p><h3 id="论文pdf">论文pdf</h3><iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/moco.pdf" width="100%" height="700"></iframe>]]></content>
       
       
       <categories>
@@ -86,11 +119,11 @@
       
         <tags>
             
+            <tag> 树 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 树 </tag>
             
         </tags>
       
@@ -148,11 +181,11 @@
       
         <tags>
             
+            <tag> 树 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 树 </tag>
             
         </tags>
       
@@ -181,11 +214,11 @@
       
         <tags>
             
+            <tag> 排序 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 排序 </tag>
             
         </tags>
       
@@ -214,11 +247,11 @@
       
         <tags>
             
+            <tag> 链表 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 链表 </tag>
             
         </tags>
       
@@ -454,11 +487,11 @@
       
         <tags>
             
+            <tag> 双指针 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 双指针 </tag>
             
         </tags>
       
@@ -487,11 +520,11 @@
       
         <tags>
             
+            <tag> 滑动窗口 </tag>
+            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
-            
-            <tag> 滑动窗口 </tag>
             
         </tags>
       
@@ -572,9 +605,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -999,9 +1032,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -1028,9 +1061,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -1231,11 +1264,11 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
+            
+            <tag> 双指针 </tag>
             
         </tags>
       
@@ -1780,9 +1813,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -1795,7 +1828,7 @@
       <link href="/2022/01/04/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/paper-gan/"/>
       <url>/2022/01/04/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/paper-gan/</url>
       
-        <content type="html"><![CDATA[<blockquote><p>笔记记录于pdf中，所以就直接放pdf在此处~ 😉</p></blockquote><h3 id="学习视频链接">学习视频链接</h3><p><a href="https://www.bilibili.com/video/BV1rb4y187vD?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1rb4y187vD?spm_id_from=333.999.0.0</a></p><h3 id="pdf链接">pdf链接</h3><p><a href="https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf">https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf</a></p><h3 id="论文学习链接">论文学习链接</h3><p>更多论文请见：<a href="https://github.com/mli/paper-reading">https://github.com/mli/paper-reading</a></p><h3 id="论文pdf">论文pdf</h3><iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf" width="100%" height="600"></iframe>]]></content>
+        <content type="html"><![CDATA[<blockquote><p>笔记记录于pdf中，所以就直接放pdf在此处~ 😉</p></blockquote><h3 id="学习视频链接">学习视频链接</h3><p><a href="https://www.bilibili.com/video/BV1rb4y187vD?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV1rb4y187vD?spm_id_from=333.999.0.0</a></p><h3 id="pdf链接">pdf链接</h3><p><a href="https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf">https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf</a></p><h3 id="论文学习链接">论文学习链接</h3><p>更多论文请见：<a href="https://github.com/mli/paper-reading">https://github.com/mli/paper-reading</a></p><h3 id="论文pdf">论文pdf</h3><iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/NIPS-2014-generative-adversarial-nets-Paper.pdf" width="100%" height="700"></iframe>]]></content>
       
       
       <categories>
@@ -1838,9 +1871,9 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 双指针 </tag>
             
         </tags>
       
@@ -1954,9 +1987,9 @@
       
         <tags>
             
-            <tag> 滑动窗口 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 滑动窗口 </tag>
             
         </tags>
       
@@ -2035,9 +2068,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -2093,9 +2126,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -2209,11 +2242,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2298,9 +2331,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2356,9 +2389,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2501,9 +2534,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2530,9 +2563,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2617,9 +2650,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -2646,9 +2679,9 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 双指针 </tag>
             
         </tags>
       
@@ -2675,9 +2708,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -3003,9 +3036,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -3283,9 +3316,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -3567,9 +3600,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -3596,9 +3629,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -3710,9 +3743,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -3882,9 +3915,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -3911,11 +3944,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -4002,9 +4035,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -4056,9 +4089,9 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -4085,9 +4118,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -4170,11 +4203,11 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
