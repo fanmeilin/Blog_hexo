@@ -157,8 +157,6 @@ ISource, INoisy = Variable(ISource.cuda()), Variable(INoisy.cuda())
 
 - heteroscedastic Gaussian  （代码中为poisson_gaussian）
 
-![image-20220216152531550](C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20220216152531550.png)
-
   - 参数 $\alpha$  和$\sigma$  分别表示混合噪声中Poisson分量和Gaussian分量的强度。
 - multivariate Gaussian        （代码中为multivariate_gaussian）多元高斯分布
 

@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>CodeTop912 排序数组</title>
+    <link href="/2022/04/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop912/"/>
+    <url>/2022/04/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop912/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p><a href="https://leetcode-cn.com/problems/sort-an-array/">排序数组</a></p><p>频度206</p></blockquote><h2 id="题目">题目</h2><p>给你一个整数数组 <code>nums</code>，请你将该数组升序排列。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：nums = [<span class="hljs-number">5,2,3,1</span>]<br>输出：[<span class="hljs-number">1,2,3,5</span>]<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[5,1,1,2,0,0]</span><br>输出：<span class="hljs-string">[0,0,1,1,2,5]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>1 &lt;= nums.length &lt;= 5 * 104</code></li><li><code>-5 * 104 &lt;= nums[i] &lt;= 5 * 104</code></li></ul><h2 id="题解">题解</h2><p>快速排序，在partition中使用随机选择pivot，到末尾位置，再使用循环遍历调整位置，i是定位所有小于等于pivot的数到前方即可。再使用qsort递归。在这两个函数中，<strong>传入nums数组，这里的传入和返回数组对象时都是直接的引用传递。</strong></p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">sortArray</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>        <span class="hljs-comment">#手撕快排</span><br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">partition</span>(<span class="hljs-params">nums,left,right</span>):</span><br>            tindex = random.randint(left,right)<br>            nums[right], nums[tindex] = nums[tindex], nums[right] <br>            pivot,i = nums[right], left-<span class="hljs-number">1</span> <span class="hljs-comment">#注意i初始化left-1 而非-1哦</span><br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(left,right+<span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">if</span> nums[j]&lt;=pivot:<br>                    i+=<span class="hljs-number">1</span><br>                    nums[i],nums[j] = nums[j],nums[i]<br>            <span class="hljs-keyword">return</span> i<br>        <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">qsort</span>(<span class="hljs-params">nums,left,right</span>):</span><br>            <span class="hljs-keyword">if</span> left&gt;=right: <span class="hljs-keyword">return</span><br>            index = partition(nums,left,right)<br>            qsort(nums,left,index-<span class="hljs-number">1</span>)<br>            qsort(nums,index+<span class="hljs-number">1</span>,right)<br>            <br>        qsort(nums,<span class="hljs-number">0</span>,<span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span>) <span class="hljs-comment">#nums作为参数传入，对于python而言，是指针传入，会直接修改</span><br>        <span class="hljs-keyword">return</span> nums<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>排序</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>排序</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CodeTop25 K个一组翻转链表</title>
     <link href="/2022/04/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop25/"/>
     <url>/2022/04/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop25/</url>
@@ -3382,9 +3411,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
     </tags>
     
@@ -3666,9 +3695,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
     </tags>
     
@@ -3695,9 +3724,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
     </tags>
     
@@ -3809,9 +3838,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
     </tags>
     
@@ -4184,9 +4213,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
     </tags>
     
@@ -4269,9 +4298,9 @@
     
     <tags>
       
-      <tag>链表</tag>
-      
       <tag>剑指</tag>
+      
+      <tag>链表</tag>
       
       <tag>idea</tag>
       
