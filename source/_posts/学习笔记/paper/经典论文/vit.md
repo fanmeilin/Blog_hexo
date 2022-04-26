@@ -1,7 +1,7 @@
 ---
 title: AN IMAGE IS WORTH 16X16 WORDS
 tags: [学习笔记,经典论文]
-categories:[学习笔记,paper]
+categories: [学习笔记,paper]
 date: 2022-04-19 18:14:40
 ---
 
