@@ -29,6 +29,35 @@
     
     
     <entry>
+      <title>AN IMAGE IS WORTH 16X16 WORDS</title>
+      <link href="/2022/04/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/vit/"/>
+      <url>/2022/04/19/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/paper/%E7%BB%8F%E5%85%B8%E8%AE%BA%E6%96%87/vit/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>再读一遍vision transformer，笔记记录于pdf中，所以就直接放pdf在此处~ 😉</p></blockquote><h3 id="学习视频链接">学习视频链接</h3><p><a href="https://www.bilibili.com/video/BV15P4y137jb?spm_id_from=333.999.0.0">https://www.bilibili.com/video/BV15P4y137jb?spm_id_from=333.999.0.0</a></p><h3 id="pdf链接">pdf链接</h3><p><a href="https://paper.mulindya.com/newAN%20IMAGE%20IS%20WORTH%2016X16%20WORDS.pdf">https://paper.mulindya.com/newAN IMAGE IS WORTH 16X16 WORDS.pdf</a></p><h3 id="论文学习链接">论文学习链接</h3><p>更多论文请见：<a href="https://github.com/mli/paper-reading">https://github.com/mli/paper-reading</a></p><h3 id="论文pdf">论文pdf</h3><iframe src="/js/pdfjs_old/web/viewer.html?file=https://paper.mulindya.com/newAN%20IMAGE%20IS%20WORTH%2016X16%20WORDS.pdf" width="100%" height="700"></iframe>]]></content>
+      
+      
+      <categories>
+          
+          <category> 学习笔记 </category>
+          
+          <category> paper </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 学习笔记 </tag>
+            
+            <tag> 经典论文 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>虚拟环境构建和使用</title>
       <link href="/2022/04/14/python/conda-env/"/>
       <url>/2022/04/14/python/conda-env/</url>
