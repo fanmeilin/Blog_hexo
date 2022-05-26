@@ -8,8 +8,8 @@ math: true
 
 >近年来的去噪顶刊《 NBNet: Noise Basis Learning for Image Denoising with Subspace Projection》发表于2021年的cvpr，在DND数据集的benchmark上的位居第三名。在实验中使用到NBnet，因此对这篇文章进行研读，以下是记录的要点。
 
-![DND_benchmark](C:\Users\mulin\Desktop\博客资源文件\img\paper\DND_benchmark.png)
 
+![](https://picture.mulindya.com/Apaper_collect%2FDND_benchmark.png)
 
 ## Abstract
 - 解决问题：图像去噪；
