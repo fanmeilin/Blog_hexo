@@ -1,0 +1,634 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>常见的hexo问题记录和解决 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="常见的hexo问题记录和解决">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-05-22 16:37" pubdate>
+        2022年5月22日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      801 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      11
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">常见的hexo问题记录和解决</h1>
+            
+            <div class="markdown-body">
+              <h2 id="⛄Hexo常见问题">⛄Hexo常见问题</h2>
+<h3 id="👀问题一，hexo命令运行出错">👀问题一，hexo命令运行出错</h3>
+<p><strong>①问题描述</strong>：运行Hexo报错hexo : 无法加载文件hexo.ps1，因为在此系统上禁止运行脚本</p>
+<p>使用如下命令安装 <code>Hexo</code>成功：</p>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">PLAINTEXT<br>npm install hexo-<span class="hljs-keyword">cli</span> -g<br></code></pre></td></tr></tbody></table></figure>
+<p>运行<code>hexo -v、hexo clean、hexo g、hexo s、hexo d</code>会出现错误：</p>
+<figure class="highlight excel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs excel">PLAINTEXT<br>bashPS <span class="hljs-symbol">C:</span>\Users\Desktop\heartlovelife&gt; hexo s<br>hexo <span class="hljs-symbol">:</span> 无法加载文件 <span class="hljs-symbol">C:</span>\Users\AppData\Roaming\npm\hexo.<span class="hljs-symbol">ps1</span>，因为在此系统上禁止运行脚本。有关详细信息，请参阅 htt<span class="hljs-symbol">ps:</span>/go.microsoft.com/fwlink/?LinkID<br>=<span class="hljs-number">135170</span> 中的 about_Execution_Policies。<br>所在位置 行<span class="hljs-symbol">:1</span> 字符<span class="hljs-symbol">:</span> <span class="hljs-number">1</span><br>+ hexo s<br>+ ~~~~<br>    + CategoryInfo          <span class="hljs-symbol">:</span> SecurityErr<span class="hljs-symbol">or:</span> (<span class="hljs-symbol">:</span>) []，PSSecurityException<br>    + FullyQualifiedErrorId <span class="hljs-symbol">:</span> UnauthorizedAccess<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>②解决方案</strong>：针对<code>windows</code>系统，设置-&gt;隐私和安全性-&gt;开发者选项-&gt;允许本地<code>PowerShell</code>脚本在为签名的情况下运行。</p>
+<h3 id="👀问题二，-hexo-init初始化失败">👀问题二， <code>hexo init</code>初始化失败</h3>
+<p><strong>①问题描述</strong>：<code>WARN Failed to install dependencies. Please run ‘npm install’ manually!</code></p>
+<p><strong>②解决方案</strong>：如果我们输入命令<code>npm install</code>还是会出现错误，这时我们需要修改<code>npm</code>的镜像：</p>
+<figure class="highlight vala"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs vala">PLAINTEXT<br>bashnpm -v<br><span class="hljs-meta"># 修改镜像</span><br>npm install -g cnpm --registry=https:<span class="hljs-comment">//registry.npm.taobao.org</span><br><span class="hljs-meta"># 初始化</span><br>hexo init<br><span class="hljs-meta"># 利用cnpm执行cnpm install</span><br>cnpm install <br></code></pre></td></tr></tbody></table></figure>
+<h3 id="👀问题三，hexo-d部署失败">👀问题三，<code>hexo d</code>部署失败</h3>
+<p><strong>①问题描述</strong>：<code>fatal: unable to auto-detect email address....</code></p>
+<figure class="highlight applescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs applescript">PLAINTEXT<br>bashfatal: unable <span class="hljs-keyword">to</span> auto-detect email address<br><span class="hljs-keyword">error</span>:src refspec HEAD <span class="hljs-keyword">does</span> <span class="hljs-keyword">not</span> match any<br><span class="hljs-keyword">error</span>:failed <span class="hljs-keyword">to</span> push <span class="hljs-keyword">some</span> refs <span class="hljs-keyword">to</span> <span class="hljs-string">"*******"</span><br>FATAL {<br>	err:Error:Spawn failed<br>	.......<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>②解决方案</strong>：在文件浏览器中勾选显示隐藏的项目，进入我们的博客目录</p>
+<figure class="highlight taggerscript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs taggerscript">PLAINTEXT<br>D:<span class="hljs-symbol">\B</span>log_Hexo<span class="hljs-symbol">\B</span>log<span class="hljs-symbol">\.</span>deploy_git<span class="hljs-symbol">\.</span>git<br></code></pre></td></tr></tbody></table></figure>
+<p>找到config文件，添加</p>
+<figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs nix">PLAINTEXT<br><br>[user]<br>	<span class="hljs-attr">email</span> = <span class="hljs-number">3086786161</span>@qq.com<br>	<span class="hljs-attr">name</span> = HeartLoveLife<br>[core]<br>	<span class="hljs-attr">repositoryformatversion</span> = <span class="hljs-number">0</span><br>	<span class="hljs-attr">filemode</span> = <span class="hljs-literal">false</span><br>	<span class="hljs-attr">bare</span> = <span class="hljs-literal">false</span><br>	<span class="hljs-attr">logallrefupdates</span> = <span class="hljs-literal">true</span><br>	<span class="hljs-attr">symlinks</span> = <span class="hljs-literal">false</span><br>	<span class="hljs-attr">ignorecase</span> = <span class="hljs-literal">true</span><br>[branch <span class="hljs-string">"main"</span>]<br>	<span class="hljs-attr">remote</span> = https://github.com/HeartLoveLife/HeartLoveLife.github.io.git<br>	<span class="hljs-attr">merge</span> = refs/heads/main<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="👀问题四，hexo-s出现警告">👀问题四，<code>hexo s</code>出现警告</h3>
+<p><strong>①问题描述</strong>：<code>Accessing non-existent property '*' of module exports inside circular dependency</code></p>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">PLAINTEXT<br><br>bash<span class="hljs-literal">INF</span>O  <span class="hljs-literal">Start</span> processing<br><span class="hljs-literal">INF</span>O  Hexo is running at http://localhost:<span class="hljs-number">4000</span>/ . Press Ctrl+C to <span class="hljs-literal">stop</span>.<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'lineno' of module exports inside circular dependency<br>(Use `<span class="hljs-keyword">node</span> <span class="hljs-title">--trace-warnings</span> ...` to show where the warning was created)<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'column' of module exports inside circular dependency<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'filename' of module exports inside circular dependency<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'lineno' of module exports inside circular dependency<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'column' of module exports inside circular dependency<br>(<span class="hljs-keyword">node</span><span class="hljs-title">:60224</span>) Warning: Accessing non-existent <span class="hljs-keyword">property</span><span class="hljs-title"> </span>'filename' of module exports inside circular dependency<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>②解决方案</strong>：出现警告，是因为<code>node</code>版本太高，切换成低版本的<code>node</code>来安装<code>Hexo</code>就可以了</p>
+<h2 id="⛄Hexo更换主题">⛄Hexo更换主题</h2>
+<p>在博客的项目文件夹下打开<code>git bash</code>执行命令，以<code>hexo-theme-butterfly</code>主题为例</p>
+<figure class="highlight crmsh"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">PLAINTEXT<br>git <span class="hljs-keyword">clone</span> <span class="hljs-title">-b</span> <span class="hljs-keyword">master</span> <span class="hljs-title">https</span>://github.com/jerryc127/hexo-theme-butterfly.git themes/butterfly<br></code></pre></td></tr></tbody></table></figure>
+<p>运行成功之后，在项目文件夹<code>source</code>中可以查看到新的主题<code>themes</code>文件夹：<code>butterfly</code></p>
+<p>在博客的项目文件夹下，修改<code>_config.yml</code>配置文件如下:</p>
+<figure class="highlight avrasm"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs avrasm">YML<br><span class="hljs-meta"># theme: landscape  默认主题</span><br><span class="hljs-symbol">theme:</span> butterfly<br></code></pre></td></tr></tbody></table></figure>
+<p>此时主题还不能正常配置使用，需要安装<code>pug</code> 以及<code>stylus</code> 的渲染器:</p>
+<figure class="highlight mel"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mel">PLAINTEXT<br>bash# npm install hexo-<span class="hljs-keyword">renderer</span>-pug hexo-<span class="hljs-keyword">renderer</span>-stylus --save<br>cnpm install hexo-<span class="hljs-keyword">renderer</span>-pug hexo-<span class="hljs-keyword">renderer</span>-stylus --save<br></code></pre></td></tr></tbody></table></figure>
+<p>执行<code>hexo s</code>部署到本地运行</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs shell">PLAINTEXT<br><span class="hljs-meta">bash#</span><span class="bash"> 清除缓存b.json 和已生成的静态文件 public</span><br>hexo clean<br><span class="hljs-meta">#</span><span class="bash"> 生成静态页面到默认设置的 public 文件夹</span><br>hexo g<br><span class="hljs-meta">#</span><span class="bash"> 启动本地服务器，用于预览</span><br>hexo s<br><span class="hljs-meta">#</span><span class="bash"> 自动生成网站静态文件，并部署到设定的仓库或上传部署至服务端</span><br>hexo d<br></code></pre></td></tr></tbody></table></figure>
+<p>默认地址：</p>
+<figure class="highlight shell"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs shell">PLAINTEXT<br>http://localhost:4000/<br></code></pre></td></tr></tbody></table></figure>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/">报错解决</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/">报错解决</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/05/24/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/hexo-bug/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">博客bug排查</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/04/26/%E8%AF%BE%E7%A8%8B%E5%A4%8D%E4%B9%A0/manager-review/">
+                        <span class="hidden-mobile">现代管理理论和方法复习整理</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/05/22/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/hexo-common-bug/';
+          this.page.identifier = '/2022/05/22/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/hexo-common-bug/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492-1号
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
