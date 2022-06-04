@@ -84,7 +84,15 @@ Figure 2:
 两个feature map进行concat后卷积生成k通道的same特征图，再进行reshape操作，转换为HW*K的size。
 #### 3.1.2 投影
 通过正交线性投影将图像特征X1投影到V。通过V求出正交投影矩阵将N空间投影到V空间。
-正交矩阵P定义为$V(V^TV)^{-1}V^T$,维度是(HW,HW),最后使用PX1进行重构。
+正交矩阵P定义为
+
+{% raw %}
+$$
+V(V^TV)^{-1}V^T
+$$
+{% endraw %}
+
+维度是(HW,HW),最后使用PX1进行重构。
 
 ### 3.2 网络架构和损失函数
 
@@ -99,7 +107,7 @@ Figure 2:
 
 使用1范数作为损失函数。
 
-> ### 结果
+### 结果
 
 ![](https://picture.mulindya.com/Apaper_collect%2FNB_tab1.png)
 
