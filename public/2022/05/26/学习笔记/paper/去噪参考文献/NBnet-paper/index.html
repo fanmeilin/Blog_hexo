@@ -391,7 +391,13 @@ projection can naturally maintain the local strcture of insight signal. especial
 <p>两个feature map进行concat后卷积生成k通道的same特征图，再进行reshape操作，转换为HW*K的size。</p>
 <h4 id="3-1-2-投影">3.1.2 投影</h4>
 <p>通过正交线性投影将图像特征X1投影到V。通过V求出正交投影矩阵将N空间投影到V空间。<br>
-正交矩阵P定义为$V(V<sup>TV)</sup>{-1}V^T$,维度是(HW,HW),最后使用PX1进行重构。</p>
+正交矩阵P定义为</p>
+
+$$
+V(V^TV)^{-1}V^T
+$$
+
+<p>维度是(HW,HW),最后使用PX1进行重构。</p>
 <h3 id="3-2-网络架构和损失函数">3.2 网络架构和损失函数</h3>
 <p><img src="https://picture.mulindya.com/Apaper_collect%2FNB_fig3.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <ul>
@@ -403,9 +409,7 @@ projection can naturally maintain the local strcture of insight signal. especial
 <li>损失函数</li>
 </ul>
 <p>使用1范数作为损失函数。</p>
-<blockquote>
 <h3 id="结果">结果</h3>
-</blockquote>
 <p><img src="https://picture.mulindya.com/Apaper_collect%2FNB_tab1.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><img src="https://picture.mulindya.com/Apaper_collect%2FNB_tab3.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <p><img src="https://picture.mulindya.com/Apaper_collect%2FNB_tab4.png" srcset="/img/loading.gif" lazyload alt=""></p>
@@ -510,6 +514,12 @@ c)  投影的选择</p>
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/06/04/python/compute-gflops/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">计算模型的GFlops和Params</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">
