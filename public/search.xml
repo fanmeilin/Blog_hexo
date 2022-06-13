@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>CodeTop1 两数之和</title>
+      <link href="/2022/06/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop1/"/>
+      <url>/2022/06/10/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop1/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>两数之和</p></blockquote><h2 id="题目">题目</h2><p>给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出 和为目标值 target  的那 两个 整数，并返回它们的数组下标。</p><p>你可以假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。</p><p>你可以按任意顺序返回答案。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[2,7,11,15]</span>, target = 9<br>输出：<span class="hljs-comment">[0,1]</span><br>解释：因为 nums<span class="hljs-comment">[0]</span> + nums<span class="hljs-comment">[1]</span> == 9 ，返回 <span class="hljs-comment">[0, 1]</span> 。<br><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[3,2,4]</span>, target = 6<br>输出：<span class="hljs-comment">[1,2]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-3：">示例 3：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：nums = <span class="hljs-comment">[3,3]</span>, target = 6<br>输出：<span class="hljs-comment">[0,1]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>2 &lt;= nums.length &lt;= 104</li><li>-109 &lt;= nums[i] &lt;= 109</li><li>-109 &lt;= target &lt;= 109</li><li>只会存在一个有效答案<br>进阶：你可以想出一个时间复杂度小于 O(n2) 的算法吗？</li></ul><h2 id="题解">题解</h2><p>使用哈希表记录数字出现情况可以使得复杂度降维O(N),但是要注意重复数字的问题，一开始的思路是采用哈希表将所有数字存入dict，键值对分别对应数字和索引。但是这里会出现覆盖的情况，比如出现重复的值，那么只能记录最新的索引。<br>因此需要考虑重复值的情况，一种是将哈希表记录所有的值对应的索引用数组来存储。<br>另外一种巧妙的方法是转换顺序，在遍历所有值的时候，先判断该差值是否在哈希表中，如果存在直接return对应结果，如果不存在将当前值再插入到哈希表。这样可以避免重复值的索引被更新的情况。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">twoSum</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]:</span><br>    dictT = <span class="hljs-built_in">dict</span>()<br>    <span class="hljs-keyword">for</span> i,num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):<br>    <span class="hljs-keyword">if</span> target-num <span class="hljs-keyword">in</span> dictT:<br>    <span class="hljs-keyword">return</span> [i,dictT[target-num]]<br>    dictT[num] = i<br></code></pre></td></tr></tbody></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> CodeTop </category>
+          
+          <category> 哈希表 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> CodeTop </tag>
+            
+            <tag> 哈希表 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>计算模型的GFlops和Params</title>
       <link href="/2022/06/04/python/compute-gflops/"/>
       <url>/2022/06/04/python/compute-gflops/</url>
@@ -240,11 +269,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -271,9 +300,9 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> CodeTop </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -302,9 +331,9 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> CodeTop </tag>
+            
+            <tag> 链表 </tag>
             
             <tag> 字节 </tag>
             
@@ -335,11 +364,11 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 双指针 </tag>
             
         </tags>
       
@@ -368,11 +397,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -463,11 +492,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -525,11 +554,11 @@
       
         <tags>
             
-            <tag> 树 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 树 </tag>
             
         </tags>
       
@@ -558,11 +587,11 @@
       
         <tags>
             
-            <tag> 排序 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 排序 </tag>
             
         </tags>
       
@@ -591,11 +620,11 @@
       
         <tags>
             
-            <tag> 链表 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 链表 </tag>
             
         </tags>
       
@@ -831,11 +860,11 @@
       
         <tags>
             
-            <tag> 双指针 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 双指针 </tag>
             
         </tags>
       
@@ -864,11 +893,11 @@
       
         <tags>
             
-            <tag> 滑动窗口 </tag>
-            
             <tag> CodeTop </tag>
             
             <tag> 微软 </tag>
+            
+            <tag> 滑动窗口 </tag>
             
         </tags>
       
@@ -949,9 +978,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -1376,9 +1405,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -1405,9 +1434,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -1608,11 +1637,11 @@
       
         <tags>
             
+            <tag> 双指针 </tag>
+            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
-            
-            <tag> 双指针 </tag>
             
         </tags>
       
@@ -2157,9 +2186,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2215,9 +2244,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 双指针 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2331,9 +2360,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 滑动窗口 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2412,9 +2441,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2470,9 +2499,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 排序 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2586,11 +2615,11 @@
       
         <tags>
             
+            <tag> 树 </tag>
+            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
-            
-            <tag> 树 </tag>
             
         </tags>
       
@@ -2675,9 +2704,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2733,9 +2762,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2878,9 +2907,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2907,9 +2936,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -2994,9 +3023,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3023,9 +3052,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 双指针 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3052,9 +3081,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3081,9 +3110,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 哈希表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3380,9 +3409,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3660,9 +3689,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3944,9 +3973,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -3973,9 +4002,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4087,9 +4116,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4259,9 +4288,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4288,11 +4317,11 @@
       
         <tags>
             
+            <tag> 树 </tag>
+            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
-            
-            <tag> 树 </tag>
             
         </tags>
       
@@ -4379,9 +4408,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4433,9 +4462,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 树 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4462,9 +4491,9 @@
       
         <tags>
             
-            <tag> 剑指 </tag>
-            
             <tag> 链表 </tag>
+            
+            <tag> 剑指 </tag>
             
         </tags>
       
@@ -4547,11 +4576,11 @@
       
         <tags>
             
+            <tag> 链表 </tag>
+            
             <tag> 剑指 </tag>
             
             <tag> idea </tag>
-            
-            <tag> 链表 </tag>
             
         </tags>
       
@@ -4611,9 +4640,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
@@ -4752,9 +4781,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 数组查找 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -4783,9 +4812,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
