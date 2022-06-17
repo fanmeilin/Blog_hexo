@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>CodeTop121 买卖股票的最佳时机</title>
+    <link href="/2022/06/16/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop121/"/>
+    <url>/2022/06/16/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop121/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>买卖股票的最佳时机</p></blockquote><h2 id="题目">题目</h2><p>给定一个数组 prices ，它的第&nbsp;i 个元素&nbsp;prices[i] 表示一支给定股票第 i 天的价格。</p><p>你只能选择 某一天 买入这只股票，并选择在 未来的某一个不同的日子 卖出该股票。设计一个算法来计算你所能获取的最大利润。</p><p>返回你可以从这笔交易中获取的最大利润。如果你不能获取任何利润，返回 0</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight tap"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs tap">输入：[7,1,5,3,6,4]<br>输出：5<br>解释：在第<span class="hljs-number"> 2 </span>天（股票价格 = 1）的时候买入，在第<span class="hljs-number"> 5 </span>天（股票价格 = 6）的时候卖出，最大利润 = 6-1 =<span class="hljs-number"> 5 </span>。<br>     注意利润不能是 7-1 = 6, 因为卖出价格需要大于买入价格；同时，你不能在买入前卖出股票。<br><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：prices = <span class="hljs-string">[7,6,4,3,1]</span><br>输出：<span class="hljs-number">0</span><br>解释：在这种情况下, 没有交易完成, 所以最大利润为 <span class="hljs-number">0</span>。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>1 &lt;= prices.length &lt;= 105</code></li><li><code>0 &lt;= prices[i] &lt;= 104</code></li></ul><h2 id="题解">题解</h2><p>找寻抛售股票最佳时机实际上在找一个前后差值最大的结果。最暴力的解法就是对每个起止点找最佳的抛点，在取其最大，这种需要n平方的复杂度。</p><p>也可以理解为对相邻两天的差价做一个数组，对这个gap数组找寻最大子序列和。</p><p>求解最大子序列和的代码：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">resum,result = <span class="hljs-number">0</span>,<span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> gap:<br>resum = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,resum+x) <span class="hljs-comment">#resum是当前为终止点的最大子序列和，如果为负数就恢复为0（不取用），也不采用当前点</span><br>result = <span class="hljs-built_in">max</span>(result,resum) <span class="hljs-comment">#result记录数组中最大的子序列和</span><br></code></pre></td></tr></tbody></table></figure><p>完整代码：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxProfit</span>(<span class="hljs-params">self, prices: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        gap = [prices[i+<span class="hljs-number">1</span>]-prices[i] <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(prices)-<span class="hljs-number">1</span>)]<br>        <span class="hljs-built_in">print</span>(gap)<br>        resum,result = <span class="hljs-number">0</span>,<span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> gap:<br>            resum = <span class="hljs-built_in">max</span>(<span class="hljs-number">0</span>,resum+x)<br>            result = <span class="hljs-built_in">max</span>(result,resum)<br>            <span class="hljs-built_in">print</span>(resum)<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure><p>此时遍历了数组两遍 也就是O(2n)</p><p>实际上无需建立数组gap，可以进一步提高时间，空间复杂度</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">maxProfit</span>(<span class="hljs-params">self, prices: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        resum, result = <span class="hljs-number">0</span>, <span class="hljs-number">0</span><br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(prices)-<span class="hljs-number">1</span>):<br>            gap = prices[i+<span class="hljs-number">1</span>]-prices[i]<br>            resum = resum+gap <span class="hljs-keyword">if</span> resum+gap&gt;<span class="hljs-number">0</span> <span class="hljs-keyword">else</span> <span class="hljs-number">0</span> <span class="hljs-comment"># resum = max(0,resum+gap)</span><br>            <span class="hljs-keyword">if</span> resum&gt;result: result = resum <span class="hljs-comment"># result = max(result,resum)   </span><br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>动态规划</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>动态规划</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CodeTop20 有效的括号</title>
     <link href="/2022/06/15/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop20/"/>
     <url>/2022/06/15/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop20/</url>
@@ -1550,9 +1579,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
@@ -1726,9 +1755,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
@@ -3579,9 +3608,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
@@ -4002,9 +4031,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
@@ -4406,9 +4435,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>动态规划</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
@@ -4435,11 +4464,11 @@
     
     <tags>
       
+      <tag>动态规划</tag>
+      
       <tag>剑指</tag>
       
       <tag>idea</tag>
-      
-      <tag>动态规划</tag>
       
     </tags>
     
@@ -4986,13 +5015,13 @@
     
     <tags>
       
+      <tag>动态规划</tag>
+      
       <tag>剑指</tag>
       
       <tag>idea</tag>
       
       <tag>斐波那契</tag>
-      
-      <tag>动态规划</tag>
       
     </tags>
     
@@ -5019,11 +5048,11 @@
     
     <tags>
       
+      <tag>动态规划</tag>
+      
       <tag>剑指</tag>
       
       <tag>斐波那契</tag>
-      
-      <tag>动态规划</tag>
       
     </tags>
     
