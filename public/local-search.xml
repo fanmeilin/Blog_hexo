@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>CodeTop103 二叉树的锯齿形层序遍历</title>
+    <link href="/2022/06/19/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop103/"/>
+    <url>/2022/06/19/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop103/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>二叉树的锯齿形层序遍历</p></blockquote><h2 id="题目">题目</h2><p>给你二叉树的根节点 <code>root</code> ，返回其节点值的 <strong>锯齿形层序遍历</strong> 。（即先从左往右，再从右往左进行下一层遍历，以此类推，层与层之间交替进行）。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight inform7"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs inform7">输入：root = <span class="hljs-comment">[3,9,20,null,null,15,7]</span><br>输出：<span class="hljs-comment">[<span class="hljs-comment">[3]</span>,<span class="hljs-comment">[20,9]</span>,<span class="hljs-comment">[15,7]</span>]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight lua"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lua">输入：root = [<span class="hljs-number">1</span>]<br>输出：<span class="hljs-string">[[1]]</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例3">示例3</h3><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">输入：root = []<br>输出：[]<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>树中节点数目在范围 <code>[0, 2000]</code> 内</li><li><code>-100 &lt;= Node.val &lt;= 100</code></li></ul><h2 id="题解">题解</h2><p>在层序遍历的基础上，将每一层的数据根据seq标记来处理是否逆序即可。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># Definition for a binary tree node.</span><br><span class="hljs-comment"># class TreeNode:</span><br><span class="hljs-comment">#     def __init__(self, val=0, left=None, right=None):</span><br><span class="hljs-comment">#         self.val = val</span><br><span class="hljs-comment">#         self.left = left</span><br><span class="hljs-comment">#         self.right = right</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">zigzagLevelOrder</span>(<span class="hljs-params">self, root: TreeNode</span>) -&gt; <span class="hljs-type">List</span>[<span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]]:</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> root: <span class="hljs-keyword">return</span> []<br>        queue, result = [], []<br>        seq = <span class="hljs-literal">True</span><br>        queue.append(root)<br>        <span class="hljs-keyword">while</span> queue:<br>            length = <span class="hljs-built_in">len</span>(queue)<br>            tmp = []<br>            <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(length):<br>                top = queue.pop(<span class="hljs-number">0</span>)<br>                <span class="hljs-keyword">if</span> top.left:queue.append(top.left)<br>                <span class="hljs-keyword">if</span> top.right:queue.append(top.right)<br>                tmp.append(top.val)<br>            <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> seq:result.append(tmp[::-<span class="hljs-number">1</span>])<br>            <span class="hljs-keyword">else</span>:result.append(tmp)<br>            seq = <span class="hljs-keyword">not</span> seq<br>        <span class="hljs-keyword">return</span> result<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>队列</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>队列</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>CodeTop88 合并两个有序数组</title>
     <link href="/2022/06/18/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop88/"/>
     <url>/2022/06/18/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop88/</url>
@@ -3284,9 +3313,9 @@
     
     <tags>
       
-      <tag>剑指</tag>
-      
       <tag>队列</tag>
+      
+      <tag>剑指</tag>
       
     </tags>
     
