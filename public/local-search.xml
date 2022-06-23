@@ -4,6 +4,35 @@
   
   
   <entry>
+    <title>CodeTop33 搜索旋转排序数组</title>
+    <link href="/2022/06/21/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop33/"/>
+    <url>/2022/06/21/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/CodeTop33/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>搜索旋转排序数组</p></blockquote><h2 id="题目">题目</h2><p>整数数组 nums 按升序排列，数组中的值 互不相同 。</p><p>在传递给函数之前，nums 在预先未知的某个下标 k（0 &lt;= k &lt; nums.length）上进行了 旋转，使数组变为 [nums[k], nums[k+1], …, nums[n-1], nums[0], nums[1], …, nums[k-1]]（下标 从 0 开始 计数）。例如， [0,1,2,4,5,6,7] 在下标 3 处经旋转后可能变为 [4,5,6,7,0,1,2] 。</p><p>给你 旋转后 的数组 nums 和一个整数 target ，如果 nums 中存在这个目标值 target ，则返回它的下标，否则返回 -1 。</p><p>你必须设计一个时间复杂度为 O(log n) 的算法解决此问题</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">target</span> = <span class="hljs-number">0</span><br>输出：<span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>,<span class="hljs-number">7</span>,<span class="hljs-number">0</span>,<span class="hljs-number">1</span>,<span class="hljs-number">2</span>], <span class="hljs-attr">target</span> = <span class="hljs-number">3</span><br>输出：-<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例3：">示例3：</h3><figure class="highlight nix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs nix">输入：<span class="hljs-attr">nums</span> = [<span class="hljs-number">1</span>], <span class="hljs-attr">target</span> = <span class="hljs-number">0</span><br>输出：-<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= nums.length &lt;= 5000</li><li>-10^4 &lt;= nums[i] &lt;= 10^4</li><li>nums 中的每个值都 独一无二</li><li>题目数据保证 nums 在预先未知的某个下标上进行了旋转</li><li>-10^4 &lt;= target &lt;= 10^4</li></ul><h2 id="题解">题解</h2><h3 id="二分查找">二分查找</h3><p>这道题本身不是有序的，但是旋转后可以保证局部有序。如何进行二分查找？</p><ul><li><p>传统的二分法是当选定mid元素后与target对比大小，按照情况再对左侧或者右侧数组进行递归查找。</p></li><li><p>局部有序时需要判断mid划分后的有序数组在左侧还是右侧，再根据有序的数组的数值范围判断是在有序中查找，还是非有序的数组中查找。</p></li></ul><p>问题关键在于：</p><p>如何判断mid划分的两侧哪一侧是有序？</p><p>原本的数组是单调递增的，旋转后，有两段单调递增的区间，但是它们是没有重复值的。只需要和第一个元素比较，如果mid的值大于全局首元素，那么左侧是有序的，如果小于全局首元素，那么右侧是有序的。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">search</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>], target: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        l, r = <span class="hljs-number">0</span>, <span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span><br>        <span class="hljs-keyword">while</span> l&lt;=r:<br>            mid = l+(r-l)//<span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> nums[mid]==target:<span class="hljs-keyword">return</span> mid<br>            <span class="hljs-keyword">if</span> nums[<span class="hljs-number">0</span>]&lt;nums[mid]: <span class="hljs-comment">#左侧有序</span><br>                <span class="hljs-keyword">if</span> mid-<span class="hljs-number">1</span>&gt;=<span class="hljs-number">0</span> <span class="hljs-keyword">and</span> nums[l]&lt;= target &lt;= nums[mid-<span class="hljs-number">1</span>]:r = mid-<span class="hljs-number">1</span>  <span class="hljs-comment">#target在左侧范围内</span><br>                <span class="hljs-keyword">else</span>:l = mid+<span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span> nums[<span class="hljs-number">0</span>]&gt;=nums[mid]: <span class="hljs-comment">#右侧有序 mid为首元素时看作右侧有序 注意细节</span><br>                <span class="hljs-keyword">if</span> mid+<span class="hljs-number">1</span>&lt;=<span class="hljs-built_in">len</span>(nums)-<span class="hljs-number">1</span> <span class="hljs-keyword">and</span> nums[mid+<span class="hljs-number">1</span>]&lt;= target &lt;= nums[r]:l = mid+<span class="hljs-number">1</span> <span class="hljs-comment">#target在右侧范围内</span><br>                <span class="hljs-keyword">else</span>: r = mid-<span class="hljs-number">1</span>  <br>        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><p>时间复杂度： O(logn)，其中 n 为nums 数组的大小。整个算法时间复杂度即为二分查找的时间复杂度 O(logn)。</p><p>空间复杂度： O(1)。我们只需要常数级别的空间存放变量。</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>查找</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>查找</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>EP121 Generation Z is stressed, depressed and exam-obsessed</title>
     <link href="/2022/06/20/english/EP121/"/>
     <url>/2022/06/20/english/EP121/</url>
