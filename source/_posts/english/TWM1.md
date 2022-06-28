@@ -29,7 +29,7 @@ The last class of my old professor's life took place once a week in his house, b
 
 No grades were given, but there were oral exams each week. You **were expected to** respond to questions, and you were expected to **pose questions** of your own. You were also required to perform physical tasks **now and then**, such as lifting the professor's head to a comfortable **spot** on the pillow or placing his glasses on the bridge of his nose. Kissing him good-bye **earned** you extra credit.
 
-**翻译：**不打分数，也没有成绩，但每星期都有口试。你得准备回答问题，还得准备提出问题。你还要不时干一些体力活，比如把教授的头在枕头上挪动一下，或者把眼镜架到他的鼻梁上。跟他吻别能得到附加的学分。
+** 翻译: **不打分数，也没有成绩，但每星期都有口试。你得准备回答问题，还得准备提出问题。你还要不时干一些体力活，比如把教授的头在枕头上挪动一下，或者把眼镜架到他的鼻梁上。跟他吻别能得到附加的学分。
 
 **词汇短语：**
 
@@ -138,9 +138,9 @@ For many of us, the curtain has just come down on childhood.
 
 - on earth 世界上
 
-**写作：**
+**写作**
 
-对于 between 的理解，大多数人都限定在“在...之间”，其实它还有很多灵活的含义，比如文中，between...and...表示**“既...又...**”的含义；
+对于 between 的理解，大多数人都限定在“在...之间”，其实它还有很多灵活的含义，比如文中，between...and...表示** "既...又..." **的含义；
 
 **cross** 本义是“横穿”，横穿就是两条线交叉结合，所以作名词引申出“**混合物、结合体**”的意思，a cross between a biblical prophet and a Christmas elf 的字面意思是“介于圣经先知和圣诞精灵之间的结合体”，也就是说，“他既像圣经先知，又像圣诞精灵”。
 
