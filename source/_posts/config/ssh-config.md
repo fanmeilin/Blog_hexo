@@ -72,6 +72,8 @@ Host PET
 
 ```
 ssh -L 16006:127.0.0.1:6006 dpet/root@27.17.30.150 -p 20401
+或者
+ssh -L 16006:127.0.0.1:6006 dpet/root@27.17.30.150 -p 20401 -N -v -v
 ```
 
 #### 服务器端输入命令
@@ -81,4 +83,10 @@ tensorboard --logdir=log --port=6006
 ```
 
 浏览器打开http://localhost:16006 就可以查看图像信息了。
+
+#### 查看GPU占用情况
+
+```
+watch -n 0.1 nvidia-smi #每0.1秒更新展示
+```
 
