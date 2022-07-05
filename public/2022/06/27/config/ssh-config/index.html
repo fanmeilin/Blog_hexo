@@ -262,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      230 字
+      271 字
     </span>
   
 
@@ -272,7 +272,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      4
        分钟
     </span>
   
@@ -329,10 +329,12 @@
 <figure class="highlight json"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs json">{<br>    <span class="hljs-comment">// 使用 IntelliSense 了解相关属性。 </span><br>    <span class="hljs-comment">// 悬停以查看现有属性的描述。</span><br>    <span class="hljs-comment">// 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387</span><br>    <span class="hljs-attr">"version"</span>: <span class="hljs-string">"0.2.0"</span>,<br>    <span class="hljs-attr">"configurations"</span>: [<br>        {<br>            <span class="hljs-attr">"name"</span>: <span class="hljs-string">"Python: Current File"</span>,<br>            <span class="hljs-attr">"type"</span>: <span class="hljs-string">"python"</span>,<br>            <span class="hljs-attr">"request"</span>: <span class="hljs-string">"launch"</span>,<br>            <span class="hljs-attr">"program"</span>: <span class="hljs-string">"MTCBD_mergedata/train_NUnetSkip.py"</span>,<br>            <span class="hljs-attr">"console"</span>: <span class="hljs-string">"integratedTerminal"</span>,<br>            <span class="hljs-attr">"args"</span>: [<br>                <span class="hljs-string">"--root_path"</span>,<br>                <span class="hljs-string">"./datasets/fivek_bsd_train"</span>,<br>                <span class="hljs-string">"--Rroot_path"</span>,<br>                <span class="hljs-string">"./datasets/SIDD_train"</span>,<br>                <span class="hljs-string">"--Vroot_path"</span>,<br>                <span class="hljs-string">"./datasets/SIDD_valnew"</span>,<br>                <span class="hljs-string">"--max_iterations"</span>,<br>                <span class="hljs-string">"100000"</span>,<br>                <span class="hljs-string">"--batch_size"</span>,<br>                <span class="hljs-string">"32"</span>,<br>                <span class="hljs-string">"--labeled_bs"</span>,<br>                <span class="hljs-string">"21"</span>,<br>                <span class="hljs-string">"--base_lr"</span>,<br>                <span class="hljs-string">"0.0002"</span>,<br>            ],<br>            <span class="hljs-attr">"env"</span>: {<br>                <span class="hljs-attr">"CUDA_VISIBLE_DEVICES"</span>: <span class="hljs-string">"0"</span><br>            },<br>            <span class="hljs-attr">"justMyCode"</span>: <span class="hljs-literal">true</span><br>        }<br>    ]<br>}<br></code></pre></td></tr></tbody></table></figure>
 <h3 id="查看tensorboardX">查看tensorboardX</h3>
 <h4 id="本地cmd输入命令">本地cmd输入命令</h4>
-<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">ssh</span> -L <span class="hljs-number">16006</span>:<span class="hljs-number">127.0.0.1:6006</span> dpet/root@<span class="hljs-number">27.17.30.150</span> -p <span class="hljs-number">20401</span><br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">ssh -L <span class="hljs-number">16006:127.0</span>.<span class="hljs-number">0.1:6006</span> dpet/root@<span class="hljs-number">27.17.30.150</span> -p <span class="hljs-number">20401</span><br>或者<br>ssh -L <span class="hljs-number">16006:127.0</span>.<span class="hljs-number">0.1:6006</span> dpet/root@<span class="hljs-number">27.17.30.150</span> -p <span class="hljs-number">20401</span> -N -v -v<br></code></pre></td></tr></tbody></table></figure>
 <h4 id="服务器端输入命令">服务器端输入命令</h4>
 <figure class="highlight routeros"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs routeros">tensorboard <span class="hljs-attribute">--logdir</span>=log <span class="hljs-attribute">--port</span>=6006<br></code></pre></td></tr></tbody></table></figure>
 <p>浏览器打开http://localhost:16006 就可以查看图像信息了。</p>
+<h4 id="查看GPU占用情况">查看GPU占用情况</h4>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">watch</span> -n <span class="hljs-number">0</span>.<span class="hljs-number">1</span> nvidia-smi #每<span class="hljs-number">0</span>.<span class="hljs-number">1</span>秒更新展示<br></code></pre></td></tr></tbody></table></figure>
 
             </div>
             <hr>
