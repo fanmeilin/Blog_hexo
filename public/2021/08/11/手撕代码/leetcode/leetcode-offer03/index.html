@@ -262,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      456 字
+      460 字
     </span>
   
 
@@ -320,7 +320,6 @@
 <h2 id="题解">题解</h2>
 <p>创建一个flag数组进行标记；</p>
 <p>指定大小的数组创建</p>
-<p><strong>填坑：</strong> <font color="red"> 不要使用后者,因为后者是浅拷贝，改变某一元素，该列均会改变</font></p>
 <ul>
 <li>
 <p>一维</p>
@@ -329,6 +328,7 @@
 <li>
 <p>二维</p>
 <p>a = [[0 for col in range(m)] for row in range(n)]  <em># 创建一个n*m的二维矩阵a，每个初值都是0</em>   《=》  a = [[0] *m] *n</p>
+<p><strong>填坑：</strong> <font color="red"> 不要使用后者（a = [[0] *m]\ *n ）,因为后者是浅拷贝，改变某一元素，该列均会改变</font></p>
 </li>
 </ul>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">findRepeatNumber</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        flag = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums))] <span class="hljs-comment">#创建长度为nums的数组 也可以用[0]*n</span><br>        <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> nums:<br>            flag[x] += <span class="hljs-number">1</span><br>            <span class="hljs-keyword">if</span>(flag[x]&gt;<span class="hljs-number">1</span>):<br>                <span class="hljs-keyword">return</span> x<br></code></pre></td></tr></tbody></table></figure>

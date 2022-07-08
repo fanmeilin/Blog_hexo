@@ -1,0 +1,762 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>python刷题常用知识点 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="python刷题常用知识点">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-05 16:31" pubdate>
+        2022年7月5日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      33
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">python刷题常用知识点</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>记录python刷题常用的知识点，主要针对的是leetcode，编程题的一些小技巧，常用的函数，balabala…</p>
+</blockquote>
+<h2 id="输入输出方法">输入输出方法</h2>
+<h3 id="输入">输入</h3>
+<p>最常见的输入方法是<code>input()</code>，默认输入的类型为字符串，可以直接进行类型转换。</p>
+<ul>
+<li>单一的输入，将输入的内容转化为自己需要的类型。</li>
+</ul>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python">n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br>m = <span class="hljs-built_in">float</span>(<span class="hljs-built_in">input</span>())<br></code></pre></td></tr></tbody></table></figure>
+<p>多值输入转化为需要的类型 包括一维数组的输入，两个值，三个值的输入</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># input().split() 默认是空白字符（若干个空格）来分割字符串  返回的是字符串的列表</span><br><span class="hljs-string">'''</span><br><span class="hljs-string">string.split(separator, max)</span><br><span class="hljs-string">separator: 可选。规定分割字符串时要使用的分隔符。默认值为空白字符。</span><br><span class="hljs-string">max: 可选。规定要执行的拆分数。默认值为 -1，即“所有出现次数”。</span><br><span class="hljs-string">'''</span><br>list1 = <span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().split())  <span class="hljs-comment">#map处理结束后转化为列表类型</span><br>m1, m2 = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, <span class="hljs-built_in">input</span>().split()) <span class="hljs-comment">#使用map对字符串列表中的元素int操作 后直接赋值到两个变量中</span><br>a, b, c = <span class="hljs-built_in">map</span>(<span class="hljs-built_in">float</span>, <span class="hljs-built_in">input</span>().split())<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-string">'''</span><br><span class="hljs-string">str.strip([chars]) </span><br><span class="hljs-string">chars -- 移除字符串头尾指定的字符序列。</span><br><span class="hljs-string">返回移除字符串头尾指定的字符生成的新字符串。</span><br><span class="hljs-string">'''</span><br><span class="hljs-keyword">import</span> sys<br>n = <span class="hljs-built_in">int</span>(sys.stdin.readline().strip()) <span class="hljs-comment">#使用sys</span><br><span class="hljs-comment">#一维数组</span><br>data= [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> stdin.readline().strip().split()]<br><br><span class="hljs-comment"># 二维数组</span><br><span class="hljs-keyword">import</span> sys<br>n = <span class="hljs-built_in">int</span>(sys.stdin.readline().strip())<br>point = []<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>    point.append(<span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>, sys.stdin.readline().strip().split())))<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="输出">输出</h3>
+<p>常见的输出是print(),默认每次打印之后换行符结尾，如果想要修改，可以对参数end来修改，还可以使用%填充字符串的输出方式，也可以使用str.format()方法。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 单值打印</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">'Hello'</span>)<br><span class="hljs-comment"># 多值打印</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">'Hello'</span>,<span class="hljs-string">'world'</span>,end=<span class="hljs-string">""</span>)<br><span class="hljs-built_in">print</span>()<br><span class="hljs-comment"># 格式化字符串</span><br>aName = <span class="hljs-string">'ali'</span><br>age = <span class="hljs-number">18</span><br><span class="hljs-built_in">print</span>(<span class="hljs-string">'%s is %d years old.'</span> % (aName, age))<br>t = <span class="hljs-number">232.109223</span><br><span class="hljs-comment"># 使用{}和: 来代替 % 都可以用于保留有效数字</span><br>string1 = <span class="hljs-string">'{:.2f}'</span>.<span class="hljs-built_in">format</span>(t)<br><span class="hljs-built_in">print</span>(string1)<br><span class="hljs-built_in">print</span>(<span class="hljs-string">'{0}, {1:.2f}'</span>.<span class="hljs-built_in">format</span>(<span class="hljs-string">'Hehe'</span>, <span class="hljs-number">20.278</span>))<br><span class="hljs-built_in">print</span>(<span class="hljs-string">'%s, %.2f'</span> % (<span class="hljs-string">'Hehe'</span>, <span class="hljs-number">20.278</span>))<br><br>结果：<br>Hello<br>Hello world<br>ali <span class="hljs-keyword">is</span> <span class="hljs-number">18</span> years old.<br><span class="hljs-number">232.11</span><br>Hehe, <span class="hljs-number">20.28</span><br>Hehe, <span class="hljs-number">20.28</span><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="常用函数">常用函数</h2>
+<h3 id="创建数组">创建数组</h3>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 创建一维列表</span><br>sqlist = [ x*x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, <span class="hljs-number">11</span>)]<br><span class="hljs-built_in">print</span>(sqlist)<br>str2 = [ch.upper() <span class="hljs-keyword">for</span> ch <span class="hljs-keyword">in</span> <span class="hljs-string">'Hello world!'</span> <span class="hljs-keyword">if</span> ch <span class="hljs-keyword">not</span> <span class="hljs-keyword">in</span> <span class="hljs-string">'orld'</span>] <span class="hljs-comment">#循环和判断语句同时使用</span><br><span class="hljs-built_in">print</span>(str2)<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">创建二维数组 ：<br>a = [[<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(m)] <span class="hljs-keyword">for</span> row <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)] <br>或者[[<span class="hljs-number">0</span>]*m <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n)]<br>但是千万不要用[[<span class="hljs-number">0</span>]*m]*n！！是错误的。对象被复制<br><span class="hljs-comment"># 创建一个二维列表5*5</span><br>list1 = [[<span class="hljs-number">0</span>]*<span class="hljs-number">5</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">5</span>)]<br><span class="hljs-built_in">print</span>(list1)<br><span class="hljs-comment"># 创建一个3*3的二维数组</span><br>arr=[<span class="hljs-built_in">list</span>(<span class="hljs-built_in">map</span>(<span class="hljs-built_in">int</span>,<span class="hljs-built_in">input</span>().split())) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">3</span>)]<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="判断变量">判断变量</h3>
+<p><code>isalpha()</code> 判断<strong>字符串</strong>是否全是字母；检查一个字符串中所有的字符是否都是由字母构成的，并且至少有1个字符。</p>
+<p><code>isalnum()</code>函数判断的<strong>字符</strong>范围不仅包括字母，还包括0-9的数字。</p>
+<p><code>isdigit()</code> 判断<strong>字符串</strong>是否全是数字0-9</p>
+<p><code>is_integer()</code> 判断浮点数是否为整数</p>
+<h3 id="字符串操作">字符串操作</h3>
+<h4 id="基本操作">基本操作</h4>
+<p><code>join()</code>: 用法 ‘分隔符’.join(字符串序列) 比如’ '.join([“hello”,“world”,“thank”,“you”]) 输出 “hello world thank you”</p>
+<p><code>str.count(substr,start,end)</code>:计数子序列出现的次数</p>
+<p><code>str.upper()</code>：字符串转成大写</p>
+<p><code>str.lower()</code>：字符串转成小写</p>
+<h5 id="补充">补充</h5>
+<ul>
+<li>
+<p>ord()： 将ASCLL码转换为数字。ord(‘a’)返回91</p>
+</li>
+<li>
+<p>chr()： 将数字转换为ASCLL码。chr(97) 返回字符串 ‘a’</p>
+</li>
+<li>
+<p>str1.swapcase() : 翻转 str1 中的大小写</p>
+</li>
+<li>
+<p>list(str1): 将字符串转化为列表</p>
+</li>
+<li>
+<p>‘’.join(str1): 将字符串列表，拼成字符串</p>
+</li>
+<li>
+<p>srt1.split()：将字符串按一定符号分割，分割后成列表</p>
+</li>
+<li>
+<p>srt1.isdigit() : 检测字符串是否由十进制数 0–9组成</p>
+</li>
+<li>
+<p>str1.isnumeric(): 检测字符串是否只由数字组成</p>
+</li>
+<li>
+<p>srt1.isxdigit() : 检测字符串是否由十六进制数 0–9，a—f，或A–F组成</p>
+</li>
+<li>
+<p>srt1.isalnum() : 检测字符串是否由字母数字符号 0–9，a–Z，或A–Z组成</p>
+</li>
+<li>
+<p>srt1.isalpha() : 检测字符串是否由字母a–Z或A–Z组成</p>
+</li>
+<li>
+<p>srt1.islower(): 检测字符串是否否由小写字母 a–Z组成</p>
+</li>
+<li>
+<p>srt1.isupper(): 检测字符串是由 大写字母 A–Z组成</p>
+</li>
+<li>
+<p><strong>strip() / lstrip() / rstrip(): 用于移除字符串头尾 / 开头 / 结尾指定的字符（默认为空格）</strong></p>
+</li>
+</ul>
+<h4 id="反转">反转</h4>
+<p>字符串反转 使用切片反转：str[::-1]</p>
+<h5 id="reverse">reverse()</h5>
+<p>reverse()是python中<strong>列表的一个内置方法</strong>（也就是说，在字典，<a target="_blank" rel="noopener" href="https://so.csdn.net/so/search?q=%E5%AD%97%E7%AC%A6%E4%B8%B2&amp;spm=1001.2101.3001.7020">字符串</a>或者元组中，是没有这个内置方法的），用于列表中数据的反转；</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">lista = [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>]<br>lista.reverse() <span class="hljs-comment">#原地操作 无返回值</span><br><span class="hljs-built_in">print</span>(lista)<br>[<span class="hljs-number">4</span>,<span class="hljs-number">3</span>,<span class="hljs-number">2</span>,<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h5 id="reversed">reversed()</h5>
+<p>有返回值，是python的自带方法，经过reversed()的作用之后，返回的是一个把序列值经过反转之后的<strong>迭代器</strong>，所以，需要通过遍历，或者List,或者next()等方法，获取作用后的值；</p>
+<h3 id="列表操作">列表操作</h3>
+<p>列表有自带的sort函数，直接对原列表进行更改。</p>
+<ul>
+<li>
+<p>list1.append（x） ： 将x添加到列表末尾</p>
+</li>
+<li>
+<p>list1.sort()： 对列表元素排序 默认<strong>升序</strong> 如果设置为降序：list1.sort(reverse=True)</p>
+</li>
+<li>
+<p>list1.reverse() ： 将列表元素逆序</p>
+</li>
+<li>
+<p>list1.index(x) ： 返回第一次出现元素x的索引值</p>
+</li>
+<li>
+<p>list1.insert(x) ： 在位置i处插入新元素x</p>
+</li>
+<li>
+<p>list1.count(x) ： 返回元素x在列表中的数量</p>
+</li>
+<li>
+<p>list.remove(value)：删除第一个匹配的值</p>
+</li>
+<li>
+<p>list.pop(index)：删除对应位置的元素</p>
+</li>
+</ul>
+<h3 id="字典操作">字典操作</h3>
+<p>判断是否含有该元素 ：key in dict 即可</p>
+<h3 id="列表和字典相关技巧">列表和字典相关技巧</h3>
+<h4 id="字典排序">字典排序</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># python 根据 key，value 排序字典</span><br>d = {<span class="hljs-string">'d'</span>: <span class="hljs-number">4</span>, <span class="hljs-string">'a'</span>: <span class="hljs-number">1</span>, <span class="hljs-string">'b'</span>: <span class="hljs-number">2</span>, <span class="hljs-string">'c'</span>:<span class="hljs-number">3</span>}<br><span class="hljs-comment"># dict sort by key and reverse</span><br><span class="hljs-comment">#按照key</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>(<span class="hljs-built_in">sorted</span>(d.items())))               <span class="hljs-comment"># {'a': 1, 'b': 2, 'c': 3, 'd': 4}</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>(<span class="hljs-built_in">sorted</span>(d.items(),reverse=<span class="hljs-literal">True</span>))) <span class="hljs-comment"># {'d': 4, 'c': 3, 'b': 2, 'a': 1}</span><br><span class="hljs-comment">#按照value</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>(<span class="hljs-built_in">sorted</span>(d.items(),key=<span class="hljs-keyword">lambda</span> d:d[<span class="hljs-number">1</span>])))               <br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">dict</span>(<span class="hljs-built_in">sorted</span>(d.items(),key=<span class="hljs-keyword">lambda</span> d:d[<span class="hljs-number">1</span>],reverse=<span class="hljs-literal">True</span>)))<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 排序嵌套 list</span><br>l = [(<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">'b'</span>,<span class="hljs-number">3</span>)]<br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(l, key=<span class="hljs-keyword">lambda</span> p:p[<span class="hljs-number">0</span>])) <span class="hljs-comment"># 根据第1个值排序，[('a', 1), ('b', 3), ('c', 2)]</span><br><span class="hljs-built_in">print</span>(<span class="hljs-built_in">sorted</span>(l, key=<span class="hljs-keyword">lambda</span> p:p[<span class="hljs-number">1</span>])) <span class="hljs-comment"># 根据第2个值排序，[('a', 1), ('c', 2), ('b', 3)]</span><br>[(<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-number">3</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-number">2</span>)]<br>[(<span class="hljs-string">'a'</span>, <span class="hljs-number">1</span>), (<span class="hljs-string">'c'</span>, <span class="hljs-number">2</span>), (<span class="hljs-string">'b'</span>, <span class="hljs-number">3</span>)]<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="获取最大值和下标">获取最大值和下标</h4>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 同时获取最大值的下标和值</span><br>lis = [<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">5</span>,<span class="hljs-number">4</span>,<span class="hljs-number">3</span>]<br>max_index,max_value = <span class="hljs-built_in">max</span>(<span class="hljs-built_in">enumerate</span>(lis),key=<span class="hljs-keyword">lambda</span> iv:iv[<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(<span class="hljs-string">'最大值的下标：'</span>,max_index,<span class="hljs-string">'、'</span>,<span class="hljs-string">'最大值为：'</span>,max_value)<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 获取字典对应的最大值对应的 key,value</span><br>mydict = {<span class="hljs-string">'A'</span>:<span class="hljs-number">4</span>,<span class="hljs-string">'B'</span>:<span class="hljs-number">10</span>,<span class="hljs-string">'C'</span>:<span class="hljs-number">0</span>,<span class="hljs-string">'D'</span>:<span class="hljs-number">87</span>}<br>max_key, max_value = <span class="hljs-built_in">max</span>(mydict.items(), key=<span class="hljs-keyword">lambda</span> k: k[<span class="hljs-number">1</span>])<br><span class="hljs-built_in">print</span>(<span class="hljs-string">'最大值的key：'</span>,max_key,<span class="hljs-string">'、'</span>,<span class="hljs-string">'最大值为：'</span>,max_value)<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="内置函数">内置函数</h3>
+<p><code>zip()</code>： 创建一个聚合了来自每个可迭代对象中的元素的迭代器。</p>
+<figure class="highlight stylus"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs stylus">x = <span class="hljs-selector-attr">[1, 2, 3]</span><br>y = <span class="hljs-selector-attr">[4, 5, 6]</span><br>zipped = zip(x, y)<br><span class="hljs-function"><span class="hljs-title">print</span><span class="hljs-params">(list(zipped)</span></span>) <br><span class="hljs-selector-attr">[(1, 4), (2, 5), (3, 6)]</span><br></code></pre></td></tr></tbody></table></figure>
+<p>zip() 与 * 运算符相结合可以用来拆解*</p>
+<figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">x2</span>, y<span class="hljs-number">2</span> = zip(*zipped)<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="排序">排序</h3>
+<p>对于字典，字符串等数据结构，必须用sorted函数。<br>
+sorted(iterable[, cmp[, key[, reverse]]])</p>
+<ul>
+<li>cmp和key都是函数</li>
+<li>key的输出是cmp的输入</li>
+<li>cmp函数默认是升序</li>
+</ul>
+<p>比如</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python">dic = {‘a’:<span class="hljs-number">2</span>,’b’:<span class="hljs-number">1</span>} <br><span class="hljs-comment"># 按照key排序</span><br>dict1 = <span class="hljs-built_in">sorted</span>(dic.items(),key=<span class="hljs-keyword">lambda</span> d:d[<span class="hljs-number">0</span>])<br>返回[(‘a’,<span class="hljs-number">2</span>),(‘b’,<span class="hljs-number">1</span>)]<br><span class="hljs-comment"># 按照value排序 </span><br>dict2 = <span class="hljs-built_in">sorted</span>(dic.items(),key= <span class="hljs-keyword">lambda</span> d:d[<span class="hljs-number">1</span>])<br>返回元组列表[(‘b’,<span class="hljs-number">1</span>),(‘a’,<span class="hljs-number">2</span>)]<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>dic.items() 函数以列表返回可遍历的(键, 值) 元组数组。把字典中每对 key 和 value 组成一个元组，并把这些元组放在列表中返回。</p>
+</blockquote>
+<h4 id="例题：">例题：</h4>
+<p>P为给定的二维平面整数点集。定义 P 中某点x，如果x满足 P 中任意点都不在 x 的右上方区域内（横纵坐标都大于x），则称其为“最大的”。求出所有“最大的”点的集合。（所有点的横坐标和纵坐标都不重复, 坐标轴范围在[0, 1e9) 内）</p>
+<p>如下图：实心点为满足条件的点的集合。请实现代码找到集合 P 中的所有 ”最大“ 点的集合并输出。</p>
+<p><img src="https://picture.mulindya.com/Aleetcode%2Fbytedance_leetcode1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="输入描述：">输入描述：</h5>
+<p>第一行输入点集的个数 N， 接下来 N 行，每行两个数字代表点的 X 轴和 Y 轴。<br>
+对于 50%的数据,  1 &lt;= N &lt;= 10000;<br>
+对于 100%的数据, 1 &lt;= N &lt;= 500000;</p>
+<h5 id="输出描述：">输出描述：</h5>
+<p>输出“最大的” 点集合， 按照 X 轴从小到大的方式输出，每行两个数字分别代表点的 X 轴和 Y轴。</p>
+<h5 id="示例1">示例1</h5>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs">输入：<br>5<br>1 2<br>5 3<br>4 6<br>7 5<br>9 0<br><br>输出：<br>4 6<br>7 5<br>9 0<br></code></pre></td></tr></tbody></table></figure>
+<p>方法一：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> stdin<br>n =<span class="hljs-built_in">int</span>(stdin.readline().strip())<br>data= [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> stdin.readline().strip().split()] <span class="hljs-comment">#可以对每一行进行操作，会统一放进同一个列表中；注意int操作对字符串数据变换</span><br><span class="hljs-comment">#使用stdin.readline().strip().split()  strip去掉首尾空字符串 split进行切割数据</span><br>partsum=[<span class="hljs-number">0</span>]<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data:<br>    partsum.append( partsum[-<span class="hljs-number">1</span>]+x )<br> <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">left_bound</span>(<span class="hljs-params">data</span>):</span><br>    left=[ <span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n) ]<br>    <span class="hljs-keyword">for</span> i,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>( data[<span class="hljs-number">1</span>:],<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">if</span> v &gt; data[i-<span class="hljs-number">1</span>]:<br>            left[i]=i<br>        <span class="hljs-keyword">else</span>:<br>            k = i-<span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> k &gt;= <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> v &lt; data[k]:<br>                    k = left[k]-<span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span> :<br>                    left[i] = left[k] <span class="hljs-keyword">if</span> v == data[k] <span class="hljs-keyword">else</span> k+<span class="hljs-number">1</span><br>                    <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> left<br> <br>left = left_bound(data)<br>right= left_bound(data[::-<span class="hljs-number">1</span>])[::-<span class="hljs-number">1</span>]<br>right= [n-x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> right ]<br> <br>res = <span class="hljs-built_in">max</span>([ data[i]*(partsum[right[i]]-partsum[left[i]]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n) ])<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>思路是：把每个数当做区间里的最小值，找区间左右边界，即第一个小于它的数（区间里加入小于它的数，它就不是最小值了）<br>
+优化的点有两个：<br>
+1.求和涉及大量的重复运算——可以用从0到n的部分和减法代替<br>
+2.找边界的过程涉及大量的重复比较——<br>
+以找左边界为例， 从第二个数起，<br>
+如果大于前一个数，则左边界为自身；否则：<br>
+如果等于前一个数，则左边界跟前一个数的左边界一样；<br>
+如果小于，则它的左边界小于前一个数的左边界；<br>
+这样可以跳过重复的比较。<br>
+把找左边界写成函数，求右边界把数组逆置调用下再转换就行了，不用重写</p>
+</blockquote>
+<p>方法二：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">p = []<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>    tmp = <span class="hljs-built_in">input</span>()<br>    a = [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> tmp.split(<span class="hljs-string">' '</span>)]<br>    p.append(a)<br><span class="hljs-built_in">sorted</span>(p, key=<span class="hljs-keyword">lambda</span> x: (-x[<span class="hljs-number">0</span>], -x[<span class="hljs-number">1</span>]))<br>tmp = -<span class="hljs-number">1</span><br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> p:<br>    <span class="hljs-keyword">if</span> t[<span class="hljs-number">1</span>] &gt; tmp:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">'%d %d'</span> % (t[<span class="hljs-number">0</span>], t[<span class="hljs-number">1</span>]))<br>        tmp = t[<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/python/">python</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/python/">python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/03/english/rethinking%20the%20western%20revolotion%20in%20science/">
+                        <span class="hidden-mobile">外刊阅读--Rethinking The Western Revolution In Science</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/07/05/python/python-code-skillset/';
+          this.page.identifier = '/2022/07/05/python/python-code-skillset/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>

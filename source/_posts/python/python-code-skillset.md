@@ -283,6 +283,58 @@ dict2 = sorted(dic.items(),key= lambda d:d[1])
 
 > dic.items() 函数以列表返回可遍历的(键, 值) 元组数组。把字典中每对 key 和 value 组成一个元组，并把这些元组放在列表中返回。
 
+### 数据结构
+
+#### list
+
+普通的栈和队列，使用list即可实现
+
+- append(value) 加入元素
+- pop() 出栈
+- pop(0) 出队列
+
+#### deque
+
+collections模块的deque（双端队列）
+
+deque是栈和队列的一种广义实现，deque是"double-end queue"的简称；deque支持线程安全、有效内存地以近似O(1)的性能在deque的两端插入和删除元素，尽管list也支持相似的操作，但是它主要在固定长度操作上的优化，从而在pop(0)和insert(0,v)（会改变数据的位置和大小）上有O(n)的时间复杂度。
+
+deque 是一个双端队列, 如果要经常从两端append 的数据, 选择这个数据结构就比较好了, 如果要实现随机访问,不建议用这个,请用列表. deque 优势就是可以从两边append ,appendleft 数据. 这一点list 是没有的.
+
+```python
+import collections
+d = collections.deque([])
+d.append('a') # 在最右边添加一个元素，此时 d=deque('a')
+d.appendleft('b') # 在最左边添加一个元素，此时 d=deque(['b', 'a'])
+d.extend(['c','d']) # 在最右边添加所有元素，此时 d=deque(['b', 'a', 'c', 'd'])
+d.extendleft(['e','f']) # 在最左边添加所有元素，此时 d=deque(['f', 'e', 'b', 'a', 'c', 'd'])
+d.pop() # 将最右边的元素取出，返回 'd'，此时 d=deque(['f', 'e', 'b', 'a', 'c'])
+d.popleft() # 将最左边的元素取出，返回 'f'，此时 d=deque(['e', 'b', 'a', 'c'])
+d.rotate(-2) # 向左旋转两个位置（正数则向右旋转），此时 d=deque(['a', 'c', 'e', 'b'])
+d.count('a') # 队列中'a'的个数，返回 1
+d.remove('c') # 从队列中将'c'删除，此时 d=deque(['a', 'e', 'b'])
+d.reverse() # 将队列倒序，此时 d=deque(['b', 'e', 'a'])
+f=d.copy()
+print(f)#deque(['b', 'e', 'a'])
+f.clear()
+print(f)#deque([])
+ 
+#可以指定队列的长度，如果添加的元素超过指定长度，则原元素会被挤出。
+e=collections.deque(maxlen=5)
+e.extend([1,2,3,4,5])
+e.append("a")
+print(e)
+#deque([2, 3, 4, 5, 'a'], maxlen=5)
+e.appendleft("b")
+print(e)
+#deque(['b', 2, 3, 4, 5], maxlen=5)
+e.extendleft(["c","d"])
+print(e)
+#deque(['d', 'c', 'b', 2, 3], maxlen=5)
+```
+
+
+
 #### 例题：
 
 P为给定的二维平面整数点集。定义 P 中某点x，如果x满足 P 中任意点都不在 x 的右上方区域内（横纵坐标都大于x），则称其为“最大的”。求出所有“最大的”点的集合。（所有点的横坐标和纵坐标都不重复, 坐标轴范围在[0, 1e9) 内）
