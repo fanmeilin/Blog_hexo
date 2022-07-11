@@ -262,7 +262,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      2.5k 字
+      3.1k 字
     </span>
   
 
@@ -272,7 +272,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      33
+      40
        分钟
     </span>
   
@@ -443,6 +443,19 @@ sorted(iterable[, cmp[, key[, reverse]]])</p>
 <blockquote>
 <p>dic.items() 函数以列表返回可遍历的(键, 值) 元组数组。把字典中每对 key 和 value 组成一个元组，并把这些元组放在列表中返回。</p>
 </blockquote>
+<h3 id="数据结构">数据结构</h3>
+<h4 id="list">list</h4>
+<p>普通的栈和队列，使用list即可实现</p>
+<ul>
+<li>append(value) 加入元素</li>
+<li>pop() 出栈</li>
+<li>pop(0) 出队列</li>
+</ul>
+<h4 id="deque">deque</h4>
+<p>collections模块的deque（双端队列）</p>
+<p>deque是栈和队列的一种广义实现，deque是"double-end queue"的简称；deque支持线程安全、有效内存地以近似O(1)的性能在deque的两端插入和删除元素，尽管list也支持相似的操作，但是它主要在固定长度操作上的优化，从而在pop(0)和insert(0,v)（会改变数据的位置和大小）上有O(n)的时间复杂度。</p>
+<p>deque 是一个双端队列, 如果要经常从两端append 的数据, 选择这个数据结构就比较好了, 如果要实现随机访问,不建议用这个,请用列表. deque 优势就是可以从两边append ,appendleft 数据. 这一点list 是没有的.</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> collections<br>d = collections.deque([])<br>d.append(<span class="hljs-string">'a'</span>) <span class="hljs-comment"># 在最右边添加一个元素，此时 d=deque('a')</span><br>d.appendleft(<span class="hljs-string">'b'</span>) <span class="hljs-comment"># 在最左边添加一个元素，此时 d=deque(['b', 'a'])</span><br>d.extend([<span class="hljs-string">'c'</span>,<span class="hljs-string">'d'</span>]) <span class="hljs-comment"># 在最右边添加所有元素，此时 d=deque(['b', 'a', 'c', 'd'])</span><br>d.extendleft([<span class="hljs-string">'e'</span>,<span class="hljs-string">'f'</span>]) <span class="hljs-comment"># 在最左边添加所有元素，此时 d=deque(['f', 'e', 'b', 'a', 'c', 'd'])</span><br>d.pop() <span class="hljs-comment"># 将最右边的元素取出，返回 'd'，此时 d=deque(['f', 'e', 'b', 'a', 'c'])</span><br>d.popleft() <span class="hljs-comment"># 将最左边的元素取出，返回 'f'，此时 d=deque(['e', 'b', 'a', 'c'])</span><br>d.rotate(-<span class="hljs-number">2</span>) <span class="hljs-comment"># 向左旋转两个位置（正数则向右旋转），此时 d=deque(['a', 'c', 'e', 'b'])</span><br>d.count(<span class="hljs-string">'a'</span>) <span class="hljs-comment"># 队列中'a'的个数，返回 1</span><br>d.remove(<span class="hljs-string">'c'</span>) <span class="hljs-comment"># 从队列中将'c'删除，此时 d=deque(['a', 'e', 'b'])</span><br>d.reverse() <span class="hljs-comment"># 将队列倒序，此时 d=deque(['b', 'e', 'a'])</span><br>f=d.copy()<br><span class="hljs-built_in">print</span>(f)<span class="hljs-comment">#deque(['b', 'e', 'a'])</span><br>f.clear()<br><span class="hljs-built_in">print</span>(f)<span class="hljs-comment">#deque([])</span><br> <br><span class="hljs-comment">#可以指定队列的长度，如果添加的元素超过指定长度，则原元素会被挤出。</span><br>e=collections.deque(maxlen=<span class="hljs-number">5</span>)<br>e.extend([<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>,<span class="hljs-number">5</span>])<br>e.append(<span class="hljs-string">"a"</span>)<br><span class="hljs-built_in">print</span>(e)<br><span class="hljs-comment">#deque([2, 3, 4, 5, 'a'], maxlen=5)</span><br>e.appendleft(<span class="hljs-string">"b"</span>)<br><span class="hljs-built_in">print</span>(e)<br><span class="hljs-comment">#deque(['b', 2, 3, 4, 5], maxlen=5)</span><br>e.extendleft([<span class="hljs-string">"c"</span>,<span class="hljs-string">"d"</span>])<br><span class="hljs-built_in">print</span>(e)<br><span class="hljs-comment">#deque(['d', 'c', 'b', 2, 3], maxlen=5)</span><br></code></pre></td></tr></tbody></table></figure>
 <h4 id="例题：">例题：</h4>
 <p>P为给定的二维平面整数点集。定义 P 中某点x，如果x满足 P 中任意点都不在 x 的右上方区域内（横纵坐标都大于x），则称其为“最大的”。求出所有“最大的”点的集合。（所有点的横坐标和纵坐标都不重复, 坐标轴范围在[0, 1e9) 内）</p>
 <p>如下图：实心点为满足条件的点的集合。请实现代码找到集合 P 中的所有 ”最大“ 点的集合并输出。</p>
@@ -503,6 +516,12 @@ sorted(iterable[, cmp[, key[, reverse]]])</p>
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2022/07/06/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance_leetcode/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">算法题复习</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

@@ -1,0 +1,691 @@
+
+
+<!DOCTYPE html>
+
+<html lang="zh-CN" data-default-color-scheme=auto>
+<script type="text/javascript" src="/js/jquery.js"></script>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#d8afe4">
+  <meta name="description" content="与灵魂共舞">
+  <meta name="author" content="Meilin Fan">
+  <meta name="keywords" content="个人博客,学习,生活">
+  
+  <title>bytedance2018算法方向题解 - 待时</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"fanmeilin.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 5.4.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+
+<body>	
+	<div>
+		<div class='real_mask'></div>
+		<div id="banner_video_insert">
+		</div>	
+		<div id='vvd_banner_img'>
+		</div>
+	</div>
+	<div id="banner"></div>
+    
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>与灵魂共舞</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+	
+	<!-- <div class="banner" id="banner" parallax=true
+		style="background: url('https://picture.mulindya.com/03990bbe091d5cca73421ac40bacfc46_1.jpg') no-repeat center center;
+		background-size: cover;"> -->
+        <div class="banner" id='banner' >
+		<div class="full-bg-img" >
+		
+			
+				<script>
+					var ua = navigator.userAgent;
+					var ipad = ua.match(/(iPad).*OS\s([\d_]+)/),
+						isIphone = !ipad && ua.match(/(iPhone\sOS)\s([\d_]+)/),
+						isAndroid = ua.match(/(Android)\s+([\d.]+)/),
+						isMobile = isIphone || isAndroid;
+
+					function set_video_attr(id){
+
+						var height = document.body.clientHeight
+						var width = document.body.clientWidth
+						var video_item = document.getElementById(id);
+
+						if (height / width < 0.56){
+							video_item.setAttribute('width', '100%');
+							video_item.setAttribute('height', 'auto');
+						} else {
+							video_item.setAttribute('height', '100%');
+							video_item.setAttribute('width', 'auto');
+						}
+					}
+
+					$.getJSON('/js/video_url.json', function(data){
+						if (!isMobile){
+							var video_list_length = data.length
+							var seed = Math.random()
+							index = Math.floor(seed * video_list_length)
+							
+							video_url = data[index][0]
+							pre_show_image_url = data[index][1]
+							
+							banner_obj = document.getElementById("banner")
+							banner_obj.style.cssText = "background: url('" + pre_show_image_url + "') no-repeat; background-size: cover;"
+
+							vvd_banner_obj = document.getElementById("vvd_banner_img")
+
+							vvd_banner_content = "<img id='banner_img_item' src='" + pre_show_image_url + "' style='height: 100%; position: fixed; z-index: -999'>"
+							vvd_banner_obj.innerHTML = vvd_banner_content
+
+							video_html_res = "<video id='video_item' style='position: fixed; z-index: -888;'  muted='muted' src=" + video_url + " autoplay='autoplay' loop='loop'></video>"
+							document.getElementById("banner_video_insert").innerHTML = video_html_res;
+
+							set_video_attr('video_item')
+							set_video_attr('banner_img_item')
+						}
+					});
+
+					if (!isMobile){
+						window.onresize = function(){
+							set_video_attr('video_item')
+							}
+						}
+				</script>
+			
+
+			<!-- <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)"> -->
+            <div class="mask flex-center">
+			  <div class="page-header text-center fade-in-up">
+				<span class="h2" id="subtitle" title="bytedance2018算法方向题解">
+				  
+				</span>
+
+				
+				  <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2022-07-07 17:17" pubdate>
+        2022年7月7日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      40
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+				
+			  </div>
+
+			  
+			</div>
+		</div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">bytedance2018算法方向题解</h1>
+            
+            <div class="markdown-body">
+              <blockquote>
+<p>字节跳动2018校招算法方向题目记录</p>
+</blockquote>
+<h3 id="题目1：">题目1：</h3>
+<p>P为给定的二维平面整数点集。定义 P 中某点x，如果x满足 P 中任意点都不在 x 的右上方区域内（横纵坐标都大于x），则称其为“最大的”。求出所有“最大的”点的集合。（所有点的横坐标和纵坐标都不重复, 坐标轴范围在[0, 1e9) 内）</p>
+<p>如下图：实心点为满足条件的点的集合。请实现代码找到集合 P 中的所有 ”最大“ 点的集合并输出。</p>
+<p><img src="https://picture.mulindya.com/Aleetcode%2Fbytedance_leetcode1.png" srcset="/img/loading.gif" lazyload alt=""></p>
+<h5 id="输入描述：">输入描述：</h5>
+<p>第一行输入点集的个数 N， 接下来 N 行，每行两个数字代表点的 X 轴和 Y 轴。<br>
+对于 50%的数据,  1 &lt;= N &lt;= 10000;<br>
+对于 100%的数据, 1 &lt;= N &lt;= 500000;</p>
+<h5 id="输出描述：">输出描述：</h5>
+<p>输出“最大的” 点集合， 按照 X 轴从小到大的方式输出，每行两个数字分别代表点的 X 轴和 Y轴。</p>
+<h5 id="示例1">示例1</h5>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs">输入：<br>5<br>1 2<br>5 3<br>4 6<br>7 5<br>9 0<br><br>输出：<br>4 6<br>7 5<br>9 0<br></code></pre></td></tr></tbody></table></figure>
+<p>方法一：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> sys <span class="hljs-keyword">import</span> stdin<br>n =<span class="hljs-built_in">int</span>(stdin.readline().strip())<br>data= [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> stdin.readline().strip().split()] <span class="hljs-comment">#可以对每一行进行操作，会统一放进同一个列表中；注意int操作对字符串数据变换</span><br><span class="hljs-comment">#使用stdin.readline().strip().split()  strip去掉首尾空字符串 split进行切割数据</span><br>partsum=[<span class="hljs-number">0</span>]<br><span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> data:<br>    partsum.append( partsum[-<span class="hljs-number">1</span>]+x )<br> <br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">left_bound</span>(<span class="hljs-params">data</span>):</span><br>    left=[ <span class="hljs-number">0</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n) ]<br>    <span class="hljs-keyword">for</span> i,v <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>( data[<span class="hljs-number">1</span>:],<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">if</span> v &gt; data[i-<span class="hljs-number">1</span>]:<br>            left[i]=i<br>        <span class="hljs-keyword">else</span>:<br>            k = i-<span class="hljs-number">1</span><br>            <span class="hljs-keyword">while</span> k &gt;= <span class="hljs-number">0</span>:<br>                <span class="hljs-keyword">if</span> v &lt; data[k]:<br>                    k = left[k]-<span class="hljs-number">1</span><br>                <span class="hljs-keyword">else</span> :<br>                    left[i] = left[k] <span class="hljs-keyword">if</span> v == data[k] <span class="hljs-keyword">else</span> k+<span class="hljs-number">1</span><br>                    <span class="hljs-keyword">break</span><br>    <span class="hljs-keyword">return</span> left<br> <br>left = left_bound(data)<br>right= left_bound(data[::-<span class="hljs-number">1</span>])[::-<span class="hljs-number">1</span>]<br>right= [n-x <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> right ]<br> <br>res = <span class="hljs-built_in">max</span>([ data[i]*(partsum[right[i]]-partsum[left[i]]) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n) ])<br><span class="hljs-built_in">print</span>(res)<br></code></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>思路是：把每个数当做区间里的最小值，找区间左右边界，即第一个小于它的数（区间里加入小于它的数，它就不是最小值了）<br>
+优化的点有两个：<br>
+1.求和涉及大量的重复运算——可以用从0到n的部分和减法代替<br>
+2.找边界的过程涉及大量的重复比较——<br>
+以找左边界为例， 从第二个数起，<br>
+如果大于前一个数，则左边界为自身；否则：<br>
+如果等于前一个数，则左边界跟前一个数的左边界一样；<br>
+如果小于，则它的左边界小于前一个数的左边界；<br>
+这样可以跳过重复的比较。<br>
+把找左边界写成函数，求右边界把数组逆置调用下再转换就行了，不用重写</p>
+</blockquote>
+<p>方法二：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python">p = []<br>n = <span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(n):<br>    tmp = <span class="hljs-built_in">input</span>()<br>    a = [<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> tmp.split(<span class="hljs-string">' '</span>)]<br>    p.append(a)<br><span class="hljs-built_in">sorted</span>(p, key=<span class="hljs-keyword">lambda</span> x: (-x[<span class="hljs-number">0</span>], -x[<span class="hljs-number">1</span>]))<br>tmp = -<span class="hljs-number">1</span><br><span class="hljs-keyword">for</span> t <span class="hljs-keyword">in</span> p:<br>    <span class="hljs-keyword">if</span> t[<span class="hljs-number">1</span>] &gt; tmp:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">'%d %d'</span> % (t[<span class="hljs-number">0</span>], t[<span class="hljs-number">1</span>]))<br>        tmp = t[<span class="hljs-number">1</span>]<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="题目2">题目2</h3>
+<p>给定一个数组序列, 需要求选出一个区间, 使得该区间是所有区间中经过如下计算的值最大的一个：</p>
+<p>区间中的最小数 * 区间所有数的和最后程序输出经过计算后的最大值即可，不需要输出具体的区间。如给定序列  [6 2 1]则根据上述公式, 可得到所有可以选定各个区间的计算值:</p>
+<p>[6] = 6 * 6 = 36;</p>
+<p>[2] = 2 * 2 = 4;</p>
+<p>[1] = 1 * 1 = 1;</p>
+<p>[6,2] = 2 * 8 = 16;</p>
+<p>[2,1] = 1 * 3 = 3;</p>
+<p>[6, 2, 1] = 1 * 9 = 9;</p>
+<p>从上述计算可见选定区间 [6] ，计算值为 36， 则程序输出为 36。</p>
+<p>区间内的所有数字都在[0, 100]的范围内;</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs python">n=<span class="hljs-built_in">int</span>(<span class="hljs-built_in">input</span>())<br>arr=[<span class="hljs-built_in">int</span>(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> <span class="hljs-built_in">input</span>().split()]<br>stack = []<br>arr.append(<span class="hljs-number">0</span>)<br>result = <span class="hljs-number">0</span><br>i = <span class="hljs-number">0</span><br>presum = []<br>tempsum = <span class="hljs-number">0</span><br><span class="hljs-keyword">while</span> i&lt;<span class="hljs-built_in">len</span>(arr):<br>    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> stack <span class="hljs-keyword">or</span> arr[i]&gt;=stack[-<span class="hljs-number">1</span>]:<br>        presum.append(tempsum)<br>        tempsum = <span class="hljs-number">0</span><br>        stack.append(arr[i])<br>        i+=<span class="hljs-number">1</span><br>    <span class="hljs-keyword">else</span>:<br>        temp = stack.pop(-<span class="hljs-number">1</span>)<br>        tempsum+=(temp+presum.pop())<br>        result = <span class="hljs-built_in">max</span>(tempsum*temp,result)<br><span class="hljs-built_in">print</span>(result)<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="题目3">题目3</h3>
+<p>产品经理(PM)有很多好的idea，而这些idea需要程序员实现。现在有N个PM，在某个时间会想出一个 idea，每个 idea 有提出时间、所需时间和优先等级。对于一个PM来说，最想实现的idea首先考虑优先等级高的，相同的情况下优先所需时间最小的，还相同的情况下选择最早想出的，没有 PM 会在同一时刻提出两个 idea。</p>
+<p>同时有M个程序员，每个程序员空闲的时候就会查看每个PM尚未执行并且最想完成的一个idea,然后从中挑选出所需时间最小的一个idea独立实现，如果所需时间相同则选择PM序号最小的。直到完成了idea才会重复上述操作。如果有多个同时处于空闲状态的程序员，那么他们会依次进行查看idea的操作。</p>
+<p>求每个idea实现的时间。</p>
+<p>输入第一行三个数N、M、P，分别表示有N个PM，M个程序员，P个idea。随后有P行，每行有4个数字，分别是PM序号、提出时间、优先等级和所需时间。输出P行，分别表示每个idea实现的时间点。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">idea</span>{</span><br>    <span class="hljs-comment">// idea的标号, 想出idea的pm, 想出idea的时间, idea的优先级, idea所需时间</span><br>    <span class="hljs-keyword">int</span> id, pm, time, priority, cost;<br>    <span class="hljs-built_in">idea</span>(<span class="hljs-keyword">int</span> id_, <span class="hljs-keyword">int</span> pm_, <span class="hljs-keyword">int</span> time_, <span class="hljs-keyword">int</span> priority_, <span class="hljs-keyword">int</span> cost_):<br>        <span class="hljs-built_in">id</span>(id_),<span class="hljs-built_in">pm</span>(pm_),<span class="hljs-built_in">time</span>(time_),<span class="hljs-built_in">priority</span>(priority_),<span class="hljs-built_in">cost</span>(cost_){<br>    }<br>};<br><span class="hljs-comment">// pm对idea的优先级比较</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">cmp_by_pm</span>{</span><br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> idea&amp; a, <span class="hljs-keyword">const</span> idea&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a.priority != b.priority) {<br>            <span class="hljs-keyword">return</span> a.priority &lt; b.priority;<br>        }<br>        <span class="hljs-keyword">if</span> (a.cost != b.cost) {<br>            <span class="hljs-keyword">return</span> a.cost &gt; b.cost;<br>        }<br>        <span class="hljs-keyword">if</span> (a.time != b.time) {<br>            <span class="hljs-keyword">return</span> a.time &gt; b.time;<br>        }<br>        <span class="hljs-keyword">return</span> a.pm &lt; b.pm;<br>    }<br>};<br><span class="hljs-comment">// 想出idea的时间比较</span><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">cmp_time</span><span class="hljs-params">(<span class="hljs-keyword">const</span> idea&amp; a, <span class="hljs-keyword">const</span> idea&amp; b)</span></span>{<br>    <span class="hljs-keyword">return</span> a.time &lt; b.time;<br>}<br><span class="hljs-comment">// 程序员对idea的优先级比较</span><br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">cmp_by_worker</span>{</span><br>    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span><span class="hljs-params">(<span class="hljs-keyword">const</span> idea&amp; a, <span class="hljs-keyword">const</span> idea&amp; b)</span> </span>{<br>        <span class="hljs-keyword">if</span> (a.cost != b.cost) {<br>            <span class="hljs-keyword">return</span> a.cost &gt; b.cost;<br>        }<br>        <span class="hljs-keyword">return</span> a.pm &gt; b.pm;<br>    }<br>};<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{<br>    <span class="hljs-keyword">int</span> i;<br>    <span class="hljs-keyword">int</span> N, M, P;<br>    cin &gt;&gt; N &gt;&gt; M &gt;&gt; P;<br>    vector&lt;idea&gt; ideas;  <span class="hljs-comment">// 记录ideas</span><br>    <span class="hljs-keyword">int</span> pm, time, priority, cost;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; P; i++) {<br>        cin &gt;&gt; pm &gt;&gt; time &gt;&gt; priority &gt;&gt; cost;<br>        ideas.<span class="hljs-built_in">emplace_back</span>(<span class="hljs-built_in">idea</span>(i, pm - <span class="hljs-number">1</span>, time, priority, cost));<br>    }<br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">workers</span><span class="hljs-params">(M, <span class="hljs-number">0</span>)</span></span>;  <span class="hljs-comment">// 程序员剩余的工作时间</span><br>    <span class="hljs-function">vector&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">finished</span><span class="hljs-params">(P)</span></span>;  <span class="hljs-comment">// 记录ideas的完成时间</span><br>    <span class="hljs-comment">// 优先队列, 分别记录每个PM当前尚未执行的idea, 可获得其最想执行的idea</span><br>    priority_queue&lt;idea, vector&lt;idea&gt;, cmp_by_pm&gt; cur_ideas[N];<br>    <span class="hljs-comment">// 对ideas排序, 按时间逐个加入每个PM的优先队列中</span><br>    <span class="hljs-built_in">sort</span>(ideas.<span class="hljs-built_in">begin</span>(), ideas.<span class="hljs-built_in">end</span>(), cmp_time);<br>    <span class="hljs-keyword">int</span> count = <span class="hljs-number">0</span>, p = <span class="hljs-number">0</span>;<br>    time = <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">while</span> (count &lt; P) {<br>        <span class="hljs-keyword">while</span> (p &lt; P &amp;&amp; ideas[p].time &lt;= time) {<br>            <span class="hljs-keyword">int</span> pm_ = ideas[p].pm;<br>            cur_ideas[pm_].<span class="hljs-built_in">push</span>(ideas[p]);<br>            p++;<br>        }<br>        <span class="hljs-comment">// 优先队列, 记录每个PM最想执行的idea, 可获得程序员将要做的idea</span><br>        priority_queue&lt;idea, vector&lt;idea&gt;, cmp_by_worker&gt; q;<br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N; i++) {<br>            <span class="hljs-keyword">if</span> (!cur_ideas[i].<span class="hljs-built_in">empty</span>()) {<br>                q.<span class="hljs-built_in">push</span>(cur_ideas[i].<span class="hljs-built_in">top</span>());<br>            }<br>        }<br>        <span class="hljs-comment">// 更新程序员的剩余工作时间, 为空闲程序员分配工作</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; M; i++) {<br>            <span class="hljs-keyword">if</span> (workers[i] &gt; <span class="hljs-number">0</span>) {<br>                workers[i]--;<br>            }<br>            <span class="hljs-keyword">if</span> (workers[i] == <span class="hljs-number">0</span> &amp;&amp; !q.<span class="hljs-built_in">empty</span>()) {<br>                idea t = q.<span class="hljs-built_in">top</span>();<br>                q.<span class="hljs-built_in">pop</span>();<br>                cur_ideas[t.pm].<span class="hljs-built_in">pop</span>();<br>                <span class="hljs-comment">// 一个PM的idea被执行后, 他的次优先idea需要加入队列中</span><br>                <span class="hljs-keyword">if</span> (!cur_ideas[t.pm].<span class="hljs-built_in">empty</span>()) {<br>                    q.<span class="hljs-built_in">push</span>(cur_ideas[t.pm].<span class="hljs-built_in">top</span>());<br>                }<br>                <span class="hljs-comment">// 分配工作后更新剩余工作时间, 同时可确定完成时间</span><br>                workers[i] = t.cost;<br>                finished[t.id] = time + t.cost;<br>                count++;<br>            }<br>        }<br>        time++;<br>    }<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; P; i++) {<br>        cout &lt;&lt; finished[i] &lt;&lt; endl;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span><br> <br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br> <br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Task</span></span><br><span class="hljs-class">{</span><br>    <span class="hljs-keyword">int</span> id;<br>    <span class="hljs-keyword">int</span> pm;<br>    <span class="hljs-keyword">int</span> time;<br>    <span class="hljs-keyword">int</span> pri;<br>    <span class="hljs-keyword">int</span> dur;<br>};<br> <br>vector&lt;vector&lt;Task&gt;&gt; pmtasks;<br>map&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; result;<br><span class="hljs-keyword">int</span> proid = <span class="hljs-number">1</span>;<br><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Programer</span></span><br><span class="hljs-class">{</span><br>    <span class="hljs-built_in">Programer</span>()<br>    {<br>        t = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">this</span>-&gt;id = proid++;<br>    }<br>    <span class="hljs-keyword">int</span> t;<span class="hljs-comment">//当前的时间</span><br>    <span class="hljs-keyword">int</span> id;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">doTask</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>{<br>        vector&lt;Task&gt;::iterator findT;<br>        <span class="hljs-keyword">int</span> index = <span class="hljs-number">-1</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; pmtasks.<span class="hljs-built_in">size</span>(); i++)<br>        {<br>            <span class="hljs-keyword">auto</span>&amp; tasks = pmtasks.<span class="hljs-built_in">at</span>(i);<br>            <span class="hljs-keyword">if</span> (tasks.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">auto</span> it = tasks.<span class="hljs-built_in">begin</span>();<br>            <span class="hljs-keyword">while</span> (it!= tasks.<span class="hljs-built_in">end</span>() &amp;&amp; it-&gt;time &gt; t)<br>                it++;<br>            <span class="hljs-keyword">if</span> (it == tasks.<span class="hljs-built_in">end</span>()) <span class="hljs-keyword">continue</span>;<br>            <span class="hljs-keyword">if</span> (index == <span class="hljs-number">-1</span>)<br>            {<br>                findT = it;<br>                index = i;<br>            }<br>            <span class="hljs-keyword">else</span><br>            {<br>                <span class="hljs-keyword">if</span> (it-&gt;dur &lt; findT-&gt;dur)<br>                {<br>                    findT = it;<br>                    index = i;<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">if</span> (index != <span class="hljs-number">-1</span>)<br>        {<br>            t += findT-&gt;dur;<br>            result[findT-&gt;id] = t;<br>            pmtasks.<span class="hljs-built_in">at</span>(index).<span class="hljs-built_in">erase</span>(findT);<br>            <span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        }<br>        <span class="hljs-keyword">else</span><br>            t++;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    }<br>};<br> <br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>{<br>    <span class="hljs-keyword">int</span> n, m, p;<br>    cin &gt;&gt; n &gt;&gt; m &gt;&gt; p;<br>    pmtasks.<span class="hljs-built_in">resize</span>(n);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; p; i++)<br>    {<br>        Task task;<br>        cin &gt;&gt; task.pm &gt;&gt; task.time &gt;&gt; task.pri &gt;&gt; task.dur;<br>        task.id = i;<br>        pmtasks.<span class="hljs-built_in">at</span>(task.pm - <span class="hljs-number">1</span>).<span class="hljs-built_in">push_back</span>(task);<br>    }<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; pmtasks.<span class="hljs-built_in">size</span>(); i++)<br>    {<br>        <span class="hljs-keyword">auto</span>&amp; tasks = pmtasks.<span class="hljs-built_in">at</span>(i);<br>        <span class="hljs-keyword">if</span> (tasks.<span class="hljs-built_in">size</span>() == <span class="hljs-number">0</span>) <span class="hljs-keyword">continue</span>;<br>        <span class="hljs-built_in">sort</span>(tasks.<span class="hljs-built_in">begin</span>(), tasks.<span class="hljs-built_in">end</span>(), [](Task &amp; t1, Task &amp; t2)<br>        {<br>            <span class="hljs-keyword">if</span> (t1.pri == t2.pri)<br>            {<br>                <span class="hljs-keyword">if</span> (t1.dur == t2.dur)<br>                {<br>                    <span class="hljs-keyword">return</span> t1.time &lt; t2.time;<br>                }<br>                <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> t1.dur &lt; t2.dur;<br>            }<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> t1.pri &gt; t2.pri;<br>        });<br>    }<br>    <span class="hljs-function">vector&lt;Programer&gt; <span class="hljs-title">pros</span><span class="hljs-params">(m)</span></span>;<br>    <span class="hljs-keyword">while</span> (p &gt; <span class="hljs-number">0</span>)<br>    {<br>        <span class="hljs-built_in">sort</span>(pros.<span class="hljs-built_in">begin</span>(), pros.<span class="hljs-built_in">end</span>(), [&amp;](Programer &amp; t1, Programer &amp; t2)<br>        {<br>            <span class="hljs-keyword">return</span> t1.t &lt; t2.t;<br>        });<br>        p -= pros.<span class="hljs-built_in">begin</span>()-&gt;<span class="hljs-built_in">doTask</span>();<br>    }<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;it : result)<br>        cout &lt;&lt; it.second &lt;&lt; endl;<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="题目4">题目4</h3>
+<p>给定一棵树的根节点, 在已知该树最大深度的情况下, 求节点数最多的那一层并返回具体的层数。</p>
+<p>如果最后答案有多层, 输出最浅的那一层，树的深度不会超过100000。实现代码如下，请指出代码中的多处错误：</p>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">struct</span> Node {<br><br>  vector&lt;Node*&gt; sons;<br><br>};<br><br>void dfs<span class="hljs-constructor">Find(Node <span class="hljs-operator">*</span><span class="hljs-params">node</span>, <span class="hljs-params">int</span> <span class="hljs-params">dep</span>, <span class="hljs-params">int</span> <span class="hljs-params">counter</span>[])</span> {<br><br>  counter<span class="hljs-literal">[<span class="hljs-identifier">dep</span>]</span>++;<br><br>  <span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; node.sons.size<span class="hljs-literal">()</span>; i++) {<br><br>     dfs<span class="hljs-constructor">Find(<span class="hljs-params">node</span>.<span class="hljs-params">sons</span>[<span class="hljs-params">i</span>], <span class="hljs-params">dep</span>, <span class="hljs-params">counter</span>)</span>;<br><br>  }<br><br>}<br><br><span class="hljs-built_in">int</span> find(Node *root, <span class="hljs-built_in">int</span> maxDep) {<br><br>  <span class="hljs-built_in">int</span> depCounter<span class="hljs-literal">[<span class="hljs-number">100000</span>]</span>;<br><br>  dfs<span class="hljs-constructor">Find(<span class="hljs-params">root</span>, 0, <span class="hljs-params">depCounter</span>)</span>;<br><br> <br><br>  <span class="hljs-built_in">int</span> max, maxDep;<br><br>  <span class="hljs-keyword">for</span> (<span class="hljs-built_in">int</span> i = <span class="hljs-number">1</span>; i &lt;= maxDep; i++) {<br><br>    <span class="hljs-keyword">if</span> (depCounter<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span> &gt; max) {<br><br>      max = depCounter<span class="hljs-literal">[<span class="hljs-identifier">i</span>]</span>;<br><br>      maxDep = i;<br><br>    }<br><br>  }<br><br>  return maxDep;<br><br>}<br></code></pre></td></tr></tbody></table></figure>
+<ol>
+<li>
+<p>树的深度有可能为100000，数组应该初始化为长度为100001.</p>
+</li>
+<li>
+<p>在dfsFind中，递归访问子节点应该将树的深度+1：</p>
+</li>
+</ol>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">for</span>(<span class="hljs-built_in">int</span> i = <span class="hljs-number">0</span>; i &lt; node.sons.size<span class="hljs-literal">()</span>; i++) { <br><br>  dfs<span class="hljs-constructor">Find(<span class="hljs-params">node</span>.<span class="hljs-params">sons</span>[<span class="hljs-params">i</span>], <span class="hljs-params">dep</span>+1, <span class="hljs-params">counter</span>)</span>; <br><br>}<br></code></pre></td></tr></tbody></table></figure>
+<ol start="3">
+<li>dfsFind函数中，node是指针，所以访问其成员函数sons时应该用 '-&gt;'而不是 ‘.’</li>
+</ol>
+<figure class="highlight reasonml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">dfs<span class="hljs-constructor">Find(<span class="hljs-params">node</span>-&gt;<span class="hljs-params">sons</span>[<span class="hljs-params">i</span>], <span class="hljs-params">dep</span>+1, <span class="hljs-params">counter</span>)</span>;<br></code></pre></td></tr></tbody></table></figure>
+<ol start="4">
+<li>在最后求最大值的循环前，变量int max没有初始化。maxDep是函数传入的值，不应该再次定义，改定义为depth_res。</li>
+</ol>
+<figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">int max</span> = 0;<br><br><span class="hljs-attribute">int depth_res</span> = 0;<br></code></pre></td></tr></tbody></table></figure>
+<p>在循环求最大值中，以及最终的返回结果都应该是depth_res.</p>
+<h3 id="题目5">题目5</h3>
+<p>早期短链接广泛应用于图片上传网站，通过缩短网址URL链接字数，达到减少代码字符串的目的。常见于网店图片分类的使用，因有字符个数限制，采用短链接可以达到外链图片的目的。自微博盛行以来，在微博字数有限的特色下，短链接也盛行于微博网站，以节省字数给博主发布更多文字的空间。</p>
+<p>问题描述：设计一个短链生成和查询系统，需要提供以下两个功能：</p>
+<p>1、提供长链转换短链的接口</p>
+<p>2、点击短链能跳转到对应的长链</p>
+<p>题目要求：</p>
+<p>1、同一个长链生成同一个短链接，不要有多个短链指向同一个长链。</p>
+<p>2、同一个短链只能指向某一个长链，短链生成后要固定不变，不能再指向其它长链。</p>
+<p>3、给出系统架构，需要考虑高并发解决方案。</p>
+<p>4、考虑存储和缓存方案</p>
+<p>数据量预估：</p>
+<p>1、预计长链接总量500亿</p>
+<p>2、长链换短链请求量：10W qps</p>
+<p>3、短链跳转请求量：100W qps</p>
+<p>映射方法：<br>
+1、设计记号器，服务端每进入一个长联接，记号器就加一计数，计数器计数值转为62进制格式，在6位数之内可以满足存储500亿长连接的存储和映射关系</p>
+<p>2、系统基本架构由服务器、客户端组成 使用nginx进行并发处理操作</p>
+<p>3、存储数据结构为链表，链表顺序为记号器从大到小的顺序</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CodeTop/">CodeTop</a>
+                    
+                      <a class="hover-with-bg" href="/categories/CodeTop/bytedance/">bytedance</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/CodeTop/">CodeTop</a>
+                    
+                      <a class="hover-with-bg" href="/tags/bytedance/">bytedance</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/06/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance_leetcode/">
+                        <span class="hidden-mobile">算法题复习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    
+      <script type="text/javascript">
+        var disqus_config = function() {
+          this.page.url = 'https://fanmeilin.github.io/2022/07/07/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance2018/';
+          this.page.identifier = '/2022/07/07/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance2018/';
+        };
+        Fluid.utils.loadComments('#disqus_thread', function() {
+          var d = document, s = d.createElement('script');
+          s.src = '//' + 'fluid' + '.disqus.com/embed.js';
+          s.setAttribute('data-timestamp', new Date());
+          (d.head || d.body).appendChild(s);
+        });
+      </script>
+    
+    <noscript>Please enable JavaScript to view the comments</noscript>
+  </div>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header vvd_contents"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+  <div class="statistics">
+    
+    
+
+    
+      
+        <!-- 不蒜子统计PV -->
+        <span id="busuanzi_container_site_pv" style="display: none">
+            总访问量 
+            <span id="busuanzi_value_site_pv"></span>
+             次
+          </span>
+      
+      
+        <!-- 不蒜子统计UV -->
+        <span id="busuanzi_container_site_uv" style="display: none">
+            总访客数 
+            <span id="busuanzi_value_site_uv"></span>
+             人
+          </span>
+      
+    
+  </div>
+  <div class="statistics">
+    <a target="_blank" rel="noopener" href="https://developer.hitokoto.cn/" id="hitokoto_text"><span style="color: #DDD;"  id="hitokoto"></span></a>
+ <script src="https://v1.hitokoto.cn/?encode=js&select=%23hitokoto" defer></script>
+  </div>
+
+
+  
+  <!-- 备案信息 -->
+  <div class="beian">
+    <span>
+      <a href="http://beian.miit.gov.cn/" target="_blank" rel="nofollow noopener">
+        鄂ICP备2021014492号-1
+      </a>
+    </span>
+    
+  </div>
+
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/mermaid@8.10.1/dist/mermaid.min.js" ></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({"theme":"default"});
+    }
+  </script>
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"log":false,"model":{"jsonPath":"/live2dw/assets/tororo.model.json"},"display":{"position":"left","width":260,"height":480},"mobile":{"show":false},"react":{"opacity":0.9}});</script></body>
+</html>
