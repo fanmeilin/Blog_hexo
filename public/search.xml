@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>NVIDIA驱动失效简单解决方案</title>
+      <link href="/2022/07/11/config/nvidia/nvidia-error/"/>
+      <url>/2022/07/11/config/nvidia/nvidia-error/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>跑模型的时候出现报错cuda找不到了，输入命令nvidia-smi报错： NVIDIA-SMI has failed because it couldn‘t communicate with the NVIDIA driver.</p></blockquote><p>以下方法，不需要重装驱动，简单快捷。适用于Ubuntu系统下，之前已经安装过驱动，但驱动失效的问题。如果此方法仍然无法解决问题，可参考<a href="https://blog.csdn.net/wjinjie/article/details/108512153">Ubuntu下安装nvidia显卡驱动</a>，重装驱动。</p><h3 id="查看">查看</h3><figure class="highlight applescript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs applescript">NVIDIA-SMI has failed because <span class="hljs-keyword">it</span> couldn't communicate <span class="hljs-keyword">with</span> <span class="hljs-keyword">the</span> NVIDIA driver. <br>Make sure <span class="hljs-keyword">that</span> <span class="hljs-keyword">the</span> latest NVIDIA driver <span class="hljs-keyword">is</span> installed <span class="hljs-keyword">and</span> <span class="hljs-built_in">running</span>.<br></code></pre></td></tr></tbody></table></figure><p>主要原因还是系统内核升级了，导致<strong>新版本内核和原来显卡驱动不匹配</strong></p><h3 id="检查驱动">检查驱动</h3><figure class="highlight ebnf"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ebnf"><span class="hljs-attribute">nvcc -V</span><br></code></pre></td></tr></tbody></table></figure><p>输入</p><figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">nvcc</span>: NVIDIA (R) Cuda compiler driver<br><span class="hljs-attribute">Copyright</span> (c) <span class="hljs-number">2005</span>-<span class="hljs-number">2019</span> NVIDIA Corporation<br><span class="hljs-attribute">Built</span> <span class="hljs-literal">on</span> Wed_Oct_<span class="hljs-number">23</span>_<span class="hljs-number">19</span>:<span class="hljs-number">24</span>:<span class="hljs-number">38</span>_PDT_<span class="hljs-number">2019</span><br><span class="hljs-attribute">Cuda</span> compilation tools, release <span class="hljs-number">10</span>.<span class="hljs-number">2</span>, V<span class="hljs-number">10</span>.<span class="hljs-number">2</span>.<span class="hljs-number">89</span><br></code></pre></td></tr></tbody></table></figure><p>发现驱动是存在的，于是进行下一步</p><h3 id="查看驱动版本">查看驱动版本</h3><figure class="highlight gradle"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gradle">ls <span class="hljs-regexp">/usr/</span>src | <span class="hljs-keyword">grep</span> nvidia<br>输入 nvidia-<span class="hljs-number">440.33</span>.<span class="hljs-number">01</span><br></code></pre></td></tr></tbody></table></figure><h3 id="修改版本号">修改版本号</h3><figure class="highlight apache"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">sudo</span> apt-get install dkms<br><span class="hljs-attribute">sudo</span> dkms install -m nvidia -v <span class="hljs-number">440</span>.<span class="hljs-number">33</span>.<span class="hljs-number">01</span><br></code></pre></td></tr></tbody></table></figure><h3 id="成功解决">成功解决</h3><p><img src="https://picture.mulindya.com/nvidia-error.png" alt=""></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 配置 </category>
+          
+          <category> nvidia </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 配置 </tag>
+            
+            <tag> nvidia </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>bytedance2018算法方向题解</title>
       <link href="/2022/07/07/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance2018/"/>
       <url>/2022/07/07/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/bytedance2018/</url>
