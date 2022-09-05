@@ -69,23 +69,26 @@ dfs方法：设当前指针指向的岛屿中的某点(i,j)，寻找包括此点
 ```python
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-        def dfs(grid,i,j): #传入grid（数组形式）直接对grid进行修改
-            h,w = len(grid),len(grid[0]) #行列
-            if not(0 <= i < h) or not(0 <= j < w) or grid[i][j]=='0': return #可以使用连续的比较符号 终止循环
-            grid[i][j] = '0' #剔除该结点
-            dfs(grid,i,j-1)
-            dfs(grid,i,j+1)
-            dfs(grid,i-1,j)
-            dfs(grid,i+1,j)
-            
+        h,w = len(grid),len(grid[0])
+        def dfs(i,j):
+            if not (0<=i<h and 0<=j<w) or grid[i][j]=='0': return
+            grid[i][j] = '0'
+            dfs(i-1,j)
+            dfs(i+1,j)
+            dfs(i,j-1)
+            dfs(i,j+1)
         count = 0
-        for i in range(0,len(grid)):  #采用顺序遍历的形式
-            for j in range(0,len(grid[0])):
-                if grid[i][j] == '1': #当寻找到岛屿的某一点将会整片岛屿进行消除
-                    dfs(grid,i,j)
+        for i in range(h):
+            for j in range(w):
+                if grid[i][j] == '1':
+                    dfs(i,j)
                     count += 1
         return count
 ```
+
+时间复杂度为 O(MN)
+
+空间复杂度为 O(MN) 最坏情况下，整个网格均为陆地，dfs的深度达到MN
 
 #### 解法二 BFS
 
@@ -98,25 +101,28 @@ class Solution:
 ```python
 class Solution:
     def numIslands(self, grid: List[List[str]]) -> int:
-		def bfs(grid,i,j):
-            queue = [[i,j]]
-            while queue:
-                [i,j] = queue.pop(0) #pop函数，0表示pop元素的index
-                if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j]=='1': 
-                #可以先将其上下左右节点入队列之后在对邻居节点特性进行判断，只需保证该节点为岛屿节点即可
-                    grid[i][j] = 0
-                    queue += [[i,j+1],[i,j-1],[i+1,j],[i-1,j]]
-                    
+        h, w = len(grid),len(grid[0])
+        def bfs(i,j):
+            grid[i][j] = "0"
+            neighbors = collections.deque([(i, j)]) #双端队列
+            while neighbors:
+                row, col = neighbors.popleft() #左边出队列
+                for x, y in [(row - 1, col), (row + 1, col), (row, col - 1), (row, col + 1)]: #判断上下左右
+                    if 0 <= x < h and 0 <= y < w and grid[x][y] == "1": #满足条件则入队列
+                        neighbors.append((x, y))
+                        grid[x][y] = "0" #在入队列时置为0，避免后续重复循环插入该元素
         count = 0
-        # len(grid)为行数
-        for i in range(0,len(grid)):  #采用顺序遍历的形式
-            for j in range(0,len(grid[0])):
-                if grid[i][j] == '1': #当寻找到岛屿的某一点将会整片岛屿进行消除
-                    # dfs(grid,i,j)
-                    bfs(grid,i,j)
+        for i in range(h):
+            for j in range(w):
+                if grid[i][j] == "1":
                     count += 1
+                    bfs(i,j)
         return count
 ```
+
+时间复杂度为 O(MN)
+
+空间复杂度为 O(min(M,N)) 最坏情况下，整个网格均为陆地，bfs的深度达到min(M,N)，BFS按照每一层进行遍历，最长的队列长度为对角线。
 
 #### 解法三 并查集
 

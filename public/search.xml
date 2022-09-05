@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Windows不支持PosixPath问题</title>
+      <link href="/2022/08/02/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/PosixPath-problem/"/>
+      <url>/2022/08/02/%E6%8A%A5%E9%94%99%E8%A7%A3%E5%86%B3/PosixPath-problem/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>在运行CVF-SID的代码时，加载模型测试出现<br>报错：NotImplementedError: cannot instantiate ‘PosixPath’ on your system</p></blockquote><h3 id="原因">原因</h3><p>推测原因是作者的模型是之前在Linux环境下训练好了模型，现在我使用Windows系统加载模型导致的不兼容</p><h3 id="解决办法">解决办法</h3><p>修改所使用环境下的lib/pathlib.py代码大概1040行的函数：</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#修改前</span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span>(<span class="hljs-params">cls, *args, **kwargs</span>):</span><br>        <span class="hljs-keyword">if</span> cls <span class="hljs-keyword">is</span> Path:<br>            cls = WindowsPath <span class="hljs-keyword">if</span> os.name == <span class="hljs-string">'nt'</span> <span class="hljs-keyword">else</span> PosixPath<br>        self = cls._from_parts(args, init=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._flavour.is_supported:<br>            <span class="hljs-keyword">raise</span> NotImplementedError(<span class="hljs-string">"cannot instantiate %r on your system"</span><br>                                      % (cls.__name__,))<br>        self._init()<br>        <span class="hljs-keyword">return</span> self<br><br></code></pre></td></tr></tbody></table></figure><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment">#修改后    </span><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__new__</span>(<span class="hljs-params">cls, *args, **kwargs</span>):</span><br>        <span class="hljs-keyword">if</span> cls <span class="hljs-keyword">is</span> Path:<br>            <span class="hljs-comment"># cls = WindowsPath if os.name == 'nt' else PosixPath</span><br>            cls = WindowsPath<br>        self = cls._from_parts(args, init=<span class="hljs-literal">False</span>)<br>        <span class="hljs-comment"># Windows doesn't support PosixPath</span><br>        <span class="hljs-keyword">if</span> <span class="hljs-built_in">type</span>(self) == PosixPath:<br>            cls = WindowsPath<br>            self = cls._from_parts(args, init=<span class="hljs-literal">False</span>)<br>        <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> self._flavour.is_supported:<br>            <span class="hljs-keyword">raise</span> NotImplementedError(<span class="hljs-string">"cannot instantiate %r on your system"</span><br>                                      % (cls.__name__,))<br>        self._init()<br>        <span class="hljs-keyword">return</span> self<br><br></code></pre></td></tr></tbody></table></figure><p>解决~</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> 报错解决 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 报错解决 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>NVIDIA驱动失效简单解决方案</title>
       <link href="/2022/07/11/config/nvidia/nvidia-error/"/>
       <url>/2022/07/11/config/nvidia/nvidia-error/</url>
@@ -5142,9 +5167,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
@@ -5283,9 +5308,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 数组查找 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -5314,9 +5339,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
