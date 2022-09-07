@@ -1,5 +1,5 @@
 ---
-title: ViLT: Vision-and-Language Transformer Without Convolution or Region Supervision
+title: ViLT  Vision-and-Language Transformer Without Convolution or Region Supervision
 tags: [文献,多模态]
 categories: [文献,多模态]
 date: 2022-09-07 16:50:52
