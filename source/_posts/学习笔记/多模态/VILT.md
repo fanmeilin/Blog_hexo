@@ -65,7 +65,7 @@ Vision-and-Language 多模态
     >
     > Bao H, Wang W, Dong L, et al. VL-BEiT: Generative Vision-Language Pretraining[J]. arXiv preprint arXiv:2206.01127, 2022.
 
-- Augmentation Strategies: 数据增强，从消融实验可以看出数据增强作用很大，并且有可能可能提升data efficiency。
+- Augmentation Strategies: 数据增强，从消融实验可以看出数据增强作用很大，并且有可能提升data efficiency。
 
 #### 相关论文
 

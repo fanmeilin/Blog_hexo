@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>ViLT  Vision-and-Language Transformer Without Convolution or Region Supervision</title>
+      <link href="/2022/09/07/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%A4%9A%E6%A8%A1%E6%80%81/VILT/"/>
+      <url>/2022/09/07/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%A4%9A%E6%A8%A1%E6%80%81/VILT/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>视频讲解：<a href="https://www.bilibili.com/video/BV14r4y1j74y?vd_source=d26291f722468f7096aa948876c55640">ViLT 论文精读</a><br>论文下载：<a href="https://arxiv.org/pdf/2102.03334.pdf">https://arxiv.org/pdf/2102.03334.pdf</a><br>代码地址：<a href="https://github.com/dandelin/vilt">https://github.com/dandelin/vilt</a><br>论文投稿：PMLR2021 <strong>Proceedings of Machine Learning Research</strong> 机器学习顶会</p></blockquote><h3 id="领域">领域</h3><p>Vision-and-Language 多模态</p><h3 id="背景">背景</h3><p>现在的VLP模型过度依赖于图像特征提取，包括使用Convolution or Region的结构，这一过程时间冗杂，导致了</p><p>（1）计算速度和效率较低，简单地提取输入特征需要比多模态交互用到多得多的计算量</p><p>（2）表达能力的上限取决于视觉嵌入器和预定义的视觉词汇量（predefined visual vocabulary）</p><h3 id="方法">方法</h3><ul><li><p>结合BERT和VIT</p><ul><li>使用简单的patch线性投影（linear projection of a patch）代替之前的图像特征提取的工作。结合文本和图像为一个序列输入到Transformer中。</li><li>transfomer encoder作为Modality Interaction</li></ul></li><li><p>使用了2个trick</p><ul><li>Whole Word Masking：巧妙的加强文字和图像的联系</li><li>Image Augmentation：使用RandAugment的数据增强方法，但是这里剔除了color inversion和cutout。因为这两个部分可能会导致数据集中的图片和文字不对应。</li></ul></li></ul><h3 id="结果">结果</h3><p>大大提升效率：在图像的处理上，从之前的885ms（region），45ms（convolution）提升到0.4ms</p><p>下游任务效果持平，算是有竞争力，但是没有太大提升</p><h3 id="贡献">贡献</h3><ul><li><p>ViLT is the simplest architecture by far for a vision-and-language model as it commissions the transformer module to extract and process visual features in place of a separate deep visual embedder. This design inherently leads to significant runtime and parameter efficiency.</p></li><li><p>For the first time, we achieve competent performance on vision-and-language tasks without using region features or deep convolutional visual embedders in general.</p></li><li><p>Also, for the first time, we empirically show that whole word masking and image augmentations that were unprecedented in VLP training schemes further drive downstream performance</p></li></ul><h3 id="缺点">缺点</h3><ul><li>模型是在64张32G的V100s上训练了3天，这个资源配置太贵了，99%的人无法承受。</li></ul><blockquote><p>后期在NeurlPS2021（机器学习顶会）出现更轻量的<a href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87">ALBEF</a>（单机八卡训练3天）</p></blockquote><ul><li>时间上提升了很多，但是效果一般般</li></ul><h3 id="展望">展望</h3><ul><li><p>Scalability：扩大数据集或者增大模型的规模</p></li><li><p>Masked Modeling for Visual Inputs：图像上进行mask的操作（完形填空）</p><blockquote><p>后期出现MAE，BEIT后，微软研究院在2022年6月提出的<a href="https://arxiv.org/abs/2206.01127">VL-BEiT</a>，在此基础上加上了视觉的无监督重建损失.</p><p>Bao H, Wang W, Dong L, et al. VL-BEiT: Generative Vision-Language Pretraining[J]. arXiv preprint arXiv:2206.01127, 2022.</p></blockquote></li><li><p>Augmentation Strategies: 数据增强，从消融实验可以看出数据增强作用很大，并且有可能可能提升data efficiency。</p></li></ul><h4 id="相关论文">相关论文</h4><ul><li>Align before Fuse: Vision and Language Representation Learning with Momentum Distillation</li><li>BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation</li><li>Masked Unsupervised Self-training for Zero-shot Image Classification</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 文献 </category>
+          
+          <category> 多模态 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 文献 </tag>
+            
+            <tag> 多模态 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>周赛309</title>
       <link href="/2022/09/05/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/weekcontest309/"/>
       <url>/2022/09/05/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/weekcontest309/</url>
@@ -5196,9 +5225,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
@@ -5337,9 +5366,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> idea </tag>
-            
             <tag> 数组查找 </tag>
+            
+            <tag> idea </tag>
             
         </tags>
       
@@ -5368,9 +5397,9 @@
             
             <tag> 剑指 </tag>
             
-            <tag> 数组 </tag>
-            
             <tag> idea </tag>
+            
+            <tag> 数组 </tag>
             
         </tags>
       
