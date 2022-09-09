@@ -4,11 +4,69 @@
   
   
   <entry>
+    <title>CodeTop300 最长递增子序列</title>
+    <link href="/2022/09/09/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/%E4%B8%AD%E7%AD%89/CodeTop300/"/>
+    <url>/2022/09/09/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/%E4%B8%AD%E7%AD%89/CodeTop300/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>最长递增子序列</p></blockquote><h2 id="题目">题目</h2><p>给你一个整数数组 nums ，找到其中最长严格递增子序列的长度。</p><p>子序列 是由数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。例如，[3,6,2,7] 是数组 [0,3,1,6,2,2,7] 的子序列。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：nums = [<span class="hljs-number">10,9,2,5</span>,<span class="hljs-number">3,7,101,18</span>]<br>输出：<span class="hljs-number">4</span><br>解释：最长递增子序列是 [<span class="hljs-number">2,3,7,101</span>]，因此长度为 <span class="hljs-number">4</span> 。<br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[0,1,0,3,2,3]</span><br>输出：<span class="hljs-number">4</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-3：">示例 3：</h3><figure class="highlight accesslog"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs accesslog">输入：nums = <span class="hljs-string">[7,7,7,7,7,7,7]</span><br>输出：<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li>1 &lt;= nums.length &lt;= 2500</li><li>-104 &lt;= nums[i] &lt;= 104</li></ul><h3 id="进阶：">进阶：</h3><p>你能将算法的时间复杂度降低到 O(n log(n)) 吗?</p><h2 id="题解">题解</h2><p>注意这里是子序列，数组派生而来的序列，删除（或不删除）数组中的元素而不改变其余元素的顺序。元素间不一定是连续。</p><h4 id="动态规划">动态规划</h4><p>主思路是动态规划。</p><ul><li>用dp[i]来表示以nums[i]为结尾的最长递增子序列的长度；</li><li>在处理dp[i]时，需要遍历前面的i-1个元素，查找比nums[i]小的元素对应的dp，选择最大的dp+1，即：</li></ul><p>$$<br>dp[i] = max(dp[j]+1) \quad 其中{0&lt;=j&lt;i}且nums[i]&gt;nums[j]<br>$$</p><p>此时的时间复杂度为$O(n^2)$。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lengthOfLIS</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        dp = [<span class="hljs-number">1</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums))] <span class="hljs-comment">#表示结尾为nums[i]的最长递增子序列的长度</span><br>        <span class="hljs-keyword">for</span> i,num <span class="hljs-keyword">in</span> <span class="hljs-built_in">enumerate</span>(nums):<br>            <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">0</span>,i):<br>                <span class="hljs-keyword">if</span> num&gt;nums[j] <span class="hljs-keyword">and</span> dp[j]+<span class="hljs-number">1</span>&gt;dp[i]:dp[i] = dp[j]+<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-built_in">max</span>(dp)<br></code></pre></td></tr></tbody></table></figure><h4 id="二分法-动态规划">二分法+动态规划</h4><p>在上述方法中，确定dp[i]大小时需要顺序遍历前面的所有元素，所以内层循环需要O(n)，如果是采用二分查找法就可以降到O(logn)。关键问题是需要构建一个有序数组，同时，查找比num小的数据且长度最长。我们可以构造一个tails数组，tails[i]表示能够构成最长递增子序列长度为i的最小元素。这样tails一定是递增的，用res来表示当前tails的长度，也就是此时能够构成递增子序列的最长长度，二分法查找可以在1-res之间进行。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">lengthOfLIS</span>(<span class="hljs-params">self, nums: <span class="hljs-type">List</span>[<span class="hljs-built_in">int</span>]</span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        tails, res = [<span class="hljs-number">0</span> <span class="hljs-keyword">for</span> _ <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-built_in">len</span>(nums)+<span class="hljs-number">1</span>)], <span class="hljs-number">1</span> <span class="hljs-comment">#res可以直接得到最长的序列长度</span><br>        tails[<span class="hljs-number">1</span>] = nums[<span class="hljs-number">0</span>]<br>        <span class="hljs-keyword">for</span> num <span class="hljs-keyword">in</span> nums[<span class="hljs-number">1</span>:]:<br>            i,j = <span class="hljs-number">1</span>,res<br>            <span class="hljs-keyword">while</span> i&lt;=j:<br>                mid = (i+j)//<span class="hljs-number">2</span><br>                <span class="hljs-keyword">if</span> tails[mid]&gt;=num:j=mid-<span class="hljs-number">1</span> <span class="hljs-comment">#j最后指向小于num的元素，i指向大于等于num的元素</span><br>                <span class="hljs-keyword">else</span>:i=mid+<span class="hljs-number">1</span><br>            tails[i] = num <span class="hljs-comment">#比num大的最近的元素替换为num</span><br>            <span class="hljs-keyword">if</span> i&gt;res:res = i <span class="hljs-comment">#等价res+=1</span><br>            <span class="hljs-comment"># if j==res:</span><br>            <span class="hljs-comment">#     tails[res+1],res = num, res+1</span><br>            <span class="hljs-comment"># elif tails[j+1]&gt;num: tails[j+1] = num</span><br>        <span class="hljs-keyword">return</span> res<br></code></pre></td></tr></tbody></table></figure><p>此时的时间复杂度为O(nlogn)</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>中等</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>中等</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>CodeTop69</title>
+    <link href="/2022/09/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/%E7%AE%80%E5%8D%95/CodeTop69/"/>
+    <url>/2022/09/08/%E6%89%8B%E6%92%95%E4%BB%A3%E7%A0%81/CodeTop/%E7%AE%80%E5%8D%95/CodeTop69/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>x的平方根</p></blockquote><h2 id="题目">题目</h2><p>给你一个非负整数 x ，计算并返回 x 的 算术平方根 。</p><p>由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。</p><p>注意：不允许使用任何内置指数函数和算符，例如 pow(x, 0.5) 或者 x ** 0.5 。</p><h3 id="示例-1：">示例 1：</h3><figure class="highlight fix"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs fix"><span class="hljs-attr">输入：x </span>=<span class="hljs-string"> 4</span><br><span class="hljs-string">输出：2</span><br></code></pre></td></tr></tbody></table></figure><h3 id="示例-2：">示例 2：</h3><figure class="highlight dns"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs dns">输入：x = <span class="hljs-number">8</span><br>输出：<span class="hljs-number">2</span><br>解释：<span class="hljs-number">8</span> 的算术平方根是 <span class="hljs-number">2.82842</span>..., 由于返回类型是整数，小数部分将被舍去。<br></code></pre></td></tr></tbody></table></figure><h3 id="提示：">提示：</h3><ul><li><code>0 &lt;= x &lt;= 231 - 1</code></li></ul><h2 id="题解">题解</h2><h3 id="循环查找">循环查找</h3><p>直接循环查找，如果i平方大于x即可停止。时间复杂度为O(n)，空间复杂度为O(1)。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> x==<span class="hljs-number">0</span> <span class="hljs-keyword">or</span> x==<span class="hljs-number">1</span>:<span class="hljs-keyword">return</span> x<br>        <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(x+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">if</span> i*i&gt;x:<span class="hljs-keyword">break</span><br>        <span class="hljs-keyword">return</span> i-<span class="hljs-number">1</span><br></code></pre></td></tr></tbody></table></figure><h3 id="二分查找">二分查找</h3><p>二分查找方法，从0到x的闭区间二分查找可以缩短时间复杂度。时间复杂度为O(log n)，空间复杂度为O(1)。</p><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        l,r = <span class="hljs-number">0</span>,x<br>        <span class="hljs-keyword">while</span> l&lt;=r: <span class="hljs-comment">#注意l=r时仍需判断</span><br>            mid = (l+r)//<span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> mid*mid==x:<span class="hljs-keyword">return</span> mid<br>            <span class="hljs-keyword">if</span> mid*mid&gt;x:r=mid-<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:l=mid+<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> r <span class="hljs-comment">#向下取整</span><br></code></pre></td></tr></tbody></table></figure><blockquote><p>本次的判断最好不用<code>mid * mid== x</code>而是用<code>mid== x / mid</code>来避免数据溢出。</p></blockquote><figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">mySqrt</span>(<span class="hljs-params">self, x: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-built_in">int</span>:</span><br>        <span class="hljs-keyword">if</span> x==<span class="hljs-number">0</span> :<span class="hljs-keyword">return</span> <span class="hljs-number">0</span><br>        l,r = <span class="hljs-number">1</span>,x<br>        <span class="hljs-keyword">while</span> l&lt;=r:<br>            mid = (l+r)//<span class="hljs-number">2</span><br>            <span class="hljs-keyword">if</span> mid== x / mid:<span class="hljs-keyword">return</span> mid<br>            <span class="hljs-keyword">if</span> mid*mid&gt;x:r=mid-<span class="hljs-number">1</span><br>            <span class="hljs-keyword">else</span>:l=mid+<span class="hljs-number">1</span><br>        <span class="hljs-keyword">return</span> r<br></code></pre></td></tr></tbody></table></figure>]]></content>
+    
+    
+    <categories>
+      
+      <category>CodeTop</category>
+      
+      <category>简单</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>CodeTop</tag>
+      
+      <tag>简单</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>ViLT  Vision-and-Language Transformer Without Convolution or Region Supervision</title>
     <link href="/2022/09/07/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%A4%9A%E6%A8%A1%E6%80%81/VILT/"/>
     <url>/2022/09/07/%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/%E5%A4%9A%E6%A8%A1%E6%80%81/VILT/</url>
     
-    <content type="html"><![CDATA[<blockquote><p>视频讲解：<a href="https://www.bilibili.com/video/BV14r4y1j74y?vd_source=d26291f722468f7096aa948876c55640">ViLT 论文精读</a><br>论文下载：<a href="https://arxiv.org/pdf/2102.03334.pdf">https://arxiv.org/pdf/2102.03334.pdf</a><br>代码地址：<a href="https://github.com/dandelin/vilt">https://github.com/dandelin/vilt</a><br>论文投稿：PMLR2021 <strong>Proceedings of Machine Learning Research</strong> 机器学习顶会</p></blockquote><h3 id="领域">领域</h3><p>Vision-and-Language 多模态</p><h3 id="背景">背景</h3><p>现在的VLP模型过度依赖于图像特征提取，包括使用Convolution or Region的结构，这一过程时间冗杂，导致了</p><p>（1）计算速度和效率较低，简单地提取输入特征需要比多模态交互用到多得多的计算量</p><p>（2）表达能力的上限取决于视觉嵌入器和预定义的视觉词汇量（predefined visual vocabulary）</p><h3 id="方法">方法</h3><ul><li><p>结合BERT和VIT</p><ul><li>使用简单的patch线性投影（linear projection of a patch）代替之前的图像特征提取的工作。结合文本和图像为一个序列输入到Transformer中。</li><li>transfomer encoder作为Modality Interaction</li></ul></li><li><p>使用了2个trick</p><ul><li>Whole Word Masking：巧妙的加强文字和图像的联系</li><li>Image Augmentation：使用RandAugment的数据增强方法，但是这里剔除了color inversion和cutout。因为这两个部分可能会导致数据集中的图片和文字不对应。</li></ul></li></ul><h3 id="结果">结果</h3><p>大大提升效率：在图像的处理上，从之前的885ms（region），45ms（convolution）提升到0.4ms</p><p>下游任务效果持平，算是有竞争力，但是没有太大提升</p><h3 id="贡献">贡献</h3><ul><li><p>ViLT is the simplest architecture by far for a vision-and-language model as it commissions the transformer module to extract and process visual features in place of a separate deep visual embedder. This design inherently leads to significant runtime and parameter efficiency.</p></li><li><p>For the first time, we achieve competent performance on vision-and-language tasks without using region features or deep convolutional visual embedders in general.</p></li><li><p>Also, for the first time, we empirically show that whole word masking and image augmentations that were unprecedented in VLP training schemes further drive downstream performance</p></li></ul><h3 id="缺点">缺点</h3><ul><li>模型是在64张32G的V100s上训练了3天，这个资源配置太贵了，99%的人无法承受。</li></ul><blockquote><p>后期在NeurlPS2021（机器学习顶会）出现更轻量的<a href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87">ALBEF</a>（单机八卡训练3天）</p></blockquote><ul><li>时间上提升了很多，但是效果一般般</li></ul><h3 id="展望">展望</h3><ul><li><p>Scalability：扩大数据集或者增大模型的规模</p></li><li><p>Masked Modeling for Visual Inputs：图像上进行mask的操作（完形填空）</p><blockquote><p>后期出现MAE，BEIT后，微软研究院在2022年6月提出的<a href="https://arxiv.org/abs/2206.01127">VL-BEiT</a>，在此基础上加上了视觉的无监督重建损失.</p><p>Bao H, Wang W, Dong L, et al. VL-BEiT: Generative Vision-Language Pretraining[J]. arXiv preprint arXiv:2206.01127, 2022.</p></blockquote></li><li><p>Augmentation Strategies: 数据增强，从消融实验可以看出数据增强作用很大，并且有可能可能提升data efficiency。</p></li></ul><h4 id="相关论文">相关论文</h4><ul><li>Align before Fuse: Vision and Language Representation Learning with Momentum Distillation</li><li>BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation</li><li>Masked Unsupervised Self-training for Zero-shot Image Classification</li></ul>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>视频讲解：<a href="https://www.bilibili.com/video/BV14r4y1j74y?vd_source=d26291f722468f7096aa948876c55640">ViLT 论文精读</a><br>论文下载：<a href="https://arxiv.org/pdf/2102.03334.pdf">https://arxiv.org/pdf/2102.03334.pdf</a><br>代码地址：<a href="https://github.com/dandelin/vilt">https://github.com/dandelin/vilt</a><br>论文投稿：PMLR2021 <strong>Proceedings of Machine Learning Research</strong> 机器学习顶会</p></blockquote><h3 id="领域">领域</h3><p>Vision-and-Language 多模态</p><h3 id="背景">背景</h3><p>现在的VLP模型过度依赖于图像特征提取，包括使用Convolution or Region的结构，这一过程时间冗杂，导致了</p><p>（1）计算速度和效率较低，简单地提取输入特征需要比多模态交互用到多得多的计算量</p><p>（2）表达能力的上限取决于视觉嵌入器和预定义的视觉词汇量（predefined visual vocabulary）</p><h3 id="方法">方法</h3><ul><li><p>结合BERT和VIT</p><ul><li>使用简单的patch线性投影（linear projection of a patch）代替之前的图像特征提取的工作。结合文本和图像为一个序列输入到Transformer中。</li><li>transfomer encoder作为Modality Interaction</li></ul></li><li><p>使用了2个trick</p><ul><li>Whole Word Masking：巧妙的加强文字和图像的联系</li><li>Image Augmentation：使用RandAugment的数据增强方法，但是这里剔除了color inversion和cutout。因为这两个部分可能会导致数据集中的图片和文字不对应。</li></ul></li></ul><h3 id="结果">结果</h3><p>大大提升效率：在图像的处理上，从之前的885ms（region），45ms（convolution）提升到0.4ms</p><p>下游任务效果持平，算是有竞争力，但是没有太大提升</p><h3 id="贡献">贡献</h3><ul><li><p>ViLT is the simplest architecture by far for a vision-and-language model as it commissions the transformer module to extract and process visual features in place of a separate deep visual embedder. This design inherently leads to significant runtime and parameter efficiency.</p></li><li><p>For the first time, we achieve competent performance on vision-and-language tasks without using region features or deep convolutional visual embedders in general.</p></li><li><p>Also, for the first time, we empirically show that whole word masking and image augmentations that were unprecedented in VLP training schemes further drive downstream performance</p></li></ul><h3 id="缺点">缺点</h3><ul><li>模型是在64张32G的V100s上训练了3天，这个资源配置太贵了，99%的人无法承受。</li></ul><blockquote><p>后期在NeurlPS2021（机器学习顶会）出现更轻量的<a href="#%E7%9B%B8%E5%85%B3%E8%AE%BA%E6%96%87">ALBEF</a>（单机八卡训练3天）</p></blockquote><ul><li>时间上提升了很多，但是效果一般般</li></ul><h3 id="展望">展望</h3><ul><li><p>Scalability：扩大数据集或者增大模型的规模</p></li><li><p>Masked Modeling for Visual Inputs：图像上进行mask的操作（完形填空）</p><blockquote><p>后期出现MAE，BEIT后，微软研究院在2022年6月提出的<a href="https://arxiv.org/abs/2206.01127">VL-BEiT</a>，在此基础上加上了视觉的无监督重建损失.</p><p>Bao H, Wang W, Dong L, et al. VL-BEiT: Generative Vision-Language Pretraining[J]. arXiv preprint arXiv:2206.01127, 2022.</p></blockquote></li><li><p>Augmentation Strategies: 数据增强，从消融实验可以看出数据增强作用很大，并且有可能提升data efficiency。</p></li></ul><h4 id="相关论文">相关论文</h4><ul><li>Align before Fuse: Vision and Language Representation Learning with Momentum Distillation</li><li>BLIP: Bootstrapping Language-Image Pre-training for Unified Vision-Language Understanding and Generation</li><li>Masked Unsupervised Self-training for Zero-shot Image Classification</li></ul>]]></content>
     
     
     <categories>
@@ -5225,9 +5283,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
@@ -5366,9 +5424,9 @@
       
       <tag>剑指</tag>
       
-      <tag>数组查找</tag>
-      
       <tag>idea</tag>
+      
+      <tag>数组查找</tag>
       
     </tags>
     
@@ -5397,9 +5455,9 @@
       
       <tag>剑指</tag>
       
-      <tag>idea</tag>
-      
       <tag>数组</tag>
+      
+      <tag>idea</tag>
       
     </tags>
     
