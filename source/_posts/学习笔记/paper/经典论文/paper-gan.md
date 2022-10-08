@@ -1,7 +1,7 @@
 ---
 title: generative adversarial nets
-tags: [学习笔记,经典论文]
-categories: [学习笔记,paper]
+tags: [文献,经典论文]
+categories: [文献,经典论文]
 date: 2022-01-04 15:48:20
 ---
 

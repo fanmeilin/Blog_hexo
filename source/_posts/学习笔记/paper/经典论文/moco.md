@@ -1,7 +1,7 @@
 ---
 title: Momentum Contrast for Unsupervised Visual Representation Learning
-tags: [学习笔记,经典论文]
-categories: [学习笔记,paper]
+tags: [文献,经典论文]
+categories: [文献,经典论文]
 date: 2022-03-30 20:28:14
 ---
 
