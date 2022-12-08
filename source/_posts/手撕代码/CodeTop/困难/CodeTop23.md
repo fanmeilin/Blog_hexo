@@ -124,14 +124,18 @@ heapq.heapify(nums)
 print([heapq.heappop(nums) for _ in range(len(nums))])  # 堆排序结果
 # out: [1, 2, 3, 5, 23, 54, 132]
 ```
-##### 插入元素
+##### 插入弹出元素
 
-堆创建好后，可以通过`heapq.heappop() `函数弹出堆中最小值。
+- `heapq.heappush(heap, num)`  在heap堆中插入元素num
+
+- 堆创建好后，可以通过`heapq.heappop() `函数弹出堆中最小值。
 
 ```python
 import heapq
-nums = [2, 43, 45, 23, 12]
-heapq.heapify(nums)
+nums = [2, 3, 5, 1, 54, 23, 132]
+heap = []
+for num in nums:
+    heapq.heappush(heap, num)  # 加入堆
 
 print(heapq.heappop(nums))
 # out: 2
